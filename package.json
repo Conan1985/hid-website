@@ -6,6 +6,10 @@
   "keywords": [
     ""
   ],
+  "engines": {
+    "node": ">=16.x",
+    "npm": ">=7.x"
+  },
   "license": "",
   "author": "",
   "scripts": {
