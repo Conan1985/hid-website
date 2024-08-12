@@ -13,13 +13,14 @@
   "license": "",
   "author": "",
   "scripts": {
-    "start": "node_modules/.bin/webpack serve --open --config webpack.config.dev.js",
+    "start": "http-server dist",
     "build": "webpack --config webpack.config.prod.js",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.3",
+    "http-server": "^14.1.1",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
