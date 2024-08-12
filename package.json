@@ -9,7 +9,7 @@
   "license": "",
   "author": "",
   "scripts": {
-    "start": "webpack serve --open --config webpack.config.dev.js",
+    "start": "node_modules/.bin/webpack serve --open --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
     "heroku-postbuild": "npm run build"
   },
