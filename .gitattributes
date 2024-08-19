@@ -1,2 +1,0 @@
-public/videos/HID\\[[:space:]]web\\[[:space:]]v3.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mp4 filter=lfs diff=lfs merge=lfs -text
