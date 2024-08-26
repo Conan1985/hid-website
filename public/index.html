@@ -8029,9 +8029,18 @@
                 </div>
                 <div class="fullBleedMedia-content">
                     <div class="fullBleedMedia-content-inner">
-                        <img
+                        <img    id="logoImg"
                                 src="images/HID Logo est 2018.png"
                                 class="custom-logo" alt="Healthy Insurance Dude">
+                        <script>
+                            const img = document.getElementById('logoImg');
+                            img.addEventListener('mouseover', () => {
+                                img.style.animation = 'scaleUpImg 0.3s forwards';
+                            });
+                            img.addEventListener('mouseout', () => {
+                                img.style.animation = 'scaleDownImg 1.3s forwards';
+                            });
+                        </script>
                         <div class="titleMedium"></div>
                         <p class="smallBody">Welcome to The Healthy Insurance Dude, a simplified approach to health,
                             life and retirement coverage where we prioritize affordability and simplicity.

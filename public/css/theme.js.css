@@ -5745,6 +5745,15 @@ a:hover, a:focus {
     animation-timing-function: ease-out
 }
 
+@keyframes scaleUpImg {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.13);
+    }
+}
+
 @keyframes scaleDownImg {
     0% {
         opacity: 1;
