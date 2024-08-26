@@ -115,7 +115,7 @@
 }
 
 .icon-Chevron-right::before {
-    content: "î¤„"
+    content: "\27A4"
 }
 
 .icon-Chevron-up::before {
@@ -824,7 +824,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .datepicker__month-button--next::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: icomoon;
     font-size: 1.9rem;
     line-height: 2rem;
@@ -1874,7 +1874,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .calendar-table .next span::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #000;
     font-size: 19px;
@@ -3011,7 +3011,7 @@ a:hover, a:focus {
 }
 
 .cta::after {
-    content: "î¤„";
+    content: "\27A4";
     color: #82754a;
     font-family: "icomoon";
     font-size: 24px;
@@ -3805,7 +3805,7 @@ a:hover, a:focus {
 }
 
 .mainHeader .subHeader__container--links ul li a.submenuLinkItem::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #82754a;
     font-size: 20px;
@@ -4228,7 +4228,7 @@ a:hover, a:focus {
 }
 
 .mainHeader__mobile--active--links .menuLinks > li > a.mainLinks::after, .mainHeader__mobile--active--links .menuLinks > li > a.mainLinksSingle::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     font-size: 25px;
     font-size: 2.5rem;
@@ -9402,7 +9402,7 @@ a:hover, a:focus {
 
 @media screen and (prefers-reduced-motion: reduce)and (prefers-reduced-motion: reduce) {
     .accommodationListWrapper .listCard--link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -9418,7 +9418,7 @@ a:hover, a:focus {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .accommodationListWrapper .listCard--link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -9454,7 +9454,7 @@ a:hover, a:focus {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .accommodationListWrapper .listCard--link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -9469,7 +9469,7 @@ a:hover, a:focus {
 }
 
 .accommodationListWrapper .listCard--link .titleSmall::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     position: relative;
     color: #82754a;
@@ -12882,7 +12882,7 @@ a:hover, a:focus {
 }
 
 .mediaSlider .slick-next::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     display: block;
     height: 38px;
@@ -13434,7 +13434,7 @@ a:hover, a:focus {
 }
 
 .breadcrumb span:not(:last-child)::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     margin: 0 10px;
     font-size: 16px;
@@ -15265,7 +15265,7 @@ div.wpforms-container-full .wpforms-form input[type=checkbox].wpforms-error::bef
 }
 
 .slider-listing .slick-arrow.slick-next::after {
-    content: "î¤„"
+    content: "\27A4"
 }
 
 .slider-listing .slick-arrow.slick-disabled {
@@ -17754,7 +17754,7 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce)and (prefers-reduced-motion: reduce) {
     .interactiveMaps .container .gallery .card-link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -17770,7 +17770,7 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .interactiveMaps .container .gallery .card-link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -17806,7 +17806,7 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .interactiveMaps .container .gallery .card-link .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -17821,7 +17821,7 @@ code {
 }
 
 .interactiveMaps .container .gallery .card-link .titleSmall::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     position: relative;
     color: #82754a;
@@ -18175,7 +18175,7 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .interactiveMaps .slick-slider .slick-arrow.slick-next::after {
-        content: "î¤„";
+        content: "\27A4";
         display: block;
         width: 40px;
         height: 40px;
@@ -18195,7 +18195,7 @@ code {
 }
 
 .interactiveMaps .slick-slider .slick-arrow.slick-next::after {
-    content: "î¤„";
+    content: "\27A4";
     display: block;
     width: 40px;
     height: 40px;
@@ -19738,7 +19738,7 @@ code {
 }
 
 .searchWrapper .searchAutocompleteWrapper .searchContentAutocompleteContent li::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #82754a;
     margin-right: 5px;
@@ -19841,7 +19841,7 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .searchWrapper .searchResultContent .searchRow .searchRowRight .titleSmall::after {
-        content: "î¤„";
+        content: "\27A4";
         font-family: "icomoon";
         position: relative;
         color: #82754a;
@@ -19855,7 +19855,7 @@ code {
 }
 
 .searchWrapper .searchResultContent .searchRow .searchRowRight .titleSmall::after {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     position: relative;
     color: #82754a;
@@ -19997,7 +19997,7 @@ code {
 }
 
 .searchWrapper .searchHeaderQuickLinks li a::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #82754a;
     margin-right: 5px;
@@ -20420,7 +20420,7 @@ code {
 }
 
 .searchHeaderWrapper .searchHeaderAutocompleteContent li::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #82754a;
     margin-right: 5px;
@@ -20465,7 +20465,7 @@ code {
 }
 
 .searchHeaderWrapper .searchHeaderQuickLinks li a::before {
-    content: "î¤„";
+    content: "\27A4";
     font-family: "icomoon";
     color: #82754a;
     margin-right: 5px;
@@ -21133,7 +21133,7 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-image-nav-right::after {
-    content: "î¤„"
+    content: "\27A4"
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-info {
@@ -21352,7 +21352,7 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-thumbnails-container .galleria-thumb-nav-right::after {
-    content: "î¤„"
+    content: "\27A4"
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-thumbnails-container .galleria-thumbnails-list {
@@ -22593,7 +22593,7 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .tribe-common--breakpoint-medium.tribe-events .tribe-events-calendar-list .tribe-events-calendar-list__event-btn .cta::after, .tribe-common--breakpoint-medium.tribe-events--filter-bar-horizontal.tribe-events .tribe-events-calendar-list .tribe-events-calendar-list__event-btn .cta::after, .tribe-events .tribe-events-calendar-list .tribe-events-calendar-list__event-btn .cta::after {
-    content: "î¤„";
+    content: "\27A4";
     color: #82754a;
     font-family: "icomoon";
     font-size: 24px;
@@ -23226,7 +23226,7 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .tooltipster-base.tribe-events.tribe-events-tooltip-theme .tribe-events-calendar-month__calendar-event-tooltip .tribe-events-calendar-month__calendar-event-tooltip-title a::after {
-    content: "î¤„";
+    content: "\27A4";
     color: #82754a;
     font-family: "icomoon";
     font-size: 24px;
@@ -23571,7 +23571,7 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .tribe-events-single .tribe-events-single-content-container__event-data .tribe-events-event-meta .tribe-events-meta-group a::after {
-    content: "î¤„";
+    content: "\27A4";
     color: #82754a;
     font-family: "icomoon";
     font-size: 24px;
