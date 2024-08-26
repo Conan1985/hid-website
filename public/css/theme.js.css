@@ -7987,6 +7987,9 @@ a:hover, a:focus {
     .text-besides-faster {
         margin-bottom: 100px
     }
+    .text-besides-slower {
+        margin-bottom: -100px
+    }
 }
 
 @media (max-width: 989px) {
