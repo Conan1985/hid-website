@@ -7974,6 +7974,12 @@ a:hover, a:focus {
     flex-direction: row-reverse
 }
 
+@media (min-width: 990px) {
+    .text-besides-faster {
+        margin-bottom: 100px
+    }
+}
+
 @media (max-width: 989px) {
     .imageText.right-image .imageText__inner {
         flex-direction: column
