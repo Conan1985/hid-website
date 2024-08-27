@@ -7983,6 +7983,12 @@ a:hover, a:focus {
     flex-direction: row-reverse
 }
 
+@media (max-width: 767px) {
+    .text-move-down {
+        margin-top: 150px
+    }
+}
+
 @media (min-width: 990px) {
     .text-besides-faster {
         margin-bottom: 100px
