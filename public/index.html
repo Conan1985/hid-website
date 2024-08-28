@@ -8140,17 +8140,11 @@
             <div class="imageTxtHeadline default-animated-block">
                 <div class="imageTxtHeadline__inner imageTxtHeadline--C3">
                     <div class="leftContainer">
-                        <div class="slider withFullWidth forDesktopContent slick-initialized slick-slider slick-dotted">
+                        <div class="slider withFullWidth forDesktopContent slick-initialized slick-slider slick-dotted"
+                             id="faces-behind-the-brand-desktop">
                             <div class="slick-list draggable">
                                 <div class="slick-track"
-                                     style="opacity: 1; width: 6820px; transform: translate3d(-620px, 0px, 0px);">
-                                    <div class="slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%205.jpg"
-                                                  alt="Bar Ito sign logo in the quick service restaurant area with seating"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
+                                     style="opacity: 1; width: 6820px">
                                     <div class="slick-slide slick-current slick-active" data-slick-index="0"
                                          aria-hidden="false" style="width: 620px;" role="tabpanel" id="slick-slide00"
                                          aria-describedby="slick-slide-control00">
@@ -8186,41 +8180,6 @@
                                     <div class="slick-slide" data-slick-index="4" aria-hidden="true"
                                          style="width: 620px;" tabindex="-1" role="tabpanel" id="slick-slide04"
                                          aria-describedby="slick-slide-control04">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%205.jpg"
-                                                  alt="Bar Ito sign logo in the quick service restaurant area with seating"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
-                                    <div class="slick-slide slick-cloned" data-slick-index="5" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%201.jpg"
-                                                  alt="Quick service dining options with seating"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
-                                    <div class="slick-slide slick-cloned" data-slick-index="6" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%202.jpg"
-                                                  alt="Prime beef sandwich with white sauce and rosemary garnish"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
-                                    <div class="slick-slide slick-cloned" data-slick-index="7" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%203.jpg"
-                                                  alt="Roadside Taco sign logo in the quick service restaurant area with seating"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
-                                    <div class="slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
-                                        <div><img decoding="async" class="lazyImg"
-                                                  src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%204.jpg"
-                                                  alt="Half of bagel, covered with cream cheese, salmon, cucumber, onions, tomatoes and capers with a garnish"
-                                                  style="width: 100%; display: inline-block;"></div>
-                                    </div>
-                                    <div class="slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true"
-                                         style="width: 620px;" tabindex="-1">
                                         <div><img decoding="async" class="lazyImg"
                                                   src="./images/Faces%20Behind%20the%20Brand/Faces%20Behind%20the%20Brand%20carousel%20web%205.jpg"
                                                   alt="Bar Ito sign logo in the quick service restaurant area with seating"
@@ -8547,8 +8506,57 @@
             </div>
             <script src="https://www.youtube.com/iframe_api"></script>
             <script src="https://player.vimeo.com/api/player.js"></script>
-        </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let currentIndex = 0
+                    const slides = document.querySelectorAll('#faces-behind-the-brand-desktop .slick-slide')
+                    const dots = document.querySelectorAll('#faces-behind-the-brand-desktop .slick-dots button')
+                    const track = document.querySelector('#faces-behind-the-brand-desktop .slick-track')
+                    const slideCount = slides.length
+                    const slideWidth = 620
+                    let autoSlideInterval
 
+                    function goToSlide(index) {
+                        track.style.transform = `translate3d(-${slideWidth * index}px, 0, 0)`
+                        slides[currentIndex].classList.remove("slick-current", "slick-active");
+                        slides[currentIndex].setAttribute("aria-hidden", "true");
+                        slides[currentIndex].setAttribute("tabindex", "-1");
+                        slides[index].classList.add("slick-current", "slick-active");
+                        slides[index].setAttribute("aria-hidden", "false");
+                        slides[index].removeAttribute("tabindex");
+                        dots[currentIndex].parentElement.classList.remove("slick-active");
+                        dots[currentIndex].setAttribute("tabindex", "-1");
+                        dots[currentIndex].removeAttribute("aria-selected");
+
+                        dots[index].parentElement.classList.add("slick-active");
+                        dots[index].setAttribute("tabindex", "0");
+                        dots[index].setAttribute("aria-selected", "true");
+
+                        currentIndex = index;
+                    }
+
+                    const dotsContainer = document.querySelector('#faces-behind-the-brand-desktop .slick-dots');
+
+                    dotsContainer.addEventListener('click', (event) => {
+                        if (event.target.closest('li')) {
+                            const index = Array.from(dotsContainer.children).indexOf(event.target.closest('li'));
+                            clearInterval(autoSlideInterval)
+                            goToSlide(index); // Call the function to change the slide
+                            autoSlide()
+                        }
+                    });
+
+                    function autoSlide() {
+                        autoSlideInterval = setInterval(() => {
+                            goToSlide((currentIndex + 1) % slideCount);
+                        }, 2000);
+                    }
+
+                    autoSlide()
+                })
+            </script>
+        </div>
+    </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
     <div class="mainFooter__inner">
