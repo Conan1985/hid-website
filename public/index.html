@@ -8547,41 +8547,49 @@
                         dots[index].setAttribute("aria-selected", "true");
                     }
 
-                    // function startDrag(event) {
-                    //     startX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-                    //     dragging = true;
-                    //     track.style.transition = "none";
-                    // }
-                    //
-                    // function drag(event) {
-                    //     if (!dragging) return;
-                    //     const currentX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-                    //     const deltaX = currentX - startX;
-                    //     currentTranslate = prevTranslate + deltaX;
-                    //     track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
-                    // }
-                    //
-                    // function endDrag() {
-                    //     dragging = false;
-                    //     const movedBy = currentTranslate - prevTranslate;
-                    //     if (movedBy < -100 && currentIndex < slideCount - 1) {
-                    //         goToSlide(currentIndex + 1);
-                    //     } else if (movedBy > 100 && currentIndex > 0) {
-                    //         goToSlide(currentIndex - 1);
-                    //     } else {
-                    //         track.style.transition = "transform 0.3s ease";
-                    //         track.style.transform = `translate3d(${prevTranslate}px, 0, 0)`;
-                    //     }
-                    //     prevTranslate = currentTranslate;
-                    // }
-                    //
-                    // track.addEventListener('mousedown', startDrag);
-                    // track.addEventListener('mousemove', drag);
-                    // track.addEventListener('mouseup', endDrag);
-                    // track.addEventListener('mouseleave', endDrag);
-                    // track.addEventListener('touchstart', startDrag);
-                    // track.addEventListener('touchmove', drag);
-                    // track.addEventListener('touchend', endDrag);
+                    function startDrag(event) {
+                        event.preventDefault()
+                        startX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+                        dragging = true;
+                        track.style.transition = "none";
+                        clearInterval(autoSlideInterval)
+                    }
+
+                    function drag(event) {
+                        event.preventDefault()
+                        if (!dragging) return;
+                        let currentX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+                        let deltaX = currentX - startX;
+                        if ((currentIndex === 0 && deltaX > 0) || (currentIndex === slideCount - 1 && deltaX < 0)) {
+                            return;
+                        }
+                        currentTranslate = prevTranslate + deltaX;
+                        track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
+                    }
+
+                    function endDrag() {
+                        if (!dragging) return
+                        dragging = false;
+                        const movedBy = currentTranslate - prevTranslate;
+                        if (movedBy < -100 && currentIndex < slideCount - 1) {
+                            goToSlide(currentIndex + 1);
+                        } else if (movedBy > 100 && currentIndex > 0) {
+                            goToSlide(currentIndex - 1);
+                        } else {
+                            track.style.transition = "transform 0.5s ease-in-out";
+                            track.style.transform = `translate3d(${prevTranslate}px, 0, 0)`;
+                        }
+                        prevTranslate = currentTranslate;
+                        autoSlide()
+                    }
+
+                    track.addEventListener('mousedown', startDrag);
+                    track.addEventListener('mousemove', drag);
+                    track.addEventListener('mouseup', endDrag);
+                    track.addEventListener('mouseleave', endDrag);
+                    track.addEventListener('touchstart', startDrag);
+                    track.addEventListener('touchmove', drag);
+                    track.addEventListener('touchend', endDrag);
 
                     const dotsContainer = document.querySelector('#faces-behind-the-brand-desktop .slick-dots');
 
