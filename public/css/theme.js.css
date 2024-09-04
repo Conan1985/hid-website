@@ -24255,6 +24255,16 @@ html.notsmooth {
     }
 }
 
+.logo-rotate-left {
+    width: 100px;
+    position: fixed;
+    bottom: 50px; /* or any other position you need */
+    left: 50px; /* adjust as necessary */
+    transform: rotate(0deg); /* Adjust this in JavaScript */
+    opacity: 0; /* Adjust this in JavaScript */
+    transition: transform 1s ease-out, opacity 0.5s ease-out;
+}
+
 .wpforms-error-container {
     display: none
 }
