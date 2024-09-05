@@ -24255,6 +24255,10 @@ html.notsmooth {
     }
 }
 
+.popup-logo {
+    max-height: 80px
+}
+
 .logo-rotate-left {
     width: 100px;
     position: fixed;
