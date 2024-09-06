@@ -8049,14 +8049,14 @@
 
                                 // Calculate how much to rotate and move based on scroll position
                                 const maxScroll = windowHeight / 2;
-                                const progress = Math.min((scrollPosition - 1000) / maxScroll, 1);
+                                const progress = Math.min((scrollPosition - 500) / maxScroll, 1);
                                 console.log('youwei lu check progress: ', progress)
 
                                 if (scrollPosition > windowHeight / 4) {
                                     logoLeft.classList.remove('fullBleedMediaScale')
-                                    logoLeft.style.transform = `translateX(${progress * 750}px) rotate(${progress * 360}deg)`;
+                                    logoLeft.style.transform = `translate3d(${progress * 750}px, ${progress * -350}px, 0px) rotate(${progress * 360}deg)`;
                                     // logoRight.style.transform = `translateX(${-progress * 150}px) rotate(${progress * -360}deg)`;
-                                    logoLeft.style.opacity = progress;
+                                    // logoLeft.style.opacity = progress;
                                     // logoRight.style.opacity = progress;
                                     // title.style.opacity = progress;
                                 }
