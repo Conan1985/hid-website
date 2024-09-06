@@ -8029,6 +8029,7 @@
                              class="custom-logo forDesktopPopupLogo popup-logo" alt="Healthy Insurance Dude">
                         <img src="images/HID Logo est 2018.png"
                              class="custom-logo forMobilePopupLogo popup-logo" alt="Healthy Insurance Dude">
+                        <img src="images/hid%20logo%20icon%20blue%20and%20gold%201080.png" class="logo-rotate-right">
                         <script>
                             const imgs = document.getElementsByClassName('popup-logo');
                             for (let img of imgs) {
@@ -8045,9 +8046,8 @@
                                 const windowWidth = window.innerWidth;
 
                                 const logoLeft = document.querySelector('.logo-rotate-left');
-                                const logoRight = document.querySelector('.logo-rotate')
+                                const logoRight = document.querySelector('.logo-rotate-right')
 
-                                // Calculate how much to rotate and move based on scroll position
                                 const maxScroll = windowHeight / 2;
                                 let startPosition = 1.102 * windowWidth - 1308.082
                                 startPosition = startPosition < 0 ? 0 : startPosition
@@ -8058,13 +8058,12 @@
 
                                 if (scrollPosition > windowHeight / 4) {
                                     logoLeft.classList.remove('fullBleedMediaScale')
+                                    logoRight.classList.remove('fullBleedMediaScale')
                                     const scale = 2 - progress
                                     logoLeft.style.transform = `translate3d(${progress * 800}px, ${progress * targetY}px, 0px) rotate(${progress * 360}deg) scale(${scale})`;
-                                    // logoRight.style.transform = `translateX(${-progress * 150}px) rotate(${progress * -360}deg)`;
+                                    logoRight.style.transform = `translate3d(${progress * -880}px, ${progress * targetY}px, 0px) rotate(${progress * 360}deg) scale(${scale})`;
                                     logoLeft.style.opacity = progress;
-                                    console.log('youwei lu check progress: ', progress)
-                                    // logoRight.style.opacity = progress;
-                                    // title.style.opacity = progress;
+                                    logoRight.style.opacity = progress
                                 }
                             });
                         </script>
