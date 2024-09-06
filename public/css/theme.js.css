@@ -24255,18 +24255,40 @@ html.notsmooth {
     }
 }
 
+@media (max-width: 767px) {
+    .forDesktopPopupLogo {
+        display: none
+    }
+}
+
+@media (min-width: 768px) {
+    .forMobilePopupLogo {
+        display: none
+    }
+}
+
 .popup-logo {
     max-height: 80px
 }
 
 .logo-rotate-left {
-    width: 100px;
+    width: 80px;
     position: fixed;
-    bottom: 50px; /* or any other position you need */
-    left: 50px; /* adjust as necessary */
+    bottom: 0px; /* or any other position you need */
+    left: calc(50% - 1100px); /* adjust as necessary */
     transform: rotate(0deg); /* Adjust this in JavaScript */
-    /*opacity: 0; !* Adjust this in JavaScript *!*/
-    transition: transform 1s ease-out, opacity 0.5s ease-out;
+    opacity: 0; /* Adjust this in JavaScript */
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.logo-rotate-right {
+    width: 80px;
+    position: fixed;
+    bottom: 0px; /* or any other position you need */
+    left: calc(50% + 1100px); /* adjust as necessary */
+    transform: rotate(0deg); /* Adjust this in JavaScript */
+    opacity: 0; /* Adjust this in JavaScript */
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
 .wpforms-error-container {
