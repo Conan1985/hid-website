@@ -8059,7 +8059,7 @@
                                 if (scrollPosition > windowHeight / 4) {
                                     logoLeft.classList.remove('fullBleedMediaScale')
                                     logoRight.classList.remove('fullBleedMediaScale')
-                                    const scale = 2 - progress
+                                    const scale = 4 - 3 * progress
                                     logoLeft.style.transform = `translate3d(${progress * 800}px, ${progress * targetY}px, 0px) rotate(${progress * 360}deg) scale(${scale})`;
                                     logoRight.style.transform = `translate3d(${progress * -880}px, ${progress * targetY}px, 0px) rotate(${progress * -360}deg) scale(${scale})`;
                                     logoLeft.style.opacity = progress;
