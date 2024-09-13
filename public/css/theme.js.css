@@ -24320,10 +24320,12 @@ html.notsmooth {
 .cloud-logo {
     position: absolute;
     left: 50%;
-    top: -30%;
-    max-width: 50%;
+    top: -40%;
+    max-width: 1000px;
     transform: translateX(-50%);
-    transition: transform 0.3s ease-out;
+    opacity: 0;
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    z-index: 1;
 }
 
 
