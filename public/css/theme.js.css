@@ -24267,15 +24267,15 @@ html.notsmooth {
     }
 }
 
-@media (min-width: 990px) {
-    .quote-6 {
-        max-width: 714px;
+@media (max-width: 989px) {
+    .quote-video {
+        max-width: 514px;
     }
 }
 
-@media (max-width: 989px) {
-    .quote-6 {
-        max-width: 514px;
+@media (min-width: 990px) {
+    .quote-video {
+        width: 620px;
     }
 }
 
