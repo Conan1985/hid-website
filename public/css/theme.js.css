@@ -24303,6 +24303,112 @@ html.notsmooth {
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
+.cloud-img-container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.cloud-img-container img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+.cloud-logo {
+    position: absolute;
+    left: 50%;
+    top: -30%;
+    max-width: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-out;
+}
+
+
+
+/*.img-behind-the-brand-text {*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    width: 100%;*/
+/*    object-fit: contain;*/
+/*    background-color: transparent;*/
+/*}*/
+
+/*.img-behind-the-brand-text1 {*/
+/*    position: absolute;*/
+/*    z-index: 2;*/
+/*    width: 100%;*/
+/*    object-fit: contain;*/
+/*    background-color: transparent;*/
+/*}*/
+
+/*.img-btb-s1c {*/
+/*    position: absolute;*/
+/*    z-index: 3;*/
+/*}*/
+
+/*.img-btb-s1c1 {*/
+/*    position: absolute;*/
+/*    z-index: 4;*/
+/*}*/
+
+/*.img-btb-s1c2 {*/
+/*    position: absolute;*/
+/*    z-index: 5;*/
+/*}*/
+
+/*.img-btb-s1c3 {*/
+/*    position: absolute;*/
+/*    z-index: 6;*/
+/*}*/
+
+/*.img-btb-s1c4 {*/
+/*    position: absolute;*/
+/*    z-index: 7;*/
+/*}*/
+
+/*.img-btb-s1c5 {*/
+/*    position: absolute;*/
+/*    z-index: 8;*/
+/*}*/
+
+/*.img-btb-s1c6 {*/
+/*    position: absolute;*/
+/*    z-index: 9;*/
+/*}*/
+
+/*.img-btb-s1c7 {*/
+/*    position: absolute;*/
+/*    z-index: 10;*/
+/*}*/
+
+/*.img-btb-s1c8 {*/
+/*    position: absolute;*/
+/*    z-index: 11;*/
+/*}*/
+
+/*.img-btb-s1c9 {*/
+/*    position: absolute;*/
+/*    z-index: 12;*/
+/*}*/
+
+/*.img-btb-s1c10 {*/
+/*    position: absolute;*/
+/*    z-index: 13;*/
+/*}*/
+
+/*.img-btb-s1c11 {*/
+/*    position: absolute;*/
+/*    z-index: 14;*/
+/*}*/
+
+/*.img-btb-s1c12 {*/
+/*    position: absolute;*/
+/*    z-index: 15;*/
+/*}*/
+
 .wpforms-error-container {
     display: none
 }
