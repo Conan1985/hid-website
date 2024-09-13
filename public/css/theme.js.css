@@ -24320,7 +24320,6 @@ html.notsmooth {
 .cloud-logo {
     position: absolute;
     left: 50%;
-    top: -40%;
     max-width: 1000px;
     transform: translateX(-50%);
     opacity: 0;
@@ -24328,15 +24327,15 @@ html.notsmooth {
     z-index: 1;
 }
 
-
-
-/*.img-behind-the-brand-text {*/
-/*    position: absolute;*/
-/*    z-index: 1;*/
-/*    width: 100%;*/
-/*    object-fit: contain;*/
-/*    background-color: transparent;*/
-/*}*/
+.img-behind-the-brand-text {
+    position: absolute;
+    z-index: 2;
+    top: 10%;
+    left: 10%;
+    max-width: 80%;
+    object-fit: contain;
+    background-color: transparent;
+}
 
 /*.img-behind-the-brand-text1 {*/
 /*    position: absolute;*/

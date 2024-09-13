@@ -8035,34 +8035,33 @@
         <div class="cloud-img-container">
             <img id="cloud-background" src="../images/Brand%20Services/BTB%20S1%20bg.jpg"/>
             <img id="cloud-logo" class="cloud-logo" src="../images/Brand%20Services/Behind%20the%20Brand%20logo.png"/>
-<!--                    <img class="img-behind-the-brand-text"-->
-<!--                         src="../images/Brand%20Services/Behind%20the%20Brand%20text.png"/>-->
-<!--                    <img class="img-behind-the-brand-text1"-->
-<!--                         src="../images/Brand%20Services/Behind%20the%20Brand%20text1.png"/>-->
-<!--                    <img class="img-btb-s1c" src="../images/Brand%20Services/BTB%20S1C.png"/>-->
-<!--                    <img class="img-btb-s1c1" src="../images/Brand%20Services/BTB%20S1C1.png"/>-->
-<!--                    <img class="img-btb-s1c2" src="../images/Brand%20Services/BTB%20S1C2.png"/>-->
-<!--                    <img class="img-btb-s1c3" src="../images/Brand%20Services/BTB%20S1C3.png"/>-->
-<!--                    <img class="img-btb-s1c4" src="../images/Brand%20Services/BTB%20S1C4.png"/>-->
-<!--                    <img class="img-btb-s1c5" src="../images/Brand%20Services/BTB%20S1C5.png"/>-->
-<!--                    <img class="img-btb-s1c6" src="../images/Brand%20Services/BTB%20S1C6.png"/>-->
-<!--                    <img class="img-btb-s1c7" src="../images/Brand%20Services/BTB%20S1C7.png"/>-->
-<!--                    <img class="img-btb-s1c8" src="../images/Brand%20Services/BTB%20S1C8.png"/>-->
-<!--                    <img class="img-btb-s1c9" src="../images/Brand%20Services/BTB%20S1C9.png"/>-->
-<!--                    <img class="img-btb-s1c10" src="../images/Brand%20Services/BTB%20S1C10.png"/>-->
-<!--                    <img class="img-btb-s1c11" src="../images/Brand%20Services/BTB%20S1C11.png"/>-->
-<!--                    <img class="img-btb-s1c12" src="../images/Brand%20Services/BTB%20S1C12.png"/>-->
+            <img class="img-behind-the-brand-text"
+                 src="../images/Brand%20Services/Behind%20the%20Brand%20text.png"/>
+            <!--                    <img class="img-behind-the-brand-text1"-->
+            <!--                         src="../images/Brand%20Services/Behind%20the%20Brand%20text1.png"/>-->
+            <!--                    <img class="img-btb-s1c" src="../images/Brand%20Services/BTB%20S1C.png"/>-->
+            <!--                    <img class="img-btb-s1c1" src="../images/Brand%20Services/BTB%20S1C1.png"/>-->
+            <!--                    <img class="img-btb-s1c2" src="../images/Brand%20Services/BTB%20S1C2.png"/>-->
+            <!--                    <img class="img-btb-s1c3" src="../images/Brand%20Services/BTB%20S1C3.png"/>-->
+            <!--                    <img class="img-btb-s1c4" src="../images/Brand%20Services/BTB%20S1C4.png"/>-->
+            <!--                    <img class="img-btb-s1c5" src="../images/Brand%20Services/BTB%20S1C5.png"/>-->
+            <!--                    <img class="img-btb-s1c6" src="../images/Brand%20Services/BTB%20S1C6.png"/>-->
+            <!--                    <img class="img-btb-s1c7" src="../images/Brand%20Services/BTB%20S1C7.png"/>-->
+            <!--                    <img class="img-btb-s1c8" src="../images/Brand%20Services/BTB%20S1C8.png"/>-->
+            <!--                    <img class="img-btb-s1c9" src="../images/Brand%20Services/BTB%20S1C9.png"/>-->
+            <!--                    <img class="img-btb-s1c10" src="../images/Brand%20Services/BTB%20S1C10.png"/>-->
+            <!--                    <img class="img-btb-s1c11" src="../images/Brand%20Services/BTB%20S1C11.png"/>-->
+            <!--                    <img class="img-btb-s1c12" src="../images/Brand%20Services/BTB%20S1C12.png"/>-->
         </div>
         <script>
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 const logo = document.getElementById('cloud-logo');
                 const bg = document.getElementById('cloud-background');
                 const scrollPosition = window.scrollY;
                 const windowWidth = window.innerWidth;
-                const bgHeight = bg.offsetHeight;
                 const displayThreshold = windowWidth > 989 ? 100 : 0.1 * windowWidth;
                 const disappearThreshold = 1.1 * windowWidth;
-                logo.style.top = windowWidth > 989 ? -1000 : "-50%";
+                logo.style.top = windowWidth > 989 ? -700 : "-40%";
                 logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
