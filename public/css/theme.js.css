@@ -24358,10 +24358,11 @@ html.notsmooth {
     background-color: transparent;
 }
 
-/*.img-btb-s1c {*/
-/*    position: absolute;*/
-/*    z-index: 3;*/
-/*}*/
+.img-btb-s1c {
+    position: absolute;
+    top: -10%;
+    z-index: 10;
+}
 
 /*.img-btb-s1c1 {*/
 /*    position: absolute;*/
