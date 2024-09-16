@@ -24360,23 +24360,26 @@ html.notsmooth {
 
 .img-btb-s1c {
     position: absolute;
-    top: -10%;
+    top: -5%;
     z-index: 10;
 }
 
-/*.img-btb-s1c1 {*/
-/*    position: absolute;*/
-/*    z-index: 4;*/
-/*}*/
+.img-btb-s1c1 {
+    position: absolute;
+    top: -5%;
+    z-index: 10;
+}
 
-/*.img-btb-s1c2 {*/
-/*    position: absolute;*/
-/*    z-index: 5;*/
-/*}*/
+.img-btb-s1c2 {
+    position: absolute;
+    top: 6%;
+    z-index: 10;
+}
 
 /*.img-btb-s1c3 {*/
 /*    position: absolute;*/
-/*    z-index: 6;*/
+/*    top: -5%;*/
+/*    z-index: 10;*/
 /*}*/
 
 /*.img-btb-s1c4 {*/

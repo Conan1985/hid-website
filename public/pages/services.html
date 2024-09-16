@@ -8040,10 +8040,10 @@
                  src="../images/Brand%20Services/Behind%20the%20Brand%20text.png"/>
             <img class="img-behind-the-brand-text1"
                  src="../images/Brand%20Services/Behind%20the%20Brand%20text1.png"/>
-            <img class="img-btb-s1c" src="../images/Brand%20Services/BTB%20S1C.png"/>
-            <!--                    <img class="img-btb-s1c1" src="../images/Brand%20Services/BTB%20S1C1.png"/>-->
-            <!--                    <img class="img-btb-s1c2" src="../images/Brand%20Services/BTB%20S1C2.png"/>-->
-            <!--                    <img class="img-btb-s1c3" src="../images/Brand%20Services/BTB%20S1C3.png"/>-->
+            <!--            <img class="img-btb-s1c" src="../images/Brand%20Services/BTB%20S1C.png"/>-->
+            <!--            <img class="img-btb-s1c1" src="../images/Brand%20Services/BTB%20S1C1.png"/>-->
+            <img id="img-btb-s1c2" class="img-btb-s1c2" src="../images/Brand%20Services/BTB%20S1C2.png"/>
+<!--            <img class="img-btb-s1c3" src="../images/Brand%20Services/BTB%20S1C3.png"/>-->
             <!--                    <img class="img-btb-s1c4" src="../images/Brand%20Services/BTB%20S1C4.png"/>-->
             <!--                    <img class="img-btb-s1c5" src="../images/Brand%20Services/BTB%20S1C5.png"/>-->
             <!--                    <img class="img-btb-s1c6" src="../images/Brand%20Services/BTB%20S1C6.png"/>-->
@@ -8057,6 +8057,7 @@
         <script>
             window.addEventListener('scroll', function () {
                 const logo = document.getElementById('cloud-logo');
+                const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
                 const bg = document.getElementById('cloud-background');
                 const scrollPosition = window.scrollY;
                 const windowWidth = window.innerWidth;
@@ -8065,6 +8066,7 @@
                 const disappearStart = 0.7 * windowWidth;
                 logo.style.top = windowWidth > 989 ? -500 : "-40%";
                 logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
+                imgBtbS1c2.style.transform = `translateY(-${scrollPosition * 0.5}px)`
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
                 } else if (scrollPosition > disappearStart) {
