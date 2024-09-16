@@ -24267,6 +24267,11 @@ html.notsmooth {
     }
 }
 
+.quote-video {
+    height: auto;
+    clip-path: inset(0 0 2px 0);
+}
+
 @media (max-width: 989px) {
     .quote-video {
         max-width: 514px;
