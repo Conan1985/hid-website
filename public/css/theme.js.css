@@ -24267,15 +24267,20 @@ html.notsmooth {
     }
 }
 
-@media (min-width: 990px) {
-    .quote-6 {
-        max-width: 714px;
-    }
+.quote-video {
+    height: auto;
+    clip-path: inset(0 0 2px 0);
 }
 
 @media (max-width: 989px) {
-    .quote-6 {
+    .quote-video {
         max-width: 514px;
+    }
+}
+
+@media (min-width: 990px) {
+    .quote-video {
+        width: 620px;
     }
 }
 
