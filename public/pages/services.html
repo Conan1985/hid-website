@@ -8059,21 +8059,16 @@
                 const logo = document.getElementById('cloud-logo');
                 const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
                 const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
-                const bg = document.getElementById('cloud-background');
                 const scrollPosition = window.scrollY;
                 const windowWidth = window.innerWidth;
                 const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
                 const disappearThreshold = windowWidth;
-                const disappearStart = 0.9 * windowWidth;
                 logo.style.top = windowWidth > 989 ? -500 : "-40%";
                 logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
                 imgBtbS1c2.style.transform = `translateY(-${scrollPosition * 0.5}px)`;
                 imgBtbS1c11.style.transform = `translateY(${scrollPosition * 0.2}px)`;
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
-                } else if (scrollPosition > disappearStart) {
-                    const opacity = 1 - (scrollPosition - disappearStart) / (disappearThreshold - disappearStart)
-                    logo.style.opacity = opacity
                 } else {
                     logo.style.opacity = 1;
                 }

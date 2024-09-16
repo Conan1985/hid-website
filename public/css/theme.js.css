@@ -24336,7 +24336,7 @@ html.notsmooth {
     max-width: 1000px;
     opacity: 0;
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-    z-index: 2;
+    z-index: 4;
 }
 
 .img-behind-the-brand-text {
@@ -24360,12 +24360,12 @@ html.notsmooth {
 
 .img-btb-s1c {
     position: absolute;
-    z-index: 10;
+    z-index: 1;
 }
 
 .img-btb-s1c1 {
     position: absolute;
-    z-index: 10;
+    z-index: 2;
 }
 
 .img-btb-s1c2 {
@@ -24376,37 +24376,37 @@ html.notsmooth {
 
 .img-btb-s1c3 {
     position: absolute;
-    z-index: 10;
+    z-index: 3;
 }
 
 .img-btb-s1c4 {
     position: absolute;
-    z-index: 10;
+    z-index: 4;
 }
 
 .img-btb-s1c5 {
     position: absolute;
-    z-index: 10;
+    z-index: 5;
 }
 
 .img-btb-s1c6 {
     position: absolute;
-    z-index: 10;
+    z-index: 6;
 }
 
 .img-btb-s1c7 {
     position: absolute;
-    z-index: 10;
+    z-index: 7;
 }
 
 .img-btb-s1c8 {
     position: absolute;
-    z-index: 10;
+    z-index: 8;
 }
 
 .img-btb-s1c9 {
     position: absolute;
-    z-index: 10;
+    z-index: 9;
 }
 
 .img-btb-s1c10 {
@@ -24416,12 +24416,12 @@ html.notsmooth {
 
 .img-btb-s1c11 {
     position: absolute;
-    z-index: 10;
+    z-index: 11;
 }
 
 .img-btb-s1c12 {
     position: absolute;
-    z-index: 10;
+    z-index: 12;
 }
 
 .wpforms-error-container {
