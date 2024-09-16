@@ -24342,7 +24342,8 @@ html.notsmooth {
 .img-behind-the-brand-text {
     position: absolute;
     z-index: 6;
-    top: 10%;
+    top: 0;
+    top: 3%;
     left: 10%;
     max-width: 80%;
     object-fit: contain;
