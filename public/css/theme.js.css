@@ -24322,6 +24322,14 @@ html.notsmooth {
     background-color: transparent;
 }
 
+.cloud-invisible {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    object-fit: contain;
+    background-color: transparent;
+}
+
 .cloud-logo {
     position: absolute;
     left: 50%;
@@ -24329,12 +24337,12 @@ html.notsmooth {
     transform: translateX(-50%);
     opacity: 0;
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-    z-index: 1;
+    z-index: 2;
 }
 
 .img-behind-the-brand-text {
     position: absolute;
-    z-index: 2;
+    z-index: 6;
     top: 10%;
     left: 10%;
     max-width: 80%;
