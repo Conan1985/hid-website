@@ -8038,8 +8038,8 @@
             <img id="cloud-logo" class="cloud-logo" src="../images/Brand%20Services/Behind%20the%20Brand%20logo.png"/>
             <img class="img-behind-the-brand-text"
                  src="../images/Brand%20Services/Behind%20the%20Brand%20text.png"/>
-            <!--                    <img class="img-behind-the-brand-text1"-->
-            <!--                         src="../images/Brand%20Services/Behind%20the%20Brand%20text1.png"/>-->
+            <img class="img-behind-the-brand-text1"
+                 src="../images/Brand%20Services/Behind%20the%20Brand%20text1.png"/>
             <!--                    <img class="img-btb-s1c" src="../images/Brand%20Services/BTB%20S1C.png"/>-->
             <!--                    <img class="img-btb-s1c1" src="../images/Brand%20Services/BTB%20S1C1.png"/>-->
             <!--                    <img class="img-btb-s1c2" src="../images/Brand%20Services/BTB%20S1C2.png"/>-->
@@ -8061,14 +8061,14 @@
                 const scrollPosition = window.scrollY;
                 const windowWidth = window.innerWidth;
                 const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
-                const disappearThreshold =  windowWidth;
+                const disappearThreshold = windowWidth;
                 const disappearStart = 0.7 * windowWidth;
                 logo.style.top = windowWidth > 989 ? -500 : "-40%";
                 logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
                 } else if (scrollPosition > disappearStart) {
-                    const opacity = 1 - (scrollPosition - disappearStart ) / (disappearThreshold - disappearStart)
+                    const opacity = 1 - (scrollPosition - disappearStart) / (disappearThreshold - disappearStart)
                     logo.style.opacity = opacity
                 } else {
                     logo.style.opacity = 1;
@@ -8190,7 +8190,8 @@
             <div class="imageTxtHeadline default-animated-block">
                 <div class="imageTxtHeadline__inner imageTxtHeadline--C3">
                     <div class="leftContainer">
-                        <img decoding="async" class="lazyImg" src="../images/Brand%20Services/HID%20Retirement%20Income%20Planning.jpg"
+                        <img decoding="async" class="lazyImg"
+                             src="../images/Brand%20Services/HID%20Retirement%20Income%20Planning.jpg"
                              alt="Seating area with mini bar, billiard table and chairs underneath a light fixture"/>
                     </div>
                     <div class="rightContainer">
@@ -8216,11 +8217,13 @@
                 <div class="imageTxtHeadline__inner imageTxtHeadline--C3_mirrored">
                     <div class="leftContainer">
                         <div class="withFullWidth forDesktopContent">
-                            <img decoding="async" class="lazyImg" src="../images/Brand%20Services/HID%20Capital%20Preservation.jpg"
+                            <img decoding="async" class="lazyImg"
+                                 src="../images/Brand%20Services/HID%20Capital%20Preservation.jpg"
                                  alt="Entertainment area with television"/>
                         </div>
                         <div class="withFullWidth forMobileContent">
-                            <img decoding="async" class="lazyImg" src="../images/Brand%20Services/HID%20Capital%20Preservation.jpg"
+                            <img decoding="async" class="lazyImg"
+                                 src="../images/Brand%20Services/HID%20Capital%20Preservation.jpg"
                                  alt="Entertainment area with television"/>
                         </div>
                     </div>

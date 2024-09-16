@@ -24342,7 +24342,6 @@ html.notsmooth {
 .img-behind-the-brand-text {
     position: absolute;
     z-index: 6;
-    top: 0;
     top: 3%;
     left: 10%;
     max-width: 80%;
@@ -24350,13 +24349,14 @@ html.notsmooth {
     background-color: transparent;
 }
 
-/*.img-behind-the-brand-text1 {*/
-/*    position: absolute;*/
-/*    z-index: 2;*/
-/*    width: 100%;*/
-/*    object-fit: contain;*/
-/*    background-color: transparent;*/
-/*}*/
+.img-behind-the-brand-text1 {
+    position: absolute;
+    left: 9%;
+    z-index: 1;
+    width: 100%;
+    object-fit: contain;
+    background-color: transparent;
+}
 
 /*.img-btb-s1c {*/
 /*    position: absolute;*/
