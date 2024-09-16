@@ -24334,7 +24334,6 @@ html.notsmooth {
     position: absolute;
     left: 50%;
     max-width: 1000px;
-    transform: translateX(-50%);
     opacity: 0;
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
     z-index: 2;

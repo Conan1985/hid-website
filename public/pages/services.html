@@ -8060,9 +8060,9 @@
                 const bg = document.getElementById('cloud-background');
                 const scrollPosition = window.scrollY;
                 const windowWidth = window.innerWidth;
-                const displayThreshold = windowWidth > 989 ? 100 : 0.1 * windowWidth;
+                const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
                 const disappearThreshold = 1.1 * windowWidth;
-                logo.style.top = windowWidth > 989 ? -700 : "-40%";
+                logo.style.top = windowWidth > 989 ? -500 : "-40%";
                 logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
