@@ -24284,6 +24284,20 @@ html.notsmooth {
     }
 }
 
+@media (min-width: 768px) {
+    .connect-with-us {
+        transform: translateY(-80px);
+    }
+}
+
+@media (max-width: 767px) {
+    .connect-with-us {
+        transform: translateY(-50px);
+        margin-left: -5vw;
+        width: 110vw;
+    }
+}
+
 .popup-logo {
     max-height: 80px
 }
