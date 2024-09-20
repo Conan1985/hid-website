@@ -111,7 +111,8 @@
 }
 
 .icon-Chevron-left::before {
-    content: "î¤ƒ"
+    content: "\27A4";
+    transform: rotate(180deg);
 }
 
 .icon-Chevron-right::before {
@@ -815,7 +816,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .datepicker__month-button--prev::after {
-    content: "î¤ƒ";
+    content: "\27A4";
+    transform: rotate(180deg);;
     font-family: icomoon;
     font-size: 1.9rem;
     line-height: 2rem;
@@ -1890,7 +1892,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .calendar-table .prev span::before {
-    content: "î¤ƒ";
+    content: "\27A4";
+    transform: rotate(180deg);;
     font-family: "icomoon";
     color: #000;
     font-size: 19px;
@@ -7993,6 +7996,7 @@ a:hover, a:focus {
     .text-besides-faster {
         margin-bottom: 100px
     }
+
     .text-besides-slower {
         margin-bottom: -100px
     }
@@ -12942,7 +12946,8 @@ a:hover, a:focus {
 }
 
 .mediaSlider .slick-prev::before {
-    content: "î¤ƒ";
+    content: "\27A4";
+    transform: rotate(180deg);;
     font-family: "icomoon";
     display: block;
     height: 38px;
@@ -13474,7 +13479,8 @@ a:hover, a:focus {
 
 @media (max-width: 767px) {
     .breadcrumb span:not(:last-child)::before {
-        content: "î¤ƒ";
+        content: "\27A4";
+        transform: rotate(180deg);;
         font-family: "icomoon";
         margin-right: 5px;
         font-size: 16px;
@@ -15281,7 +15287,8 @@ div.wpforms-container-full .wpforms-form input[type=checkbox].wpforms-error::bef
 }
 
 .slider-listing .slick-arrow.slick-prev::after {
-    content: "î¤ƒ"
+    content: "\27A4";
+    transform: rotate(180deg);
 }
 
 .slider-listing .slick-arrow.slick-next {
@@ -18257,7 +18264,8 @@ code {
 
 @media screen and (prefers-reduced-motion: reduce) {
     .interactiveMaps .slick-slider .slick-arrow.slick-prev::after {
-        content: "î¤ƒ";
+        content: "\27A4";
+        transform: rotate(180deg);;
         display: block;
         width: 40px;
         height: 40px;
@@ -18277,7 +18285,8 @@ code {
 }
 
 .interactiveMaps .slick-slider .slick-arrow.slick-prev::after {
-    content: "î¤ƒ";
+    content: "\27A4";
+    transform: rotate(180deg);;
     display: block;
     width: 40px;
     height: 40px;
@@ -21153,7 +21162,8 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-image-nav-left::after {
-    content: "î¤ƒ"
+    content: "\27A4";
+    transform: rotate(180deg);
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-image-nav-right::after {
@@ -21372,7 +21382,8 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-thumbnails-container .galleria-thumb-nav-left::after {
-    content: "î¤ƒ"
+    content: "\27A4";
+    transform: rotate(180deg);
 }
 
 .galleria-theme-nextgen_pro_lightbox .galleria-thumbnails-container .galleria-thumb-nav-right::after {
@@ -23471,7 +23482,8 @@ ul.wp-tag-cloud li a.clearTag {
 }
 
 .tribe-events-single .tribe-events-single-content-container__innerTop .backToAll::before {
-    content: "î¤ƒ";
+    content: "\27A4";
+    transform: rotate(180deg);;
     font-family: "icomoon";
     position: relative;
     top: -1px;
