@@ -8032,30 +8032,86 @@
                 </div>
             </div>
         </div>
-        <div style="height: 50px"></div>
-        <div id="cms-block-66cbd7373ba453.56160975" class="cms-block cms-block-element">
-            <div class="heroBanner default-animation-nomov heroBanner--C1-D">
-                <div class="contentBottom">
-                    <h2 class="mediumHeading-1 colorGold">How we accomplished what they can’t</h2>
-                    <h6 class="titleSmall"></h6>
-                    <br>
-                    <p class="boldBody">
-                        Welcome to a world where quality and affordable insurance is no longer a distant hope but a
-                        tangible reality! At our platform, you’ll uncover accessible PPO health insurance plans
-                        alongside annuities, Medicare, and life insurance options.
-                        Our approach is direct: we harness the collective power of a vast association comprising over
-                        1.7 million small business owners, individuals, 1099 contractors, and anyone in search of
-                        equitable health insurance solutions and retirement programs.
-                        Operated within established governmental frameworks, our strategy is both legally sound and
-                        refreshingly simple.
-                        Furthermore, many of our plans offer guaranteed renewal from birth through retirement,
-                        eliminating the need for constant searches for new insurance options.
-                        Trust us on your journey towards hassle-free and affordable health, life, and retirement
-                        coverage!
+        <div id="cms-block-6613d09044be65.81557508" class="cms-block cms-block-element">
+            <div class="fullBleedMedia default-animated-block default-animation">
+                <div class="customfullHeight">
+                    <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
+                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                               muted playsinline>
+                            <source src="https://d10fkq1icl237t.cloudfront.net/HID+web+v3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="fullBleedMedia-content">
+                    <div class="fullBleedMedia-content-inner">
+                        <img src="../images/hid%20logo%20icon%20blue%20and%20gold%201080.png" class="logo-rotate-left">
+                        <img src="../images/HID horizontal wide title text.png"
+                             class="custom-logo forDesktopPopupLogo popup-logo" alt="Healthy Insurance Dude">
+                        <img src="../images/HID Logo est 2018.png"
+                             class="custom-logo forMobilePopupLogo popup-logo" alt="Healthy Insurance Dude">
+                        <img src="../images/hid%20logo%20icon%20blue%20and%20gold%201080.png" class="logo-rotate-right">
+                        <script>
+                            const imgs = document.getElementsByClassName('popup-logo');
+                            for (let img of imgs) {
+                                img.addEventListener('mouseover', () => {
+                                    img.style.animation = 'scaleUpImg 0.3s forwards';
+                                });
+                                img.addEventListener('mouseout', () => {
+                                    img.style.animation = 'scaleDownImg 1.3s forwards';
+                                });
+                            }
+                            window.addEventListener('scroll', function () {
+                                const scrollPosition = window.scrollY;
+                                const windowHeight = window.innerHeight;
+                                const windowWidth = window.innerWidth;
+
+                                const logoLeft = document.querySelector('.logo-rotate-left');
+                                const logoRight = document.querySelector('.logo-rotate-right')
+
+                                const maxScroll = windowHeight / 2;
+                                let startPosition = 1.102 * windowWidth - 1308.082
+                                startPosition = startPosition < 0 ? 0 : startPosition
+                                startPosition = startPosition > 500 ? 500 : startPosition
+
+                                const progress = windowWidth < 768 ? 0 : Math.min((scrollPosition - startPosition) / maxScroll, 1);
+                                const targetY = windowWidth < 990 ? -720 : -880
+
+                                if (scrollPosition > windowHeight / 4) {
+                                    logoLeft.classList.remove('fullBleedMediaScale')
+                                    logoRight.classList.remove('fullBleedMediaScale')
+                                    const scale = 4 - 3 * progress
+                                    logoLeft.style.transform = `translate3d(${progress * 800}px, ${progress * targetY}px, 0px) rotate(${progress * 360}deg) scale(${scale})`;
+                                    logoRight.style.transform = `translate3d(${progress * -880}px, ${progress * targetY}px, 0px) rotate(${progress * -360}deg) scale(${scale})`;
+                                    logoLeft.style.opacity = progress;
+                                    logoRight.style.opacity = progress
+                                }
+                            });
+                        </script>
                         <br>
-                    </p>
-                    <div class="multiButtons">
-                        <a href="" class="primary--btn" rel="nofollow">Book a Consultation</a>
+                        <br>
+                        <h2 class="mediumHeading-1 colorGold">How we accomplished what they can’t</h2>
+                        <h6 class="titleSmall"></h6>
+                        <br>
+                        <p class="boldBody">
+                            Welcome to a world where quality and affordable insurance is no longer a distant hope but a
+                            tangible reality! At our platform, you’ll uncover accessible PPO health insurance plans
+                            alongside annuities, Medicare, and life insurance options.
+                            Our approach is direct: we harness the collective power of a vast association comprising
+                            over
+                            1.7 million small business owners, individuals, 1099 contractors, and anyone in search of
+                            equitable health insurance solutions and retirement programs.
+                            Operated within established governmental frameworks, our strategy is both legally sound and
+                            refreshingly simple.
+                            Furthermore, many of our plans offer guaranteed renewal from birth through retirement,
+                            eliminating the need for constant searches for new insurance options.
+                            Trust us on your journey towards hassle-free and affordable health, life, and retirement
+                            coverage!
+                            <br>
+                        </p>
+                        <div class="multiButtons">
+                            <a href="" class="primary--btn" rel="nofollow">Book a Consultation</a>
+                        </div>
                     </div>
                 </div>
             </div>
