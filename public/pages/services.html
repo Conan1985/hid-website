@@ -7073,8 +7073,9 @@
             <a href="javascript:void(0);">Menu</a>
         </div>
         <div class="logoMobile">
-            <a href="/index.html" data-title="Spontaneous Sophistication"><img src="../images/HID Logo (blue and gold).png"
-                                                                           alt="logo"></a>
+            <a href="/index.html" data-title="Spontaneous Sophistication"><img
+                    src="../images/HID Logo (blue and gold).png"
+                    alt="logo"></a>
         </div>
         <div class="mainHeader__mobile--right">
             <button type="button" href="javascript:void(0);" class="primary--btn btn--book-now"
@@ -8063,12 +8064,16 @@
                 const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
                 const disappearThreshold = windowWidth;
                 logo.style.top = windowWidth > 989 ? -500 : "-40%";
-                logo.style.transform = `translateX(-50%) translateY(${scrollPosition * 1.5}px)`;
-                imgBtbS1c2.style.transform = `translateY(-${scrollPosition * 0.5}px)`;
-                imgBtbS1c11.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+                logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 1.5, 5000)}px)`;
+                imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
+                imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
+                console.log('youwei lu check scroll position: ', scrollPosition)
+                console.log('youwei lu check display threshold: ', displayThreshold)
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                     logo.style.opacity = 0;
+                    logo.style.display = 'none';
                 } else {
+                    logo.style.display = 'block'
                     logo.style.opacity = 1;
                 }
             });
