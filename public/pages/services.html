@@ -8067,14 +8067,12 @@
                 logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 1.5, 5000)}px)`;
                 imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
                 imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
-                console.log('youwei lu check scroll position: ', scrollPosition)
-                console.log('youwei lu check display threshold: ', displayThreshold)
                 if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
-                    logo.style.opacity = 0;
+                    logo.style.opacity = "0";
                     logo.style.display = 'none';
                 } else {
                     logo.style.display = 'block'
-                    logo.style.opacity = 1;
+                    logo.style.opacity = "1";
                 }
             });
         </script>
