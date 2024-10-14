@@ -8041,11 +8041,11 @@
                         <h2>Would you like to schedule an appointment?</h2>
 
                         <label class="form-radio">
-                            <input type="radio" required="">
+                            <input type="radio" name="appointment" id="yes-option">
                             Yes
                         </label>
                         <label class="form-radio">
-                            <input type="radio">
+                            <input type="radio" name="appointment" id="no-option">
                             No
                         </label>
                     </div>
@@ -8071,14 +8071,33 @@
                 title="Info Submission Gold"
         >
         </iframe>
-        <script src="https://hello.thehealthyinsurancedude.com/js/form_embed.js"></script>
 
         <iframe src="https://hello.thehealthyinsurancedude.com/widget/booking/jf5EmnNLCjbvyGlCnTe5"
                 style="width: 100%;border:none;overflow: hidden;" scrolling="no"
                 id="jf5EmnNLCjbvyGlCnTe5_1728929351231"></iframe>
         <br>
         <script src="https://hello.thehealthyinsurancedude.com/js/form_embed.js" type="text/javascript"></script>
-
+        <script>
+            const yesOption = document.getElementById('yes-option');
+            const noOption = document.getElementById('no-option');
+            const firstIframe = document.getElementById('inline-75hnSYfloK8bXVGRXHum');
+            const secondIframe = document.getElementById('jf5EmnNLCjbvyGlCnTe5_1728929351231');
+            function handleRadioChange() {
+                if (yesOption.checked) {
+                    firstIframe.style.display = "none";
+                    secondIframe.style.display = "block";
+                } else if (noOption.checked) {
+                    firstIframe.style.display = "block";
+                    secondIframe.style.display = "none";
+                } else {
+                    firstIframe.style.display = "block";
+                    secondIframe.style.display = "none";
+                }
+            }
+            yesOption.addEventListener('change', handleRadioChange);
+            noOption.addEventListener('change', handleRadioChange);
+            handleRadioChange();
+        </script>
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
