@@ -24310,6 +24310,14 @@ html.notsmooth {
     }
 }
 
+@media (min-width: 1249px) {
+    .book-appointment {
+        max-width: 1249px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 .popup-logo {
     max-height: 80px
 }
