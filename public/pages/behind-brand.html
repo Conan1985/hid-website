@@ -8043,7 +8043,7 @@
                         </video>
                     </div>
                 </div>
-                <div class="fullBleedMedia-content">
+                <div class="fullBleedMedia-content" style="max-width: 990px">
                     <div class="fullBleedMedia-content-inner">
                         <img src="../images/hid%20logo%20icon%20blue%20and%20gold%201080.png" class="logo-rotate-left">
                         <img src="../images/HID horizontal wide title text.png"
@@ -8075,8 +8075,24 @@
                                 startPosition = startPosition > 500 ? 500 : startPosition
 
                                 const progress = windowWidth < 768 ? 0 : Math.min((scrollPosition - startPosition) / maxScroll, 1);
-                                const targetY = windowWidth < 990 ? -720 : -880
-
+                                let targetY = 0
+                                if (windowWidth >= 990) {
+                                    targetY = -1326
+                                } else if (windowWidth >= 966) {
+                                    targetY = -1166
+                                } else if (windowWidth >= 879) {
+                                    targetY = -1196
+                                } else if (windowWidth >= 865) {
+                                    targetY = -1236
+                                } else if (windowWidth >= 803) {
+                                    targetY = -1266
+                                } else if (windowWidth >= 792) {
+                                    targetY = -1296
+                                } else if (windowWidth >= 782) {
+                                    targetY = -1326
+                                } else {
+                                    targetY = -1356
+                                }
                                 if (scrollPosition > windowHeight / 4) {
                                     logoLeft.classList.remove('fullBleedMediaScale')
                                     logoRight.classList.remove('fullBleedMediaScale')
@@ -8090,9 +8106,32 @@
                         </script>
                         <br>
                         <br>
+                        <h2 class="mediumHeading-1 colorGold">What’s with the name?</h2>
+                        <br>
+                        <h2>Yes, We Know… It’s a Goofy Name!</h2>
+                        <p class="boldBody">
+                            But hey, it’s catchy! What started as a simple hashtag took off, and now it’s a name I
+                            proudly live up to. Plus, it keeps me moving—and keeps my wife happy seeing me at the gym.
+                            And yes, I know cigars aren't the healthiest habit… I never claimed to be perfect!
+                        </p>
+                        <h2>But you’re not here for the name.</h2>
+                        <p class="boldBody">
+                            You’re here because of our reputation and reviews; you’re here for a better plan; to save
+                            your business or family money; and for the receive the respect you deserve.
+                        </p>
+                        <h2>For Us, Our Clients Are Everything</h2>
+                        <p class="boldBody">
+                            Our clients are at the heart of everything we do. They’re what drive our business, support
+                            our families, and give us joy every day. That’s why providing exceptional customer service
+                            is our true passion. We know we’re not perfect, but we strive to be better every day.
+                        </p>
+                        <h2>Our Simple Mission:</h2>
+                        <p class="boldBody">
+                            We do what we say we’re going to do, when we say we’re going to do it—and we do it with a
+                            smile.
+                        </p>
                         <h2 class="mediumHeading-1 colorGold">How we accomplished what they can’t</h2>
                         <h6 class="titleSmall"></h6>
-                        <br>
                         <p class="boldBody">
                             Welcome to a world where quality and affordable insurance is no longer a distant hope but a
                             tangible reality! At our platform, you’ll uncover accessible PPO health insurance plans
