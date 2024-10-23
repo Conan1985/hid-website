@@ -10557,6 +10557,42 @@ a:hover, a:focus {
     }
 }
 
+.behind-brand-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.behind-brand-photo-left {
+    flex-basis: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5%;
+}
+
+.behind-brand-photo-left img {
+    width: 100%;
+    height: auto; /* Ensure image maintains aspect ratio */
+    max-height: 100%; /* Make sure it doesn't overflow container */
+    /*object-fit: cover;*/
+}
+
+.behind-brand-text-right {
+    text-align: left;
+    flex-basis: 70%;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .behind-brand-photo-left {
+        display: none; /* Hide photo on smaller screens */
+    }
+    .behind-brand-text-right {
+        flex-basis: 100%; /* Take full width when image is hidden */
+    }
+}
+
 .slick-slider {
     position: relative;
     display: block;
