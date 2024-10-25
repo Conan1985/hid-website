@@ -24396,6 +24396,7 @@ html.notsmooth {
     display: flex;
     align-items: flex-start;
     width: 100%;
+    overflow: hidden;
 }
 
 .cloud-img-container img {
@@ -24428,6 +24429,20 @@ html.notsmooth {
     max-width: 25%;
     object-fit: contain;
     background-color: transparent;
+}
+
+.social-line{
+    position: absolute;
+    z-index: 6;
+    top: 50px;
+    left: 35px;
+    max-width: 90%;
+    object-fit: contain;
+    background-color: transparent;
+    opacity: 0;
+    width: 0;
+    transition: width 1s ease-out, opacity 1s ease-out;
+    position: relative;
 }
 
 .cloud-logo {
