@@ -10571,6 +10571,7 @@ a:hover, a:focus {
 }
 
 .behind-brand-photo-left img {
+    z-index: -4;
     width: 90%;
     height: auto; /* Ensure image maintains aspect ratio */
     max-height: 100%; /* Make sure it doesn't overflow container */
