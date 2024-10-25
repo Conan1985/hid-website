@@ -24424,7 +24424,7 @@ html.notsmooth {
 .let_sGetSocial {
     position: absolute;
     z-index: 6;
-    top: 10px;
+    margin-top: 2%;
     left: 30px;
     max-width: 25%;
     object-fit: contain;
@@ -24434,15 +24434,14 @@ html.notsmooth {
 .social-line{
     position: absolute;
     z-index: 6;
-    top: 50px;
-    left: 35px;
-    max-width: 90%;
+    margin-top: 5%;
+    left: 30px;
+    max-width: 85%;
     object-fit: contain;
     background-color: transparent;
     opacity: 0;
     width: 0;
-    transition: width 1s ease-out, opacity 1s ease-out;
-    position: relative;
+    transition: width 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .cloud-logo {
