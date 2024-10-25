@@ -24391,7 +24391,21 @@ html.notsmooth {
     width: 100%;
 }
 
+.rocket-img-container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
 .cloud-img-container img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+.rocket-img-container img {
     height: auto;
     width: 100%;
     object-fit: contain;
@@ -24402,6 +24416,16 @@ html.notsmooth {
     position: absolute;
     z-index: 5;
     width: 100%;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+.let_sGetSocial {
+    position: absolute;
+    z-index: 6;
+    top: 10px;
+    left: 30px;
+    max-width: 25%;
     object-fit: contain;
     background-color: transparent;
 }
