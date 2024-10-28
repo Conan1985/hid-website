@@ -8058,11 +8058,12 @@
             window.addEventListener('scroll', function () {
                 const scrollPosition = window.scrollY;
                 const socialLineCover = document.getElementById("social-line-cover")
+
                 console.log('youwei lu check scroll position: ', scrollPosition)
-                if (scrollPosition <= 480) {
-                    socialLineCover.style.left = 0.17 * scrollPosition + 3 + "%"
+                if (scrollPosition <= 400) {
+                    socialLineCover.style.left = 0.21 * scrollPosition + 3 + "%"
                 } else {
-                    socialLineCover.style.left = 0.17 * 480 + 3 + "%"
+                    socialLineCover.style.left = 0.21 * 400 + 3 + "%"
                 }
             });
         </script>
