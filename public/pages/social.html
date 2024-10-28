@@ -8047,21 +8047,16 @@
         <div class="rocket-img-container">
             <img src="../images/HID%20rocket/rocket%20text%20bg.png"/>
             <img class="let_sGetSocial" src="../images/HID%20rocket/text%20overlay/1%20Let_s%20Get%20Social%20(text).png"/>
-            <img id="social-line" class="social-line" src="../images/HID%20rocket/text%20overlay/2%20line.png"/>
-            <img class="social-eclipse-4" src="../images/HID%20rocket/text%20overlay/3%20eclipse%204.png"/>
-            <img class="social-eclipse-3" src="../images/HID%20rocket/text%20overlay/3%20eclipse%203.png"/>
+            <img class="social-line" src="../images/HID%20rocket/text%20overlay/2%20line.png"/>
+            <img class="social-eclipse social-eclipse-1" src="../images/HID%20rocket/text%20overlay/3%20eclipse%201.png"/>
+            <img class="social-eclipse social-eclipse-2" src="../images/HID%20rocket/text%20overlay/3%20eclipse%202.png"/>
+            <img class="social-eclipse social-eclipse-3" src="../images/HID%20rocket/text%20overlay/3%20eclipse%203.png"/>
+            <img class="social-eclipse social-eclipse-4" src="../images/HID%20rocket/text%20overlay/3%20eclipse%204.png"/>
         </div>
         <script>
             window.addEventListener('scroll', function () {
-                const socialLine = document.getElementById("social-line");
                 const scrollPosition = window.scrollY;
                 socialLine.style.opacity = 1;
-                console.log('youwei lu check scroll position: ', scrollPosition)
-                if (scrollPosition < 450) {
-                    socialLine.style.width = (scrollPosition / 450) * 100 + "%"
-                } else {
-                    socialLine.style.width = "100%"
-                }
             });
         </script>
 

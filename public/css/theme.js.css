@@ -24423,8 +24423,8 @@ html.notsmooth {
 
 .let_sGetSocial {
     position: absolute;
-    z-index: 6;
-    margin-top: 2%;
+    z-index: 20;
+    margin-top: 1%;
     left: 30px;
     max-width: 25%;
     object-fit: contain;
@@ -24433,15 +24433,63 @@ html.notsmooth {
 
 .social-line{
     position: absolute;
-    z-index: 6;
-    margin-top: 5%;
+    z-index: 1;
+    top: 60px;
     left: 30px;
-    max-width: 85%;
     object-fit: contain;
     background-color: transparent;
-    opacity: 0;
-    width: 0;
-    transition: width 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.social-eclipse{
+    position: absolute;
+    z-index: 1;
+    max-width: 25px;
+    top: 65px;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+@media (max-width: 767px) {
+    .social-line {
+        top: 30px;
+    }
+    .social-eclipse {
+        top: 25px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 989px) {
+    .social-line {
+        top: 40px;
+    }
+    .social-eclipse {
+        top: 37px;
+    }
+}
+
+@media (min-width: 990px) and (max-width: 1149px) {
+    .social-line {
+        top: 50px;
+    }
+    .social-eclipse {
+        top: 50px;
+    }
+}
+
+.social-eclipse-1{
+    right: 90px;
+}
+
+.social-eclipse-2{
+    right: 70px;
+}
+
+.social-eclipse-3{
+    right: 50px;
+}
+
+.social-eclipse-4{
+    right: 30px;
 }
 
 .cloud-logo {
@@ -24451,26 +24499,6 @@ html.notsmooth {
     opacity: 0;
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
     z-index: 4;
-}
-
-.social-eclipse-4{
-    position: absolute;
-    z-index: 6;
-    max-width: 2%;
-    margin-top: 5%;
-    right: 30px;
-    object-fit: contain;
-    background-color: transparent;
-}
-
-.social-eclipse-3{
-    position: absolute;
-    z-index: 6;
-    max-width: 2%;
-    margin-top: 5%;
-    right: 45px;
-    object-fit: contain;
-    background-color: transparent;
 }
 
 .img-behind-the-brand-text {
