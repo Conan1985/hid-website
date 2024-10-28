@@ -24463,6 +24463,16 @@ html.notsmooth {
     background-color: transparent;
 }
 
+.social-eclipse-3{
+    position: absolute;
+    z-index: 6;
+    max-width: 2%;
+    margin-top: 5%;
+    right: 45px;
+    object-fit: contain;
+    background-color: transparent;
+}
+
 .img-behind-the-brand-text {
     position: absolute;
     z-index: 6;
