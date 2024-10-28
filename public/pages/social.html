@@ -8048,7 +8048,7 @@
             <img src="../images/HID%20rocket/rocket%20text%20bg.png"/>
             <img class="let_sGetSocial" src="../images/HID%20rocket/text%20overlay/1%20Let_s%20Get%20Social%20(text).png"/>
             <img class="social-line" src="../images/HID%20rocket/text%20overlay/2%20line.png"/>
-            <img class="social-line-cover" src="../images/HID%20rocket/text%20overlay/social-line-cover.png"/>
+            <img id="social-line-cover" class="social-line-cover" src="../images/HID%20rocket/text%20overlay/social-line-cover.png"/>
             <img class="social-eclipse social-eclipse-1" src="../images/HID%20rocket/text%20overlay/3%20eclipse%201.png"/>
             <img class="social-eclipse social-eclipse-2" src="../images/HID%20rocket/text%20overlay/3%20eclipse%202.png"/>
             <img class="social-eclipse social-eclipse-3" src="../images/HID%20rocket/text%20overlay/3%20eclipse%203.png"/>
@@ -8057,7 +8057,13 @@
         <script>
             window.addEventListener('scroll', function () {
                 const scrollPosition = window.scrollY;
-
+                const socialLineCover = document.getElementById("social-line-cover")
+                console.log('youwei lu check scroll position: ', scrollPosition)
+                if (scrollPosition <= 480) {
+                    socialLineCover.style.left = 0.17 * scrollPosition + 3 + "%"
+                } else {
+                    socialLineCover.style.left = 0.17 * 480 + 3 + "%"
+                }
             });
         </script>
 

@@ -24443,6 +24443,7 @@ html.notsmooth {
 .social-line-cover {
     z-index: 2;
     position: absolute;
+    left: 30px;
 }
 
 .social-eclipse{
