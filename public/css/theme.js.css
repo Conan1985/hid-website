@@ -24449,8 +24449,8 @@ html.notsmooth {
 .social-eclipse{
     position: absolute;
     z-index: 3;
-    max-width: 25px;
-    top: 65px;
+    max-width: 3%;
+    top: 55px;
     object-fit: contain;
     background-color: transparent;
 }
@@ -24466,7 +24466,7 @@ html.notsmooth {
         top: 30px;
     }
     .social-eclipse {
-        top: 25px;
+        top: 28px;
     }
 }
 
@@ -24484,24 +24484,24 @@ html.notsmooth {
         top: 50px;
     }
     .social-eclipse {
-        top: 50px;
+        top: 47px;
     }
 }
 
 .social-eclipse-1{
-    right: 90px;
+    right: 12%;
 }
 
 .social-eclipse-2{
-    right: 70px;
+    right: 9%;
 }
 
 .social-eclipse-3{
-    right: 50px;
+    right: 6%;
 }
 
 .social-eclipse-4{
-    right: 30px;
+    right: 3%;
 }
 
 .cloud-logo {

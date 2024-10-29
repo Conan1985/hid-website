@@ -8078,15 +8078,15 @@
                 } else {
                     socialLineCover.style.left = 0.1 * 800 + 3 + "%"
                 }
-                if (scrollPosition >= 800 && scrollPosition < 1000) {
-                    socialEclipseCover3.style.right = 50 + (scrollPosition - 800) * 0.1 + "px";
-                } else if (scrollPosition >= 1000 && scrollPosition < 1200) {
-                    socialEclipseCover3.style.right = 70 + (scrollPosition - 1000) * 0.1 + "px";
-                    socialEclipseCover2.style.right = 70 + (scrollPosition - 1000) * 0.1 + "px";
-                } else if (scrollPosition >= 1200 && scrollPosition < 1400) {
-                    socialEclipseCover3.style.right = 90 + (scrollPosition - 1200) * 0.1 + "px";
-                    socialEclipseCover2.style.right = 90 + (scrollPosition - 1200) * 0.1 + "px";
-                    socialEclipseCover1.style.right = 90 + (scrollPosition - 1200) * 0.1 + "px";
+                if (scrollPosition >= 800 && scrollPosition < 980) {
+                    socialEclipseCover3.style.right = 6 + (scrollPosition - 800) / 60 + "%";
+                } else if (scrollPosition >= 980 && scrollPosition < 1160) {
+                    socialEclipseCover3.style.right = 9 + (scrollPosition - 980) / 60 + "%";
+                    socialEclipseCover2.style.right = 9 + (scrollPosition - 980) / 60 + "%";
+                } else if (scrollPosition >= 1160 && scrollPosition < 1340) {
+                    socialEclipseCover3.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
+                    socialEclipseCover2.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
+                    socialEclipseCover1.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
                 }
             });
         </script>
