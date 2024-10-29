@@ -24455,6 +24455,12 @@ html.notsmooth {
     background-color: transparent;
 }
 
+.social-eclipse-cover {
+    position: absolute;
+    z-index: 4;
+    right: 0
+}
+
 @media (max-width: 767px) {
     .social-line {
         top: 30px;
