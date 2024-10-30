@@ -10595,6 +10595,16 @@ a:hover, a:focus {
     }
 }
 
+@media (min-width: 768px) and (max-width: 829px) {
+    .behind-brand-photo-left {
+        flex-basis: 40%;
+    }
+    .behind-brand-text-right {
+        flex-basis: 60%;
+    }
+}
+
+
 .slick-slider {
     position: relative;
     display: block;
