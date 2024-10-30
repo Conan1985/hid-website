@@ -10569,7 +10569,7 @@ a:hover, a:focus {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 5s;
+    transition: opacity 10s;
 }
 
 .behind-brand-photo-left img {
