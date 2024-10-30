@@ -8044,52 +8044,52 @@
                 </div>
             </div>
         </div>
-        <div class="rocket-img-container">
-            <img src="../images/HID%20rocket/rocket%20text%20bg.png" alt="rocket text bg"/>
-            <img class="let_sGetSocial" alt="Let's get social"
-                 src="../images/HID%20rocket/text%20overlay/1%20Let_s%20Get%20Social%20(text).png"/>
-            <img class="social-line" alt="social line" src="../images/HID%20rocket/text%20overlay/2%20line.png"/>
-            <img id="social-line-cover" alt="social line cover" class="social-line-cover"
-                 src="../images/HID%20rocket/text%20overlay/social-line-cover.png"/>
-            <img class="social-eclipse social-eclipse-1" alt="social eclipse 1"
-                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%201.png"/>
-            <img class="social-eclipse social-eclipse-2" alt="social eclipse 2"
-                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%202.png"/>
-            <img class="social-eclipse social-eclipse-3" alt="social eclipse 3"
-                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%203.png"/>
-            <img class="social-eclipse social-eclipse-4" alt="social eclipse 4"
-                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%204.png"/>
-            <img id="social-eclipse-cover-3" class="social-eclipse-cover social-eclipse-3" alt="social eclipse cover 3"
-                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>
-            <img id="social-eclipse-cover-2" class="social-eclipse-cover social-eclipse-2" alt="social eclipse cover 2"
-                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>
-            <img id="social-eclipse-cover-1" class="social-eclipse-cover social-eclipse-1" alt="social eclipse cover 1"
-                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>
-        </div>
-        <script>
-            window.addEventListener('scroll', function () {
-                const scrollPosition = window.scrollY;
-                const socialLineCover = document.getElementById("social-line-cover")
-                const socialEclipseCover3 = document.getElementById("social-eclipse-cover-3")
-                const socialEclipseCover2 = document.getElementById("social-eclipse-cover-2")
-                const socialEclipseCover1 = document.getElementById("social-eclipse-cover-1")
-                if (scrollPosition < 800) {
-                    socialLineCover.style.left = 0.1 * scrollPosition + 3 + "%"
-                } else {
-                    socialLineCover.style.left = 0.1 * 800 + 3 + "%"
-                }
-                if (scrollPosition >= 800 && scrollPosition < 980) {
-                    socialEclipseCover3.style.right = 6 + (scrollPosition - 800) / 60 + "%";
-                } else if (scrollPosition >= 980 && scrollPosition < 1160) {
-                    socialEclipseCover3.style.right = 9 + (scrollPosition - 980) / 60 + "%";
-                    socialEclipseCover2.style.right = 9 + (scrollPosition - 980) / 60 + "%";
-                } else if (scrollPosition >= 1160 && scrollPosition < 1340) {
-                    socialEclipseCover3.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
-                    socialEclipseCover2.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
-                    socialEclipseCover1.style.right = 12 + (scrollPosition - 1160) / 60 + "%";
-                }
-            });
-        </script>
+<!--        <div class="rocket-img-container">-->
+<!--            <img src="../images/HID%20rocket/rocket%20text%20bg.png" alt="rocket text bg"/>-->
+<!--            <img class="let_sGetSocial" alt="Let's get social"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/1%20Let_s%20Get%20Social%20(text).png"/>-->
+<!--            <img class="social-line" alt="social line" src="../images/HID%20rocket/text%20overlay/2%20line.png"/>-->
+<!--            <img id="social-line-cover" alt="social line cover" class="social-line-cover"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/social-line-cover.png"/>-->
+<!--            <img class="social-eclipse social-eclipse-1" alt="social eclipse 1"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%201.png"/>-->
+<!--            <img class="social-eclipse social-eclipse-2" alt="social eclipse 2"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%202.png"/>-->
+<!--            <img class="social-eclipse social-eclipse-3" alt="social eclipse 3"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%203.png"/>-->
+<!--            <img class="social-eclipse social-eclipse-4" alt="social eclipse 4"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/3%20eclipse%204.png"/>-->
+<!--            <img id="social-eclipse-cover-3" class="social-eclipse-cover social-eclipse-3" alt="social eclipse cover 3"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>-->
+<!--            <img id="social-eclipse-cover-2" class="social-eclipse-cover social-eclipse-2" alt="social eclipse cover 2"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>-->
+<!--            <img id="social-eclipse-cover-1" class="social-eclipse-cover social-eclipse-1" alt="social eclipse cover 1"-->
+<!--                 src="../images/HID%20rocket/text%20overlay/social-eclipse-cover.png"/>-->
+<!--        </div>-->
+<!--        <script>-->
+<!--            window.addEventListener('scroll', function () {-->
+<!--                const scrollPosition = window.scrollY;-->
+<!--                const socialLineCover = document.getElementById("social-line-cover")-->
+<!--                const socialEclipseCover3 = document.getElementById("social-eclipse-cover-3")-->
+<!--                const socialEclipseCover2 = document.getElementById("social-eclipse-cover-2")-->
+<!--                const socialEclipseCover1 = document.getElementById("social-eclipse-cover-1")-->
+<!--                if (scrollPosition < 800) {-->
+<!--                    socialLineCover.style.left = 0.1 * scrollPosition + 3 + "%"-->
+<!--                } else {-->
+<!--                    socialLineCover.style.left = 0.1 * 800 + 3 + "%"-->
+<!--                }-->
+<!--                if (scrollPosition >= 800 && scrollPosition < 980) {-->
+<!--                    socialEclipseCover3.style.right = 6 + (scrollPosition - 800) / 60 + "%";-->
+<!--                } else if (scrollPosition >= 980 && scrollPosition < 1160) {-->
+<!--                    socialEclipseCover3.style.right = 9 + (scrollPosition - 980) / 60 + "%";-->
+<!--                    socialEclipseCover2.style.right = 9 + (scrollPosition - 980) / 60 + "%";-->
+<!--                } else if (scrollPosition >= 1160 && scrollPosition < 1340) {-->
+<!--                    socialEclipseCover3.style.right = 12 + (scrollPosition - 1160) / 60 + "%";-->
+<!--                    socialEclipseCover2.style.right = 12 + (scrollPosition - 1160) / 60 + "%";-->
+<!--                    socialEclipseCover1.style.right = 12 + (scrollPosition - 1160) / 60 + "%";-->
+<!--                }-->
+<!--            });-->
+<!--        </script>-->
 
         <div id="cms-block-66cbd7373ba453.56160975" class="cms-block cms-block-element">
             <div class="heroBanner default-animation-nomov heroBanner--C1-D">
