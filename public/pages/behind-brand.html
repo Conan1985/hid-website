@@ -8114,6 +8114,15 @@
                             <div class="behind-brand-photo-left">
                                 <img src="../images/BEI03794.jpg">
                             </div>
+                            <script>
+                                window.addEventListener('scroll', function () {
+                                    const scrollPosition = window.scrollY;
+                                    const windowHeight = window.innerHeight;
+                                    if (scrollPosition > 0.5 * windowHeight) {
+                                        document.querySelector('.behind-brand-photo-left').style.opacity = 1;
+                                    }
+                                });
+                            </script>
                             <div class="behind-brand-text-right">
                                 <p>Yes, We Know… It’s a Goofy Name!</p>
                                 <p class="boldBody">
