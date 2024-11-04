@@ -3696,7 +3696,7 @@ a:hover, a:focus {
 .mainHeader .subHeader__container--links .subLinks {
     display: flex;
     width: 100%;
-    height: calc(100% - 150px);
+    height: calc(100% - 100px);
     overflow-x: hidden;
     overflow-y: auto
 }
