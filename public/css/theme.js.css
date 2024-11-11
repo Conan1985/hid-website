@@ -11338,6 +11338,33 @@ a:hover, a:focus {
     }
 }
 
+.terms-and-conditions-number-list {
+    padding-left: 3ch;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.terms-and-conditions-number-disc {
+    padding-left: 3ch;
+    li {
+        list-style-type: disc;
+    }
+}
+
+.privacy-policy-number-list {
+    padding-left: 3ch;
+    li {
+        list-style-type: decimal;
+    }
+}
+
+.privacy-policy-disc-list {
+    padding-left: 3ch;
+    li {
+        list-style-type: disc;
+    }
+}
+
 .numberText .numberTextTwo {
     animation: numberTextOne 1.25s both;
     transition: transform .2s cubic-bezier(0.27, 0.44, 0.67, 0.85)
