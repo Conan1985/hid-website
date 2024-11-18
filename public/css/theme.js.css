@@ -11736,6 +11736,12 @@ a:hover, a:focus {
     }
 }
 
+@media (min-width: 1200px) {
+    .useful-info-footer {
+        margin-left: 100px
+    }
+}
+
 @media (max-width: 989px) {
     .mainFooter__level-2__inner--list.signUp {
         border-bottom: 0 solid #d5d5d5
