@@ -13457,6 +13457,14 @@ a:hover, a:focus {
     max-width: 100%
 }
 
+a.footer-disabled {
+    pointer-events: none;
+}
+a.footer-disabled:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media (max-width: 767px) {
     .breadcrumb-container.blackFont.gradientOn, .breadcrumb-container.whiteFont.gradientOn {
         height: 80px
