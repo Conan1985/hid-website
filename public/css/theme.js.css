@@ -11877,6 +11877,24 @@ a:hover, a:focus {
     }
 }
 
+@media (max-width: 989px) {
+    .mainFooter__level-2__inner .titleSmall-footer::after {
+        content: "";
+        font-family: "icomoon";
+        font-size: 24px;
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+        position: inherit;
+        right: 0;
+        top: 3px;
+        transition: all .4s ease;
+        transform: rotateZ(180deg);
+        display: inline-block;
+        color: #82754a;
+        filter: invert(39%) sepia(59%) saturate(288%) hue-rotate(9deg) brightness(96%) contrast(83%)
+    }
+}
+
 @media screen and (max-width: 989px)and (prefers-reduced-motion: reduce) {
     .mainFooter__level-2__inner .titleSmall.titleSmallarrow::after {
         content: "î¤…";
