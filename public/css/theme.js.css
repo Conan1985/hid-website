@@ -11742,6 +11742,17 @@ a:hover, a:focus {
     }
 }
 
+.mute_button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
 @media (max-width: 989px) {
     .mainFooter__level-2__inner--list.signUp {
         border-bottom: 0 solid #d5d5d5
