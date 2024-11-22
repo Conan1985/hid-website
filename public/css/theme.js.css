@@ -11753,6 +11753,37 @@ a:hover, a:focus {
     cursor: pointer;
 }
 
+/* Default: Small screens (< 990px) - Stack vertically and center */
+.responsive-video-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.responsive-video-container-left {
+    margin-top: 10px;
+}
+
+.responsive-video-container-right {
+    margin-top: 10px;
+}
+
+/* Large screens (> 990px) - Arrange evenly in a row */
+@media (min-width: 990px) {
+    .responsive-video-container {
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        height: auto;
+        column-gap: 10px;
+    }
+    .responsive-video-container .video {
+        margin: 0;
+    }
+}
+
 @media (max-width: 989px) {
     .mainFooter__level-2__inner--list.signUp {
         border-bottom: 0 solid #d5d5d5

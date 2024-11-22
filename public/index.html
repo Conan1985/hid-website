@@ -6176,16 +6176,11 @@
             <div class="fullBleedMedia default-animated-block default-animation">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video id="video-HID+bottom+vid" style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/HID+bottom+vid.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <button id="mute-button-HID+bottom+vid" class="mute_button">
-                            <img id="mute-icon-HID+bottom+vid"
-                                 src="images/Mute_Icon.svg.png"
-                                 alt="Unmute" style="width: 30px; filter: invert(1);">
-                        </button>
                         <div class="multiButtons imageText__content connect-with-us">
                             <a href="pages/contact-us.html"
                                class="primary--btn" rel="nofollow" target="_blank">Connect with us</a>
@@ -6394,22 +6389,9 @@
                 const videoHIDWebV3 = document.getElementById('video-HID+web+v3');
                 const muteButtonHIDWebV3 = document.getElementById('mute-button-HID+web+v3');
                 const muteIconHIDWebV3 = document.getElementById('mute-icon-HID+web+v3');
-                const videoHIDBottomVid = document.getElementById('video-HID+bottom+vid');
-                const muteButtonHIDBottomVid = document.getElementById('mute-button-HID+bottom+vid');
-                const muteIconHIDBottomVid = document.getElementById('mute-icon-HID+bottom+vid');
                 muteButtonHIDWebV3.addEventListener('click', () => {
                     videoHIDWebV3.muted = !videoHIDWebV3.muted;
-                    videoHIDBottomVid.muted = true
                     muteIconHIDWebV3.src = videoHIDWebV3.muted
-                        ? 'images/Mute_Icon.svg.png'
-                        : 'images/Speaker_Icon.svg.png';
-                    muteIconHIDBottomVid.src = 'images/Mute_Icon.svg.png'
-                });
-                muteButtonHIDBottomVid.addEventListener('click', () => {
-                    videoHIDWebV3.muted = true
-                    videoHIDBottomVid.muted = !videoHIDBottomVid.muted;
-                    muteIconHIDWebV3.src = 'images/Mute_Icon.svg.png'
-                    muteIconHIDBottomVid.src = videoHIDBottomVid.muted
                         ? 'images/Mute_Icon.svg.png'
                         : 'images/Speaker_Icon.svg.png';
                 });
