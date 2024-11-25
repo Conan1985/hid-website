@@ -11744,8 +11744,9 @@ a:hover, a:focus {
 
 .mute_button {
     position: absolute;
+    float: right;
     top: 10px;
-    left: 10px;
+    right: 10px;
     z-index: 10;
     background: transparent;
     border: none;
@@ -11756,6 +11757,7 @@ a:hover, a:focus {
 /* Default: Small screens (< 990px) - Stack vertically and center */
 .responsive-video-container {
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;

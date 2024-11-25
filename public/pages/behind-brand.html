@@ -5815,13 +5815,19 @@
                                 </span>
                     </nav>
                 </div>
+                <button id="mute-button-welcome-to-HID" class="mute_button">
+                    <img id="mute-icon-welcome-to-HID"
+                         src="../images/Mute_Icon.svg.png"
+                         alt="Unmute" style="width: 30px; filter: invert(1);">
+                </button>
             </div>
         </div>
         <div id="cms-block-6613d09044be65.81557508" class="cms-block cms-block-element">
             <div class="fullBleedMedia default-animated-block default-animation">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video id="video-welcome-to-HID" style="z-index: -10; background-color: #000;" width="640"
+                               height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/Welcome+to+HID.mp4"
                                     type="video/mp4">
@@ -5960,12 +5966,18 @@
             <div class="fullBleedMedia default-animated-block default-animation">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video id="video-HID-Coverage-Kings" style="z-index: -10; background-color: #000;" width="640"
+                               height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/HID+Coverage+Kings+-+Insured+and+Driven+(Season+1+Trailer).mp4"
                                     type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <button id="mute-button-HID-Coverage-Kings" class="mute_button">
+                            <img id="mute-icon-HID-Coverage-Kings"
+                                 src="../images/Mute_Icon.svg.png"
+                                 alt="Unmute" style="width: 30px; filter: invert(1);">
+                        </button>
                         <div class="multiButtons imageText__content connect-with-us">
                             <a href="contact-us.html"
                                class="primary--btn" rel="nofollow" target="_blank">Connect with us</a>
@@ -5974,6 +5986,30 @@
                 </div>
             </div>
         </div>
+        <script>
+            const videoWelcomeToHID = document.getElementById('video-welcome-to-HID')
+            const muteButtonWelcomeToHID = document.getElementById('mute-button-welcome-to-HID')
+            const muteIconWelcomeToHID = document.getElementById('mute-icon-welcome-to-HID')
+            const videoHIDCoverageKings = document.getElementById('video-HID-Coverage-Kings')
+            const muteButtonHIDCoverageKings = document.getElementById('mute-button-HID-Coverage-Kings')
+            const muteIconHIDCoverageKings = document.getElementById('mute-icon-HID-Coverage-Kings')
+            muteButtonWelcomeToHID.addEventListener('click', () => {
+                videoWelcomeToHID.muted = !videoWelcomeToHID.muted
+                videoHIDCoverageKings.muted = true
+                muteIconWelcomeToHID.src = videoWelcomeToHID.muted ?
+                    '../images/Mute_Icon.svg.png'
+                    : '../images/Speaker_Icon.svg.png'
+                muteIconHIDCoverageKings.src = '../images/Mute_Icon.svg.png'
+            })
+            muteButtonHIDCoverageKings.addEventListener('click', () => {
+                videoWelcomeToHID.muted = true
+                videoHIDCoverageKings.muted = !videoHIDCoverageKings.muted
+                muteIconWelcomeToHID.src = '../images/Mute_Icon.svg.png'
+                muteIconHIDCoverageKings.src = videoHIDCoverageKings.muted ?
+                    '../images/Mute_Icon.svg.png'
+                    : '../images/Speaker_Icon.svg.png'
+            })
+        </script>
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">

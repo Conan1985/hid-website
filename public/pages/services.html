@@ -6065,12 +6065,17 @@
             <div class="fullBleedMedia default-animated-block default-animation">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video id="video-we-sell-trust" style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/We+don't+sell+Insurance%2C+We+sell+Trust...+www.healthyinsurancedude.com+(1080p_30fps_H264-128kbit_AAC).mp4"
                                     type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <button id="mute-button-we-sell-trust" class="mute_button">
+                            <img id="mute-icon-we-sell-trust"
+                                 src="../images/Mute_Icon.svg.png"
+                                 alt="Unmute" style="width: 30px; filter: invert(1);">
+                        </button>
                         <div class="multiButtons imageText__content connect-with-us">
                             <a href="contact-us.html"
                                class="primary--btn" rel="nofollow" target="_blank">Connect with us</a>
@@ -6079,6 +6084,17 @@
                 </div>
             </div>
         </div>
+        <script>
+            const videoWeSellTrust = document.getElementById('video-we-sell-trust')
+            const muteButtonWeSellTrust = document.getElementById('mute-button-we-sell-trust')
+            const muteIconWeSellTrust = document.getElementById('mute-icon-we-sell-trust')
+            muteButtonWeSellTrust.addEventListener('click', () => {
+                videoWeSellTrust.muted = !videoWeSellTrust.muted
+                muteIconWeSellTrust.src = videoWeSellTrust.muted ?
+                    '../images/Mute_Icon.svg.png'
+                    : '../images/Speaker_Icon.svg.png'
+            })
+        </script>
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">

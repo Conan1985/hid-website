@@ -5360,25 +5360,32 @@
                                         <div class="subHeader__container--links  ">
                                             <div class="subLinks ">
                                                 <ul>
-                                                    <li><a class="submenuLinkItem" id="menu-perry-lunsford" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-perry-lunsford"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#perry-lunsford">Perry
                                                         Lunsford</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-derrick-berry" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-derrick-berry"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#derrick-berry">Derrick
                                                         Berry</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-jayme-lunsford" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-jayme-lunsford"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#jayme-lunsford">Jayme
                                                         Lunsford</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-elizabeth-annis" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-elizabeth-annis"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#elizabeth-annis">Elizabeth
                                                         Annis</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-matthew-raesner" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-matthew-raesner"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#matthew-raesner">Matthew
                                                         Raesner</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-david-stoner" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-david-stoner"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#david-stoner">David
                                                         Stoner</a></li>
-                                                    <li><a class="submenuLinkItem" id="menu-anthony-williams" onClick="location.reload()"
+                                                    <li><a class="submenuLinkItem" id="menu-anthony-williams"
+                                                           onClick="location.reload()"
                                                            href="faces-behind-brand.html#anthony-williams">Anthony
                                                         Williams</a></li>
                                                 </ul>
@@ -5813,13 +5820,19 @@
                                 </span>
                     </nav>
                 </div>
+                <button id="mute-button-HID-faces-of-the-brand-web" class="mute_button">
+                    <img id="mute-icon-HID-faces-of-the-brand-web"
+                         src="../images/Mute_Icon.svg.png"
+                         alt="Unmute" style="width: 30px; filter: invert(1);">
+                </button>
             </div>
         </div>
         <div class="cms-block cms-block-element">
             <div class="fullBleedMedia default-animated-block default-animation">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video id="video-HID-faces-of-the-brand-web" style="z-index: -10; background-color: #000;"
+                               width="640" height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/HID+Faces+of+the+Brand+web.mp4"
                                     type="video/mp4">
@@ -6129,6 +6142,17 @@
                 </div>
             </div>
         </div>
+        <script>
+            const videoHIDFacesOfTheBrandWeb = document.getElementById('video-HID-faces-of-the-brand-web')
+            const muteButtonHIDFacesOfTheBrandWeb = document.getElementById('mute-button-HID-faces-of-the-brand-web')
+            const muteIconHIDFacesOfTheBrandWeb = document.getElementById('mute-icon-HID-faces-of-the-brand-web')
+            muteButtonHIDFacesOfTheBrandWeb.addEventListener('click', () => {
+                videoHIDFacesOfTheBrandWeb.muted = !videoHIDFacesOfTheBrandWeb.muted
+                muteIconHIDFacesOfTheBrandWeb.src = videoHIDFacesOfTheBrandWeb.muted ?
+                    '../images/Mute_Icon.svg.png'
+                    : '../images/Speaker_Icon.svg.png'
+            })
+        </script>
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">

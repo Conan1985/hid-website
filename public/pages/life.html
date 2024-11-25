@@ -5819,13 +5819,19 @@
                                 </span>
                     </nav>
                 </div>
+                <button id="mute-button-HID-life-insurance-web" class="mute_button">
+                    <img id="mute-icon-HID-life-insurance-web"
+                         src="../images/Mute_Icon.svg.png"
+                         alt="Unmute" style="width: 30px; filter: invert(1);">
+                </button>
             </div>
         </div>
         <div id="cms-block-66cbc9108c5016.58692393" class="cms-block cms-block-element">
             <div class="fullBleedMedia default-animated-block">
                 <div class="customfullHeight">
                     <div class="background-video" style="background: url('') no-repeat; background-size: cover;">
-                        <video style="z-index: -10; background-color: #000;" width="640" height="360" autoplay loop
+                        <video id="video-HID-life-insurance-web" style="z-index: -10; background-color: #000;"
+                               width="640" height="360" autoplay loop
                                muted playsinline>
                             <source src="https://d10fkq1icl237t.cloudfront.net/HID+-+Life+Insurance+web.mp4"
                                     type="video/mp4">
@@ -5990,6 +5996,17 @@
                 <a href="/" class="accordionArrow"></a>
             </div>
         </div>
+        <script>
+            const videoHIDLifeInsuranceWeb = document.getElementById('video-HID-life-insurance-web')
+            const muteButtonHIDLifeInsuranceWeb = document.getElementById('mute-button-HID-life-insurance-web')
+            const muteIconHIDLifeInsuranceWeb = document.getElementById('mute-icon-HID-life-insurance-web')
+            muteButtonHIDLifeInsuranceWeb.addEventListener('click', () => {
+                videoHIDLifeInsuranceWeb.muted = !videoHIDLifeInsuranceWeb.muted
+                muteIconHIDLifeInsuranceWeb.src = videoHIDLifeInsuranceWeb.muted ?
+                    '../images/Mute_Icon.svg.png'
+                    : '../images/Speaker_Icon.svg.png'
+            })
+        </script>
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
