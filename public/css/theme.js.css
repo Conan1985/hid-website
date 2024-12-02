@@ -11773,13 +11773,13 @@ a:hover, a:focus {
 }
 
 /* Large screens (> 990px) - Arrange evenly in a row */
-@media (min-width: 990px) {
+@media (min-width: 1170px) {
     .responsive-video-container {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         height: auto;
-        column-gap: 10px;
+        column-gap: 50px;
     }
     .responsive-video-container .video {
         margin: 0;
