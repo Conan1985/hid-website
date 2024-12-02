@@ -4,7 +4,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C20DPJ8THM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-C20DPJ8THM');
@@ -6244,6 +6248,7 @@
                     let currentTranslate = 0;
                     let prevTranslate = 0;
                     let dragging = false;
+
                     function goToSlide(index) {
                         currentTranslate = -slideWidth * index;
                         prevTranslate = currentTranslate;
@@ -6252,6 +6257,7 @@
                         updateSlideClasses(index);
                         currentIndex = index;
                     }
+
                     function updateSlideClasses(index) {
                         slides[currentIndex].classList.remove("slick-current", "slick-active");
                         slides[currentIndex].setAttribute("aria-hidden", "true");
@@ -6266,6 +6272,7 @@
                         dots[index].setAttribute("tabindex", "0");
                         dots[index].setAttribute("aria-selected", "true");
                     }
+
                     function startDrag(event) {
                         event.preventDefault()
                         startX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
@@ -6273,6 +6280,7 @@
                         track.style.transition = "none";
                         clearInterval(autoSlideInterval)
                     }
+
                     function drag(event) {
                         event.preventDefault()
                         if (!dragging) return;
@@ -6284,6 +6292,7 @@
                         currentTranslate = prevTranslate + deltaX;
                         track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
                     }
+
                     function endDrag() {
                         if (!dragging) return
                         dragging = false;
@@ -6299,6 +6308,7 @@
                         prevTranslate = currentTranslate;
                         autoSlide()
                     }
+
                     track.addEventListener('mousedown', startDrag);
                     track.addEventListener('mousemove', drag);
                     track.addEventListener('mouseup', endDrag);
@@ -6315,11 +6325,13 @@
                             autoSlide()
                         }
                     });
+
                     function autoSlide() {
                         autoSlideInterval = setInterval(() => {
                             goToSlide((currentIndex + 1) % slideCount);
                         }, 2000);
                     }
+
                     autoSlide()
                 })
             </script>
@@ -6353,19 +6365,22 @@
                                         style="font-size: 1.5rem">
                                         HEALTHY INSURANCE DUDE
                                     </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
-                                        style="font-size: 1.5rem">
-                                        6777 CAMP BOWIE BLVD
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
-                                        style="font-size: 1.5rem">
-                                        SUITE 401
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
-                                        style="font-size: 1.5rem">
-                                        FORT WORTH, TX 76116
-                                    </li>
                                     <div style="height: 10px"></div>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
+                                        style="font-size: 1.5rem">
+                                        <a href="https://maps.app.goo.gl/e4RVWyMjDqNfduio9" target="_blank">6777 CAMP
+                                            BOWIE BLVD</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
+                                        style="font-size: 1.5rem">
+                                        <a href="https://maps.app.goo.gl/e4RVWyMjDqNfduio9" target="_blank">SUITE
+                                            401</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"
+                                        style="font-size: 1.5rem">
+                                        <a href="https://maps.app.goo.gl/e4RVWyMjDqNfduio9" target="_blank">FORT WORTH,
+                                            TX 76116</a>
+                                    </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515">
                                         <a href="mailto:info@healthyinsurancedude.com" style="text-decoration: none">INFO@HEALTHYINSURANCEDUDE.COM</a>
                                     </li>
