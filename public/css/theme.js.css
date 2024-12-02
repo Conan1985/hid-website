@@ -2633,8 +2633,8 @@ button.applyBtn[disabled] {
 }
 
 main .smallBody {
-    font-size: 15px;
-    font-size: 1.5rem;
+    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 2.4rem;
     font-weight: 200;
     letter-spacing: .45px;
@@ -10582,8 +10582,129 @@ a:hover, a:focus {
 
 .behind-brand-text-right {
     text-align: left;
-    flex-basis: 70%;
+    flex-basis: 60%;
     padding: 0 20px;
+}
+
+/*.behind-brand-text-right {*/
+/*    flex-basis: 40%*/
+/*}*/
+
+@media screen and (min-width: 768px) and (max-width: 772px) {
+    .behind-brand-photo-left {
+        flex-basis: 49%
+    }
+    .behind-brand-text-right {
+        flex-basis: 51%
+    }
+}
+
+@media screen and (min-width: 773px) and (max-width: 792px) {
+    .behind-brand-photo-left {
+        flex-basis: 48%
+    }
+    .behind-brand-text-right {
+        flex-basis: 52%
+    }
+}
+
+@media screen and (min-width: 793px) and (max-width: 798px) {
+    .behind-brand-photo-left {
+        flex-basis: 46%
+    }
+    .behind-brand-text-right {
+        flex-basis: 54%
+    }
+}
+
+@media screen and (min-width: 799px) and (max-width: 805px) {
+    .behind-brand-photo-left {
+        flex-basis: 45%
+    }
+    .behind-brand-text-right {
+        flex-basis: 55%
+    }
+}
+
+@media screen and (min-width: 806px) and (max-width: 817px) {
+    .behind-brand-photo-left {
+        flex-basis: 43%
+    }
+    .behind-brand-text-right {
+        flex-basis: 57%
+    }
+}
+
+@media screen and (min-width: 818px) and (max-width: 839px) {
+    .behind-brand-photo-left {
+        flex-basis: 42%
+    }
+    .behind-brand-text-right {
+        flex-basis: 58%
+    }
+}
+
+@media screen and (min-width: 840px) and (max-width: 859px) {
+    .behind-brand-photo-left {
+        flex-basis: 35%
+    }
+    .behind-brand-text-right {
+        flex-basis: 65%
+    }
+}
+
+@media screen and (min-width: 860px) and (max-width: 889px) {
+    .behind-brand-photo-left {
+        flex-basis: 34%
+    }
+    .behind-brand-text-right {
+        flex-basis: 66%
+    }
+}
+
+@media screen and (min-width: 890px) and (max-width: 896px) {
+    .behind-brand-photo-left {
+        flex-basis: 33%
+    }
+    .behind-brand-text-right {
+        flex-basis: 67%
+    }
+}
+
+@media screen and (min-width: 897px) and (max-width: 919px) {
+    .behind-brand-photo-left {
+        flex-basis: 30%
+    }
+    .behind-brand-text-right {
+        flex-basis: 70%
+    }
+}
+
+@media screen and (min-width: 920px) and (max-width: 939px) {
+    .behind-brand-photo-left {
+        flex-basis: 29%
+    }
+    .behind-brand-text-right {
+        flex-basis: 71%
+    }
+}
+
+@media screen and (min-width: 940px) and (max-width: 979px) {
+    .behind-brand-photo-left {
+        flex-basis: 28%
+    }
+    .behind-brand-text-right {
+        flex-basis: 72%
+    }
+}
+
+@media screen and (min-width: 980px) and (max-width: 989px) {
+    .behind-brand-photo-left {
+        flex-basis: 27%
+    }
+    .behind-brand-text-right {
+        flex-basis: 73%
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -10592,15 +10713,6 @@ a:hover, a:focus {
     }
     .behind-brand-text-right {
         flex-basis: 100%; /* Take full width when image is hidden */
-    }
-}
-
-@media (min-width: 768px) and (max-width: 829px) {
-    .behind-brand-photo-left {
-        flex-basis: 40%;
-    }
-    .behind-brand-text-right {
-        flex-basis: 60%;
     }
 }
 
