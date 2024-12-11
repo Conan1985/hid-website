@@ -10594,6 +10594,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 49%
     }
+
     .behind-brand-text-right {
         flex-basis: 51%
     }
@@ -10603,6 +10604,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 48%
     }
+
     .behind-brand-text-right {
         flex-basis: 52%
     }
@@ -10612,6 +10614,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 46%
     }
+
     .behind-brand-text-right {
         flex-basis: 54%
     }
@@ -10621,6 +10624,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 45%
     }
+
     .behind-brand-text-right {
         flex-basis: 55%
     }
@@ -10630,6 +10634,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 43%
     }
+
     .behind-brand-text-right {
         flex-basis: 57%
     }
@@ -10639,6 +10644,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 42%
     }
+
     .behind-brand-text-right {
         flex-basis: 58%
     }
@@ -10648,6 +10654,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 35%
     }
+
     .behind-brand-text-right {
         flex-basis: 65%
     }
@@ -10657,6 +10664,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 34%
     }
+
     .behind-brand-text-right {
         flex-basis: 66%
     }
@@ -10666,6 +10674,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 33%
     }
+
     .behind-brand-text-right {
         flex-basis: 67%
     }
@@ -10675,6 +10684,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 30%
     }
+
     .behind-brand-text-right {
         flex-basis: 70%
     }
@@ -10684,6 +10694,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 29%
     }
+
     .behind-brand-text-right {
         flex-basis: 71%
     }
@@ -10693,6 +10704,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 28%
     }
+
     .behind-brand-text-right {
         flex-basis: 72%
     }
@@ -10702,6 +10714,7 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         flex-basis: 27%
     }
+
     .behind-brand-text-right {
         flex-basis: 73%
     }
@@ -10711,11 +10724,64 @@ a:hover, a:focus {
     .behind-brand-photo-left {
         display: none; /* Hide photo on smaller screens */
     }
+
     .behind-brand-text-right {
         flex-basis: 100%; /* Take full width when image is hidden */
     }
 }
 
+.google-reviews {
+    height: 5px
+}
+
+@media screen and (min-width: 1312px) {
+    .google-reviews {
+        margin-top: -140px;
+        margin-left: -260px
+    }
+}
+
+@media screen and (min-width: 1276px) and (max-width: 1311px) {
+    .google-reviews {
+        margin-top: -155px;
+        margin-left: calc(-250px + ((1311px - 100vw) * 1));
+    }
+}
+
+@media screen and (min-width: 1237px) and (max-width: 1275px) {
+    .google-reviews {
+        margin-top: -135px;
+        margin-left: calc(-214px + ((1275px - 100vw) * 1));
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1236px) {
+    .google-reviews {
+        margin-top: -115px;
+        margin-left: calc(-176px + ((1236px - 100vw) * 1));
+    }
+}
+
+@media screen and (min-width: 1176px) and (max-width: 1199px) {
+    .google-reviews {
+        margin-top: -155px;
+        margin-left: calc(-338px + ((1199px - 100vw) * 1));
+    }
+}
+
+@media screen and (min-width: 1137px) and (max-width: 1175px) {
+    .google-reviews {
+        margin-top: -135px;
+        margin-left: calc(-314px + ((1175px - 100vw) * 1));
+    }
+}
+
+@media screen and (min-width: 990px) and (max-width: 1136px) {
+    .google-reviews {
+        margin-top: -115px;
+        margin-left: calc(-275px + ((1136px - 100vw) * 1));
+    }
+}
 
 .slick-slider {
     position: relative;
@@ -11458,6 +11524,7 @@ a:hover, a:focus {
 
 .terms-and-conditions-number-disc {
     padding-left: 3ch;
+
     li {
         list-style-type: disc;
     }
@@ -11465,6 +11532,7 @@ a:hover, a:focus {
 
 .privacy-policy-number-list {
     padding-left: 3ch;
+
     li {
         list-style-type: decimal;
     }
@@ -11472,6 +11540,7 @@ a:hover, a:focus {
 
 .privacy-policy-disc-list {
     padding-left: 3ch;
+
     li {
         list-style-type: disc;
     }
@@ -11893,6 +11962,7 @@ a:hover, a:focus {
         height: auto;
         column-gap: 50px;
     }
+
     .responsive-video-container .video {
         margin: 0;
     }
@@ -13640,6 +13710,7 @@ a:hover, a:focus {
 a.footer-disabled {
     pointer-events: none;
 }
+
 a.footer-disabled:hover {
     text-decoration: none;
     color: inherit;
@@ -24658,7 +24729,7 @@ html.notsmooth {
     background-color: transparent;
 }
 
-.social-line{
+.social-line {
     position: absolute;
     z-index: 1;
     top: 60px;
@@ -24673,7 +24744,7 @@ html.notsmooth {
     left: 30px;
 }
 
-.social-eclipse{
+.social-eclipse {
     position: absolute;
     z-index: 3;
     max-width: 3%;
@@ -24692,6 +24763,7 @@ html.notsmooth {
     .social-line {
         top: 30px;
     }
+
     .social-eclipse {
         top: 28px;
     }
@@ -24701,6 +24773,7 @@ html.notsmooth {
     .social-line {
         top: 40px;
     }
+
     .social-eclipse {
         top: 37px;
     }
@@ -24710,24 +24783,25 @@ html.notsmooth {
     .social-line {
         top: 50px;
     }
+
     .social-eclipse {
         top: 47px;
     }
 }
 
-.social-eclipse-1{
+.social-eclipse-1 {
     right: 12%;
 }
 
-.social-eclipse-2{
+.social-eclipse-2 {
     right: 9%;
 }
 
-.social-eclipse-3{
+.social-eclipse-3 {
     right: 6%;
 }
 
-.social-eclipse-4{
+.social-eclipse-4 {
     right: 3%;
 }
 
