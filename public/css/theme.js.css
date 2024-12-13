@@ -11935,6 +11935,17 @@ a:hover, a:focus {
     cursor: pointer;
 }
 
+.mute_image {
+    width: 30px;
+    filter: invert(56%) sepia(83%) saturate(746%) hue-rotate(170deg) brightness(92%) contrast(85%);
+}
+
+@media (min-width: 990px) {
+    .mute_image {
+        width: 50px;
+    }
+}
+
 /* Default: Small screens (< 990px) - Stack vertically and center */
 .responsive-video-container {
     margin-top: 10px;
