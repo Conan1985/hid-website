@@ -5740,30 +5740,37 @@
                 <div class="mainHeader__left">
                     <ul class="menuLinks">
                         <li>
-                            <a class="mainLinks" aria-expanded="false" href="pages/services.html">Brand Services</a>
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="pages/services.html">Brand Services</a>
                         </li>
                         <li>
-                            <a class="mainLinks" aria-expanded="false" href="pages/faces-behind-brand.html">Faces Behind
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="pages/faces-behind-brand.html">Faces Behind
                                 the Brand</a>
                         </li>
                         <li>
-                            <a class="mainLinks" aria-expanded="false" href="pages/our-clients.html">Our Clients</a>
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="pages/our-clients.html">Our Clients</a>
                         </li>
                         <li>
-                            <a class="mainLinks" aria-expanded="false" href="pages/behind-brand.html">Behind the
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="pages/behind-brand.html">Behind the
                                 Brand</a>
                         </li>
                         <li>
-                            <a class="mainLinks" aria-expanded="false" href="pages/social.html">Social</a>
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="pages/social.html">Social</a>
                         </li>
                     </ul>
                 </div>
                 <ul class="menuLinks secondaryMenus">
                     <li class="Resorts">
-                        <a class="mainLinks" href="pages/contact-us.html" aria-expanded="false">Contact Us</a>
+                        <a class="mainLinks mobile-menu-link" href="pages/contact-us.html" aria-expanded="false">Contact Us</a>
                     </li>
                 </ul>
             </div>
+            <script>
+                document.querySelectorAll('.mobile-menu-link').forEach(function(link) {
+                    link.addEventListener('touchend', function() {
+                        window.location.href = this.href;
+                    });
+                });
+            </script>
         </div>
     </div>
     <div class="calendarMobile fullHeight" style="height: 968px;">
