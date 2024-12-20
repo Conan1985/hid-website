@@ -5857,28 +5857,6 @@
             <img id="img-btb-s1c11" class="img-btb-s1c11" src="../images/Brand%20Services/BTB%20S1C11.webp"/>
             <img class="img-btb-s1c12" src="../images/Brand%20Services/BTB%20S1C12.webp"/>
         </div>
-        <script>
-            window.addEventListener('scroll', function () {
-                const logo = document.getElementById('cloud-logo');
-                const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
-                const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
-                const scrollPosition = window.scrollY;
-                const windowWidth = window.innerWidth;
-                const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
-                const disappearThreshold = windowWidth > 989 ? windowWidth : 0.6 * windowWidth;
-                logo.style.top = windowWidth > 989 ? -500 : "-40%";
-                logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 5000)}px)`;
-                imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
-                imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
-                if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
-                    logo.style.opacity = "0";
-                    logo.style.display = 'none';
-                } else {
-                    logo.style.display = 'block'
-                    logo.style.opacity = "1";
-                }
-            });
-        </script>
         <div id="our-services" class="cms-block cms-block-element" style="z-index: 30; position: relative">
             <div class="heroBanner default-animation-nomov heroBanner--C1-D">
                 <div class="contentBottom">
@@ -6207,6 +6185,26 @@
                                 usefulInfoMenu.style.display = "inline-block"
                             }
                         }
+                        window.addEventListener('scroll', function () {
+                            const logo = document.getElementById('cloud-logo');
+                            const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
+                            const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
+                            const scrollPosition = window.scrollY;
+                            const windowWidth = window.innerWidth;
+                            const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
+                            const disappearThreshold = windowWidth > 989 ? windowWidth : 0.6 * windowWidth;
+                            logo.style.top = windowWidth > 989 ? -500 : "-40%";
+                            logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 5000)}px)`;
+                            imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
+                            imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
+                            if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
+                                logo.style.opacity = "0";
+                                logo.style.display = 'none';
+                            } else {
+                                logo.style.display = 'block'
+                                logo.style.opacity = "1";
+                            }
+                        });
                         window.addEventListener('resize', function () {
                             const contactUsMenu = document.getElementById('contact-us-menu')
                             const usefulInfoMenu = document.getElementById('useful-info-menu')
