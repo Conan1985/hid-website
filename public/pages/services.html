@@ -6199,11 +6199,10 @@
                                 isScrolling = true;
                             }
                         });
-
+                        const logo = document.getElementById('cloud-logo');
+                        const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
+                        const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
                         function handleScroll() {
-                            const logo = document.getElementById('cloud-logo');
-                            const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
-                            const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
                             const scrollPosition = window.scrollY;
                             const windowWidth = window.innerWidth;
                             const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
