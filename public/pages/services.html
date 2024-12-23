@@ -6188,42 +6188,64 @@
                                 usefulInfoMenu.style.display = "inline-block"
                             }
                         }
+                        // Cache DOM elements and precompute constants
+                        const logo = document.getElementById('cloud-logo');
+                        const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
+                        const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
+
+                        // Initial values
+                        let windowWidth = window.innerWidth;
+
+                        // Function to recalculate thresholds based on window size
+                        function calculateThresholds() {
+                            windowWidth = window.innerWidth;
+                            return {
+                                displayThreshold: windowWidth > 989 ? 10 : 0.1 * windowWidth,
+                                disappearThreshold: windowWidth > 989 ? windowWidth : 0.6 * windowWidth,
+                                initialLogoTop: windowWidth > 989 ? -500 : "-40%",
+                            };
+                        }
+
+                        let { displayThreshold, disappearThreshold, initialLogoTop } = calculateThresholds();
+
+                        // Set initial styles
+                        logo.style.top = initialLogoTop;
+
+                        // Throttle the scroll event
                         let lastKnownScrollPosition = 0;
                         let ticking = false;
-                        window.addEventListener('scroll', function () {
+
+                        window.addEventListener('scroll', () => {
                             lastKnownScrollPosition = window.scrollY;
+
                             if (!ticking) {
                                 window.requestAnimationFrame(() => {
-                                    updateScrollEffects(lastKnownScrollPosition);
+                                    updateElements(lastKnownScrollPosition);
                                     ticking = false;
                                 });
                                 ticking = true;
                             }
                         });
-                        function updateScrollEffects(scrollPosition) {
-                            const logo = document.getElementById('cloud-logo');
-                            const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
-                            const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
-                            const windowWidth = window.innerWidth;
-                            const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
-                            const disappearThreshold = windowWidth > 989 ? windowWidth : 0.6 * windowWidth;
-                            const logoTranslateY = Math.min(scrollPosition * 2.5, 5000);
-                            const imgBtbS1c2TranslateY = Math.min(scrollPosition * 0.5, 5000);
-                            const imgBtbS1c11TranslateY = Math.min(scrollPosition * 0.2, 5000);
-                            logo.style.top = windowWidth > 989 ? '-500px' : '-40%';
-                            logo.style.transform = `translateX(-50%) translateY(${logoTranslateY}px)`;
-                            imgBtbS1c2.style.transform = `translateY(-${imgBtbS1c2TranslateY}px)`;
-                            imgBtbS1c11.style.transform = `translateY(${imgBtbS1c11TranslateY}px)`;
+
+                        // Handle resizing to recalculate thresholds
+                        window.addEventListener('resize', () => {
+                            ({ displayThreshold, disappearThreshold, initialLogoTop } = calculateThresholds());
+                            logo.style.top = initialLogoTop; // Update the `top` value on resize
+                        });
+
+                        function updateElements(scrollPosition) {
+                            // Update transformations
+                            logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 5000)}px)`;
+                            imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
+                            imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
+
+                            // Update visibility and opacity
                             if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
-                                if (logo.style.opacity !== '0') {
-                                    logo.style.opacity = '0';
-                                    logo.style.visibility = 'hidden'; // Use visibility instead of display
-                                }
+                                logo.style.opacity = "0";
+                                logo.style.display = "none";
                             } else {
-                                if (logo.style.opacity !== '1') {
-                                    logo.style.visibility = 'visible';
-                                    logo.style.opacity = '1';
-                                }
+                                logo.style.display = "block";
+                                logo.style.opacity = "1";
                             }
                         }
                         let lastWidth = window.innerWidth
