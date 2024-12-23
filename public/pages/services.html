@@ -5729,17 +5729,21 @@
                             <a class="mainLinks mobile-menu-link" aria-expanded="false" href="../index.html">Home</a>
                         </li>
                         <li>
-                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="services.html">Brand Services</a>
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="services.html">Brand
+                                Services</a>
                         </li>
                         <li>
-                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="faces-behind-brand.html">Faces Behind
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="faces-behind-brand.html">Faces
+                                Behind
                                 the Brand</a>
                         </li>
                         <li>
-                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="our-clients.html">Our Clients</a>
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="our-clients.html">Our
+                                Clients</a>
                         </li>
                         <li>
-                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="behind-brand.html">Behind the
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="behind-brand.html">Behind
+                                the
                                 Brand</a>
                         </li>
                         <li>
@@ -5749,13 +5753,14 @@
                 </div>
                 <ul class="menuLinks secondaryMenus">
                     <li class="Resorts">
-                        <a class="mainLinks mobile-menu-link" href="contact-us.html" aria-expanded="false">Contact Us</a>
+                        <a class="mainLinks mobile-menu-link" href="contact-us.html" aria-expanded="false">Contact
+                            Us</a>
                     </li>
                 </ul>
             </div>
             <script>
-                document.querySelectorAll('.mobile-menu-link').forEach(function(link) {
-                    link.addEventListener('touchend', function() {
+                document.querySelectorAll('.mobile-menu-link').forEach(function (link) {
+                    link.addEventListener('touchend', function () {
                         window.location.href = this.href;
                     });
                 });
@@ -6188,39 +6193,26 @@
                                 usefulInfoMenu.style.display = "inline-block"
                             }
                         }
-                        let isScrolling = false;
-
-                        window.addEventListener('scroll', function () {
-                            if (!isScrolling) {
-                                window.requestAnimationFrame(() => {
-                                    handleScroll();
-                                    isScrolling = false;
-                                });
-                                isScrolling = true;
-                            }
-                        });
                         const logo = document.getElementById('cloud-logo');
                         const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
                         const imgBtbS1c11 = document.getElementById('img-btb-s1c11');
-                        function handleScroll() {
+                        window.addEventListener('scroll', function () {
                             const scrollPosition = window.scrollY;
                             const windowWidth = window.innerWidth;
                             const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
                             const disappearThreshold = windowWidth > 989 ? windowWidth : 0.6 * windowWidth;
-
-                            logo.style.top = windowWidth > 989 ? "-500px" : "-40%";
+                            logo.style.top = windowWidth > 989 ? -500 : "-40%";
                             logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 5000)}px)`;
                             imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 5000)}px)`;
                             imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 5000)}px)`;
-
                             if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
                                 logo.style.opacity = "0";
                                 logo.style.display = 'none';
                             } else {
-                                logo.style.display = 'block';
+                                logo.style.display = 'block'
                                 logo.style.opacity = "1";
                             }
-                        }
+                        });
                         let lastWidth = window.innerWidth
                         window.addEventListener('resize', function () {
                             if (window.innerWidth !== lastWidth) {
@@ -6236,6 +6228,7 @@
                                 lastWidth = window.innerWidth
                             }
                         })
+
                         function toggleMenu(item) {
                             if (window.innerWidth < 990) {
                                 let menu = null
