@@ -6309,18 +6309,21 @@
                                 usefulInfoMenu.style.display = "inline-block"
                             }
                         }
+                        let lastWidth = window.innerWidth
                         window.addEventListener('resize', function () {
-                            const contactUsMenu = document.getElementById('contact-us-menu')
-                            const usefulInfoMenu = document.getElementById('useful-info-menu')
-                            if (window.innerWidth < 990) {
-                                contactUsMenu.style.display = "none"
-                                usefulInfoMenu.style.display = "none"
-                            } else {
-                                contactUsMenu.style.display = "inline-block"
-                                usefulInfoMenu.style.display = "inline-block"
+                            if (window.innerWidth !== lastWidth) {
+                                const contactUsMenu = document.getElementById('contact-us-menu')
+                                const usefulInfoMenu = document.getElementById('useful-info-menu')
+                                if (window.innerWidth < 990) {
+                                    contactUsMenu.style.display = "none"
+                                    usefulInfoMenu.style.display = "none"
+                                } else {
+                                    contactUsMenu.style.display = "inline-block"
+                                    usefulInfoMenu.style.display = "inline-block"
+                                }
+                                lastWidth = window.innerWidth
                             }
                         })
-
                         function toggleMenu(item) {
                             if (window.innerWidth < 990) {
                                 let menu = null
