@@ -6212,16 +6212,16 @@
                             const displayThreshold = windowWidth > 989 ? 10 : 0.1 * windowWidth;
                             const disappearThreshold = windowWidth > 989 ? windowWidth : 0.6 * windowWidth;
                             logo.style.top = windowWidth > 989 ? -500 : "-40%";
-                            logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 3000)}px)`;
-                            imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 3000)}px)`;
-                            imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 3000)}px)`;
-                            // if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
-                            //     logo.style.opacity = "0";
-                            //     logo.style.display = 'none';
-                            // } else {
-                            //     logo.style.display = 'block'
-                            //     logo.style.opacity = "1";
-                            // }
+                            // logo.style.transform = `translateX(-50%) translateY(${Math.min(scrollPosition * 2.5, 3000)}px)`;
+                            // imgBtbS1c2.style.transform = `translateY(-${Math.min(scrollPosition * 0.5, 3000)}px)`;
+                            // imgBtbS1c11.style.transform = `translateY(${Math.min(scrollPosition * 0.2, 3000)}px)`;
+                            if (scrollPosition < displayThreshold || scrollPosition > disappearThreshold) {
+                                logo.style.opacity = "0";
+                                logo.style.display = 'none';
+                            } else {
+                                logo.style.display = 'block'
+                                logo.style.opacity = "1";
+                            }
                         }
                         let lastWidth = window.innerWidth
                         window.addEventListener('resize', function () {
