@@ -11923,6 +11923,12 @@ a:hover, a:focus {
     }
 }
 
+@media (max-width: 768px) {
+    .elfsight-app-6b11a292-7e8b-49be-9abe-9fcbe46f168b {
+        margin: 0 auto;
+    }
+}
+
 .mute_button {
     position: absolute;
     float: right;
