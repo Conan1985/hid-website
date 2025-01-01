@@ -24675,6 +24675,34 @@ html.notsmooth {
     }
 }
 
+@media (min-width: 990px) {
+    .index-our-services {
+        margin-top: -150px
+    }
+    .index-faces-behind-the-brand {
+        margin-top: -150px;
+        margin-bottom: -150px
+    }
+    .index-our-clients {
+        margin-top: -150px;
+        margin-bottom: -150px
+    }
+}
+
+@media (max-width: 767px) {
+    .index-our-services {
+        margin-top: -50px
+    }
+    .index-faces-behind-the-brand {
+        margin-top: -50px;
+        margin-bottom: -50px
+    }
+    .index-our-clients {
+        margin-top: -100px;
+        margin-bottom: -100px
+    }
+}
+
 .popup-logo {
     max-height: 80px
 }
