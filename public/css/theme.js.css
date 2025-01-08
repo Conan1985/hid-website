@@ -6318,6 +6318,24 @@ a:hover, a:focus {
     animation: imageTxtHeadlineC3Left .75s both
 }
 
+@media (max-width: 989px) {
+    .our-clients-video-desktop {
+        display: none
+    }
+    .our-clients-video-mobile {
+        display: block
+    }
+}
+
+@media (min-width: 990px) {
+    .our-clients-video-desktop {
+        display: block
+    }
+    .our-clients-video-mobile {
+        display: none
+    }
+}
+
 @keyframes imageTxtHeadlineC3Left {
     0% {
         opacity: 0;
