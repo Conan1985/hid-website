@@ -3124,6 +3124,90 @@ a:hover, a:focus {
     margin: 0
 }
 
+.landing-page-top-cover {
+    z-index: 3;
+    position: absolute;
+    float: left;
+    top: 30px;
+}
+
+.landing-page-top-title {
+    margin-left: 5%;
+    font-family: sans-serif;
+    font-size: 66px;
+    font-weight: 900;
+    color: white;
+    line-height: 1
+}
+
+.landing-page-top-description {
+    margin-left: 5%;
+    font-family: sans-serif;
+    color: white;
+    font-size: 22px;
+    max-width: 55%;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+
+.landing-page-top-button {
+    margin-top: 20px;
+    margin-left: -57px;
+}
+
+@media (min-width: 990px) and (max-width: 1458px) {
+    .landing-page-top-button {
+        margin-left: calc(-57px + (-83 - -57) * ((100vw - 1458px) / (990 - 1458)))
+    }
+}
+
+@media (max-width: 1199px) {
+    .landing-page-top-title {
+        font-size: 56px;
+    }
+}
+
+@media (max-width: 989px) {
+    .landing-page-top-button {
+        margin-left: 0
+    }
+    .landing-page-top-title {
+        font-size: 50px;
+    }
+    .landing-page-top-description {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    .landing-page-top-title {
+        font-size: 44px;
+    }
+    .landing-page-top-description {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 550px) {
+    .landing-page-top-title-small {
+        display: none
+    }
+}
+
+@media (max-width: 549px) {
+    .landing-page-top-title {
+        font-size: 38px;
+    }
+    .landing-page-top-title-large {
+        display: none;
+    }
+    .landing-page-top-description {
+        font-size: 16px;
+    }
+}
+
 .multiButtons a[href^="tel:"], .multiButtons a[href^="mailto:"] {
     text-decoration: none
 }
@@ -6322,6 +6406,7 @@ a:hover, a:focus {
     .our-clients-video-desktop {
         display: none
     }
+
     .our-clients-video-mobile {
         display: block
     }
@@ -6331,6 +6416,7 @@ a:hover, a:focus {
     .our-clients-video-desktop {
         display: block
     }
+
     .our-clients-video-mobile {
         display: none
     }
@@ -24697,10 +24783,12 @@ html.notsmooth {
     .index-our-services {
         margin-top: -100px
     }
+
     .index-faces-behind-the-brand {
         margin-top: -150px;
         margin-bottom: -150px
     }
+
     .index-our-clients {
         margin-top: -150px;
         margin-bottom: -150px
@@ -24711,10 +24799,12 @@ html.notsmooth {
     .index-our-services {
         margin-top: -50px
     }
+
     .index-faces-behind-the-brand {
         margin-top: -50px;
         margin-bottom: -50px
     }
+
     .index-our-clients {
         margin-top: -100px;
         margin-bottom: -100px
