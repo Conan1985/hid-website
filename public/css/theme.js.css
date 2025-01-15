@@ -24825,6 +24825,18 @@ html.notsmooth {
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
+@media (min-width: 990px) {
+    .logo-rotate-left-lp {
+        left: calc(50% - 1180px)
+    }
+}
+
+@media (max-width: 989px) {
+    .logo-rotate-left-lp {
+        left: calc(50% - 1080px)
+    }
+}
+
 .logo-rotate-right {
     width: 80px;
     position: fixed;
@@ -24834,6 +24846,20 @@ html.notsmooth {
     opacity: 0; /* Adjust this in JavaScript */
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
+
+
+@media (min-width: 990px) {
+    .logo-rotate-right-lp {
+        left: calc(50% + 1180px)
+    }
+}
+
+@media (max-width: 989px) {
+    .logo-rotate-right-lp {
+        left: calc(50% + 1080px)
+    }
+}
+
 
 .cloud-img-container {
     position: relative;
