@@ -24811,6 +24811,31 @@ html.notsmooth {
     }
 }
 
+/* Container style */
+.lp-photos-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    gap: 16px; /* Space between columns */
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+}
+
+/* Box style */
+.lp-photos-box {
+    flex: 1; /* Distribute evenly */
+    min-width: calc(33.333% - 16px); /* Adjust for gaps */
+    padding: 2px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .lp-photos-box {
+        min-width: 100%; /* Full width in single-column layout */
+    }
+}
+
 .popup-logo {
     max-height: 80px
 }
