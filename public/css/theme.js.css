@@ -24827,6 +24827,18 @@ html.notsmooth {
     padding: 2px;
     text-align: center;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column
+}
+
+.lp-photos-box p {
+    flex-grow: 1
+}
+
+@media (min-width: 769px) and (max-width: 989px) {
+    .lp-photos-box-button {
+        min-width: 230px
+    }
 }
 
 /* Responsive design */
