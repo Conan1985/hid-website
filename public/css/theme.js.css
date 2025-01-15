@@ -24841,11 +24841,34 @@ html.notsmooth {
     }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .lp-photos-box {
         min-width: 100%; /* Full width in single-column layout */
     }
+}
+
+.lp-testimonials-background-video {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.lp-testimonials-text-box {
+    position: absolute; /* Position it relative to the nearest positioned ancestor */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Match the size of the video */
+    display: flex; /* Center content inside the text box */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background */
+    color: white; /* Text color */
+    font-size: 24px; /* Text size */
+    z-index: 10; /* Ensure it is above the video */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .popup-logo {
