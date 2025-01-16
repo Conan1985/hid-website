@@ -24966,18 +24966,6 @@ html.notsmooth {
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
-@media (min-width: 990px) {
-    .logo-rotate-left-lp {
-        left: calc(50% - 1180px)
-    }
-}
-
-@media (max-width: 989px) {
-    .logo-rotate-left-lp {
-        left: calc(50% - 1080px)
-    }
-}
-
 .logo-rotate-right {
     width: 80px;
     position: fixed;
@@ -24988,19 +24976,41 @@ html.notsmooth {
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
-
 @media (min-width: 990px) {
+    .logo-rotate-left-lp {
+        left: calc(50% - 1180px)
+    }
     .logo-rotate-right-lp {
         left: calc(50% + 1180px)
     }
 }
 
 @media (max-width: 989px) {
+    .logo-rotate-left-lp {
+        left: calc(50% - 1080px)
+    }
     .logo-rotate-right-lp {
         left: calc(50% + 1080px)
     }
 }
 
+@media (max-width: 599px) {
+    .logo-rotate-left-lp {
+        left: calc(50% - 1040px)
+    }
+    .logo-rotate-right-lp {
+        left: calc(50% + 1040px)
+    }
+}
+
+@media (max-width: 499px) {
+    .logo-rotate-left-lp {
+        display: none;
+    }
+    .logo-rotate-right-lp {
+        display: none;
+    }
+}
 
 .cloud-img-container {
     position: relative;
