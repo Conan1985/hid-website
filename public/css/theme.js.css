@@ -24865,10 +24865,18 @@ html.notsmooth {
     background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background */
     color: white; /* Text color */
     font-size: 24px; /* Text size */
-    z-index: 10; /* Ensure it is above the video */
+    z-index: 1; /* Ensure it is above the video */
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.lp-slick-dots {
+    bottom: 20px;
+}
+
+.lp-slick-dots li {
+    background-color: white
 }
 
 .popup-logo {
