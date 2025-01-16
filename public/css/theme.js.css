@@ -24868,7 +24868,15 @@ html.notsmooth {
     z-index: 1; /* Ensure it is above the video */
     text-align: center;
     padding: 20px;
-    box-sizing: border-box;
+}
+
+.lp-testimonials-text-box > div {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.lp-testimonials-text-box > div > div {
+    min-width: 100%;
 }
 
 .lp-slick-dots {
