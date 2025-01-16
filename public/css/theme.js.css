@@ -24872,11 +24872,20 @@ html.notsmooth {
 
 .lp-testimonials-text-box > div {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    position: relative;
 }
 
 .lp-testimonials-text-box > div > div {
     min-width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Fade transition */
+    position: absolute; /* Keep slides stacked on top of each other */
+}
+
+.lp-testimonials-text-box > div > div.active {
+    opacity: 1;  /* Visible slide */
+    position: relative; /* Move active slide to the front */
 }
 
 .lp-slick-dots {

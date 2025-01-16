@@ -5989,21 +5989,22 @@
                     </div>
                 </div>
                 <script>
-                    const buttons = document.querySelectorAll('.lp-slick-dots button');
                     const carousel = document.querySelector('.lp-testimonials-text-box > div');
-                    const totalSlides = 10;
+                    const slides = carousel.children;
+                    const totalSlides = slides.length;
                     let currentSlide = 0;
                     let autoSlideInterval;
 
                     function goToSlide(slideIndex) {
-                        currentSlide = (slideIndex + totalSlides) % totalSlides; // Ensure circular navigation
-                        carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                        currentSlide = (slideIndex + totalSlides) % totalSlides;
+                        Array.from(slides).forEach(slide => slide.classList.remove('active'));
+                        slides[currentSlide].classList.add('active');
                     }
 
                     function startAutoSlide() {
                         autoSlideInterval = setInterval(() => {
                             goToSlide(currentSlide + 1);
-                        }, 2000);
+                        }, 3000);
                     }
 
                     goToSlide(0);
