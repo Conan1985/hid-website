@@ -3208,6 +3208,39 @@ a:hover, a:focus {
     }
 }
 
+@media (max-width: 499px) {
+    .landing-page-top-title {
+        font-size: 30px;
+    }
+    .landing-page-top-description {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 429px) {
+    .landing-page-top-title {
+        font-size: 20px;
+    }
+    .landing-page-top-description {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 392px) {
+    .landing-page-top-title {
+        font-size: 16px;
+    }
+    .landing-page-top-description {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 372px) {
+    .landing-page-top-button {
+        display: none;
+    }
+}
+
 .multiButtons a[href^="tel:"], .multiButtons a[href^="mailto:"] {
     text-decoration: none
 }
