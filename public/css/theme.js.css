@@ -24888,12 +24888,35 @@ html.notsmooth {
     position: relative; /* Move active slide to the front */
 }
 
-.lp-slick-dots {
-    bottom: 20px;
+.lp-testimonials-message {
+    font-size: 26px;
+    line-height: 1;
+    font-weight: bold;
 }
 
-.lp-slick-dots li {
-    background-color: white
+@media (max-width: 989px) {
+    .lp-testimonials-message {
+        font-size: 20px
+    }
+}
+
+@media (max-width: 512px) {
+    .lp-testimonials-message {
+        font-size: 16px
+    }
+}
+
+.lp-testimonials-message .first-sentence {
+    font-style: italic
+}
+
+.lp-testimonials-message .second-sentence {
+    color: #2490e8
+}
+
+.lp-testimonials-message .name {
+    font-weight: lighter;
+    color: #2490e8
 }
 
 .popup-logo {
