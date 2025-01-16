@@ -5981,17 +5981,11 @@
                             <div>"Thank you so much for your help! 9"</div>
                             <div>"Thank you so much for your help! 10"</div>
                         </div>
-                        <ul class="slick-dots lp-slick-dots" style="">
-                            <li><button data-direction="prev">&#8249;</button></li>
-                            <li><button data-direction="center"></button></li>
-                            <li><button data-direction="next">&#8250;</button></li>
-                        </ul>
                     </div>
                 </div>
                 <script>
                     const buttons = document.querySelectorAll('.lp-slick-dots button');
                     const carousel = document.querySelector('.lp-testimonials-text-box > div');
-                    const dots = document.querySelectorAll('.lp-slick-dots button');
                     const totalSlides = 10;
                     let currentSlide = 0;
                     let autoSlideInterval;
@@ -6006,23 +6000,6 @@
                             goToSlide(currentSlide + 1);
                         }, 2000);
                     }
-
-                    function pauseAutoSlide() {
-                        clearInterval(autoSlideInterval);
-                    }
-
-                    dots.forEach(button => {
-                        button.addEventListener('click', (e) => {
-                            pauseAutoSlide();
-                            const direction = e.target.getAttribute('data-direction');
-                            if (direction === 'prev') {
-                                goToSlide(currentSlide - 1);
-                            } else if (direction === 'next') {
-                                goToSlide(currentSlide + 1);
-                            }
-                            startAutoSlide();
-                        });
-                    });
 
                     goToSlide(0);
                     startAutoSlide();
