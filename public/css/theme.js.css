@@ -3235,7 +3235,7 @@ a:hover, a:focus {
     }
 }
 
-@media (max-width: 412px) {
+@media (max-width: 460px) {
     .landing-page-top-button {
         display: none;
     }
