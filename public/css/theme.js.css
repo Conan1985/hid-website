@@ -3253,6 +3253,18 @@ a:hover, a:focus {
     }
 }
 
+.iframe-youtube-social {
+    width: 560px;
+    height: 315px;
+}
+
+@media (max-width: 569px) {
+    .iframe-youtube-social {
+        width: calc(100vw - 20px);
+        height: 270px
+    }
+}
+
 .multiButtons a[href^="tel:"], .multiButtons a[href^="mailto:"] {
     text-decoration: none
 }
