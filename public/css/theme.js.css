@@ -24963,15 +24963,12 @@ html.notsmooth {
     }
 }
 
-.lp-testimonials-message .first-sentence {
-    font-style: italic
-}
-
-.lp-testimonials-message .second-sentence {
+.lp-testimonials-message .emphasize-sentence {
     color: #2490e8
 }
 
 .lp-testimonials-message .name {
+    text-transform: uppercase;
     font-weight: lighter;
     color: #2490e8
 }
