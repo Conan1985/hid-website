@@ -5843,7 +5843,7 @@
                 </div>
             </div>
         </div>
-        <div class="cloud-img-container">
+        <div id="cloud-img-container" class="cloud-img-container">
             <img src="../images/Brand%20Services/BTB%20S1%20bg.jpg"/>
             <img class="cloud-invisible" src="../images/Brand%20Services/BTB%20S1%20bg%20top.webp"/>
             <img id="cloud-logo" class="cloud-logo" src="../images/Brand%20Services/Behind%20the%20Brand%20logo.webp"/>
@@ -6193,7 +6193,20 @@
                                 contactUsMenu.style.display = "inline-block"
                                 usefulInfoMenu.style.display = "inline-block"
                             }
+                            updateMaxHeight();
                         }
+
+                        function updateMaxHeight() {
+                            const width = window.innerWidth;
+                            const maxHeight = (1920 - 1210) / (1920 - 500) * (width - 500) + 1210;
+                            const imgContainer = document.getElementById('cloud-img-container');
+                            if (imgContainer) {
+                                imgContainer.style.maxHeight = `${maxHeight}px`;
+                            }
+                        }
+
+                        window.addEventListener('resize', updateMaxHeight);
+
                         const logo = document.getElementById('cloud-logo');
                         const imgBtbS1c2 = document.getElementById('img-btb-s1c2');
                         const imgBtbS1c11 = document.getElementById('img-btb-s1c11');

@@ -25038,6 +25038,7 @@ html.notsmooth {
     display: flex;
     align-items: flex-start;
     width: 100%;
+    overflow: hidden;
 }
 
 .rocket-img-container {
