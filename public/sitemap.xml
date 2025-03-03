@@ -3,9 +3,8 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
     <url>
         <loc>https://www.thehealthyinsurancedude.com/</loc>
@@ -87,6 +86,580 @@
         <lastmod>2025-02-03T17:52:17+00:00</lastmod>
         <priority>0.80</priority>
     </url>
-
-
+    <url>
+        <loc>https://www.youtube.com/embed/Qrh2Ei1pejE?si=ZxSxS5lsfHWN626p</loc>
+        <video:video>
+            <video:title>Meet THE Healthy Insurance Dude!</video:title>
+            <video:description>Meet the Healthy Insurance Dude, your go-to guy for all things health Insurance!</video:description>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>87</video:duration>
+            <video:thumbnail_loc>https://img.youtube.com/vi/Qrh2Ei1pejE/hqdefault.jpg</video:thumbnail_loc>
+            <video:player_loc>https://www.youtube.com/embed/Qrh2Ei1pejE?si=ZxSxS5lsfHWN626p</video:player_loc>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Health+Insurance+LP+client+testimonials.mp4</loc>
+        <video:video>
+            <video:title>HID Health Insurance LP Client Testimonials</video:title>
+            <video:description>HID Health Insurance LP Client Testimonials.</video:description>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>171</video:duration>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Health+Insurance+LP+client+testimonials.png</video:thumbnail_loc>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Health+Insurance+LP+client+testimonials.mp4</video:content_loc>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Life+Insurance+Client+Testimonials+video.mp4</loc>
+        <video:video>
+            <video:title>HID Life Insurance LP Client Testimonials</video:title>
+            <video:description>HID Life Insurance LP Client Testimonials.</video:description>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>90</video:duration>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Life+Insurance+Client+Testimonials+video.png</video:thumbnail_loc>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Life+Insurance+Client+Testimonials+video.mp4</video:content_loc>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/hid-once-upon-a-time-american-healthcare-revolution.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/hid-once-upon-a-time-american-healthcare-revolution.png</video:thumbnail_loc>
+            <video:title>HID Once Upon A Time American Healthcare Revolution</video:title>
+            <video:description>Once upon a time - American healthcare revolution as told by The Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/hid-once-upon-a-time-american-healthcare-revolution.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>174</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/hid-coverage-kings-insured-and-driven-trailer.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/hid-coverage-kings-insured-and-driven-trailer.png</video:thumbnail_loc>
+            <video:title>HID Coverage Kings - Insured and Driven (Season 1 Trailer)</video:title>
+            <video:description>HID Coverage Kings - Insured and Driven (Season 1 Trailer).</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/hid-coverage-kings-insured-and-driven-trailer.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>65</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.thehealthyinsurancedude.com/images/Footer/healthy-insurance-dude-bbb.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/healthy-insurance-dude-bbb.png</video:thumbnail_loc>
+            <video:title>BBB</video:title>
+            <video:description>Healthy Insurance Dude BBB.</video:description>
+            <video:content_loc>https://www.thehealthyinsurancedude.com/images/Footer/healthy-insurance-dude-bbb.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>8</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Capital+Preservation.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+-+Capital+Preservation.png</video:thumbnail_loc>
+            <video:title>HID Capital Preservation</video:title>
+            <video:description>HID Capital Preservation.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Capital+Preservation.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>114</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Podcast+-+Capital+Preservation.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Podcast+-+Capital+Preservation.png</video:thumbnail_loc>
+            <video:title>HID Podcast Capital Preservation</video:title>
+            <video:description>HID Podcast Capital Preservation.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Podcast+-+Capital+Preservation.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>554</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/faces-behind-the-brand-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/faces-behind-the-brand-hid.png</video:thumbnail_loc>
+            <video:title>Faces Behind The Brand</video:title>
+            <video:description>Get to know the faces behind the brand at The Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/faces-behind-the-brand-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>199</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/perry-lunsford-the-healthy-insurance-dude.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/perry-lunsford-the-healthy-insurance-dude.png</video:thumbnail_loc>
+            <video:title>Perry Lunsford</video:title>
+            <video:description>Perry Lunsford The Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/perry-lunsford-the-healthy-insurance-dude.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/derrick-berry-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/derrick-berry-hid.png</video:thumbnail_loc>
+            <video:title>Derrick Berry</video:title>
+            <video:description>Derrick Berry in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/derrick-berry-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/jayme-lunsford-the-dudette.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/jayme-lunsford-the-dudette.png</video:thumbnail_loc>
+            <video:title>Jayme Lunsford</video:title>
+            <video:description>Jayme Lunsford in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/jayme-lunsford-the-dudette.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/elizabeth-annis-coo-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/elizabeth-annis-coo-hid.png</video:thumbnail_loc>
+            <video:title>Elizabeth Annis COO</video:title>
+            <video:description>Elizabeth Annis COO in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/elizabeth-annis-coo-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/matthew-raesner-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/matthew-raesner-hid.png</video:thumbnail_loc>
+            <video:title>Matthew Raesner</video:title>
+            <video:description>Matthew Raesner in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/matthew-raesner-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/david-stoner-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/david-stoner-hid.png</video:thumbnail_loc>
+            <video:title>David Stoner</video:title>
+            <video:description>David Stoner in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/david-stoner-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>31</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/anthony-williams-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/anthony-williams-hid.png</video:thumbnail_loc>
+            <video:title>Anthony Williams</video:title>
+            <video:description>Anthony Williams in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/anthony-williams-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>25</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/justis-wilson-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/justis-wilson-hid.png</video:thumbnail_loc>
+            <video:title>Justis Wilson</video:title>
+            <video:description>Justis Wilson in Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/justis-wilson-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>20</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Group+Plans+Quote.mov</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Health+Insurance+-+Group+Plans+Quote.png</video:thumbnail_loc>
+            <video:title>HID Group Plans Quote</video:title>
+            <video:description>Healthy Insurance Dude Group Plans Quote.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Group+Plans+Quote.mov</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Health%2520Insurance%2520-%2520Marketplace%2520Plans%2520Quote.mov</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Health%2520Insurance%2520-%2520Marketplace%2520Plans%2520Quote.png</video:thumbnail_loc>
+            <video:title>HID Marketplace Plans Quote</video:title>
+            <video:description>Healthy Insurance Dude Marketplace Plans Quote.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Health%2520Insurance%2520-%2520Marketplace%2520Plans%2520Quote.mov</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Health+Insurance+male+vo.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+-+Health+Insurance+male+vo.png</video:thumbnail_loc>
+            <video:title>HID Health Insurance Male VO</video:title>
+            <video:description>Healthy Insurance Dude Health Insurance Male Vo.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Health+Insurance+male+vo.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>33</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Underwritten+Plans+Quote.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Health+Insurance+-+Underwritten+Plans+Quote.png</video:thumbnail_loc>
+            <video:title>Health Insurance Underwritten Plans Quote</video:title>
+            <video:description>Health Insurance Underwritten Plans Quote.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Underwritten+Plans+Quote.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Junk+Plans+Quote.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Health+Insurance+-+Junk+Plans+Quote.png</video:thumbnail_loc>
+            <video:title>Health Insurance Junk Plans Quote</video:title>
+            <video:description>Health Insurance Junk Plans Quote.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Junk+Plans+Quote.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Health+Insurance+-+Medicare.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Health+Insurance+-+Medicare.png</video:thumbnail_loc>
+            <video:title>HID Health Insurance Medicare</video:title>
+            <video:description>healthy Insurance Dude Health Insurance Medicare.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Health+Insurance+-+Medicare.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Once+Upon+A+Time+-+American+Healthcare+Revolution.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Once+Upon+A+Time+-+American+Healthcare+Revolution.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Once+Upon+A+Time+-+American+Healthcare+Revolution.png</video:thumbnail_loc>
+            <video:title>HID Once Upon A Time</video:title>
+            <video:description>Healthy Insurance Dude Once Upon A Time American Healthcare Revolution.</video:description>
+            <video:duration>707</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-hid.MOV</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-hid.MOV</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-health-insurance-hid.png</video:thumbnail_loc>
+            <video:title>Affordable Health Insurance HID</video:title>
+            <video:description>Affordable Health Insurance HID.</video:description>
+            <video:duration>9</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/best-affordable-health-insurance-plans-healthy-insurance-dude.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/best-affordable-health-insurance-plans-healthy-insurance-dude.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/best-affordable-health-insurance-plans-healthy-insurance-dude.png</video:thumbnail_loc>
+            <video:title>Best Affordable Health Insurance Plans Healthy Insurance Dude</video:title>
+            <video:description>Best Affordable Health Insurance Plans Healthy Insurance Dude.</video:description>
+            <video:duration>87</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-business-owners.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-business-owners.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-health-insurance-for-business-owners.png</video:thumbnail_loc>
+            <video:title>Affordable Health Insurance for Business Owners</video:title>
+            <video:description>Affordable Health Insurance for Business Owners.</video:description>
+            <video:duration>24</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/behind-the-healthy-insurance-dude-brand.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/behind-the-healthy-insurance-dude-brand.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/behind-the-healthy-insurance-dude-brand.png</video:thumbnail_loc>
+            <video:title>Behind The Healthy Insurance Dude Brand</video:title>
+            <video:description>Behind The Healthy Insurance Dude Brand.</video:description>
+            <video:duration>55</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/connect-with-the-healthy-insurance-dude.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/connect-with-the-healthy-insurance-dude.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/connect-with-the-healthy-insurance-dude.png</video:thumbnail_loc>
+            <video:title>Connect with The Healthy Insurance Dude</video:title>
+            <video:description>Connect with The Healthy Insurance Dude.</video:description>
+            <video:duration>17</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Life+Insurance+web.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Life+Insurance+web.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+-+Life+Insurance+web.png</video:thumbnail_loc>
+            <video:title>HID Life Insurance Web</video:title>
+            <video:description>Healthy Insurance Dude Life Insurance Web.</video:description>
+            <video:duration>89</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Brand+Services+-+Term+Life+Insurance+Quote.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Brand+Services+-+Term+Life+Insurance+Quote.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Brand+Services+-+Term+Life+Insurance+Quote.png</video:thumbnail_loc>
+            <video:title>Brand Services Term Life Insurance Quote</video:title>
+            <video:description>Brand Services Term Life Insurance Quote.</video:description>
+            <video:duration>20</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Brand+Services+-+Universal+Indexed+Life+Insurance+Quote.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Brand+Services+-+Universal+Indexed+Life+Insurance+Quote.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Brand+Services+-+Universal+Indexed+Life+Insurance+Quote.png</video:thumbnail_loc>
+            <video:title>Brand Services Universal Indexed Life Insurance Quote</video:title>
+            <video:description>Brand Services Universal Indexed Life Insurance Quote.</video:description>
+            <video:duration>20</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Underwritten+Plans+Quote.mp4</loc>
+        <lastmod>2025-02-06</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/Health+Insurance+-+Underwritten+Plans+Quote.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/Health+Insurance+-+Underwritten+Plans+Quote.png</video:thumbnail_loc>
+            <video:title>Health Insurance Underwritten Plans Quote</video:title>
+            <video:description>Health Insurance Underwritten Plans Quote.</video:description>
+            <video:duration>11</video:duration>
+            <video:upload_date>2025-02-06T12:00:00+00:00</video:upload_date>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/our-clients-hid.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/our-clients-hid.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/our-clients-hid.png</video:thumbnail_loc>
+            <video:title>Our Clients HID</video:title>
+            <video:description>Our Clients with Healthy Insurance Dude.</video:description>
+            <video:duration>171</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-1099-independent-contractors.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-1099-independent-contractors.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-health-insurance-for-1099-independent-contractors.png</video:thumbnail_loc>
+            <video:title>Affordable Health Insurance For 1099 Independent Contractors</video:title>
+            <video:description>Affordable health insurance for 1099 independent contractors and those who are self-employed.</video:description>
+            <video:duration>24</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-small-business-owners.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-health-insurance-for-small-business-owners.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-health-insurance-for-small-business-owners.png</video:thumbnail_loc>
+            <video:title>Affordable health insurance for small business owners</video:title>
+            <video:description>Affordable health insurance for small business owners.</video:description>
+            <video:duration>24</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-cobra-health-insurance-plans.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-cobra-health-insurance-plans.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-cobra-health-insurance-plans.png</video:thumbnail_loc>
+            <video:title>Affordable COBRA Health Insurance Plans</video:title>
+            <video:description>Affordable COBRA health insurance plans for employment transitions.</video:description>
+            <video:duration>40</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-family-health-insurance-plans.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-family-health-insurance-plans.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-family-health-insurance-plans.png</video:thumbnail_loc>
+            <video:title>Affordable Family Health Insurance Plans</video:title>
+            <video:description>Affordable individual and family health insurance plans for those who are getting the shaft.</video:description>
+            <video:duration>21</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Capital+Preservation.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+-+Capital+Preservation.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+-+Capital+Preservation.png</video:thumbnail_loc>
+            <video:title>HID Capital Preservation</video:title>
+            <video:description>Healthy Insurance Dude Capital Preservation.</video:description>
+            <video:duration>114</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/HID+Podcast+-+Capital+Preservation.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/HID+Podcast+-+Capital+Preservation.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/HID+Podcast+-+Capital+Preservation.png</video:thumbnail_loc>
+            <video:title>HID Podcast Capital Preservation</video:title>
+            <video:description>Healthy Insurance Dude Podcast Capital Preservation.</video:description>
+            <video:duration>554</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/best-health-insurance-plans.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/best-health-insurance-plans.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/best-health-insurance-plans.png</video:thumbnail_loc>
+            <video:title>Best Health Insurance Plans</video:title>
+            <video:description>The Healthy Insurance Dude offers the best health insurance plans for individuals, family and small businesses.</video:description>
+            <video:duration>11</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/affordable-life-insurance-policies.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/affordable-life-insurance-policies.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/affordable-life-insurance-policies.png</video:thumbnail_loc>
+            <video:title>Affordable Life Insurance Policies</video:title>
+            <video:description>Protect your loved ones with our affordable life insurance policies.</video:description>
+            <video:duration>20</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/retirement-income-planning.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/retirement-income-planning.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/retirement-income-planning.png</video:thumbnail_loc>
+            <video:title>Retirement Income Planning</video:title>
+            <video:description>Secure your future with our Retirement Income Planning services.</video:description>
+            <video:duration>20</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/capital-preservation.mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/capital-preservation.mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/capital-preservation.png</video:thumbnail_loc>
+            <video:title>Capital Preservation</video:title>
+            <video:description>Preserve your wealth with our capital preservation strategies.</video:description>
+            <video:duration>16</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/We+don't+sell+Insurance%2C+We+sell+Trust...+www.healthyinsurancedude.com+(1080p_30fps_H264-128kbit_AAC).mp4</loc>
+        <lastmod>2025-02-06T12:00:00+00:00</lastmod>
+        <video:video>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/We+don't+sell+Insurance%2C+We+sell+Trust...+www.healthyinsurancedude.com+(1080p_30fps_H264-128kbit_AAC).mp4</video:content_loc>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/We+don't+sell+Insurance%2C+We+sell+Trust...+www.healthyinsurancedude.com+(1080p_30fps_H264-128kbit_AAC).png</video:thumbnail_loc>
+            <video:title>We don't Sell Insurance We Sell Trust</video:title>
+            <video:description>We don't sell insurance We sell trust.</video:description>
+            <video:duration>61</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://d10fkq1icl237t.cloudfront.net/social-hid.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://www.thehealthyinsurancedude.com/images/Thumbnails/social-hid.png</video:thumbnail_loc>
+            <video:title>Social HID</video:title>
+            <video:description>Social Healthy Insurance Dude.</video:description>
+            <video:content_loc>https://d10fkq1icl237t.cloudfront.net/social-hid.mp4</video:content_loc>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>73</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/qy0uROrWb94?si=zWD21ztMwg1I2VMn</loc>
+        <video:video>
+            <video:title>Part 1 Episode 1: Clyde Kemp & Perry Lunsford | Real Estate, Entrepreneurship & More</video:title>
+            <video:description>Meet Clyde—a top-tier home flipper and luxury builder redefining the game in Dallas, Texas.</video:description>
+            <video:embed_url>https://www.youtube.com/embed/qy0uROrWb94?si=zWD21ztMwg1I2VMn</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>435</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/KTliZ3u_JqU?si=gTBazR10CRPNdABx</loc>
+        <video:video>
+            <video:title>We Don't Sell Insurance, We Sell Trust!</video:title>
+            <video:description>We Don't Sell Insurance, We Sell Trust!</video:description>
+            <video:embed_url>https://www.youtube.com/embed/KTliZ3u_JqU?si=gTBazR10CRPNdABx</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>61</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/5oE_kCvCMxg?si=jtT8aWqQBN9WYupY</loc>
+        <video:video>
+            <video:title>Challenge Accepted | Harlem Shake Edition</video:title>
+            <video:description>We did the 💫 Harlem Shaaaake 💫 this time. We brought in the whole HID crew, and we had a blast. Also spiced it up with a few costumes for funzies.</video:description>
+            <video:embed_url>https://www.youtube.com/embed/5oE_kCvCMxg?si=jtT8aWqQBN9WYupY</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>59</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/Qa_rxKrs5M4?si=mKskk1iVaR2cH_37</loc>
+        <video:video>
+            <video:title>HID Hands Of A Working Man</video:title>
+            <video:description>When a video speaks THIS loudly, the caption can take a backseat.</video:description>
+            <video:embed_url>https://www.youtube.com/embed/Qa_rxKrs5M4?si=mKskk1iVaR2cH_37</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>196</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/WCGyt8heElA?si=2WDyBRshS34Ydjps</loc>
+        <video:video>
+            <video:title>HID Customer Journey | Amanda White</video:title>
+            <video:description>We had the pleasure of catching up with our dear friend and long-time client, Amanda White!</video:description>
+            <video:embed_url>https://www.youtube.com/embed/WCGyt8heElA?si=2WDyBRshS34Ydjps</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>226</video:duration>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://www.youtube.com/embed/K33aZHPUi9k?si=BtGhlAWLzE-0Fbtq</loc>
+        <video:video>
+            <video:title>Throwback Thursdays | Mannequin Challenge</video:title>
+            <video:description>We did the 💫 Mannequin Challenge 💫 this time. We brought in the whole HID crew, and we had a blast. Also spiced it up with a few costumes for funzies.</video:description>
+            <video:embed_url>https://www.youtube.com/embed/K33aZHPUi9k?si=BtGhlAWLzE-0Fbtq</video:embed_url>
+            <video:publication_date>2025-02-06T12:00:00+00:00</video:publication_date>
+            <video:duration>132</video:duration>
+        </video:video>
+    </url>
 </urlset>
