@@ -24899,6 +24899,10 @@ html.notsmooth {
     }
 }
 
+.colorBlue {
+    color: #37b3e7;
+}
+
 .lp-contents-container {
     margin-left: 5%;
     margin-right: 5%;
@@ -24910,9 +24914,17 @@ html.notsmooth {
     font-family: "Arial Black", sans-serif;
     font-size: 48px;
     font-weight: 700;
-    color: #37b3e7;
     line-height: 1.2;
 }
+
+.lp-contents-gold-title {
+    font-family: "BauerBodoniStd", Times, serif;
+    font-style: italic;
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
 
 /* Container style */
 .lp-photos-container {
