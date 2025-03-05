@@ -3128,14 +3128,27 @@ a:hover, a:focus {
     z-index: 3;
     position: absolute;
     float: left;
-    top: 35%;
+    top: 40%;
     left: 5%;
 }
 
-.landing-page-button {
-    font-weight: bolder;
-    background-color: #5eb1e2
+@media (max-width: 989px) {
+    .landing-page-top-cover {
+        top: 35%
+    }
 }
+
+@media (max-width: 699px) {
+    .landing-page-top-cover {
+        top: 25%
+    }
+}
+
+.landing-page-button {
+    font-weight: 600;
+    background-color: #37b3e7
+}
+
 .landing-page-button:hover {
     color: white;
     background-color: #786c45;
@@ -3183,9 +3196,11 @@ a:hover, a:focus {
     .landing-page-top-button {
         margin-left: 0
     }
+
     .landing-page-top-title {
         font-size: 50px;
     }
+
     .landing-page-top-description {
         font-size: 18px;
     }
@@ -3195,6 +3210,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 44px;
     }
+
     .landing-page-top-description {
         font-size: 16px;
     }
@@ -3210,9 +3226,11 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 38px;
     }
+
     .landing-page-top-title-large {
         display: none;
     }
+
     .landing-page-top-description {
         font-size: 16px;
     }
@@ -3222,6 +3240,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 30px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -3231,6 +3250,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 20px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -3240,6 +3260,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 16px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -24878,6 +24899,21 @@ html.notsmooth {
     }
 }
 
+.lp-contents-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.lp-contents-blue-title {
+    font-family: "Arial Black", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #37b3e7;
+    line-height: 1.2;
+}
+
 /* Container style */
 .lp-photos-container {
     margin-left: 5%;
@@ -24951,7 +24987,7 @@ html.notsmooth {
 }
 
 .lp-testimonials-text-box > div > div.active {
-    opacity: 1;  /* Visible slide */
+    opacity: 1; /* Visible slide */
     position: relative; /* Move active slide to the front */
 }
 
@@ -25011,6 +25047,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1180px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1180px)
     }
@@ -25020,6 +25057,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1080px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1080px)
     }
@@ -25029,6 +25067,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1040px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1040px)
     }
@@ -25038,6 +25077,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         display: none;
     }
+
     .logo-rotate-right-lp {
         display: none;
     }

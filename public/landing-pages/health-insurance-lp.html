@@ -5893,49 +5893,14 @@
                 <div class="landing-page-top-cover">
                     <a href="#booking-contact-us" class="primary--btn landing-page-button" rel="nofollow" style="font-size: 26px">Start Saving Today!</a>
                 </div>
+                <div class="lp-contents-container">
+                    <div id="lp-title" class="lp-contents-blue-title" >The Right Plan. The Right Price.</div>
+                </div>
 
-                <div class="fullBleedMedia-content">
+                <div class="lp-photos-container">
+
                     <div class="fullBleedMedia-content-inner">
-                        <img src="../images/hid%20logo%20icon%20blue%20and%20gold%201080.png"
-                             class="logo-rotate-left logo-rotate-left-lp">
-                        <div id="lp-title" class="mediumHeading-1 colorGold">Health Insurance</div>
-                        <img src="../images/hid%20logo%20icon%20blue%20and%20gold%201080.png"
-                             class="logo-rotate-right logo-rotate-right-lp">
-                        <script>
-                            const lpTitle = document.getElementById('lp-title')
-                            lpTitle.addEventListener('mouseover', () => {
-                                lpTitle.style.animation = 'scaleUpImg 0.3s forwards';
-                            });
-                            lpTitle.addEventListener('mouseout', () => {
-                                lpTitle.style.animation = 'scaleDownImg 1.3s forwards';
-                            });
-                            window.addEventListener('scroll', function () {
-                                const scrollPosition = window.scrollY;
-                                const windowHeight = window.innerHeight;
-                                const windowWidth = window.innerWidth;
 
-                                const logoLeft = document.querySelector('.logo-rotate-left');
-                                const logoRight = document.querySelector('.logo-rotate-right')
-
-                                const maxScroll = windowHeight / 2;
-                                let startPosition = 1.102 * windowWidth - 1308.082
-                                startPosition = startPosition < 0 ? 0 : startPosition
-                                startPosition = startPosition > 500 ? 500 : startPosition
-
-                                const progress = windowWidth < 768 ? 1 : Math.min((scrollPosition - startPosition) / maxScroll, 1);
-                                const targetY = windowWidth < 990 ? -170 : -240
-
-                                if (scrollPosition > windowHeight / 4) {
-                                    logoLeft.classList.remove('fullBleedMediaScale')
-                                    logoRight.classList.remove('fullBleedMediaScale')
-                                    const scale = 4 - 3 * progress
-                                    logoLeft.style.transform = `translate3d(${progress * 800}px, ${progress * targetY}px, 0px) rotate(${progress * 360}deg) scale(${scale})`;
-                                    logoRight.style.transform = `translate3d(${progress * -880}px, ${progress * targetY}px, 0px) rotate(${progress * -360}deg) scale(${scale})`;
-                                    logoLeft.style.opacity = progress;
-                                    logoRight.style.opacity = progress
-                                }
-                            });
-                        </script>
                         <div class="titleMedium"></div>
                         <p class="smallBody">Our mission is to ensure you have the coverage you need for a secure and
                             prosperous future.
