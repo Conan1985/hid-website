@@ -3128,7 +3128,17 @@ a:hover, a:focus {
     z-index: 3;
     position: absolute;
     float: left;
-    top: 30px;
+    top: 35%;
+    left: 5%;
+}
+
+.landing-page-button {
+    font-weight: bolder;
+    background-color: #5eb1e2
+}
+.landing-page-button:hover {
+    color: white;
+    background-color: #786c45;
 }
 
 .landing-page-top-title {
