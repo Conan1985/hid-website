@@ -3128,20 +3128,49 @@ a:hover, a:focus {
     z-index: 3;
     position: absolute;
     float: left;
-    top: 40%;
+    top: 35%;
     left: 5%;
+}
+
+@media (max-width: 1199px) {
+    .landing-page-top-cover {
+        top: 30%
+    }
 }
 
 @media (max-width: 989px) {
     .landing-page-top-cover {
-        top: 35%
+        top: 25%
     }
 }
 
 @media (max-width: 699px) {
     .landing-page-top-cover {
-        top: 25%
+        top: 15%
     }
+}
+
+.benefits-list-lp {
+    text-align: left;
+}
+
+@media (min-width: 989px) {
+    .benefits-list-lp {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media (min-width: 1199px) {
+    .benefits-list-lp {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+.bullet-benefits-list-lp {
+    font-size: 60px;
+    vertical-align: bottom
 }
 
 .landing-page-button {
