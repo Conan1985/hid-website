@@ -3173,14 +3173,28 @@ a:hover, a:focus {
     vertical-align: bottom
 }
 
-.landing-page-button {
+.landing-page-button-blue {
     font-weight: 600;
-    background-color: #27aae1
+    background-color: #27aae1;
+    border-color: #27aae1;
 }
 
-.landing-page-button:hover {
+.landing-page-button-blue:hover {
     color: white;
     background-color: #786c45;
+    border-color: #786c45;
+}
+
+.landing-page-button-gold {
+    font-weight: 600;
+    background-color: #786c45;
+    border-color: #786c45
+}
+
+.landing-page-button-gold:hover {
+    color: white;
+    background-color: #27aae1;
+    border-color: #27aae1;
 }
 
 .landing-page-top-title {
