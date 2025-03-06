@@ -3173,6 +3173,35 @@ a:hover, a:focus {
     vertical-align: bottom
 }
 
+.benefits-list-ticker-lp {
+    text-align: left;
+}
+
+@media (min-width: 599px) {
+    .benefits-list-ticker-lp {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media (min-width: 989px) {
+    .benefits-list-ticker-lp {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+@media (min-width: 1099px) {
+    .benefits-list-ticker-lp {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+}
+
+.bullet-benefits-ticker-lp {
+    font-size: 30px;
+}
+
 .landing-page-button-blue {
     font-weight: 600;
     background-color: #27aae1;
