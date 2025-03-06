@@ -3150,6 +3150,12 @@ a:hover, a:focus {
     }
 }
 
+@media (max-width: 549px) {
+    .landing-page-top-cover {
+        top: 10%
+    }
+}
+
 .benefits-list-lp {
     text-align: left;
 }
