@@ -3173,9 +3173,11 @@ a:hover, a:focus {
     .landing-page-top-button {
         margin-left: 0
     }
+
     .landing-page-top-title {
         font-size: 50px;
     }
+
     .landing-page-top-description {
         font-size: 18px;
     }
@@ -3185,6 +3187,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 44px;
     }
+
     .landing-page-top-description {
         font-size: 16px;
     }
@@ -3200,9 +3203,11 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 38px;
     }
+
     .landing-page-top-title-large {
         display: none;
     }
+
     .landing-page-top-description {
         font-size: 16px;
     }
@@ -3212,6 +3217,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 30px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -3221,6 +3227,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 20px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -3230,6 +3237,7 @@ a:hover, a:focus {
     .landing-page-top-title {
         font-size: 16px;
     }
+
     .landing-page-top-description {
         font-size: 14px;
     }
@@ -24941,7 +24949,7 @@ html.notsmooth {
 }
 
 .lp-testimonials-text-box > div > div.active {
-    opacity: 1;  /* Visible slide */
+    opacity: 1; /* Visible slide */
     position: relative; /* Move active slide to the front */
 }
 
@@ -25001,6 +25009,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1180px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1180px)
     }
@@ -25010,6 +25019,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1080px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1080px)
     }
@@ -25019,6 +25029,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         left: calc(50% - 1040px)
     }
+
     .logo-rotate-right-lp {
         left: calc(50% + 1040px)
     }
@@ -25028,6 +25039,7 @@ html.notsmooth {
     .logo-rotate-left-lp {
         display: none;
     }
+
     .logo-rotate-right-lp {
         display: none;
     }
@@ -25289,4 +25301,58 @@ a[href^="tel:"], a[href^="mailto:"] {
 
 .pageColorBlack, .defaultBlackFont {
     color: #041021
+}
+
+.meta-title {
+    font-size: 2rem;
+}
+
+@media (min-width: 390px) {
+    .meta-title {
+        font-size: 2.5rem
+    }
+}
+
+@media (min-width: 670px) {
+    .meta-title {
+        font-size: 4rem
+    }
+}
+
+@media (min-width: 750px) {
+    .meta-title {
+        font-size: 5rem
+    }
+}
+
+.meta-progress-container {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.meta-progress {
+    width: 100%;
+    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #eee; /* background of track */
+    overflow: hidden;
+}
+
+.meta-progress::-webkit-progress-bar {
+    background-color: #eee;
+}
+
+.meta-progress::-webkit-progress-value {
+    background-color: #2490e8; /* 🔥 Your new color */
+    border-radius: 10px 0 0 10px;
+    transition: width 0.3s ease;
+}
+
+.meta-progress::-moz-progress-bar {
+    background-color: #2490e8;
+    border-radius: 10px 0 0 10px;
+    transition: width 0.3s ease;
 }

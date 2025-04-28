@@ -5812,20 +5812,31 @@
 <div>
     <main id="content">
         <!-- React App Mount Point -->
-        <div id="react-root" ></div>
+        <div id="react-root"></div>
         <!-- Tiny React App with JSX -->
         <script type="text/babel">
             const {useState} = React;
             const {createRoot} = ReactDOM;
+
             function App() {
-                const [count, setCount] = useState(0);
+                const [step, setStep] = useState(1)
+
+
                 return (
                     <div className="cms-block cms-block-element">
-                        <div className="heroBanner default-animation-nomov" >
+                        <div className="heroBanner default-animation-nomov">
                             <div className="contentBottom">
-                                <h2>Hello from React with JSX!</h2>
-                                <p>You clicked {count} times.</p>
-                                <button onClick={() => setCount(count + 1)}>Click me</button>
+                                <div>
+                                    <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
+                                        with 3 Simple Steps</h1>
+                                </div>
+                                <div className="meta-progress-container">
+                                    <progress value={step/4} className="meta-progress" ></progress>
+                                </div>
+                                <div className="boldBody">
+                                    Do you currently have health insurance?
+                                </div>
+
                             </div>
                         </div>
                     </div>
