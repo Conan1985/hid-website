@@ -25356,3 +25356,32 @@ a[href^="tel:"], a[href^="mailto:"] {
     border-radius: 10px 0 0 10px;
     transition: width 0.3s ease;
 }
+
+.options-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically if you want */
+    gap: 24px; /* a bit bigger gap between buttons */
+}
+
+.option-box {
+    padding: 20px 70px; /* bigger button */
+    background-color: #f3f4f6;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.option-box:hover {
+    background-color: #e5e7eb; /* slightly darker on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.option-box.selected {
+    border-color: #2490e8;
+    background-color: #e0e7ff;
+}

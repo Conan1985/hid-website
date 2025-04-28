@@ -5820,7 +5820,11 @@
 
             function App() {
                 const [step, setStep] = useState(1)
+                const [currentInsurance, setCurrentInsurance] = useState('')
 
+                const handleCurrentInsurance = (option) => {
+                    setCurrentInsurance(option)
+                }
 
                 return (
                     <div className="cms-block cms-block-element">
@@ -5831,10 +5835,21 @@
                                         with 3 Simple Steps</h1>
                                 </div>
                                 <div className="meta-progress-container">
-                                    <progress value={step/4} className="meta-progress" ></progress>
+                                    <progress value={step / 4} className="meta-progress"></progress>
                                 </div>
                                 <div className="boldBody">
                                     Do you currently have health insurance?
+                                </div>
+
+                                <div className="options-container">
+                                    <div className={`option-box ${currentInsurance === 'Yes' ? 'selected' : ''}`}
+                                         onClick={() => handleCurrentInsurance('Yes')}>
+                                        <p className="font-semibold text-sm">Yes</p>
+                                    </div>
+                                    <div className={`option-box ${currentInsurance === 'No' ? 'selected' : ''}`}
+                                         onClick={() => handleCurrentInsurance('No')}>
+                                        <p className="font-semibold text-sm">No</p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -5850,7 +5865,7 @@
 </div>
 <footer class="mainFooter footerBottom" id="footer">
     <div class="mainFooter__inner">
-        <div class="mainFooterBig">
+    <div class="mainFooterBig">
             <div class="mainFooter__level-2">
                 <a href="javascript:void(0);" class="closeFooter-1"><img class="lazyImg" src=""
                                                                          data-src="images/close-popup.svg" alt=""></a>
