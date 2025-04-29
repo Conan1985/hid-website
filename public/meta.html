@@ -5829,10 +5829,11 @@
                 return (
                     <div className="cms-block cms-block-element">
                         <div className="heroBanner default-animation-nomov">
-                            <div className='meta-form-logo-container'>
+                            {step === 1 && <div className='meta-form-logo-container'>
                                 <img src="images/healthy-insurance-dude-logo.png"  style={{maxWidth: '200px'}}
                                      alt="Healthy Insurance Dude logo"/>
-                            </div>
+                            </div>}
+                            {step > 1 && <div style={{height: '50px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
                             <div>
                                     <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
