@@ -25304,7 +25304,31 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .meta-title {
-    font-size: 2.5rem;
+    font-size: 2.1rem;
+}
+
+@media (min-width: 331px) {
+    .meta-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 346px) {
+    .meta-title {
+        font-size: 2.3rem;
+    }
+}
+
+@media (min-width: 361px) {
+    .meta-title {
+        font-size: 2.4rem;
+    }
+}
+
+@media (min-width: 375px) {
+    .meta-title {
+        font-size: 2.5rem;
+    }
 }
 
 @media (min-width: 450px) {
