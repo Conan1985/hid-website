@@ -25304,12 +25304,18 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .meta-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
-@media (min-width: 390px) {
+@media (min-width: 450px) {
     .meta-title {
-        font-size: 2.5rem
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 521px) {
+    .meta-title {
+        font-size: 3.5rem
     }
 }
 
@@ -25319,9 +25325,9 @@ a[href^="tel:"], a[href^="mailto:"] {
     }
 }
 
-@media (min-width: 750px) {
+@media (min-width: 800px) {
     .meta-title {
-        font-size: 5rem
+        font-size: 4.2rem
     }
 }
 
