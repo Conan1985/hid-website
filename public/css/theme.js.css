@@ -25398,17 +25398,82 @@ a[href^="tel:"], a[href^="mailto:"] {
     flex-direction: row;
     justify-content: center; /* center horizontally */
     align-items: center; /* center vertically if you want */
-    gap: 24px; /* a bit bigger gap between buttons */
+    gap: 5px; /* a bit bigger gap between buttons */
 }
 
 .option-box {
-    padding: 20px 70px; /* bigger button */
+    padding: 20px 62px; /* bigger button */
     background-color: #f3f4f6;
     border: 2px solid transparent;
     border-radius: 1rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+}
+
+@media (min-width: 330px) {
+    .option-box {
+        padding-left: 66px;
+        padding-right: 66px;
+    }
+}
+
+@media (min-width: 340px) {
+    .option-box {
+        padding-left: 67px;
+        padding-right: 67px;
+    }
+}
+
+@media (min-width: 350px) {
+    .option-box {
+        padding-left: 68px;
+        padding-right: 68px;
+    }
+}
+
+@media (min-width: 360px) {
+    .option-box {
+        padding-left: 69px;
+        padding-right: 69px;
+    }
+}
+
+@media (min-width: 370px) {
+    .option-box {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+}
+
+@media (min-width: 390px) {
+    .options-container {
+        gap: 10px
+    }
+}
+
+@media (min-width: 400px) {
+    .options-container {
+        gap: 15px
+    }
+}
+
+@media (min-width: 420px) {
+    .options-container {
+        gap: 20px
+    }
+}
+
+@media (min-width: 450px) {
+    .options-container {
+        gap: 30px
+    }
+}
+
+@media (min-width: 500px) {
+    .options-container {
+        gap: 40px
+    }
 }
 
 .option-box:hover {
