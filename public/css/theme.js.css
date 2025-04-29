@@ -25355,6 +25355,12 @@ a[href^="tel:"], a[href^="mailto:"] {
     }
 }
 
+@media (max-width: 326px) {
+    .meta-do-you-have-insurance {
+        font-size: 1.45rem;
+    }
+}
+
 .meta-progress-container {
     margin-bottom: 10px;
     margin-top: 10px;
