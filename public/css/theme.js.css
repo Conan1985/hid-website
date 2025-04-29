@@ -25355,6 +25355,10 @@ a[href^="tel:"], a[href^="mailto:"] {
     }
 }
 
+.meta-do-you-have-insurance {
+    margin-bottom: 10px
+}
+
 @media (max-width: 326px) {
     .meta-do-you-have-insurance {
         font-size: 1.45rem;
@@ -25476,6 +25480,18 @@ a[href^="tel:"], a[href^="mailto:"] {
     }
 }
 
+@media (min-width: 550px) {
+    .options-container {
+        gap: 50px
+    }
+}
+
+@media (min-width: 600px) {
+    .options-container {
+        gap: 60px
+    }
+}
+
 .option-box:hover {
     background-color: #e5e7eb; /* slightly darker on hover */
     transform: translateY(-2px);
@@ -25485,4 +25501,17 @@ a[href^="tel:"], a[href^="mailto:"] {
 .option-box.selected {
     border-color: #2490e8;
     background-color: #e0e7ff;
+}
+
+.meta-form-logo-container {
+    align-self: center;
+}
+
+@media (min-width: 990px) {
+    .meta-form-logo-container {
+        height: 50px;
+    }
+    .meta-form-logo-container img {
+        display: none;
+    }
 }
