@@ -5851,6 +5851,10 @@
                                 </div>}
                                 {step === 2 && <div className="boldBody">
                                     Any pre-existing conditions?
+                                    <p style={{fontSize: '12px', color: 'gray'}}>Select any that applies to you</p>
+                                </div>}
+                                {step === 3 && <div className="boldBody">
+                                    Final Details
                                 </div>}
                                 {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
@@ -5908,9 +5912,10 @@
                                     {step > 1 && <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                         <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                     </button>}
-                                    <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                            onClick={() => setStep(step + 1)}>Next
-                                    </button>
+                                    {step < 4 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                            onClick={() => setStep(step + 1)}>
+                                        {step < 3 ? 'Next' : 'Get My Free Quote'}
+                                    </button>}
                                 </div>
                             </div>
                         </div>
