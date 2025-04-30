@@ -25398,15 +25398,18 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .options-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: center; /* center horizontally */
-    align-items: center; /* center vertically if you want */
-    gap: 5px; /* a bit bigger gap between buttons */
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .option-box {
-    padding: 20px 62px; /* bigger button */
+    width: 250px;
+    padding: 20px;
     background-color: #f3f4f6;
     border: 2px solid transparent;
     border-radius: 1rem;
@@ -25415,40 +25418,6 @@ a[href^="tel:"], a[href^="mailto:"] {
     transition: all 0.2s ease-in-out;
 }
 
-@media (min-width: 330px) {
-    .option-box {
-        padding-left: 66px;
-        padding-right: 66px;
-    }
-}
-
-@media (min-width: 340px) {
-    .option-box {
-        padding-left: 67px;
-        padding-right: 67px;
-    }
-}
-
-@media (min-width: 350px) {
-    .option-box {
-        padding-left: 68px;
-        padding-right: 68px;
-    }
-}
-
-@media (min-width: 360px) {
-    .option-box {
-        padding-left: 69px;
-        padding-right: 69px;
-    }
-}
-
-@media (min-width: 370px) {
-    .option-box {
-        padding-left: 70px;
-        padding-right: 70px;
-    }
-}
 
 @media (min-width: 390px) {
     .options-container {
@@ -25493,7 +25462,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .option-box:hover {
-    background-color: #e5e7eb; /* slightly darker on hover */
+    background-color: #e5e7eb;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

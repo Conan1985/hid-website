@@ -5820,8 +5820,17 @@
             function App() {
                 const [step, setStep] = useState(1)
                 const [currentInsurance, setCurrentInsurance] = useState(null)
-                const handleCurrentInsurance = (option) => {
-                    setCurrentInsurance(option)
+                const [conditions, setConditions] = useState([])
+                const handleToggleCondition = (condition) => {
+                    setConditions(prev =>
+                        prev.includes(condition)
+                            ? prev.filter(item => item !== condition)
+                            : [...prev, condition]
+                    )
+                }
+                const isNextButtonDisabled = () => {
+                    return (step === 1 && currentInsurance === null) ||
+                        (step === 2 && !conditions.length)
                 }
                 return (
                     <div className="cms-block cms-block-element">
@@ -5845,19 +5854,61 @@
                                 </div>}
                                 {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
-                                         onClick={() => handleCurrentInsurance(true)}>
-                                        <p className="font-semibold text-sm">Yes</p>
+                                         onClick={() => setCurrentInsurance(true)}>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Yes</p>
                                     </div>
                                     <div className={`option-box ${currentInsurance === false ? 'selected' : ''}`}
-                                         onClick={() => handleCurrentInsurance(false)}>
-                                        <p className="font-semibold text-sm">No</p>
+                                         onClick={() => setCurrentInsurance(false)}>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No</p>
+                                    </div>
+                                </div>}
+                                {step === 2 && <div className="options-container">
+                                    <div className={`option-box ${conditions.includes('stroke') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('stroke')}
+                                    >
+                                        <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Stroke</p>
+                                    </div>
+                                    <div className={`option-box ${conditions.includes('cancer') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('cancer')}
+                                    >
+                                        <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Cancer</p>
+                                    </div>
+                                </div>}
+                                {step === 2 && <div className="options-container">
+                                    <div className={`option-box ${conditions.includes('surgery') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('surgery')}
+                                    >
+                                        <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Any Major Surgery</p>
+                                    </div>
+                                    <div className={`option-box ${conditions.includes('diabetes') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('diabetes')}
+                                    >
+                                        <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Type 1 Diabetes</p>
+                                    </div>
+                                </div>}
+                                {step === 2 && <div className="options-container">
+                                    <div className={`option-box ${conditions.includes('pre-existing') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('pre-existing')}
+                                    >
+                                        <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No Pre-existing Conditions</p>
+                                    </div>
+                                    <div className={`option-box ${conditions.includes('other') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('other')} style={{padding: '33px'}}
+                                    >
+                                        <i className="fas fa-pencil-alt" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Other</p>
                                     </div>
                                 </div>}
                                 <div className="meta-button-container">
                                     {step > 1 && <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                         <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                     </button>}
-                                    <button className="meta-next-button" disabled={currentInsurance === null}
+                                    <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                             onClick={() => setStep(step + 1)}>Next
                                     </button>
                                 </div>
