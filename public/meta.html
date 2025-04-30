@@ -73,6 +73,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Load Babel for JSX parsing in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Healthy Insurance Dude</title>
     <link rel="dns-prefetch" href="//code.jquery.com">
@@ -5819,7 +5820,6 @@
             function App() {
                 const [step, setStep] = useState(1)
                 const [currentInsurance, setCurrentInsurance] = useState(null)
-
                 const handleCurrentInsurance = (option) => {
                     setCurrentInsurance(option)
                 }
@@ -5840,6 +5840,9 @@
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     Do you currently have health insurance?
                                 </div>}
+                                {step === 2 && <div className="boldBody">
+                                    Any pre-existing conditions?
+                                </div>}
                                 {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
                                          onClick={() => handleCurrentInsurance(true)}>
@@ -5851,7 +5854,11 @@
                                     </div>
                                 </div>}
                                 <div className="meta-button-container">
-                                    <button className="meta-next-button" disabled={currentInsurance === null} onClick={() => setStep(step + 1)}>Next
+                                    {step > 1 && <button className="meta-back-button" onClick={() => setStep(step - 1)}>
+                                        <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                                    </button>}
+                                    <button className="meta-next-button" disabled={currentInsurance === null}
+                                            onClick={() => setStep(step + 1)}>Next
                                     </button>
                                 </div>
                             </div>
@@ -5859,6 +5866,7 @@
                     </div>
                 )
             }
+
             const root = createRoot(document.getElementById('react-root'));
             root.render(<App/>);
         </script>
