@@ -5820,7 +5820,7 @@
 
             function App() {
                 const [step, setStep] = useState(1)
-                const [currentInsurance, setCurrentInsurance] = useState('')
+                const [currentInsurance, setCurrentInsurance] = useState(null)
 
                 const handleCurrentInsurance = (option) => {
                     setCurrentInsurance(option)
@@ -5847,12 +5847,12 @@
                                 </div>
 
                                 <div className="options-container">
-                                    <div className={`option-box ${currentInsurance === 'Yes' ? 'selected' : ''}`}
-                                         onClick={() => handleCurrentInsurance('Yes')}>
+                                    <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
+                                         onClick={() => handleCurrentInsurance(true)}>
                                         <p className="font-semibold text-sm">Yes</p>
                                     </div>
-                                    <div className={`option-box ${currentInsurance === 'No' ? 'selected' : ''}`}
-                                         onClick={() => handleCurrentInsurance('No')}>
+                                    <div className={`option-box ${currentInsurance === false ? 'selected' : ''}`}
+                                         onClick={() => handleCurrentInsurance(false)}>
                                         <p className="font-semibold text-sm">No</p>
                                     </div>
                                 </div>
