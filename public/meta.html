@@ -5811,9 +5811,7 @@
 </header>
 <div>
     <main id="content">
-        <!-- React App Mount Point -->
         <div id="react-root"></div>
-        <!-- Tiny React App with JSX -->
         <script type="text/babel">
             const {useState} = React;
             const {createRoot} = ReactDOM;
@@ -5825,7 +5823,6 @@
                 const handleCurrentInsurance = (option) => {
                     setCurrentInsurance(option)
                 }
-
                 return (
                     <div className="cms-block cms-block-element">
                         <div className="heroBanner default-animation-nomov">
@@ -5845,7 +5842,6 @@
                                 <div className="boldBody meta-do-you-have-insurance">
                                     Do you currently have health insurance?
                                 </div>
-
                                 <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
                                          onClick={() => handleCurrentInsurance(true)}>
@@ -5856,12 +5852,14 @@
                                         <p className="font-semibold text-sm">No</p>
                                     </div>
                                 </div>
+                                <div className="meta-button-container">
+                                    <button className="meta-next-button" disabled={currentInsurance === null}>Next</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 );
             }
-
             const root = createRoot(document.getElementById('react-root'));
             root.render(<App/>);
         </script>
