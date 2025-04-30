@@ -5827,22 +5827,20 @@
                     <div className="cms-block cms-block-element">
                         <div className="heroBanner default-animation-nomov">
                             {step === 1 && <div className='meta-form-logo-container'>
-                                <img src="images/healthy-insurance-dude-logo.png"  style={{maxWidth: '200px'}}
+                                <img src="images/healthy-insurance-dude-logo.png" style={{maxWidth: '200px'}}
                                      alt="Healthy Insurance Dude logo"/>
                             </div>}
-                            {step > 1 && <div style={{height: '50px'}}></div>}
+                            {step > 1 && <div style={{height: '30px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
-                            <div>
-                                    <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
-                                        with 3 Simple Steps</h1>
-                                </div>
+                                <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
+                                    with 3 Simple Steps</h1>
                                 <div className="meta-progress-container">
                                     <progress value={step / 4} className="meta-progress"></progress>
                                 </div>
-                                <div className="boldBody meta-do-you-have-insurance">
+                                {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     Do you currently have health insurance?
-                                </div>
-                                <div className="options-container">
+                                </div>}
+                                {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
                                          onClick={() => handleCurrentInsurance(true)}>
                                         <p className="font-semibold text-sm">Yes</p>
@@ -5851,14 +5849,15 @@
                                          onClick={() => handleCurrentInsurance(false)}>
                                         <p className="font-semibold text-sm">No</p>
                                     </div>
-                                </div>
+                                </div>}
                                 <div className="meta-button-container">
-                                    <button className="meta-next-button" disabled={currentInsurance === null}>Next</button>
+                                    <button className="meta-next-button" disabled={currentInsurance === null} onClick={() => setStep(step + 1)}>Next
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                );
+                )
             }
             const root = createRoot(document.getElementById('react-root'));
             root.render(<App/>);
@@ -5867,7 +5866,7 @@
 </div>
 <footer class="mainFooter footerBottom" id="footer">
     <div class="mainFooter__inner">
-    <div class="mainFooterBig">
+        <div class="mainFooterBig">
             <div class="mainFooter__level-2">
                 <a href="javascript:void(0);" class="closeFooter-1"><img class="lazyImg" src=""
                                                                          data-src="images/close-popup.svg" alt=""></a>
