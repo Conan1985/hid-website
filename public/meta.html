@@ -5816,11 +5816,13 @@
         <script type="text/babel">
             const {useState} = React;
             const {createRoot} = ReactDOM;
+            const {useRef} = React;
 
             function App() {
                 const [step, setStep] = useState(1)
                 const [currentInsurance, setCurrentInsurance] = useState(null)
                 const [conditions, setConditions] = useState([])
+                const formRef = useRef()
                 const handleToggleCondition = (condition) => {
                     setConditions(prev =>
                         prev.includes(condition)
@@ -5832,6 +5834,63 @@
                     return (step === 1 && currentInsurance === null) ||
                         (step === 2 && !conditions.length)
                 }
+
+                const [form, setForm] = useState({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phone: "",
+                    state: "",
+                    selectedOptions: "",
+                    selectedConditions: "",
+                });
+
+                const [errors, setErrors] = useState({});
+
+                const handleChange = (e) => {
+                    const { name, value } = e.target;
+                    setForm({ ...form, [name]: value });
+                };
+
+                const validate = () => {
+                    const newErrors = {};
+
+                    if (!form.firstName) newErrors.firstName = "First name is required";
+                    if (!form.lastName) newErrors.lastName = "Last name is required";
+                    if (!form.email) newErrors.email = "Email is required";
+                    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = "Invalid email format";
+
+                    if (!form.phone) newErrors.phone = "Phone is required";
+                    else if (!/^\d{10}$/.test(form.phone.replace(/\D/g, ""))) newErrors.phone = "Phone must be 10 digits";
+
+                    if (!form.state) newErrors.state = "Please select a state";
+
+                    setErrors(newErrors);
+                    return Object.keys(newErrors).length === 0;
+                };
+
+                const handleSubmit = (e) => {
+                    e.preventDefault();
+                    if (validate()) {
+                        console.log("Form submitted:", form);
+                        // Do submit logic here
+                    }
+                };
+
+                const states = [
+                    { code: "", name: "Select State" },
+                    { code: "FL", name: "Florida" },
+                    { code: "CA", name: "California" },
+                    { code: "TX", name: "Texas" },
+                    { code: "NY", name: "New York" },
+                    { code: "IL", name: "Illinois" },
+                    { code: "PA", name: "Pennsylvania" },
+                    { code: "OH", name: "Ohio" },
+                    { code: "MI", name: "Michigan" },
+                    { code: "GA", name: "Georgia" },
+                    // Add more states as needed
+                ];
+
                 return (
                     <div className="cms-block cms-block-element">
                         <div className="heroBanner default-animation-nomov">
@@ -5908,13 +5967,86 @@
                                         <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Other</p>
                                     </div>
                                 </div>}
+                                {step === 3 && <form className="space-y-4" ref={formRef} onSubmit={handleSubmit}>
+                                    <input type="hidden" name="selectedOptions" value={form.selectedOptions} />
+                                    <input type="hidden" name="selectedConditions" value={form.selectedConditions} />
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">First Name</label>
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            value={form.firstName}
+                                            onChange={handleChange}
+                                            className={`w-full p-3 border rounded-xl ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
+                                        />
+                                        {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            value={form.lastName}
+                                            onChange={handleChange}
+                                            className={`w-full p-3 border rounded-xl ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
+                                        />
+                                        {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={form.email}
+                                            onChange={handleChange}
+                                            className={`w-full p-3 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                        />
+                                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">Phone</label>
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            value={form.phone}
+                                            onChange={handleChange}
+                                            className={`w-full p-3 border rounded-xl ${errors.phone ? "border-red-500" : "border-gray-300"}`}
+                                        />
+                                        {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">State</label>
+                                        <select
+                                            name="state"
+                                            value={form.state}
+                                            onChange={handleChange}
+                                            className={`w-full p-3 border rounded-xl ${errors.state ? "border-red-500" : "border-gray-300"}`}
+                                        >
+                                            {states.map((s) => (
+                                                <option key={s.code} value={s.code}>
+                                                    {s.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
+                                    </div>
+                                </form>}
                                 <div className="meta-button-container">
                                     {step > 1 && <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                         <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                     </button>}
-                                    {step < 4 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                    {step < 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                             onClick={() => setStep(step + 1)}>
-                                        {step < 3 ? 'Next' : 'Get My Free Quote'}
+                                        Next
+                                    </button>}
+                                    {step === 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                                         onClick={() => formRef.current.requestSubmit()}>
+                                        Get My Free Quote
                                     </button>}
                                 </div>
                             </div>
