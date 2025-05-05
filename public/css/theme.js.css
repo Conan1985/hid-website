@@ -25480,6 +25480,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     .meta-form-logo-container {
         height: 30px;
     }
+
     .meta-form-logo-container img {
         display: none;
     }
@@ -25523,4 +25524,34 @@ a[href^="tel:"], a[href^="mailto:"] {
 .meta-back-button:hover {
     color: #4338ca;
     transform: translateY(-2px);
+}
+
+.meta-form-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.meta-form-label span {
+    min-width: 100px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.meta-form-input {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+}
+
+.meta-form-select {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+    height: 3.8rem;
 }

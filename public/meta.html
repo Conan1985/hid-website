@@ -5840,16 +5840,14 @@
                     lastName: "",
                     email: "",
                     phone: "",
-                    state: "",
-                    selectedOptions: "",
-                    selectedConditions: "",
+                    state: ""
                 });
 
                 const [errors, setErrors] = useState({});
 
                 const handleChange = (e) => {
-                    const { name, value } = e.target;
-                    setForm({ ...form, [name]: value });
+                    const {name, value} = e.target;
+                    setForm({...form, [name]: value});
                 };
 
                 const validate = () => {
@@ -5878,16 +5876,16 @@
                 };
 
                 const states = [
-                    { code: "", name: "Select State" },
-                    { code: "FL", name: "Florida" },
-                    { code: "CA", name: "California" },
-                    { code: "TX", name: "Texas" },
-                    { code: "NY", name: "New York" },
-                    { code: "IL", name: "Illinois" },
-                    { code: "PA", name: "Pennsylvania" },
-                    { code: "OH", name: "Ohio" },
-                    { code: "MI", name: "Michigan" },
-                    { code: "GA", name: "Georgia" },
+                    {code: "", name: "Select State"},
+                    {code: "FL", name: "Florida"},
+                    {code: "CA", name: "California"},
+                    {code: "TX", name: "Texas"},
+                    {code: "NY", name: "New York"},
+                    {code: "IL", name: "Illinois"},
+                    {code: "PA", name: "Pennsylvania"},
+                    {code: "OH", name: "Ohio"},
+                    {code: "MI", name: "Michigan"},
+                    {code: "GA", name: "Georgia"},
                     // Add more states as needed
                 ];
 
@@ -5918,7 +5916,8 @@
                                 {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
                                          onClick={() => setCurrentInsurance(true)}>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Yes</p>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Yes</p>
                                     </div>
                                     <div className={`option-box ${currentInsurance === false ? 'selected' : ''}`}
                                          onClick={() => setCurrentInsurance(false)}>
@@ -5930,13 +5929,15 @@
                                          onClick={() => handleToggleCondition('stroke')}
                                     >
                                         <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Stroke</p>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Stroke</p>
                                     </div>
                                     <div className={`option-box ${conditions.includes('cancer') ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition('cancer')}
                                     >
                                         <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Cancer</p>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Cancer</p>
                                     </div>
                                 </div>}
                                 {step === 2 && <div className="options-container">
@@ -5944,95 +5945,110 @@
                                          onClick={() => handleToggleCondition('surgery')}
                                     >
                                         <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Any Major Surgery</p>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Any
+                                            Major Surgery</p>
                                     </div>
                                     <div className={`option-box ${conditions.includes('diabetes') ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition('diabetes')}
                                     >
                                         <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Type 1 Diabetes</p>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Type 1
+                                            Diabetes</p>
                                     </div>
                                 </div>}
                                 {step === 2 && <div className="options-container">
-                                    <div className={`option-box ${conditions.includes('pre-existing') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('pre-existing')}
+                                    <div
+                                        className={`option-box ${conditions.includes('pre-existing') ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition('pre-existing')}
                                     >
                                         <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No Pre-existing Conditions</p>
+                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No
+                                            Pre-existing Conditions</p>
                                     </div>
                                     <div className={`option-box ${conditions.includes('other') ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition('other')}
                                     >
                                         <i className="fas fa-pencil-alt" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Other</p>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Other</p>
                                     </div>
                                 </div>}
-                                {step === 3 && <form className="space-y-4" ref={formRef} onSubmit={handleSubmit}>
-                                    <input type="hidden" name="selectedOptions" value={form.selectedOptions} />
-                                    <input type="hidden" name="selectedConditions" value={form.selectedConditions} />
-
+                                {step === 3 && <form ref={formRef} onSubmit={handleSubmit}>
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">First Name</label>
-                                        <input
-                                            type="text"
-                                            name="firstName"
-                                            value={form.firstName}
-                                            onChange={handleChange}
-                                            className={`w-full p-3 border rounded-xl ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
-                                        />
-                                        {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+                                        <label className="meta-form-label">
+                                            <span>First Name</span>
+                                            <input
+                                                className="meta-form-input"
+                                                type="text"
+                                                name="firstName"
+                                                value={form.firstName}
+                                                onChange={handleChange}
+                                                    // className={`w-full p-3 border rounded-xl ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
+                                            />
+                                        </label>
+                                        {errors.firstName &&
+                                            <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
                                     </div>
-
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Last Name</label>
-                                        <input
-                                            type="text"
-                                            name="lastName"
-                                            value={form.lastName}
-                                            onChange={handleChange}
-                                            className={`w-full p-3 border rounded-xl ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
-                                        />
-                                        {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+                                        <label className="meta-form-label">
+                                            <span>Last Name</span>
+                                            <input
+                                                className="meta-form-input"
+                                                type="text"
+                                                name="lastName"
+                                                value={form.lastName}
+                                                onChange={handleChange}
+                                                    // className={`w-full p-3 border rounded-xl ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
+                                            />
+                                        </label>
+                                        {errors.lastName &&
+                                            <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
                                     </div>
-
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Email</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={form.email}
-                                            onChange={handleChange}
-                                            className={`w-full p-3 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
-                                        />
+                                        <label className="meta-form-label">
+                                            <span>Email</span>
+                                            <input
+                                                className="meta-form-input"
+                                                type="email"
+                                                name="email"
+                                                value={form.email}
+                                                onChange={handleChange}
+                                                    // className={`w-full p-3 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                            />
+                                        </label>
                                         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                                     </div>
-
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Phone</label>
-                                        <input
-                                            type="tel"
-                                            name="phone"
-                                            value={form.phone}
-                                            onChange={handleChange}
-                                            className={`w-full p-3 border rounded-xl ${errors.phone ? "border-red-500" : "border-gray-300"}`}
-                                        />
+                                        <label className="meta-form-label">
+                                            <span>Phone</span>
+                                            <input
+                                                className="meta-form-input"
+                                                type="tel"
+                                                name="phone"
+                                                value={form.phone}
+                                                onChange={handleChange}
+                                                    // className={`w-full p-3 border rounded-xl ${errors.phone ? "border-red-500" : "border-gray-300"}`}
+                                            />
+                                        </label>
                                         {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                                     </div>
-
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">State</label>
-                                        <select
-                                            name="state"
-                                            value={form.state}
-                                            onChange={handleChange}
-                                            className={`w-full p-3 border rounded-xl ${errors.state ? "border-red-500" : "border-gray-300"}`}
-                                        >
-                                            {states.map((s) => (
-                                                <option key={s.code} value={s.code}>
-                                                    {s.name}
-                                                </option>
-                                            ))}
-                                        </select>
+                                        <label className="meta-form-label">
+                                            <span>State</span>
+                                            <select
+                                                className="meta-form-select"
+                                                name="state"
+                                                value={form.state}
+                                                onChange={handleChange}
+                                                    // className={`w-full p-3 border rounded-xl ${errors.state ? "border-red-500" : "border-gray-300"}`}
+                                            >
+                                                {states.map((s) => (
+                                                    <option key={s.code} value={s.code}>
+                                                        {s.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
                                         {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
                                     </div>
                                 </form>}
@@ -6041,13 +6057,14 @@
                                         <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                     </button>}
                                     {step < 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                            onClick={() => setStep(step + 1)}>
+                                                         onClick={() => setStep(step + 1)}>
                                         Next
                                     </button>}
-                                    {step === 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                                         onClick={() => formRef.current.requestSubmit()}>
-                                        Get My Free Quote
-                                    </button>}
+                                    {step === 3 &&
+                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                                onClick={() => formRef.current.requestSubmit()}>
+                                            Get My Free Quote
+                                        </button>}
                                 </div>
                             </div>
                         </div>
