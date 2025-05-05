@@ -5903,6 +5903,20 @@
                     { code: "dc", name: "District of Columbia" }
                 ];
 
+                const isFormValid = () => {
+                    const { firstName, lastName, email, phone, state } = form;
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const phonePattern = /^\d{10}$/;
+
+                    return (
+                        firstName.trim() !== "" &&
+                        lastName.trim() !== "" &&
+                        emailPattern.test(email) &&
+                        phonePattern.test(phone) &&
+                        state.trim() !== ""
+                    );
+                };
+
                 const handleSubmit = (e) => {
                     e.preventDefault();
                 };
@@ -6067,7 +6081,7 @@
                                         Next
                                     </button>}
                                     {step === 3 &&
-                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                        <button className="meta-next-button" disabled={!isFormValid()}
                                                 onClick={() => formRef.current.requestSubmit()}>
                                             Get My Free Quote
                                         </button>}
