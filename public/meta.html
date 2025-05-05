@@ -6098,7 +6098,10 @@
                                                 type="tel"
                                                 name="phone"
                                                 value={form.phone}
-                                                onChange={handleChange}
+                                                onChange={(e) => {
+                                                    const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                                    handleChange({ target: { name: 'phone', value: cleaned } });
+                                                }}
                                                 onBlur={() => setTouched({...touched, phone: true})}
                                                 style={{
                                                     borderColor: touched.phone && !validateField('phone', form.phone)
