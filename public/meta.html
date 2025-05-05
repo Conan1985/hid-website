@@ -5870,7 +5870,16 @@
 
                 const handleChange = (e) => {
                     const {name, value} = e.target;
-                    setForm({...form, [name]: value});
+                    if (name === 'phone') {
+                        let digits = value.replace(/\D/g, '')
+                        if (digits.length === 11 && digits.startsWith('1')) {
+                            digits = digits.substring(1);
+                        }
+                        const cleaned = digits.slice(0, 10);
+                        setForm({ ...form, [name]: cleaned });
+                    } else {
+                        setForm({ ...form, [name]: value });
+                    }
                 };
 
                 const states = [
@@ -5941,29 +5950,6 @@
                         state.trim() !== ""
                     );
                 };
-
-                // const formatPhoneWithCountryCode = (value) => {
-                //     const cleaned = value.replace(/\D/g, '');
-                //     const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
-                //     if (!match) return '+1 ';
-                //     let formatted = '+1 ';
-                //     if (match[1]) {
-                //         formatted += `(${match[1]}`;
-                //     }
-                //     if (match[1].length === 3) {
-                //         formatted += ')';
-                //     }
-                //     if (match[2]) {
-                //         formatted += match[2];
-                //     }
-                //     if (match[2].length === 3 && match[3]) {
-                //         formatted += '-';
-                //     }
-                //     if (match[3]) {
-                //         formatted += match[3];
-                //     }
-                //     return formatted;
-                // };
 
                 const handleSubmit = (e) => {
                     e.preventDefault();
@@ -6121,6 +6107,7 @@
                                                 className="meta-form-input"
                                                 type="tel"
                                                 name="phone"
+                                                value={form.phone}
                                                 onChange={handleChange}
                                                 onBlur={() => setTouched({...touched, phone: true})}
                                                 style={{
