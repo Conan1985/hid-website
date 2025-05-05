@@ -5843,36 +5843,9 @@
                     state: ""
                 });
 
-                const [errors, setErrors] = useState({});
-
                 const handleChange = (e) => {
                     const {name, value} = e.target;
                     setForm({...form, [name]: value});
-                };
-
-                const validate = () => {
-                    const newErrors = {};
-
-                    if (!form.firstName) newErrors.firstName = "First name is required";
-                    if (!form.lastName) newErrors.lastName = "Last name is required";
-                    if (!form.email) newErrors.email = "Email is required";
-                    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = "Invalid email format";
-
-                    if (!form.phone) newErrors.phone = "Phone is required";
-                    else if (!/^\d{10}$/.test(form.phone.replace(/\D/g, ""))) newErrors.phone = "Phone must be 10 digits";
-
-                    if (!form.state) newErrors.state = "Please select a state";
-
-                    setErrors(newErrors);
-                    return Object.keys(newErrors).length === 0;
-                };
-
-                const handleSubmit = (e) => {
-                    e.preventDefault();
-                    if (validate()) {
-                        console.log("Form submitted:", form);
-                        // Do submit logic here
-                    }
                 };
 
                 const states = [
@@ -5888,6 +5861,10 @@
                     {code: "GA", name: "Georgia"},
                     // Add more states as needed
                 ];
+
+                const handleSubmit = (e) => {
+                    e.preventDefault();
+                };
 
                 return (
                     <div className="cms-block cms-block-element">
@@ -5983,11 +5960,8 @@
                                                 name="firstName"
                                                 value={form.firstName}
                                                 onChange={handleChange}
-                                                    // className={`w-full p-3 border rounded-xl ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
                                             />
                                         </label>
-                                        {errors.firstName &&
-                                            <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
@@ -5998,11 +5972,8 @@
                                                 name="lastName"
                                                 value={form.lastName}
                                                 onChange={handleChange}
-                                                    // className={`w-full p-3 border rounded-xl ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
                                             />
                                         </label>
-                                        {errors.lastName &&
-                                            <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
@@ -6013,10 +5984,8 @@
                                                 name="email"
                                                 value={form.email}
                                                 onChange={handleChange}
-                                                    // className={`w-full p-3 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
                                             />
                                         </label>
-                                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
@@ -6027,10 +5996,8 @@
                                                 name="phone"
                                                 value={form.phone}
                                                 onChange={handleChange}
-                                                    // className={`w-full p-3 border rounded-xl ${errors.phone ? "border-red-500" : "border-gray-300"}`}
                                             />
                                         </label>
-                                        {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
@@ -6040,7 +6007,6 @@
                                                 name="state"
                                                 value={form.state}
                                                 onChange={handleChange}
-                                                    // className={`w-full p-3 border rounded-xl ${errors.state ? "border-red-500" : "border-gray-300"}`}
                                             >
                                                 {states.map((s) => (
                                                     <option key={s.code} value={s.code}>
@@ -6049,7 +6015,6 @@
                                                 ))}
                                             </select>
                                         </label>
-                                        {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
                                     </div>
                                 </form>}
                                 <div className="meta-button-container">
