@@ -25555,3 +25555,18 @@ a[href^="tel:"], a[href^="mailto:"] {
     box-sizing: border-box;
     height: 3.8rem;
 }
+
+.meta-form-tc {
+    text-align: left;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.meta-form-tc input {
+    transform: scale(1.5);
+    margin-right: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+}

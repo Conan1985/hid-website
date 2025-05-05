@@ -5841,7 +5841,8 @@
                     lastName: "",
                     email: "",
                     phone: "",
-                    state: ""
+                    state: "",
+                    tc: false
                 });
 
                 const [touched, setTouched] = useState({
@@ -5850,6 +5851,7 @@
                     email: false,
                     phone: false,
                     state: false,
+                    tc: false
                 })
 
                 const validateField = (name, value) => {
@@ -5863,6 +5865,8 @@
                             return /^\d{10}$/.test(value);
                         case 'state':
                             return value.trim() !== '';
+                        case 'tc':
+                            return value === true;
                         default:
                             return true;
                     }
@@ -5876,9 +5880,11 @@
                             digits = digits.substring(1);
                         }
                         const cleaned = digits.slice(0, 10);
-                        setForm({ ...form, [name]: cleaned });
+                        setForm({...form, [name]: cleaned});
+                    } else if (name === 'tc') {
+                        setForm({...form, [name]: e.target.checked})
                     } else {
-                        setForm({ ...form, [name]: value });
+                        setForm({...form, [name]: value});
                     }
                 };
 
@@ -5938,7 +5944,7 @@
                 ];
 
                 const isFormValid = () => {
-                    const {firstName, lastName, email, phone, state} = form;
+                    const {firstName, lastName, email, phone, state, tc} = form;
                     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     const phonePattern = /^\d{10}$/;
 
@@ -5947,7 +5953,8 @@
                         lastName.trim() !== "" &&
                         emailPattern.test(email) &&
                         phonePattern.test(phone) &&
-                        state.trim() !== ""
+                        state.trim() !== "" &&
+                        tc === true
                     );
                 };
 
@@ -6141,12 +6148,30 @@
                                             </select>
                                         </label>
                                     </div>
+                                    <div className="meta-form-tc">
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                name="tc"
+                                                onChange={handleChange}
+                                                onBlur={() => setTouched({...touched, tc: true})}
+                                                style={{
+                                                    outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
+                                                }}
+                                            />
+                                        </label>
+                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
+                                            conditions</a> provided by the company.
+                                            By providing my phone number, I agree to receive text messages from The
+                                                Healthy Insurance Dude.</span>
+
+                                    </div>
                                 </form>}
                                 {step === 4 &&
                                     <iframe
                                         src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
                                         className="book-appointment"
-                                        style={{width: '100%', border:'none', height: '1200px'}} scrolling="no"
+                                        style={{width: '100%', border: 'none', height: '1200px'}} scrolling="no"
                                         id="xHdhV9mX82MIRoa7Zxe5_1735708058410">
                                     </iframe>
                                 }
