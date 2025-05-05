@@ -5942,9 +5942,33 @@
                     );
                 };
 
+                // const formatPhoneWithCountryCode = (value) => {
+                //     const cleaned = value.replace(/\D/g, '');
+                //     const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+                //     if (!match) return '+1 ';
+                //     let formatted = '+1 ';
+                //     if (match[1]) {
+                //         formatted += `(${match[1]}`;
+                //     }
+                //     if (match[1].length === 3) {
+                //         formatted += ')';
+                //     }
+                //     if (match[2]) {
+                //         formatted += match[2];
+                //     }
+                //     if (match[2].length === 3 && match[3]) {
+                //         formatted += '-';
+                //     }
+                //     if (match[3]) {
+                //         formatted += match[3];
+                //     }
+                //     return formatted;
+                // };
+
                 const handleSubmit = (e) => {
                     e.preventDefault();
                     setStep(4)
+                    console.log(form)
                 };
 
                 return (
@@ -6097,11 +6121,7 @@
                                                 className="meta-form-input"
                                                 type="tel"
                                                 name="phone"
-                                                value={form.phone}
-                                                onChange={(e) => {
-                                                    const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
-                                                    handleChange({ target: { name: 'phone', value: cleaned } });
-                                                }}
+                                                onChange={handleChange}
                                                 onBlur={() => setTouched({...touched, phone: true})}
                                                 style={{
                                                     borderColor: touched.phone && !validateField('phone', form.phone)
