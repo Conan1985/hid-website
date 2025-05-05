@@ -5809,6 +5809,7 @@
         </div>
 
     </div>
+    <script src="https://hello.thehealthyinsurancedude.com/js/form_embed.js" type="text/javascript"></script>
 </header>
 <div>
     <main id="content">
@@ -5943,6 +5944,7 @@
 
                 const handleSubmit = (e) => {
                     e.preventDefault();
+                    setStep(4)
                 };
 
                 return (
@@ -5968,6 +5970,10 @@
                                 </div>}
                                 {step === 3 && <div className="boldBody">
                                     Final Details
+                                </div>}
+                                {step === 4 && <div className="boldBody">
+                                    Thank you. Our agent will touch you shortly.<br/>
+                                    You can make appointment with us as well.
                                 </div>}
                                 {step === 1 && <div className="options-container">
                                     <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
@@ -6126,10 +6132,19 @@
                                         </label>
                                     </div>
                                 </form>}
+                                {step === 4 &&
+                                    <iframe
+                                        src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
+                                        className="book-appointment"
+                                        style={{width: '100%', border:'none', height: '1200px'}} scrolling="no"
+                                        id="xHdhV9mX82MIRoa7Zxe5_1735708058410">
+                                    </iframe>
+                                }
                                 <div className="meta-button-container">
-                                    {step > 1 && <button className="meta-back-button" onClick={() => setStep(step - 1)}>
-                                        <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
-                                    </button>}
+                                    {step > 1 && step < 4 &&
+                                        <button className="meta-back-button" onClick={() => setStep(step - 1)}>
+                                            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                                        </button>}
                                     {step < 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                          onClick={() => setStep(step + 1)}>
                                         Next
