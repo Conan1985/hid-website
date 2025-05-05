@@ -25534,7 +25534,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .meta-form-label span {
-    min-width: 100px;
+    min-width: 85px;
     font-size: 1.5rem;
     font-weight: 500;
     white-space: nowrap;
