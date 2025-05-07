@@ -5863,7 +5863,10 @@
                         case 'email':
                             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
                         case 'phone':
-                            return /^\d{10}$/.test(value);
+                            if (!/^\d{10}$/.test(value)) return false;
+                            const areaCode = value.slice(0, 3);
+                            const centralOfficeCode = value.slice(3, 6);
+                            return /^[2-9]\d{2}$/.test(areaCode) && /^[2-9]\d{2}$/.test(centralOfficeCode);
                         case 'state':
                             return value.trim() !== '';
                         case 'tc':
@@ -5961,18 +5964,12 @@
                 ];
 
                 const isFormValid = () => {
-                    const {firstName, lastName, email, phone, state, tc} = form;
-                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    const phonePattern = /^\d{10}$/;
-
-                    return (
-                        firstName.trim() !== "" &&
-                        lastName.trim() !== "" &&
-                        emailPattern.test(email) &&
-                        phonePattern.test(phone) &&
-                        state.trim() !== "" &&
-                        tc === true
-                    );
+                    return validateField('firstName', form.firstName)
+                        && validateField('lastName', form.lastName)
+                        && validateField('email', form.email)
+                        && validateField('phone', form.phone)
+                        && validateField('state', form.state)
+                        && validateField('tc', form.tc)
                 };
 
                 const handleSubmit = (e) => {
