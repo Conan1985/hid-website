@@ -5823,6 +5823,7 @@
                 const [step, setStep] = useState(1)
                 const [currentInsurance, setCurrentInsurance] = useState(null)
                 const [conditions, setConditions] = useState([])
+                const [isPhoneFocused, setIsPhoneFocused] = useState(false)
                 const formRef = useRef()
                 const handleToggleCondition = (condition) => {
                     setConditions(prev =>
@@ -5875,17 +5876,33 @@
                 const handleChange = (e) => {
                     const {name, value} = e.target;
                     if (name === 'phone') {
-                        let digits = value.replace(/\D/g, '')
-                        if (digits.length === 11 && digits.startsWith('1')) {
-                            digits = digits.substring(1);
+                        let numbers = value.replace(/\D/g, '');
+                        if (value.startsWith('+') && numbers.length === 11 && numbers.startsWith('1')) {
+                            numbers = numbers.slice(1);
                         }
-                        const cleaned = digits.slice(0, 10);
-                        setForm({...form, [name]: cleaned});
+                        if (numbers.length <= form.phone.length) {
+                            setForm({...form, phone: numbers});
+                            return;
+                        }
+                        if (form.phone.length < 10) {
+                            setForm({...form, phone: numbers.slice(0, 10)});
+                        }
                     } else if (name === 'tc') {
                         setForm({...form, [name]: e.target.checked})
                     } else {
                         setForm({...form, [name]: value});
                     }
+                };
+
+                const formatPhone = (numbers) => {
+                    console.log('youwei lu check format: ', numbers)
+                    if (numbers.length === 0) return '';
+                    const part1 = numbers.slice(0, 3);
+                    const part2 = numbers.slice(3, 6);
+                    const part3 = numbers.slice(6, 10);
+                    if (numbers.length < 4) return `(${part1}`;
+                    if (numbers.length < 7) return `(${part1})${part2}`;
+                    return `(${part1})${part2}-${part3}`;
                 };
 
                 const states = [
@@ -6114,9 +6131,13 @@
                                                 className="meta-form-input"
                                                 type="tel"
                                                 name="phone"
-                                                value={form.phone}
+                                                value={isPhoneFocused ? form.phone : formatPhone(form.phone)}
+                                                onFocus={() => setIsPhoneFocused(true)}
                                                 onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, phone: true})}
+                                                onBlur={() => {
+                                                    setIsPhoneFocused(false);
+                                                    setTouched({...touched, phone: true})
+                                                }}
                                                 style={{
                                                     borderColor: touched.phone && !validateField('phone', form.phone)
                                                         ? 'red'
@@ -6160,7 +6181,7 @@
                                                 }}
                                             />
                                         </label>
-                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
+                                        <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
                                             conditions</a> provided by the company.
                                             By providing my phone number, I agree to receive text messages from The
                                                 Healthy Insurance Dude.</span>
