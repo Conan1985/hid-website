@@ -5824,6 +5824,8 @@
                 const [currentInsurance, setCurrentInsurance] = useState(null)
                 const [conditions, setConditions] = useState([])
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
+                const [verifiedPhone, setVerifiedPhone] = useState(false)
+                const [showPopup, setShowPopup] = useState(false)
                 const formRef = useRef()
                 const handleToggleCondition = (condition) => {
                     setConditions(prev =>
@@ -5973,9 +5975,13 @@
                 };
 
                 const handleSubmit = (e) => {
-                    e.preventDefault();
-                    setStep(4)
-                    console.log(form)
+                    e.preventDefault()
+                    if (verifiedPhone) {
+                        setStep(4)
+                    } else {
+                        setVerifiedPhone(true)
+                        setShowPopup(true)
+                    }
                 };
 
                 return (
@@ -6171,6 +6177,7 @@
                                             <input
                                                 type="checkbox"
                                                 name="tc"
+                                                checked={form.tc}
                                                 onChange={handleChange}
                                                 onBlur={() => setTouched({...touched, tc: true})}
                                                 style={{
@@ -6185,6 +6192,23 @@
 
                                     </div>
                                 </form>}
+                                {showPopup && (
+                                    <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+                                        <div className="popup" onClick={e => e.stopPropagation()}>
+                                            <p className="boldBody">Is your phone number correct?</p>
+                                            <p>{formatPhone(form.phone)}</p>
+                                            <div className="meta-button-container">
+                                                <button className="meta-back-button"
+                                                        onClick={() => setShowPopup(false)}>
+                                                    No, edit
+                                                </button>
+                                                <button className="meta-next-button popup-next-button"
+                                                        onClick={() => {setShowPopup(false); setStep(4)}}>Yes, continue
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 {step === 4 &&
                                     <iframe
                                         src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
