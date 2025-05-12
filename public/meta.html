@@ -6009,7 +6009,8 @@
                                 </div>}
                                 {step === 3 && !showQuote() && <div className="boldBody">
                                     Sorry, currently we're unable to give you a virtual quote based on your existing
-                                    condition
+                                    condition.
+                                    Continue to the next step to speak with us and get a quote.
                                 </div>}
                                 {step === 4 && <div className="boldBody">
                                     Final Details
@@ -6261,12 +6262,7 @@
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
-                                    {step < 3 &&
-                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                                onClick={() => setStep(step + 1)}>
-                                            Next
-                                        </button>}
-                                    {step === 3 && showQuote() &&
+                                    {step < 4 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => setStep(step + 1)}>
                                             Next
