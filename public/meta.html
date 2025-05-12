@@ -5976,7 +5976,12 @@
                         setVerifiedPhone(true)
                         setShowPopup(true)
                     }
-                };
+                }
+
+                const showQuote = () => {
+                    return !conditions.includes('stroke') && !conditions.includes('cancer')
+                        && !conditions.includes('diabetes') && !conditions.includes('pregnant')
+                }
 
                 return (
                     <div className="cms-block cms-block-element">
@@ -5999,18 +6004,26 @@
                                     Within the last five years
                                     <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
-                                {step === 3 && <div className="boldBody">
-                                    Final Details
+                                {step === 3 && showQuote() && <div className="boldBody">
+                                    Your quote
+                                </div>}
+                                {step === 3 && !showQuote() && <div className="boldBody">
+                                    Sorry, currently we're unable to give you a virtual quote based on your existing
+                                    condition
                                 </div>}
                                 {step === 4 && <div className="boldBody">
+                                    Final Details
+                                </div>}
+                                {step === 5 && <div className="boldBody">
                                     Thank you. Our agent will touch you shortly.<br/>
                                     You can make appointment with us as well.
                                 </div>}
                                 {step === 1 &&
                                     <div>
                                         <div className="options-container">
-                                            <div className={`option-box ${ageRange === '18 - 29' ? 'selected' : ''}`}
-                                                 onClick={() => setAgeRange('18 - 29')}>
+                                            <div
+                                                className={`option-box ${ageRange === '18 - 29' ? 'selected' : ''}`}
+                                                onClick={() => setAgeRange('18 - 29')}>
                                                 <p className="font-semibold text-sm smallBody"
                                                    style={{fontSize: '16px'}}>18 - 29</p>
                                             </div>
@@ -6022,8 +6035,9 @@
                                             </div>
                                         </div>
                                         <div className="options-container">
-                                            <div className={`option-box ${ageRange === '45 - 54' ? 'selected' : ''}`}
-                                                 onClick={() => setAgeRange('45 - 54')}>
+                                            <div
+                                                className={`option-box ${ageRange === '45 - 54' ? 'selected' : ''}`}
+                                                onClick={() => setAgeRange('45 - 54')}>
                                                 <p className="font-semibold text-sm smallBody"
                                                    style={{fontSize: '16px'}}>45 - 54</p>
                                             </div>
@@ -6053,18 +6067,22 @@
                                     </div>
                                 </div>}
                                 {step === 2 && <div className="options-container">
-                                    <div className={`option-box ${conditions.includes('surgery') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('surgery')}
+                                    <div
+                                        className={`option-box ${conditions.includes('surgery') ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition('surgery')}
                                     >
                                         <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Any
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Any
                                             Major Surgery</p>
                                     </div>
-                                    <div className={`option-box ${conditions.includes('diabetes') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('diabetes')}
+                                    <div
+                                        className={`option-box ${conditions.includes('diabetes') ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition('diabetes')}
                                     >
                                         <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>Type 1
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>Type 1
                                             Diabetes</p>
                                     </div>
                                 </div>}
@@ -6077,15 +6095,20 @@
                                         <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No
                                             Pre-existing Conditions</p>
                                     </div>
-                                    <div className={`option-box ${conditions.includes('pregnant') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('pregnant')}
+                                    <div
+                                        className={`option-box ${conditions.includes('pregnant') ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition('pregnant')}
                                     >
                                         <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
                                            style={{fontSize: '16px'}}>Currently Pregnant</p>
                                     </div>
                                 </div>}
-                                {step === 3 && <form ref={formRef} onSubmit={handleSubmit}>
+                                {step === 3 && showQuote() && <div>
+                                    Here shows the quotes
+                                </div>
+                                }
+                                {step === 4 && <form ref={formRef} onSubmit={handleSubmit}>
                                     <div>
                                         <label className="meta-form-label">
                                             <span>First Name</span>
@@ -6218,14 +6241,14 @@
                                                 <button className="meta-next-button popup-next-button"
                                                         onClick={() => {
                                                             setShowPopup(false);
-                                                            setStep(4)
+                                                            setStep(5)
                                                         }}>Yes, continue
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 )}
-                                {step === 4 &&
+                                {step === 5 &&
                                     <iframe
                                         src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
                                         className="book-appointment"
@@ -6234,15 +6257,21 @@
                                     </iframe>
                                 }
                                 <div className="meta-button-container">
-                                    {step > 1 && step < 4 &&
+                                    {step > 1 && step < 5 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
-                                    {step < 3 && <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                                         onClick={() => setStep(step + 1)}>
-                                        Next
-                                    </button>}
-                                    {step === 3 &&
+                                    {step < 3 &&
+                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                                onClick={() => setStep(step + 1)}>
+                                            Next
+                                        </button>}
+                                    {step === 3 && showQuote() &&
+                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
+                                                onClick={() => setStep(step + 1)}>
+                                            Next
+                                        </button>}
+                                    {step === 4 &&
                                         <button className="meta-next-button" disabled={!isFormValid()}
                                                 onClick={() => formRef.current.requestSubmit()}>
                                             Get My Free Quote
