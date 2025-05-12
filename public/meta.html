@@ -5683,7 +5683,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="mainLinks" aria-expanded="false" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="mainLinks" aria-expanded="false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
                             </li>
                         </ul>
@@ -5810,7 +5810,7 @@
 
             function App() {
                 const [step, setStep] = useState(1)
-                const [currentInsurance, setCurrentInsurance] = useState(null)
+                const [ageRange, setAgeRange] = useState(null)
                 const [conditions, setConditions] = useState([])
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
                 const [verifiedPhone, setVerifiedPhone] = useState(false)
@@ -5824,7 +5824,7 @@
                     )
                 }
                 const isNextButtonDisabled = () => {
-                    return (step === 1 && currentInsurance === null) ||
+                    return (step === 1 && ageRange === null) ||
                         (step === 2 && !conditions.length)
                 }
 
@@ -5983,16 +5983,16 @@
                             {step > 1 && <div style={{height: '30px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
                                 <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
-                                    with 3 Simple Steps</h1>
+                                    with 4 Simple Steps</h1>
                                 <div className="meta-progress-container">
-                                    <progress value={step / 4} className="meta-progress"></progress>
+                                    <progress value={step / 5} className="meta-progress"></progress>
                                 </div>
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
-                                    Do you currently have health insurance?
+                                    What is your age?
                                 </div>}
                                 {step === 2 && <div className="boldBody">
-                                    Any pre-existing conditions?
-                                    <p style={{fontSize: '12px', color: 'gray'}}>Select any that applies to you</p>
+                                    With in the last five years
+                                    <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
                                 {step === 3 && <div className="boldBody">
                                     Final Details
@@ -6001,17 +6001,36 @@
                                     Thank you. Our agent will touch you shortly.<br/>
                                     You can make appointment with us as well.
                                 </div>}
-                                {step === 1 && <div className="options-container">
-                                    <div className={`option-box ${currentInsurance === true ? 'selected' : ''}`}
-                                         onClick={() => setCurrentInsurance(true)}>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>Yes</p>
+                                {step === 1 &&
+                                    <div>
+                                        <div className="options-container">
+                                            <div className={`option-box ${ageRange === '18 - 29' ? 'selected' : ''}`}
+                                                 onClick={() => setAgeRange('18 - 29')}>
+                                                <p className="font-semibold text-sm smallBody"
+                                                   style={{fontSize: '16px'}}>18 - 29</p>
+                                            </div>
+                                            <div
+                                                className={`option-box ${ageRange === '30 - 44' ? 'selected' : ''}`}
+                                                onClick={() => setAgeRange('30 - 44')}>
+                                                <p className="font-semibold text-sm smallBody"
+                                                   style={{fontSize: '16px'}}>30 - 44</p>
+                                            </div>
+                                        </div>
+                                        <div className="options-container">
+                                            <div className={`option-box ${ageRange === '45 - 54' ? 'selected' : ''}`}
+                                                 onClick={() => setAgeRange('45 - 54')}>
+                                                <p className="font-semibold text-sm smallBody"
+                                                   style={{fontSize: '16px'}}>45 - 54</p>
+                                            </div>
+                                            <div
+                                                className={`option-box ${ageRange === '55 - 64' ? 'selected' : ''}`}
+                                                onClick={() => setAgeRange('55 - 64')}>
+                                                <p className="font-semibold text-sm smallBody"
+                                                   style={{fontSize: '16px'}}>55 - 64</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className={`option-box ${currentInsurance === false ? 'selected' : ''}`}
-                                         onClick={() => setCurrentInsurance(false)}>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No</p>
-                                    </div>
-                                </div>}
+                                }
                                 {step === 2 && <div className="options-container">
                                     <div className={`option-box ${conditions.includes('stroke') ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition('stroke')}
@@ -6053,12 +6072,12 @@
                                         <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No
                                             Pre-existing Conditions</p>
                                     </div>
-                                    <div className={`option-box ${conditions.includes('other') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('other')}
+                                    <div className={`option-box ${conditions.includes('pre-pregnant') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('pre-pregnant')}
                                     >
-                                        <i className="fas fa-pencil-alt" style={{color: '#2490e8'}}></i>
+                                        <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>Other</p>
+                                           style={{fontSize: '16px'}}>Currently Pregnant</p>
                                     </div>
                                 </div>}
                                 {step === 3 && <form ref={formRef} onSubmit={handleSubmit}>
@@ -6192,7 +6211,10 @@
                                                     No, edit
                                                 </button>
                                                 <button className="meta-next-button popup-next-button"
-                                                        onClick={() => {setShowPopup(false); setStep(4)}}>Yes, continue
+                                                        onClick={() => {
+                                                            setShowPopup(false);
+                                                            setStep(4)
+                                                        }}>Yes, continue
                                                 </button>
                                             </div>
                                         </div>
