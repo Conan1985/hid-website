@@ -5817,11 +5817,16 @@
                 const [showPopup, setShowPopup] = useState(false)
                 const formRef = useRef()
                 const handleToggleCondition = (condition) => {
-                    setConditions(prev =>
-                        prev.includes(condition)
-                            ? prev.filter(item => item !== condition)
-                            : [...prev, condition]
-                    )
+                    setConditions(prev => {
+                        const isSelected = prev.includes(condition)
+                        if (isSelected) {
+                            return prev.filter(item => item !== condition)
+                        }
+                        if (condition === 'pre-existing') {
+                            return ['pre-existing']
+                        }
+                        return [...prev.filter(item => item !== 'pre-existing'), condition]
+                    })
                 }
                 const isNextButtonDisabled = () => {
                     return (step === 1 && ageRange === null) ||
@@ -5991,7 +5996,7 @@
                                     What is your age?
                                 </div>}
                                 {step === 2 && <div className="boldBody">
-                                    With in the last five years
+                                    Within the last five years
                                     <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
                                 {step === 3 && <div className="boldBody">
@@ -6072,8 +6077,8 @@
                                         <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>No
                                             Pre-existing Conditions</p>
                                     </div>
-                                    <div className={`option-box ${conditions.includes('pre-pregnant') ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition('pre-pregnant')}
+                                    <div className={`option-box ${conditions.includes('pregnant') ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition('pregnant')}
                                     >
                                         <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
