@@ -25595,3 +25595,30 @@ a[href^="tel:"], a[href^="mailto:"] {
 .popup-next-button {
     padding: 0.5rem 0.5rem;
 }
+
+.meta-quote-table {
+    justify-self: center;
+    border-collapse: collapse;
+    width: 60%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+.meta-quote-table th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+.meta-quote-table td.amount {
+    text-align: left;
+    white-space: nowrap;
+    font-style: italic;
+}
+
+.meta-quote-table-row-odd {
+    background-color: #e6f7ff;
+}
+
+.meta-quote-table-row-even {
+    background-color: #ccf2ff;
+}

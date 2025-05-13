@@ -5815,6 +5815,7 @@
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
                 const [verifiedPhone, setVerifiedPhone] = useState(false)
                 const [showPopup, setShowPopup] = useState(false)
+                const [understandQuote, setUnderstandQuote] = useState(false)
                 const formRef = useRef()
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -5830,7 +5831,8 @@
                 }
                 const isNextButtonDisabled = () => {
                     return (step === 1 && ageRange === null) ||
-                        (step === 2 && !conditions.length)
+                        (step === 2 && !conditions.length) ||
+                        (step === 3 && !understandQuote)
                 }
 
                 const [form, setForm] = useState({
@@ -5871,6 +5873,10 @@
                             return true;
                     }
                 };
+
+                const handleQuote = () => {
+                    setUnderstandQuote(!understandQuote)
+                }
 
                 const handleChange = (e) => {
                     const {name, value} = e.target;
@@ -6005,7 +6011,7 @@
                                     <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
                                 {step === 3 && showQuote() && <div className="boldBody">
-                                    Your quote
+                                    Your estimated monthly premium
                                 </div>}
                                 {step === 3 && !showQuote() && <div className="boldBody">
                                     Sorry, currently we're unable to give you a virtual quote based on your existing
@@ -6105,9 +6111,51 @@
                                            style={{fontSize: '16px'}}>Currently Pregnant</p>
                                     </div>
                                 </div>}
-                                {step === 3 && showQuote() && <div>
-                                    Here shows the quotes
-                                </div>
+                                {step === 3 && showQuote() &&
+                                    <div>
+                                        <table className='meta-quote-table'>
+                                            <tbody>
+                                            <tr className='meta-quote-table-row-odd'>
+                                                <td>Individual</td>
+                                                {ageRange === '18 - 29' && <td className="amount">$259 -> $419</td>}
+                                                {ageRange === '30 - 44' && <td className="amount">$309 -> $489</td>}
+                                                {ageRange === '45 - 54' && <td className="amount">$349 -> $519</td>}
+                                                {ageRange === '55 - 64' && <td className="amount">$399 -> $569</td>}
+                                            </tr>
+                                            <tr className='meta-quote-table-row-even'>
+                                                <td>Individual + Spouse</td>
+                                                {ageRange === '18 - 29' && <td className="amount">$579 -> $759</td>}
+                                                {ageRange === '30 - 44' && <td className="amount">$609 -> $829</td>}
+                                                {ageRange === '45 - 54' && <td className="amount">$659 -> $839</td>}
+                                                {ageRange === '55 - 64' && <td className="amount">$689 -> $859</td>}
+                                            </tr>
+                                            <tr className='meta-quote-table-row-odd'>
+                                                <td>Individual + Children</td>
+                                                {ageRange === '18 - 29' && <td className="amount">$569 -> $779</td>}
+                                                {ageRange === '30 - 44' && <td className="amount">$593 -> $809</td>}
+                                                {ageRange === '45 - 54' && <td className="amount">$689 -> $829</td>}
+                                                {ageRange === '55 - 64' && <td className="amount">$649 -> $839</td>}
+                                            </tr>
+                                            <tr className='meta-quote-table-row-even'>
+                                                <td>Family</td>
+                                                {ageRange === '18 - 29' && <td className="amount">$819 -> $1049</td>}
+                                                {ageRange === '30 - 44' && <td className="amount">$859 -> $1089</td>}
+                                                {ageRange === '45 - 54' && <td className="amount">$929 -> $1139</td>}
+                                                {ageRange === '55 - 64' && <td className="amount">$949 -> $1169</td>}
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <label style={{ cursor: 'pointer' }}>
+                                            <input
+                                                style={{transform: 'scale(1.5)'}}
+                                                type="checkbox"
+                                                name="quote"
+                                                checked={understandQuote}
+                                                onChange={handleQuote}
+                                            />
+                                            <span> I understand that I may not qualify the exact quotes listed.</span>
+                                        </label>
+                                    </div>
                                 }
                                 {step === 4 && <form ref={formRef} onSubmit={handleSubmit}>
                                     <div>
@@ -6221,12 +6269,11 @@
                                                     outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
                                                 }}
                                             />
-                                        </label>
                                         <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
                                             conditions</a> provided by the company.
                                             By providing my phone number, I agree to receive text messages from The
                                                 Healthy Insurance Dude.</span>
-
+                                        </label>
                                     </div>
                                 </form>}
                                 {showPopup && (
