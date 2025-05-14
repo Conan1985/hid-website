@@ -14,8 +14,6 @@ const PORT = process.env.PORT || 8964;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 
 const allowedOrigins = [
-    'http://localhost:8964',
-    'http://localhost:3000',
     ALLOWED_ORIGIN
 ];
 

@@ -5808,6 +5808,8 @@
             const {createRoot} = ReactDOM;
             const {useRef} = React;
 
+            const APP_BASE_URL = 'http://localhost:8964'
+
             function App() {
                 const [step, setStep] = useState(1)
                 const [ageRange, setAgeRange] = useState(null)
@@ -5900,7 +5902,6 @@
                 };
 
                 const formatPhone = (numbers) => {
-                    console.log('youwei lu check format: ', numbers)
                     if (numbers.length === 0) return '';
                     const part1 = numbers.slice(0, 3);
                     const part2 = numbers.slice(3, 6);
@@ -5974,14 +5975,24 @@
                         && validateField('tc', form.tc)
                 };
 
-                const handleSubmit = (e) => {
+                const handleSubmit = async (e) => {
                     e.preventDefault()
-                    if (verifiedPhone) {
-                        setStep(4)
-                    } else {
-                        setVerifiedPhone(true)
-                        setShowPopup(true)
+                    const testUrl = APP_BASE_URL + '/api/hello'
+                    try {
+                        const response = await fetch(testUrl)
+                        if (response.ok) {
+                            console.log('lu check response: ', await response.json())
+                        }
+                    } catch (error) {
+                        console.error('Error in fetch test url: ', error)
                     }
+
+                    // if (verifiedPhone) {
+                    //     setStep(4)
+                    // } else {
+                    //     setVerifiedPhone(true)
+                    //     setShowPopup(true)
+                    // }
                 }
 
                 const showQuote = () => {
