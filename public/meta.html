@@ -5832,7 +5832,7 @@
                 const isNextButtonDisabled = () => {
                     return (step === 1 && ageRange === null) ||
                         (step === 2 && !conditions.length) ||
-                        (step === 3 && !understandQuote)
+                        (step === 3 && showQuote() && !understandQuote)
                 }
 
                 const [form, setForm] = useState({
