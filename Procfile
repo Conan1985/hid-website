@@ -1,1 +1,1 @@
-web: npx serve public
+web: node server.mjs
