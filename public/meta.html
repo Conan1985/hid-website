@@ -5815,7 +5815,6 @@
                 const [ageRange, setAgeRange] = useState(null)
                 const [conditions, setConditions] = useState([])
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
-                const [verifiedPhone, setVerifiedPhone] = useState(false)
                 const [showPopup, setShowPopup] = useState(false)
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const formRef = useRef()
@@ -5977,22 +5976,29 @@
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
-                    const testUrl = APP_BASE_URL + '/api/hello'
+                    const url = APP_BASE_URL + '/createContact'
                     try {
-                        const response = await fetch(testUrl)
+                        const response = await fetch(url,{
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                test: 'test youwei'
+                            })
+                        })
+                        console.log('HID Developer check response: ', response)
                         if (response.ok) {
-                            console.log('lu check response: ', await response.json())
+                            const test = await response.json()
+                            console.log('HID Developer check response: ', test)
+
+                        } else {
+                            console.error(`HTTP error! status: ${response.status}`)
                         }
                     } catch (error) {
-                        console.error('Error in fetch test url: ', error)
+                        console.error('Error in log in: ', error)
                     }
 
-                    // if (verifiedPhone) {
-                    //     setStep(4)
-                    // } else {
-                    //     setVerifiedPhone(true)
-                    //     setShowPopup(true)
-                    // }
                 }
 
                 const showQuote = () => {
