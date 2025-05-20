@@ -5984,21 +5984,19 @@
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                test: 'test youwei'
+                                test: 'test HID'
                             })
                         })
-                        console.log('HID Developer check response: ', response)
                         if (response.ok) {
                             const test = await response.json()
                             console.log('HID Developer check response: ', test)
-
                         } else {
                             console.error(`HTTP error! status: ${response.status}`)
                         }
                     } catch (error) {
                         console.error('Error in log in: ', error)
                     }
-
+                    setStep(step + 1)
                 }
 
                 const showQuote = () => {

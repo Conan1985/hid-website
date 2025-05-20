@@ -49,7 +49,6 @@ app.post('/createContact', async (req, res) => {
     }
     try {
         const data = req.body
-        console.log('HID Developer check data: ', data)
         res.status(201).send('Contact created successfully')
     } catch (error) {
         res.status(500).send('An error occurred while creating the contact')
