@@ -12,8 +12,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 8964;
 
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 const baseUrl = process.env.BASE_URL
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
+const FIELD_ID_AGE_GROUP_HID = process.env.FIELD_ID_AGE_GROUP_HID
+const FIELD_ID_PRE_CONDITIONS_HID = process.env.FIELD_ID_PRE_CONDITIONS_HID
 
 const allowedOrigins = [
     ALLOWED_ORIGIN
@@ -64,6 +66,23 @@ app.post('/upsertContact', async (req, res) => {
 const upsertContact = async (contact, account) => {
     try {
         const url = baseUrl + '/contacts/upsert'
+        const data = {
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            email: contact.email,
+            phone: contact.phone,
+            locationId: account.location_id,
+            customFields: [
+                {
+                    id: FIELD_ID_AGE_GROUP_HID,
+                    value: contact.ageRange
+                },
+                {
+                    id: FIELD_ID_PRE_CONDITIONS_HID,
+                    value: contact.conditions
+                }
+            ]
+        }
         const response = await fetch (url, {
             method: 'POST',
             headers: {
@@ -72,7 +91,7 @@ const upsertContact = async (contact, account) => {
                 'Authorization': 'Bearer ' + account.access_token,
                 'Version': '2021-07-28'
             },
-            body: JSON.stringify(contact)
+            body: JSON.stringify(data)
         })
         const responseData = await response.json()
         const success = response.status === 201
