@@ -5987,26 +5987,26 @@
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
-                    const url = APP_BASE_URL + '/createContact'
-                    try {
-                        const response = await fetch(url,{
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                test: 'test HID'
-                            })
-                        })
-                        if (response.ok) {
-                            const test = await response.json()
-                            console.log('HID Developer check response: ', test)
-                        } else {
-                            console.error(`HTTP error! status: ${response.status}`)
-                        }
-                    } catch (error) {
-                        console.error('Error in log in: ', error)
-                    }
+                    const url = APP_BASE_URL + '/upsertContact'
+                    // try {
+                    //     const response = await fetch(url,{
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         body: JSON.stringify({
+                    //             test: 'test HID'
+                    //         })
+                    //     })
+                    //     if (response.ok) {
+                    //         const test = await response.json()
+                    //         console.log('HID Developer check response: ', test)
+                    //     } else {
+                    //         console.error(`HTTP error! status: ${response.status}`)
+                    //     }
+                    // } catch (error) {
+                    //     console.error('Error in log in: ', error)
+                    // }
                     setStep(step + 1)
                 }
 

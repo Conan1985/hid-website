@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import {getAccount} from "./services/Database.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 8964;
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
+const baseUrl = process.env.BASE_URL
 
 const allowedOrigins = [
     ALLOWED_ORIGIN
@@ -43,14 +45,50 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-app.post('/createContact', async (req, res) => {
+app.post('/upsertContact', async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
         return res.status(400).send('No data provided')
     }
-    try {
-        const data = req.body
-        res.status(201).send('Contact created successfully')
-    } catch (error) {
-        res.status(500).send('An error occurred while creating the contact')
+    const data = req.body
+    const account = await getAccount()
+    const hidContact = await upsertContact(data, account)
+    if (hidContact.success) {
+        console.log('Contact upserted successfully')
+        res.send('Contact upserted successfully')
+    } else {
+        console.log('Error in upsert contact: ', hidContact)
+        res.status(500).send('Error in upsert contact.')
     }
 })
+
+const upsertContact = async (contact, account) => {
+    try {
+        const url = baseUrl + '/contacts/upsert'
+        const response = await fetch (url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-07-28'
+            },
+            body: JSON.stringify(contact)
+        })
+        const responseData = await response.json()
+        const success = response.status === 201
+        const returnData = {
+            success: success,
+            data: responseData
+        }
+        console.log(
+            `Upsert contact for ${account.name}: `, returnData
+        )
+        return returnData
+    } catch (error) {
+        console.error(`Error in upsert contact for ${account.name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
