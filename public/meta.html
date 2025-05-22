@@ -5818,6 +5818,7 @@
                 const [showPopup, setShowPopup] = useState(false)
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [submittingContact, setSubmittingContact] = useState(false)
+                const [submitSuccess, setSubmitSuccess] = useState(false)
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -5988,6 +5989,7 @@
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
+                    setStep(step + 1)
                     const url = APP_BASE_URL + '/upsertContact'
                     setSubmittingContact(true)
                     try {
@@ -6009,8 +6011,9 @@
                         })
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
+                            return
                         }
-                        setStep(step + 1)
+                        setSubmitSuccess(true)
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
                     } finally {
@@ -6055,9 +6058,13 @@
                                 {step === 4 && <div className="boldBody">
                                     Final Details
                                 </div>}
-                                {step === 5 && <div className="boldBody">
+                                {step === 5 && submitSuccess && <div className="boldBody">
                                     Thank you. Our agent will touch you shortly.<br/>
                                     You can make appointment with us as well.
+                                </div>}
+                                {step === 5 && !submitSuccess && <div className="boldBody">
+                                    Sorry, the submission failed due to server error.<br/>
+                                    You can still make appointment with us.
                                 </div>}
                                 {step === 1 &&
                                     <div>
