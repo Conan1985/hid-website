@@ -5991,7 +5991,7 @@
                     e.preventDefault()
                     setStep(step + 1)
                     setSubmittingContact(true)
-                    await new Promise(resolve => setTimeout(resolve, 5000));
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     const url = APP_BASE_URL + '/upsertContact'
                     try {
                         const contact = {
@@ -6347,7 +6347,7 @@
                                         </div>
                                     </div>
                                 )}
-                                {step === 5 &&
+                                {step === 5 && !submittingContact &&
                                     <iframe
                                         src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
                                         className="book-appointment"
