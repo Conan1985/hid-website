@@ -6059,11 +6059,11 @@
                                 {step === 4 && <div className="boldBody">
                                     Final Details
                                 </div>}
-                                {step === 5 && submitSuccess && <div className="boldBody">
+                                {step === 5 && submitSuccess && !submittingContact && <div className="boldBody">
                                     Thank you. Our agent will touch you shortly.<br/>
                                     You can make appointment with us as well.
                                 </div>}
-                                {step === 5 && !submitSuccess && <div className="boldBody">
+                                {step === 5 && !submitSuccess && !submittingContact && <div className="boldBody">
                                     Sorry, the submission failed due to server error.<br/>
                                     You can still make appointment with us.
                                 </div>}
