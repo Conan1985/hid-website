@@ -5990,6 +5990,7 @@
                 const handleSubmit = async (e) => {
                     e.preventDefault()
                     setStep(step + 1)
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     const url = APP_BASE_URL + '/upsertContact'
                     setSubmittingContact(true)
                     try {
