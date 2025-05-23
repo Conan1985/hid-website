@@ -6196,6 +6196,13 @@
                                     </div>
                                 }
                                 {step === 4 && <form ref={formRef} onSubmit={handleSubmit}>
+                                    <input
+                                        type="text"
+                                        name="website"
+                                        autoComplete="off"
+                                        style={{ display: 'none' }}
+                                        tabIndex={-1}
+                                    />
                                     <div>
                                         <label className="meta-form-label">
                                             <span>First Name</span>
