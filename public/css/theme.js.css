@@ -25622,3 +25622,8 @@ a[href^="tel:"], a[href^="mailto:"] {
 .meta-quote-table-row-even {
     background-color: #ccf2ff;
 }
+
+.progress-spinning {
+    color: #2490e8;
+    font-size: 60px;
+}
