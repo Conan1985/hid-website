@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import {getAccount} from "./services/Database.js";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -20,6 +21,28 @@ const FIELD_ID_PRE_CONDITIONS_HID = process.env.FIELD_ID_PRE_CONDITIONS_HID
 const allowedOrigins = [
     ALLOWED_ORIGIN
 ];
+
+const ipLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 5,              // max 5 requests per IP per minute
+    message: 'Too many requests from this IP, please try again later.',
+})
+
+let globalRequestCount = 0;
+const GLOBAL_LIMIT = 10; // max 100 requests per minute globally
+const WINDOW_MS = 10 * 1000; // 10 seconds
+
+setInterval(() => {
+    globalRequestCount = 0; // reset every window
+}, WINDOW_MS);
+
+const globalLimiter = (req, res, next) => {
+    if (globalRequestCount >= GLOBAL_LIMIT) {
+        return res.status(429).send('Server is busy. Please try again shortly.');
+    }
+    globalRequestCount++;
+    next();
+};
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -47,19 +70,24 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-app.post('/upsertContact', async (req, res) => {
+app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
         return res.status(400).send('No data provided')
     }
-    const data = req.body
-    const account = await getAccount()
-    const hidContact = await upsertContact(data, account)
-    if (hidContact.success) {
-        console.log('Contact upserted successfully')
-        res.send('Contact upserted successfully')
-    } else {
-        console.log('Error in upsert contact: ', hidContact)
-        res.status(500).send('Error in upsert contact.')
+    try {
+        const data = req.body
+        const account = await getAccount()
+        const hidContact = await upsertContact(data, account)
+        if (hidContact.success) {
+            console.log('Contact upserted successfully')
+            res.send('Contact upserted successfully')
+        } else {
+            console.log('Error in upsert contact: ', hidContact)
+            res.status(500).send('Error in upsert contact.')
+        }
+    } catch (err) {
+        console.error('Unexpected error:', err);
+        res.status(500).send('Internal server error.');
     }
 })
 
