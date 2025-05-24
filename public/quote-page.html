@@ -6052,9 +6052,8 @@
                                     Your estimated monthly premium
                                 </div>}
                                 {step === 3 && !showQuote() && <div className="boldBody">
-                                    Sorry, currently we're unable to give you a virtual quote based on your existing
-                                    condition.
-                                    Continue to the next step to speak with us and get a quote.
+                                    Unfortunately, we can’t provide a virtual quote right now. Please continue to
+                                    connect with a team member for assistance with your situation.
                                 </div>}
                                 {step === 4 && <div className="boldBody">
                                     Final Details
@@ -6139,7 +6138,8 @@
                                         onClick={() => handleToggleCondition(noPreExistingConditions)}
                                     >
                                         <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody" style={{fontSize: '16px'}}>{noPreExistingConditions}</p>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{noPreExistingConditions}</p>
                                     </div>
                                     <div
                                         className={`option-box ${conditions.includes(currentlyPregnant) ? 'selected' : ''}`}
@@ -6184,15 +6184,18 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <label style={{ cursor: 'pointer' }}>
+                                        <label style={{cursor: 'pointer'}}>
                                             <input
-                                                style={{transform: 'scale(1.5)'}}
                                                 type="checkbox"
                                                 name="quote"
                                                 checked={understandQuote}
                                                 onChange={handleQuote}
                                             />
-                                            <span> &nbsp;  I understand that I may not qualify all quotes above.</span>
+                                            <span style={{fontSize: '16px', lineHeight: '1.2' }}> This is a general overview of health insurance options for
+                                                informational purposes only. Plan availability, pricing, and eligibility
+                                                vary by state, carrier, and individual circumstances. Coverage isn’t
+                                                guaranteed until approved and issued. Please refer to official policy
+                                                documents for full details and exclusions.</span>
                                         </label>
                                     </div>
                                 }
@@ -6201,7 +6204,7 @@
                                         type="text"
                                         name="website"
                                         autoComplete="off"
-                                        style={{ display: 'none' }}
+                                        style={{display: 'none'}}
                                         tabIndex={-1}
                                     />
                                     <div>
@@ -6315,7 +6318,7 @@
                                                     outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
                                                 }}
                                             />
-                                        <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
+                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
                                             conditions</a> provided by the company.
                                             By providing my phone number, I agree to receive text messages from The
                                                 Healthy Insurance Dude.</span>
