@@ -34,24 +34,30 @@
       gap: 5px;
     }
     .day {
-      padding: 10px;
-      background: #eee;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
       text-align: center;
       cursor: pointer;
       user-select: none;
-      border-radius: 4px;
-      border: 1px solid transparent;
+      border: none;
+      background: none;
+      border-radius: 50%;
+      display: inline-block;
+      margin: auto;
     }
     .day.disabled {
       color: #aaa;
       cursor: default;
-      background: #f9f9f9;
+      pointer-events: none;
+    }
+    .day:not(.disabled):hover {
+      background: #2490e8;
     }
     .day.selected {
       background: #007bff;
       color: white;
       font-weight: bold;
-      border-color: #0056b3;
     }
     .weekday-header {
       font-weight: bold;
@@ -85,7 +91,6 @@
     const daysInMonth = getDaysInMonth(year, month);
     const startDay = new Date(year, month, 1).getDay();
 
-    // Fill calendar days
     const calendarDays = [];
     for (let i = 0; i < startDay; i++) calendarDays.push(null);
     for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
@@ -135,22 +140,19 @@
 
     return (
             <div>
-              <h2>Select Date & Time</h2>
+              <h2>Calendar</h2>
 
-              {/* Header navigation */}
               <div className="header">
                 <button className="nav-btn" onClick={goPrevMonth} disabled={!canGoBack()}>&lt;</button>
                 <div>{monthYearLabel}</div>
                 <button className="nav-btn" onClick={goNextMonth}>&gt;</button>
               </div>
 
-              {/* Weekday headers */}
               <div className="calendar">
                 {WEEKDAYS.map(day => (
                         <div key={day} className="weekday-header">{day}</div>
                 ))}
 
-                {/* Calendar days */}
                 {calendarDays.map((day, idx) => {
                   const disabled = isBeforeToday(day);
                   const selected = selectedDate &&
@@ -174,7 +176,6 @@
                 })}
               </div>
 
-              {/* Show selected date */}
               {selectedDateStr && (
                       <p style={{marginTop: '20px'}}>
                         Selected Date: <strong>{selectedDateStr}</strong>
