@@ -17,6 +17,7 @@ const baseUrl = process.env.BASE_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 const FIELD_ID_AGE_GROUP_HID = process.env.FIELD_ID_AGE_GROUP_HID
 const FIELD_ID_PRE_CONDITIONS_HID = process.env.FIELD_ID_PRE_CONDITIONS_HID
+const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
     ALLOWED_ORIGIN
@@ -112,7 +113,8 @@ const upsertContact = async (contact, account) => {
                     id: FIELD_ID_PRE_CONDITIONS_HID,
                     value: contact.conditions
                 }
-            ]
+            ],
+            source: WEBSITE_LEAD
         }
         const response = await fetch (url, {
             method: 'POST',
