@@ -51,11 +51,19 @@
       cursor: default;
       pointer-events: none;
     }
+    .day:not(.disabled) {
+      background: #f0f2fd;
+      color: #007bff;
+    }
     .day:not(.disabled):hover {
-      background: #f0f0f0;
+      color: black;
+    }
+    .day:not(.disabled).selected:hover {
+      background: #007bff;
+      color: white;
     }
     .day.selected {
-      background: #2490e8;
+      background: #007bff;
       color: white;
       font-weight: bold;
     }
