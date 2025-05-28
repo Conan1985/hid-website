@@ -5990,36 +5990,36 @@
                 const handleSubmit = async (e) => {
                     e.preventDefault()
                     setStep(step + 1)
-                    setSubmittingContact(true)
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    const url = APP_BASE_URL + '/upsertContact'
-                    try {
-                        const contact = {
-                            firstName: form.firstName,
-                            lastName: form.lastName,
-                            email: form.email,
-                            phone: form.phone,
-                            state: form.state,
-                            ageRange: ageRange,
-                            conditions: conditions
-                        }
-                        const response = await fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(contact)
-                        })
-                        if (!response.ok) {
-                            console.error(`HTTP error! status: ${response.status}`)
-                            return
-                        }
-                        setSubmitSuccess(true)
-                    } catch (error) {
-                        console.error('Error in upsert contact: ', error)
-                    } finally {
-                        setSubmittingContact(false)
-                    }
+                    // setSubmittingContact(true)
+                    // await new Promise(resolve => setTimeout(resolve, 500));
+                    // const url = APP_BASE_URL + '/upsertContact'
+                    // try {
+                    //     const contact = {
+                    //         firstName: form.firstName,
+                    //         lastName: form.lastName,
+                    //         email: form.email,
+                    //         phone: form.phone,
+                    //         state: form.state,
+                    //         ageRange: ageRange,
+                    //         conditions: conditions
+                    //     }
+                    //     const response = await fetch(url, {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         body: JSON.stringify(contact)
+                    //     })
+                    //     if (!response.ok) {
+                    //         console.error(`HTTP error! status: ${response.status}`)
+                    //         return
+                    //     }
+                    //     setSubmitSuccess(true)
+                    // } catch (error) {
+                    //     console.error('Error in upsert contact: ', error)
+                    // } finally {
+                    //     setSubmittingContact(false)
+                    // }
                 }
 
                 const showQuote = () => {
