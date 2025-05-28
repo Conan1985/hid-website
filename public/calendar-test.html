@@ -18,15 +18,22 @@
       margin-bottom: 10px;
     }
     .nav-btn {
-      background: none;
+      background: #f0f2fd;
       border: none;
       font-size: 20px;
       cursor: pointer;
       color: #007bff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .nav-btn:disabled {
       color: #ccc;
       cursor: default;
+      background: none;
     }
     .calendar {
       display: grid;
@@ -148,7 +155,7 @@
 
     return (
             <div>
-              <h2>Calendar</h2>
+              <h2>Select Date & Time</h2>
 
               <div className="header">
                 <button className="nav-btn" onClick={goPrevMonth} disabled={!canGoBack()}>&lt;</button>
