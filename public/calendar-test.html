@@ -78,6 +78,20 @@
       font-weight: bold;
       text-align: center;
     }
+    .today-dot {
+      position: relative;
+    }
+    .today-dot::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%) translateY(200%);
+      width: 6px;
+      height: 6px;
+      background-color: #007bff;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
@@ -174,14 +188,18 @@
                           selectedDate.getFullYear() === year &&
                           selectedDate.getMonth() === month &&
                           selectedDate.getDate() === day;
-
+                  const isToday =
+                          day === today.getDate() &&
+                          month === today.getMonth() &&
+                          year === today.getFullYear();
                   return (
                           <div
                                   key={idx}
                                   className={
                                           "day" +
                                           (disabled ? " disabled" : "") +
-                                          (selected ? " selected" : "")
+                                          (selected ? " selected" : "") +
+                                          (isToday ? " today-dot" : "")
                                   }
                                   onClick={() => onSelectDay(day)}
                           >
