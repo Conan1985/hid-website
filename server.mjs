@@ -174,7 +174,9 @@ const getCalendar = async (account) => {
                 'Version': '2021-04-15'
             }
         })
+        console.log('HID Developer check response: ', response)
         const responseData = await response.json()
+        console.log('HID Developer check response data: ', responseData)
         const success = response.status === 200
         const returnData = {
             success: success,
