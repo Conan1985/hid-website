@@ -5810,6 +5810,12 @@
 
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
 
+            const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            function getDaysInMonth(year, month) {
+                return new Date(year, month + 1, 0).getDate();
+            }
+
             function App() {
                 const [step, setStep] = useState(1)
                 const [ageRange, setAgeRange] = useState(null)
@@ -5819,6 +5825,7 @@
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [submittingContact, setSubmittingContact] = useState(false)
                 const [submitSuccess, setSubmitSuccess] = useState(false)
+                const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -5830,6 +5837,61 @@
                 const type1Diabetes = 'Type 1 Diabetes'
                 const currentlyPregnant = 'Currently Pregnant'
                 const noPreExistingConditions = 'No Pre-existing Conditions'
+
+                const today = new Date();
+                const [year, setYear] = useState(today.getFullYear());
+                const [month, setMonth] = useState(today.getMonth());
+                const [selectedDate, setSelectedDate] = useState(null);
+
+                const daysInMonth = getDaysInMonth(year, month);
+                const startDay = new Date(year, month, 1).getDay();
+
+                const calendarDays = [];
+                for (let i = 0; i < startDay; i++) calendarDays.push(null);
+                for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
+
+                const isBeforeToday = (day) => {
+                    if (!day) return true;
+                    const date = new Date(year, month, day);
+                    return date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                };
+
+                const canGoBack = () => {
+                    return !(year === today.getFullYear() && month === today.getMonth());
+                };
+
+                const goPrevMonth = () => {
+                    if (!canGoBack()) return;
+                    const newMonth = month - 1;
+                    if (newMonth < 0) {
+                        setMonth(11);
+                        setYear(year - 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const goNextMonth = () => {
+                    const newMonth = month + 1;
+                    if (newMonth > 11) {
+                        setMonth(0);
+                        setYear(year + 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const selectedDateStr = selectedDate ? selectedDate.toDateString() : null;
+
+                const onSelectDay = (day) => {
+                    if (isBeforeToday(day)) return;
+                    setSelectedDate(new Date(year, month, day));
+                };
+
+                const monthYearLabel = new Date(year, month).toLocaleString('default', {
+                    month: 'long',
+                    year: 'numeric',
+                });
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6039,7 +6101,7 @@
                                 <h1 className="mediumHeading-1 colorGold meta-title">Get your Quote
                                     with 4 Simple Steps</h1>
                                 <div className="meta-progress-container">
-                                    <progress value={step / 5} className="meta-progress"></progress>
+                                    <progress value={step / 6} className="meta-progress"></progress>
                                 </div>
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     What is your age?
@@ -6055,16 +6117,8 @@
                                     Unfortunately, we can’t provide a virtual quote right now. Please continue to
                                     connect with a team member for assistance with your situation.
                                 </div>}
-                                {step === 4 && <div className="boldBody">
-                                    Final Details
-                                </div>}
-                                {step === 5 && submitSuccess && !submittingContact && <div className="boldBody">
-                                    Thank you. Our agent will touch you shortly.<br/>
-                                    You can make appointment with us as well.
-                                </div>}
-                                {step === 5 && !submitSuccess && !submittingContact && <div className="boldBody">
-                                    Sorry, the submission failed due to server error.<br/>
-                                    You can still make appointment with us.
+                                {step === 5 && <div className="boldBody">
+                                    Select Date & Time
                                 </div>}
                                 {step === 1 &&
                                     <div>
@@ -6319,15 +6373,15 @@
                                                     outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
                                                 }}
                                             />
-                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
-                                            conditions</a> provided by the company.
+                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank"><u>terms &
+                                            conditions</u></a> provided by the company.
                                             By providing my phone number, I agree to receive text messages from The
                                                 Healthy Insurance Dude.</span>
                                         </label>
                                     </div>
                                 </form>}
                                 {
-                                    submittingContact && <div>
+                                    submittingAppointment && <div>
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
@@ -6352,15 +6406,54 @@
                                     </div>
                                 )}
                                 {step === 5 && !submittingContact &&
-                                    <iframe
-                                        src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
-                                        className="book-appointment"
-                                        style={{width: '100%', border: 'none', height: '1200px'}} scrolling="no"
-                                        id="xHdhV9mX82MIRoa7Zxe5_1735708058410">
-                                    </iframe>
+                                    <div>
+                                        <div className="booking-header">
+                                            <button className="nav-btn" onClick={goPrevMonth} disabled={!canGoBack()}>&lt;</button>
+                                            <div>{monthYearLabel}</div>
+                                            <button className="nav-btn" onClick={goNextMonth}>&gt;</button>
+                                        </div>
+
+                                        <div className="calendar">
+                                            {WEEKDAYS.map(day => (
+                                                <div key={day} className="weekday-header">{day}</div>
+                                            ))}
+
+                                            {calendarDays.map((day, idx) => {
+                                                const disabled = isBeforeToday(day);
+                                                const selected = selectedDate &&
+                                                    selectedDate.getFullYear() === year &&
+                                                    selectedDate.getMonth() === month &&
+                                                    selectedDate.getDate() === day;
+                                                const isToday =
+                                                    day === today.getDate() &&
+                                                    month === today.getMonth() &&
+                                                    year === today.getFullYear();
+                                                return (
+                                                    <div
+                                                        key={idx}
+                                                        className={
+                                                            "day" +
+                                                            (disabled ? " disabled" : "") +
+                                                            (selected ? " selected" : "") +
+                                                            (isToday ? " today-dot" : "")
+                                                        }
+                                                        onClick={() => onSelectDay(day)}
+                                                    >
+                                                        {day || ""}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
+                                        {selectedDateStr && (
+                                            <p style={{marginTop: '20px'}}>
+                                                Selected Date: <strong>{selectedDateStr}</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 }
                                 <div className="meta-button-container">
-                                    {step > 1 && step < 5 &&
+                                    {step > 1 && step < 6 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
@@ -6372,7 +6465,11 @@
                                     {step === 4 &&
                                         <button className="meta-next-button" disabled={!isFormValid()}
                                                 onClick={() => formRef.current.requestSubmit()}>
-                                            Get My Free Quote
+                                            Next
+                                        </button>}
+                                    {step === 5 &&
+                                        <button className="meta-next-button" style={{marginRight: 'auto'}}>
+                                            Submit
                                         </button>}
                                 </div>
                             </div>
