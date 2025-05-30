@@ -174,20 +174,18 @@ const getCalendar = async (account) => {
                 'Version': '2021-04-15'
             }
         })
-        console.log('HID Developer check response: ', response)
         const responseData = await response.json()
-        console.log('HID Developer check response data: ', responseData)
         const success = response.status === 200
         const returnData = {
             success: success,
             data: responseData
         }
         console.log(
-            `Get calendar for ${account.name}: `, returnData
+            `Get calendar for ${account.business_name}: `, returnData
         )
         return returnData
     } catch (error) {
-        console.error(`Error in get calendar for ${account.name}: `, error)
+        console.error(`Error in get calendar for ${account.business_name}: `, error)
         return {
             success: false,
             data: error
