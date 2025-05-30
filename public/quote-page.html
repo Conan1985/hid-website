@@ -5823,9 +5823,9 @@
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
                 const [showPopup, setShowPopup] = useState(false)
                 const [understandQuote, setUnderstandQuote] = useState(false)
-                const [submittingContact, setSubmittingContact] = useState(false)
-                const [submitSuccess, setSubmitSuccess] = useState(false)
+                const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
+                const [submitSuccess, setSubmitSuccess] = useState(false)
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -6049,10 +6049,12 @@
                         && validateField('tc', form.tc)
                 };
 
-                const handleSubmit = async (e) => {
+                const handleSubmitContact = async (e) => {
                     e.preventDefault()
                     setStep(step + 1)
+                    await getCalendar()
                     // setSubmittingContact(true)
+                    // No need to wait in creating contact
                     // await new Promise(resolve => setTimeout(resolve, 500));
                     // const url = APP_BASE_URL + '/upsertContact'
                     // try {
@@ -6080,8 +6082,30 @@
                     // } catch (error) {
                     //     console.error('Error in upsert contact: ', error)
                     // } finally {
-                    //     setSubmittingContact(false)
+                    //     await getCalendar()
                     // }
+
+                    // Call the following only in the above finally (only after submitting contact completed)
+
+                }
+
+                const getCalendar = async () => {
+                    setGettingCalendar(true)
+                    await new Promise(resolve => setTimeout(resolve, 500))
+                    const url = APP_BASE_URL + '/getCalendar'
+                    try {
+                        const response = await fetch(url)
+                        console.log('HID Developer check response: ', response)
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            return
+                        }
+
+                    } catch (error) {
+                        console.error('Error in get calendar: ', error)
+                    } finally {
+                        setGettingCalendar(false)
+                    }
                 }
 
                 const showQuote = () => {
@@ -6254,7 +6278,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 4 && <form ref={formRef} onSubmit={handleSubmit}>
+                                {step === 4 && <form ref={formRef} onSubmit={handleSubmitContact}>
                                     <input
                                         type="text"
                                         name="website"
@@ -6381,7 +6405,7 @@
                                     </div>
                                 </form>}
                                 {
-                                    submittingAppointment && <div>
+                                    gettingCalendar && <div>
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
@@ -6405,7 +6429,7 @@
                                         </div>
                                     </div>
                                 )}
-                                {step === 5 && !submittingContact &&
+                                {step === 5 &&
                                     <div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth} disabled={!canGoBack()}>&lt;</button>

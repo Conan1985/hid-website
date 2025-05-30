@@ -90,8 +90,32 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
             res.status(500).send('Error in upsert contact.')
         }
     } catch (err) {
-        console.error('Unexpected error:', err);
-        res.status(500).send('Internal server error.');
+        console.error('Unexpected error in upsert contact:', err);
+        res.status(500).send('Unexpected error in upsert contact:', err);
+    }
+})
+
+app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).send('No data provided')
+    }
+    if (req.body.website) {
+        return res.status(400).send('Bot detected');
+    }
+    try {
+        const data = req.body
+        const account = await getAccount()
+        const hidCalendar = await getCalendar(account)
+        if (hidCalendar.success) {
+            console.log('Calendar fetched successfully')
+            res.send('Calendar fetched successfully')
+        } else {
+            console.log('Error in get calendar: ', hidCalendar)
+            res.status(500).send('Error in get calendar')
+        }
+    } catch (err) {
+        console.error('Unexpected error in get calendar: ', err)
+        res.status(500).send('Unexpected error in get calendar: ', err)
     }
 })
 
@@ -138,6 +162,37 @@ const upsertContact = async (contact, account) => {
         return returnData
     } catch (error) {
         console.error(`Error in upsert contact for ${account.name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+const getCalendar = async (account) => {
+    try {
+        const url = baseUrl + '/calendars/' + account.calendar_id
+        const response = await fetch (url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.accessToken,
+                'Version': '2021-04-15'
+            }
+        })
+        const responseData = await response.json()
+        const success = response.status === 200
+        const returnData = {
+            success: success,
+            data: responseData
+        }
+        console.log(
+            `Get calendar for ${account.name}: `, returnData
+        )
+        return returnData
+    } catch (error) {
+        console.error(`Error in get calendar for ${account.name}: `, error)
         return {
             success: false,
             data: error
