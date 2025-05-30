@@ -96,12 +96,6 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
 })
 
 app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
-    if (!req.body || Object.keys(req.body).length === 0) {
-        return res.status(400).send('No data provided')
-    }
-    if (req.body.website) {
-        return res.status(400).send('Bot detected');
-    }
     try {
         const data = req.body
         const account = await getAccount()
