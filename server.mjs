@@ -101,7 +101,7 @@ app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
         const hidCalendar = await getCalendar(account)
         if (hidCalendar.success) {
             console.log('Calendar fetched successfully')
-            res.send('Calendar fetched successfully')
+            res.status(200).send({data: hidCalendar.data})
         } else {
             console.log('Error in get calendar: ', hidCalendar)
             res.status(500).send('Error in get calendar')
@@ -176,14 +176,10 @@ const getCalendar = async (account) => {
         })
         const responseData = await response.json()
         const success = response.status === 200
-        const returnData = {
+        return {
             success: success,
             data: responseData
         }
-        console.log(
-            `Get calendar for ${account.business_name}: `, returnData
-        )
-        return returnData
     } catch (error) {
         console.error(`Error in get calendar for ${account.business_name}: `, error)
         return {
