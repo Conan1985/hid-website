@@ -6100,7 +6100,7 @@
                             return
                         }
                         const calendar = await response.json()
-                        console.log('HID Developer check calendar: ', calendar)
+                        console.log('HID Developer check calendar: ', calendar.data)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
                     } finally {
