@@ -97,7 +97,6 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
 
 app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
     try {
-        const data = req.body
         const account = await getAccount()
         const hidCalendar = await getCalendar(account)
         if (hidCalendar.success) {
@@ -171,7 +170,7 @@ const getCalendar = async (account) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + account.accessToken,
+                'Authorization': 'Bearer ' + account.access_token,
                 'Version': '2021-04-15'
             }
         })
