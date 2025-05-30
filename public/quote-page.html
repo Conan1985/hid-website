@@ -6095,12 +6095,12 @@
                     const url = APP_BASE_URL + '/getCalendar'
                     try {
                         const response = await fetch(url)
-                        console.log('HID Developer check response in UI: ', response)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
                             return
                         }
-                        console.log('HID Developer check respons to json in UI: ', await response.json())
+                        const calendar = await response.json()
+                        console.log('HID Developer check calendar: ', calendar)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
                     } finally {
