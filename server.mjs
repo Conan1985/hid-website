@@ -64,7 +64,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello from backend!' });
+    res.json({message: 'Hello from backend!'});
 })
 
 app.listen(PORT, () => {
@@ -112,6 +112,24 @@ app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
     }
 })
 
+app.get('/getFreeSlots', globalLimiter, ipLimiter, async (req, res) => {
+    try {
+        const account = await getAccount()
+        const slots = await getFreeSlots(req.query.timezone, req.query.startDate, req.query.endDate,
+            account)
+        if (slots.success) {
+            console.log('Free slots fetched successfully')
+            res.status(200).send({data: slots.data})
+        } else {
+            console.log('Error in get free slots: ', slots)
+            res.status(500).send('Error in get free slots')
+        }
+    } catch (err) {
+        console.error('Unexpected error in get free slots: ', err)
+        res.status(500).send('Unexpected error in get free slots: ', err)
+    }
+})
+
 const upsertContact = async (contact, account) => {
     try {
         const url = baseUrl + '/contacts/upsert'
@@ -133,7 +151,7 @@ const upsertContact = async (contact, account) => {
             ],
             source: WEBSITE_LEAD
         }
-        const response = await fetch (url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -165,7 +183,7 @@ const upsertContact = async (contact, account) => {
 const getCalendar = async (account) => {
     try {
         const url = baseUrl + '/calendars/' + account.calendar_id
-        const response = await fetch (url, {
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -182,6 +200,34 @@ const getCalendar = async (account) => {
         }
     } catch (error) {
         console.error(`Error in get calendar for ${account.business_name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+const getFreeSlots = async (timezone, startDate, endDate, account) => {
+    try {
+        const url = baseUrl + '/calendars/' + account.calendar_id + '/free-slots?startDate=' + startDate
+            + '&endDate=' + endDate
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-04-15'
+            }
+        })
+        const responseData = await response.json()
+        const success = response.status === 200
+        return {
+            success: success,
+            data: responseData
+        }
+    } catch (error) {
+        console.error(`Error in get free slots for ${account.business_name}: `, error)
         return {
             success: false,
             data: error

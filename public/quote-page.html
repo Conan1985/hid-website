@@ -5821,6 +5821,7 @@
                 const [showPopup, setShowPopup] = useState(false)
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [gettingCalendar, setGettingCalendar] = useState(false)
+                const [gettingFreeSlots, setGettingFreeSlots] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
@@ -6051,6 +6052,7 @@
                     e.preventDefault()
                     setStep(step + 1)
                     await getCalendar()
+                    await getFreeSlots()
                     // setSubmittingContact(true)
                     // No need to wait in creating contact
                     // await new Promise(resolve => setTimeout(resolve, 500));
@@ -6089,7 +6091,6 @@
 
                 const getCalendar = async () => {
                     setGettingCalendar(true)
-                    await new Promise(resolve => setTimeout(resolve, 500))
                     const url = APP_BASE_URL + '/getCalendar'
                     try {
                         const response = await fetch(url)
@@ -6103,6 +6104,26 @@
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
+                    }
+                }
+
+                const getFreeSlots = async () => {
+                    setGettingFreeSlots(true)
+                    await new Promise(resolve => setTimeout(resolve, 500))
+                    const url = APP_BASE_URL + '/getFreeSlots?timezone=' + timezone + '&startDate=' + now.toMillis()
+                        + '&endDate=' + now.plus({months: 2}).toMillis()
+                    try {
+                        const response = await fetch(url)
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            return
+                        }
+                        const freeSlots = await response.json()
+                        console.log('HID Developer check free slots: ', freeSlots.data)
+                    } catch (error) {
+                        console.error('Error in get free slots: ', error)
+                    } finally {
+                        setGettingFreeSlots(false)
                     }
                 }
 
@@ -6403,7 +6424,7 @@
                                     </div>
                                 </form>}
                                 {
-                                    gettingCalendar && <div>
+                                    (gettingCalendar || gettingFreeSlots) && <div>
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
