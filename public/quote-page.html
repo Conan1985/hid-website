@@ -6108,10 +6108,12 @@
                         const calendar = await response.json()
                         if (calendar.data?.slotDuration) {
                             setSlotDuration(calendar.data.slotDuration)
+                            console.log('HID Developer check slot duration: ', calendar.data.slotDuration)
                         }
                         if (calendar.data?.slotDurationUnit) {
                             const str = calendar.data.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
+                            console.log('HID Developer check slot duration unit: ', str)
                         }
                         setShowCalendar(true)
                     } catch (error) {
