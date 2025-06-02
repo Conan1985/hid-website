@@ -25704,7 +25704,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     position: absolute;
     bottom: 4px;
     left: 50%;
-    transform: translateX(-50%) translateY(200%);
+    transform: translateX(-50%) translateY(50%);
     width: 6px;
     height: 6px;
     background-color: #007bff;

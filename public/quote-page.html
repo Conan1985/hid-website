@@ -5822,9 +5822,12 @@
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [gettingFreeSlots, setGettingFreeSlots] = useState(false)
+                const [showCalendar, setShowCalendar] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
+                const [slotDuration, setSlotDuration] = useState(30)
+                const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -5841,8 +5844,8 @@
                 const [month, setMonth] = useState(now.month - 1)
                 const [selectedDate, setSelectedDate] = useState(null)
 
-                const daysInMonth = DateTime.local(year, month + 1, 1, { zone: timezone }).daysInMonth
-                const startDay = DateTime.local(year, month + 1, 1, { zone: timezone }).weekday % 7
+                const daysInMonth = DateTime.local(year, month + 1, 1, {zone: timezone}).daysInMonth
+                const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
 
                 const calendarDays = [];
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
@@ -5850,7 +5853,7 @@
 
                 const isBeforeToday = (day) => {
                     if (!day) return true;
-                    const date = DateTime.local(year, month + 1, day, { zone: timezone });
+                    const date = DateTime.local(year, month + 1, day, {zone: timezone});
                     return date.startOf('day') < now.startOf('day');
                 }
 
@@ -5886,11 +5889,14 @@
 
                 const onSelectDay = (day) => {
                     if (isBeforeToday(day)) return;
-                    const selected = DateTime.local(year, month + 1, day, { zone: timezone });
+                    const selected = DateTime.local(year, month + 1, day, {zone: timezone});
                     setSelectedDate(selected);
                 }
 
-                const monthYearLabel = DateTime.local(year, month + 1, 1, { zone: timezone }).toLocaleString({ month: 'long', year: 'numeric' })
+                const monthYearLabel = DateTime.local(year, month + 1, 1, {zone: timezone}).toLocaleString({
+                    month: 'long',
+                    year: 'numeric'
+                })
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6092,6 +6098,7 @@
                 const getCalendar = async () => {
                     setGettingCalendar(true)
                     const url = APP_BASE_URL + '/getCalendar'
+                    setShowCalendar(false)
                     try {
                         const response = await fetch(url)
                         if (!response.ok) {
@@ -6099,7 +6106,14 @@
                             return
                         }
                         const calendar = await response.json()
-                        console.log('HID Developer check calendar: ', calendar.data)
+                        if (calendar.data?.slotDuration) {
+                            setSlotDuration(calendar.data.slotDuration)
+                        }
+                        if (calendar.data?.slotDurationUnit) {
+                            const str = calendar.data.slotDurationUnit
+                            setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
+                        }
+                        setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
                     } finally {
@@ -6110,6 +6124,7 @@
                 const getFreeSlots = async () => {
                     setGettingFreeSlots(true)
                     await new Promise(resolve => setTimeout(resolve, 100))
+                    setShowCalendar(false)
                     const url = APP_BASE_URL + '/getFreeSlots?timezone=' + timezone + '&startDate=' + now.toMillis()
                         + '&endDate=' + now.plus({months: 2}).toMillis()
                     try {
@@ -6120,6 +6135,7 @@
                         }
                         const freeSlots = await response.json()
                         console.log('HID Developer check free slots: ', freeSlots.data)
+                        setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get free slots: ', error)
                     } finally {
@@ -6160,9 +6176,15 @@
                                     Unfortunately, we can’t provide a virtual quote right now. Please continue to
                                     connect with a team member for assistance with your situation.
                                 </div>}
-                                {step === 5 && <div className="boldBody">
-                                    Select Date & Time to book an appointment
-                                </div>}
+                                {step === 5 && showCalendar && !gettingCalendar && !gettingFreeSlots &&
+                                    <div className="boldBody">
+                                        Select Date & Time to book an appointment
+                                    </div>}
+                                {step === 5 && !showCalendar && !gettingCalendar && !gettingFreeSlots &&
+                                    <div className="boldBody">
+                                        Thank you for your interest in Healthy Insurance Dude. We will be in touch with
+                                        you
+                                    </div>}
                                 {step === 1 &&
                                     <div>
                                         <div className="options-container">
@@ -6416,7 +6438,8 @@
                                                     outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
                                                 }}
                                             />
-                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank"><u>terms &
+                                            <span> I agree to the <a href="terms-and-conditions.html"
+                                                                     target="_blank"><u>terms &
                                             conditions</u></a> provided by the company.
                                             By providing my phone number, I agree to receive text messages from The
                                                 Healthy Insurance Dude.</span>
@@ -6448,10 +6471,11 @@
                                         </div>
                                     </div>
                                 )}
-                                {step === 5 &&
+                                {step === 5 && !gettingCalendar && !gettingFreeSlots && showCalendar &&
                                     <div>
                                         <div className="booking-header">
-                                            <button className="nav-btn" onClick={goPrevMonth} disabled={!canGoBack()}>&lt;</button>
+                                            <button className="nav-btn" onClick={goPrevMonth}
+                                                    disabled={!canGoBack()}>&lt;</button>
                                             <div>{monthYearLabel}</div>
                                             <button className="nav-btn" onClick={goNextMonth}>&gt;</button>
                                         </div>
@@ -6510,7 +6534,7 @@
                                                 onClick={() => formRef.current.requestSubmit()}>
                                             Next
                                         </button>}
-                                    {step === 5 &&
+                                    {step === 5 && !gettingCalendar && !gettingFreeSlots && showCalendar &&
                                         <button className="meta-next-button" style={{marginRight: 'auto'}}>
                                             Submit
                                         </button>}
