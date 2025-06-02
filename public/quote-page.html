@@ -6108,12 +6108,10 @@
                         const calendar = await response.json()
                         if (calendar.data?.calendar?.slotDuration) {
                             setSlotDuration(calendar.data.calendar.slotDuration)
-                            console.log('HID Developer check slot duration: ', calendar.data.calendar.slotDuration)
                         }
                         if (calendar.data?.calendar?.slotDurationUnit) {
                             const str = calendar.data.calendar.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
-                            console.log('HID Developer check slot duration unit: ', str)
                         }
                         setShowCalendar(true)
                     } catch (error) {
@@ -6474,6 +6472,9 @@
                                 )}
                                 {step === 5 && !gettingCalendar && !gettingFreeSlots && showCalendar &&
                                     <div>
+                                        <div className="booking-selection-summary">
+                                            <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                        </div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth}
                                                     disabled={!canGoBack()}>&lt;</button>

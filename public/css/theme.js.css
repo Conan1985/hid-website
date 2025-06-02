@@ -25710,3 +25710,11 @@ a[href^="tel:"], a[href^="mailto:"] {
     background-color: #007bff;
     border-radius: 50%;
 }
+
+.booking-selection-summary {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 24px;
+    left: 10%;
+    color: gray;
+}
