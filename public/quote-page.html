@@ -6109,7 +6109,7 @@
 
                 const getFreeSlots = async () => {
                     setGettingFreeSlots(true)
-                    await new Promise(resolve => setTimeout(resolve, 500))
+                    await new Promise(resolve => setTimeout(resolve, 100))
                     const url = APP_BASE_URL + '/getFreeSlots?timezone=' + timezone + '&startDate=' + now.toMillis()
                         + '&endDate=' + now.plus({months: 2}).toMillis()
                     try {
