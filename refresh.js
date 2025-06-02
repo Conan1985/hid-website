@@ -14,7 +14,7 @@ async function refreshTokens() {
     console.log('Tokens refreshed')
     setTimeout(async () => {
         await refreshTokens()
-    }, 10 * 60 * 1000)
+    }, 720 * 60 * 1000)
 }
 
 const refreshAccessToken = async (account) => {
