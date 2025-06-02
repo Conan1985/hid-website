@@ -6106,6 +6106,10 @@
                             return
                         }
                         const calendar = await response.json()
+                        console.log('HID Developer check calendar: ', calendar)
+                        console.log('HID Developer check calendar data: ', calendar.data)
+                        console.log('HID Developer check calendar data slotDuration: ', calendar.data.duration)
+                        console.log('HID Developer check true: ', calendar.data?.slotDuration)
                         if (calendar.data?.slotDuration) {
                             setSlotDuration(calendar.data.slotDuration)
                             console.log('HID Developer check slot duration: ', calendar.data.slotDuration)
