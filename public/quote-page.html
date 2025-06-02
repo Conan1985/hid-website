@@ -73,6 +73,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Load Babel for JSX parsing in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Healthy Insurance Dude</title>
@@ -5809,12 +5810,8 @@
             const {useRef} = React;
 
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
-
-            const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-            function getDaysInMonth(year, month) {
-                return new Date(year, month + 1, 0).getDate();
-            }
+            const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            const DateTime = luxon.DateTime
 
             function App() {
                 const [step, setStep] = useState(1)
@@ -5826,6 +5823,7 @@
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
+                const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -5837,14 +5835,13 @@
                 const type1Diabetes = 'Type 1 Diabetes'
                 const currentlyPregnant = 'Currently Pregnant'
                 const noPreExistingConditions = 'No Pre-existing Conditions'
+                const now = DateTime.now().setZone(timezone)
+                const [year, setYear] = useState(now.year)
+                const [month, setMonth] = useState(now.month - 1)
+                const [selectedDate, setSelectedDate] = useState(null)
 
-                const today = new Date();
-                const [year, setYear] = useState(today.getFullYear());
-                const [month, setMonth] = useState(today.getMonth());
-                const [selectedDate, setSelectedDate] = useState(null);
-
-                const daysInMonth = getDaysInMonth(year, month);
-                const startDay = new Date(year, month, 1).getDay();
+                const daysInMonth = DateTime.local(year, month + 1, 1, { zone: timezone }).daysInMonth
+                const startDay = DateTime.local(year, month + 1, 1, { zone: timezone }).weekday % 7
 
                 const calendarDays = [];
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
@@ -5852,13 +5849,16 @@
 
                 const isBeforeToday = (day) => {
                     if (!day) return true;
-                    const date = new Date(year, month, day);
-                    return date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                };
+                    const date = DateTime.local(year, month + 1, day, { zone: timezone });
+                    return date.startOf('day') < now.startOf('day');
+                }
 
                 const canGoBack = () => {
-                    return !(year === today.getFullYear() && month === today.getMonth());
-                };
+                    const now = DateTime.now().setZone(timezone);
+                    const currentYear = now.year;
+                    const currentMonth = now.month - 1;
+                    return !(year === currentYear && month === currentMonth);
+                }
 
                 const goPrevMonth = () => {
                     if (!canGoBack()) return;
@@ -5881,17 +5881,15 @@
                     }
                 };
 
-                const selectedDateStr = selectedDate ? selectedDate.toDateString() : null;
+                const selectedDateStr = selectedDate ? selectedDate.toLocaleString(DateTime.DATE_FULL) : null
 
                 const onSelectDay = (day) => {
                     if (isBeforeToday(day)) return;
-                    setSelectedDate(new Date(year, month, day));
-                };
+                    const selected = DateTime.local(year, month + 1, day, { zone: timezone });
+                    setSelectedDate(selected);
+                }
 
-                const monthYearLabel = new Date(year, month).toLocaleString('default', {
-                    month: 'long',
-                    year: 'numeric',
-                });
+                const monthYearLabel = DateTime.local(year, month + 1, 1, { zone: timezone }).toLocaleString({ month: 'long', year: 'numeric' })
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6445,13 +6443,13 @@
                                             {calendarDays.map((day, idx) => {
                                                 const disabled = isBeforeToday(day);
                                                 const selected = selectedDate &&
-                                                    selectedDate.getFullYear() === year &&
-                                                    selectedDate.getMonth() === month &&
-                                                    selectedDate.getDate() === day;
-                                                const isToday =
-                                                    day === today.getDate() &&
-                                                    month === today.getMonth() &&
-                                                    year === today.getFullYear();
+                                                    selectedDate.year === year &&
+                                                    selectedDate.month - 1 === month &&
+                                                    selectedDate.day === day;
+                                                const isToday = day &&
+                                                    day === now.day &&
+                                                    month + 1 === now.month &&
+                                                    year === now.year
                                                 return (
                                                     <div
                                                         key={idx}
