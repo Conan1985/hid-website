@@ -5941,6 +5941,7 @@
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
                 const [timezonesList, setTimezonesList] = useState([])
+                const [currentTimes, setCurrentTimes] = useState({});
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
@@ -5961,7 +5962,7 @@
                 const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
 
                 useEffect(() => {
-                    const timezonesList = LOCATIONS.map(tz => {
+                    const timezones = LOCATIONS.map(tz => {
                         const dt = now.setZone(tz)
                         return {
                             name: tz,
@@ -5969,10 +5970,21 @@
                             short: dt.offsetNameShort
                         }
                     })
-                    if (!timezonesList.find(tz => tz.name === timezone)) {
-                        const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
+                    setTimezonesList(timezones)
+                    if (!timezones.find(tz => tz.name === timezone)) {
+                        const matchTimeZone = timezones.find(tz => tz.offset === now.toFormat("ZZ"))
                         setTimezone(matchTimeZone.name)
                     }
+                    const updateTimes = () => {
+                        const newTimes = {}
+                        timezones.forEach((tz) => {
+                            newTimes[tz.name] = DateTime.now().setZone(tz.name).toFormat('h:mm a')
+                        })
+                        setCurrentTimes(newTimes)
+                    }
+                    updateTimes()
+                    const interval = setInterval(updateTimes, 60000); // refresh every minute
+                    return () => clearInterval(interval)
                 }, [])
 
                 const calendarDays = [];
@@ -6606,6 +6618,16 @@
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
                                             <br/>
                                             <i className="fas fa-globe"></i>
+                                            &ensp;
+                                            <select id="timezone" value={timezone} onChange={e => setTimezone(e.target.value)}>
+                                                {timezonesList.map((tz) => {
+                                                    const label = `GMT${tz.offset} ${tz.name} (${tz.short})`
+                                                    const time = currentTimes[tz.name]
+                                                    return (<option key={tz.name} value={tz.name}>
+                                                        {timezone === tz.name ? label : `${label}  ${time}`}
+                                                    </option>)
+                                                })}
+                                            </select>
                                         </div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth}
