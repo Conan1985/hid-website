@@ -5969,8 +5969,10 @@
                             short: dt.offsetNameShort
                         }
                     })
-                    const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
-                    setTimezone(matchTimeZone.name)
+                    if (!timezonesList.find(tz => tz.name === timezone)) {
+                        const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
+                        setTimezone(matchTimeZone.name)
+                    }
                 }, [])
 
                 const calendarDays = [];
