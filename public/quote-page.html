@@ -5940,7 +5940,6 @@
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
-                const [timezonesList, setTimezonesList] = useState([])
                 const [currentTimes, setCurrentTimes] = useState({});
                 const formRef = useRef()
                 const ageGroup1 = '18 - 29'
@@ -5957,27 +5956,29 @@
                 const [year, setYear] = useState(now.year)
                 const [month, setMonth] = useState(now.month - 1)
                 const [selectedDate, setSelectedDate] = useState(null)
+                const [isStateListOpen, setIsStateListOpen] = useState(false);
+                const statesWrapper = useRef(null);
 
                 const daysInMonth = DateTime.local(year, month + 1, 1, {zone: timezone}).daysInMonth
                 const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
 
+                const timezonesList = LOCATIONS.map(tz => {
+                    const dt = now.setZone(tz)
+                    return {
+                        name: tz,
+                        offset: dt.toFormat("ZZ"),
+                        short: dt.offsetNameShort
+                    }
+                })
+
                 useEffect(() => {
-                    const timezones = LOCATIONS.map(tz => {
-                        const dt = now.setZone(tz)
-                        return {
-                            name: tz,
-                            offset: dt.toFormat("ZZ"),
-                            short: dt.offsetNameShort
-                        }
-                    })
-                    setTimezonesList(timezones)
-                    if (!timezones.find(tz => tz.name === timezone)) {
-                        const matchTimeZone = timezones.find(tz => tz.offset === now.toFormat("ZZ"))
+                    if (!timezonesList.find(tz => tz.name === timezone)) {
+                        const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
                         setTimezone(matchTimeZone.name)
                     }
                     const updateTimes = () => {
                         const newTimes = {}
-                        timezones.forEach((tz) => {
+                        timezonesList.forEach((tz) => {
                             newTimes[tz.name] = DateTime.now().setZone(tz.name).toFormat('h:mm a')
                         })
                         setCurrentTimes(newTimes)
@@ -5986,6 +5987,24 @@
                     const interval = setInterval(updateTimes, 60000); // refresh every minute
                     return () => clearInterval(interval)
                 }, [])
+
+                useEffect(() => {
+                    function handleClickOutside(e) {
+                        if (statesWrapper.current && !statesWrapper.current.contains(e.target)) {
+                            setIsStateListOpen(false);
+                        }
+                    }
+                    document.addEventListener("mousedown", handleClickOutside);
+                    return () => document.removeEventListener("mousedown", handleClickOutside);
+                }, []);
+
+                const handleSelectState = (tz) => {
+                    setTimezone(tz.name);
+                    setIsStateListOpen(false);
+                };
+
+                const selectedTz = timezonesList.find(tz => tz.name === timezone);
+                const selectedLabel = `GMT${selectedTz.offset} ${selectedTz.name} (${selectedTz.short})`;
 
                 const calendarDays = [];
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
@@ -6619,15 +6638,55 @@
                                             <br/>
                                             <i className="fas fa-globe"></i>
                                             &ensp;
-                                            <select id="timezone" value={timezone} onChange={e => setTimezone(e.target.value)}>
-                                                {timezonesList.map((tz) => {
-                                                    const label = `GMT${tz.offset} ${tz.name} (${tz.short})`
-                                                    const time = currentTimes[tz.name]
-                                                    return (<option key={tz.name} value={tz.name}>
-                                                        {timezone === tz.name ? label : `${label}  ${time}`}
-                                                    </option>)
-                                                })}
-                                            </select>
+                                            <div ref={statesWrapper} style={{ position: 'relative', width: 300 }}>
+                                                <div
+                                                    onClick={() => setIsStateListOpen(!isStateListOpen)}
+                                                    style={{
+                                                        border: '1px solid #ccc',
+                                                        padding: '10px',
+                                                        cursor: 'pointer',
+                                                        background: '#fff'
+                                                    }}
+                                                >
+                                                    {selectedLabel}
+                                                </div>
+
+                                                {isStateListOpen && (
+                                                    <ul
+                                                        style={{
+                                                            listStyle: 'none',
+                                                            margin: 0,
+                                                            padding: 0,
+                                                            border: '1px solid #ccc',
+                                                            borderTop: 'none',
+                                                            maxHeight: 200,
+                                                            overflowY: 'auto',
+                                                            background: '#fff',
+                                                            position: 'absolute',
+                                                            width: '100%',
+                                                            zIndex: 10,
+                                                        }}
+                                                    >
+                                                        {timezonesList.map((tz) => {
+                                                            const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                            const time = currentTimes[tz.name] || '';
+                                                            return (
+                                                                <li
+                                                                    key={tz.name}
+                                                                    onClick={() => handleSelectState(tz)}
+                                                                    style={{
+                                                                        padding: '10px',
+                                                                        background: tz.name === timezone ? '#eee' : '#fff',
+                                                                        cursor: 'pointer',
+                                                                    }}
+                                                                >
+                                                                    {label} {time}
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                )}
+                                            </div>
                                         </div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth}
