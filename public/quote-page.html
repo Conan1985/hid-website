@@ -5962,10 +5962,13 @@
                     const dt = now.setZone(tz)
                     return {
                         name: tz,
-                        offset: 'GMT' + dt.toFormat("ZZ"),
+                        offset: dt.toFormat("ZZ"),
                         short: dt.offsetNameShort
                     }
                 })
+
+                const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
+                setTimezone(matchTimeZone.name)
 
                 const calendarDays = [];
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
@@ -6596,6 +6599,8 @@
                                             <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
                                             &ensp;
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
+                                            &ensp;
+                                            <i className="fas fa-globe"></i>
                                         </div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth}
