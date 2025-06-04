@@ -5960,14 +5960,10 @@
 
                 const timezonesList = LOCATIONS.map(tz => {
                     const dt = now.setZone(tz)
-                    const offsetMinutes = dt.offset
-                    const offsetHours = Math.floor(offsetMinutes / 60)
-                    const offsetSign = offsetHours >= 0 ? "+" : ""
                     return {
-                        zone: `GMT${offsetSign}${offsetHours}`,
                         name: tz,
-                        offset: `GMT$dt.toFormat("ZZ")$`,
-                        abbv: dt.offsetNameShort
+                        offset: 'GMT' + dt.toFormat("ZZ"),
+                        short: dt.offsetNameShort
                     }
                 })
 
@@ -6598,6 +6594,8 @@
                                     <div>
                                         <div className="booking-selection-summary">
                                             <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                            &ensp;
+                                            <i className="fas fa-calendar"></i> {selectedDateStr}
                                         </div>
                                         <div className="booking-header">
                                             <button className="nav-btn" onClick={goPrevMonth}
@@ -6637,12 +6635,6 @@
                                                 );
                                             })}
                                         </div>
-
-                                        {selectedDateStr && (
-                                            <p style={{marginTop: '20px'}}>
-                                                Selected Date: <strong>{selectedDateStr}</strong>
-                                            </p>
-                                        )}
                                     </div>
                                 }
                                 <div className="meta-button-container">
