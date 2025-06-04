@@ -5831,7 +5831,7 @@
                 const [showCalendar, setShowCalendar] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
-                const [timezone, setTimezone] = useState('GMT' + luxon.DateTime.local().dt.toFormat("ZZ"))
+                const [timezone, setTimezone] = useState('GMT' + DateTime.local().toFormat("ZZ"))
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
                 const formRef = useRef()
