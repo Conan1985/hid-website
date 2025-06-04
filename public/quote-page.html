@@ -5812,6 +5812,11 @@
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
             const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             const DateTime = luxon.DateTime
+            const LOCATIONS = [
+                'Etc/GMT+12',
+                'Pacific/Midway',
+                'America/Dawson'
+            ]
 
             function App() {
                 const [step, setStep] = useState(1)
@@ -5825,7 +5830,7 @@
                 const [showCalendar, setShowCalendar] = useState(false)
                 const [submittingAppointment, setSubmittingAppointment] = useState(false)
                 const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
-                const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
+                const [timezone, setTimezone] = useState(`GMT$luxon.DateTime.local().dt.toFormat("ZZ")$`)
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
                 const formRef = useRef()
@@ -5846,6 +5851,22 @@
 
                 const daysInMonth = DateTime.local(year, month + 1, 1, {zone: timezone}).daysInMonth
                 const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
+
+                const timezonesList = LOCATIONS.map(tz => {
+                    const dt = now.setZone(tz)
+                    const offsetMinutes = dt.offset
+                    const offsetHours = Math.floor(offsetMinutes / 60)
+                    const offsetSign = offsetHours >= 0 ? "+" : ""
+                    return {
+                        zone: `GMT${offsetSign}${offsetHours}`,
+                        name: tz,
+                        offset: `GMT$dt.toFormat("ZZ")$`,
+                        abbv: dt.offsetNameShort
+                    }
+                })
+
+                console.log('HID Developer check time zone: ', timezone)
+                console.log('HID Developer check time zones list: ', timezonesList)
 
                 const calendarDays = [];
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
