@@ -6005,7 +6005,7 @@
                     }
                 };
 
-                const selectedDateStr = selectedDate ? selectedDate.toLocaleString(DateTime.DATE_FULL) : null
+                const selectedDateStr = selectedDate ? selectedDate.toFormat('ccc, LLL dd, yyyy') : null
 
                 const onSelectDay = (day) => {
                     if (isBeforeToday(day)) return;
