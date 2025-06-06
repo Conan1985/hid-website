@@ -6307,6 +6307,10 @@
                         && !conditions.includes(type1Diabetes) && !conditions.includes(currentlyPregnant)
                 }
 
+                useEffect(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, [step])
+
                 return (
                     <div className="cms-block cms-block-element">
                         <div className="heroBanner default-animation-nomov">
