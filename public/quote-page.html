@@ -5805,6 +5805,7 @@
         <div id="react-root"></div>
         <script type="text/babel">
             const {useState} = React;
+            const {useEffect} = React;
             const {createRoot} = ReactDOM;
             const {useRef} = React;
 
@@ -6026,6 +6027,10 @@
                     return !conditions.includes(stroke) && !conditions.includes(cancer)
                         && !conditions.includes(type1Diabetes) && !conditions.includes(currentlyPregnant)
                 }
+
+                useEffect(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, [step])
 
                 return (
                     <div className="cms-block cms-block-element">
