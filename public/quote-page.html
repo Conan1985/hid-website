@@ -5809,18 +5809,11 @@
             const {createRoot} = ReactDOM;
             const {useRef} = React;
 
-            const APP_BASE_URL = 'https://hid-website-eb439f6d41df.herokuapp.com'
-
             function App() {
                 const [step, setStep] = useState(1)
                 const [ageRange, setAgeRange] = useState(null)
                 const [conditions, setConditions] = useState([])
-                const [isPhoneFocused, setIsPhoneFocused] = useState(false)
-                const [showPopup, setShowPopup] = useState(false)
                 const [understandQuote, setUnderstandQuote] = useState(false)
-                const [submittingContact, setSubmittingContact] = useState(false)
-                const [submitSuccess, setSubmitSuccess] = useState(false)
-                const formRef = useRef()
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
                 const ageGroup3 = '45 - 54'
@@ -5850,177 +5843,8 @@
                         (step === 3 && showQuote() && !understandQuote)
                 }
 
-                const [form, setForm] = useState({
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    phone: "",
-                    state: "",
-                    tc: false
-                });
-
-                const [touched, setTouched] = useState({
-                    firstName: false,
-                    lastName: false,
-                    email: false,
-                    phone: false,
-                    state: false,
-                    tc: false
-                })
-
-                const validateField = (name, value) => {
-                    switch (name) {
-                        case 'firstName':
-                        case 'lastName':
-                            return value.trim() !== '';
-                        case 'email':
-                            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                        case 'phone':
-                            if (!/^\d{10}$/.test(value)) return false;
-                            const areaCode = value.slice(0, 3);
-                            const centralOfficeCode = value.slice(3, 6);
-                            return /^[2-9]\d{2}$/.test(areaCode) && /^[2-9]\d{2}$/.test(centralOfficeCode);
-                        case 'state':
-                            return value.trim() !== '';
-                        case 'tc':
-                            return value === true;
-                        default:
-                            return true;
-                    }
-                };
-
                 const handleQuote = () => {
                     setUnderstandQuote(!understandQuote)
-                }
-
-                const handleChange = (e) => {
-                    const {name, value} = e.target;
-                    if (name === 'phone') {
-                        let numbers = value.replace(/\D/g, '');
-                        if (value.startsWith('+') && numbers.length === 11 && numbers.startsWith('1')) {
-                            numbers = numbers.slice(1);
-                        }
-                        if (numbers.length <= form.phone.length) {
-                            setForm({...form, phone: numbers});
-                            return;
-                        }
-                        if (form.phone.length < 10) {
-                            setForm({...form, phone: numbers.slice(0, 10)});
-                        }
-                    } else if (name === 'tc') {
-                        setForm({...form, [name]: e.target.checked})
-                    } else {
-                        setForm({...form, [name]: value});
-                    }
-                };
-
-                const formatPhone = (numbers) => {
-                    if (numbers.length === 0) return '';
-                    const part1 = numbers.slice(0, 3);
-                    const part2 = numbers.slice(3, 6);
-                    const part3 = numbers.slice(6, 10);
-                    if (numbers.length < 4) return `(${part1}`;
-                    if (numbers.length < 7) return `(${part1})${part2}`;
-                    return `(${part1})${part2}-${part3}`;
-                };
-
-                const states = [
-                    {code: "", name: "Select State"},
-                    {code: "AL", name: "Alabama"},
-                    {code: "AK", name: "Alaska"},
-                    {code: "AZ", name: "Arizona"},
-                    {code: "AR", name: "Arkansas"},
-                    {code: "CA", name: "California"},
-                    {code: "CO", name: "Colorado"},
-                    {code: "CT", name: "Connecticut"},
-                    {code: "DE", name: "Delaware"},
-                    {code: "FL", name: "Florida"},
-                    {code: "GA", name: "Georgia"},
-                    {code: "HI", name: "Hawaii"},
-                    {code: "ID", name: "Idaho"},
-                    {code: "IL", name: "Illinois"},
-                    {code: "IN", name: "Indiana"},
-                    {code: "IA", name: "Iowa"},
-                    {code: "KS", name: "Kansas"},
-                    {code: "KY", name: "Kentucky"},
-                    {code: "LA", name: "Louisiana"},
-                    {code: "ME", name: "Maine"},
-                    {code: "MD", name: "Maryland"},
-                    {code: "MA", name: "Massachusetts"},
-                    {code: "MI", name: "Michigan"},
-                    {code: "MN", name: "Minnesota"},
-                    {code: "MS", name: "Mississippi"},
-                    {code: "MO", name: "Missouri"},
-                    {code: "MT", name: "Montana"},
-                    {code: "NE", name: "Nebraska"},
-                    {code: "NV", name: "Nevada"},
-                    {code: "NH", name: "New Hampshire"},
-                    {code: "NJ", name: "New Jersey"},
-                    {code: "NM", name: "New Mexico"},
-                    {code: "NY", name: "New York"},
-                    {code: "NC", name: "North Carolina"},
-                    {code: "ND", name: "North Dakota"},
-                    {code: "OH", name: "Ohio"},
-                    {code: "OK", name: "Oklahoma"},
-                    {code: "OR", name: "Oregon"},
-                    {code: "PA", name: "Pennsylvania"},
-                    {code: "RI", name: "Rhode Island"},
-                    {code: "SC", name: "South Carolina"},
-                    {code: "SD", name: "South Dakota"},
-                    {code: "TN", name: "Tennessee"},
-                    {code: "TX", name: "Texas"},
-                    {code: "UT", name: "Utah"},
-                    {code: "VT", name: "Vermont"},
-                    {code: "VA", name: "Virginia"},
-                    {code: "WA", name: "Washington"},
-                    {code: "WV", name: "West Virginia"},
-                    {code: "WI", name: "Wisconsin"},
-                    {code: "WY", name: "Wyoming"},
-                    {code: "DC", name: "District of Columbia"}
-                ];
-
-                const isFormValid = () => {
-                    return validateField('firstName', form.firstName)
-                        && validateField('lastName', form.lastName)
-                        && validateField('email', form.email)
-                        && validateField('phone', form.phone)
-                        && validateField('state', form.state)
-                        && validateField('tc', form.tc)
-                };
-
-                const handleSubmit = async (e) => {
-                    e.preventDefault()
-                    setStep(step + 1)
-                    setSubmittingContact(true)
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    const url = APP_BASE_URL + '/upsertContact'
-                    try {
-                        const contact = {
-                            firstName: form.firstName,
-                            lastName: form.lastName,
-                            email: form.email,
-                            phone: form.phone,
-                            state: form.state,
-                            ageRange: ageRange,
-                            conditions: conditions
-                        }
-                        const response = await fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(contact)
-                        })
-                        if (!response.ok) {
-                            console.error(`HTTP error! status: ${response.status}`)
-                            return
-                        }
-                        setSubmitSuccess(true)
-                    } catch (error) {
-                        console.error('Error in upsert contact: ', error)
-                    } finally {
-                        setSubmittingContact(false)
-                    }
                 }
 
                 const showQuote = () => {
@@ -6044,7 +5868,7 @@
                                 <h1 className="mediumHeading-1 colorGold meta-title" style={{fontSize: '2em'}}>Get your Price Estimate
                                     with 3 Simple Steps</h1>
                                 <div className="meta-progress-container">
-                                    <progress value={step / 5} className="meta-progress"></progress>
+                                    <progress value={step / 4} className="meta-progress"></progress>
                                 </div>
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     What is your age?
@@ -6057,19 +5881,11 @@
                                     Estimated Cost for Your PPO Health Coverage
                                 </div>}
                                 {step === 3 && !showQuote() && <div className="boldBody">
-                                    Unfortunately, <br/> we can’t provide a virtual quote right now. Please continue to
+                                    Unfortunately, <br/> we can’t provide a virtual price estimate right now. Please continue to
                                     connect with a team member for assistance with your situation.
                                 </div>}
                                 {step === 4 && <div className="boldBody">
-                                    Final Details
-                                </div>}
-                                {step === 5 && submitSuccess && !submittingContact && <div className="boldBody">
-                                    Thank you. Our agent will touch you shortly.<br/>
-                                    You can make appointment with us as well.
-                                </div>}
-                                {step === 5 && !submitSuccess && !submittingContact && <div className="boldBody">
-                                    Sorry, the submission failed due to server error.<br/>
-                                    You can still make appointment with us.
+                                    Make appointment with us.
                                 </div>}
                                 {step === 1 &&
                                     <div>
@@ -6205,158 +6021,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 4 && <form ref={formRef} onSubmit={handleSubmit}>
-                                    <input
-                                        type="text"
-                                        name="website"
-                                        autoComplete="off"
-                                        style={{display: 'none'}}
-                                        tabIndex={-1}
-                                    />
-                                    <div>
-                                        <label className="meta-form-label">
-                                            <span>First Name</span>
-                                            <input
-                                                className="meta-form-input"
-                                                type="text"
-                                                name="firstName"
-                                                value={form.firstName}
-                                                onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, firstName: true})}
-                                                style={{
-                                                    borderColor: touched.firstName && !validateField('firstName', form.firstName)
-                                                        ? 'red'
-                                                        : ''
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label className="meta-form-label">
-                                            <span>Last Name</span>
-                                            <input
-                                                className="meta-form-input"
-                                                type="text"
-                                                name="lastName"
-                                                value={form.lastName}
-                                                onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, lastName: true})}
-                                                style={{
-                                                    borderColor: touched.lastName && !validateField('lastName', form.lastName)
-                                                        ? 'red'
-                                                        : ''
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label className="meta-form-label">
-                                            <span>Email</span>
-                                            <input
-                                                className="meta-form-input"
-                                                type="email"
-                                                name="email"
-                                                value={form.email}
-                                                onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, email: true})}
-                                                style={{
-                                                    borderColor: touched.email && !validateField('email', form.email)
-                                                        ? 'red'
-                                                        : ''
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label className="meta-form-label">
-                                            <span>Phone</span>
-                                            <input
-                                                className="meta-form-input"
-                                                type="tel"
-                                                name="phone"
-                                                value={isPhoneFocused ? form.phone : formatPhone(form.phone)}
-                                                onFocus={() => setIsPhoneFocused(true)}
-                                                onChange={handleChange}
-                                                onBlur={() => {
-                                                    setIsPhoneFocused(false);
-                                                    setTouched({...touched, phone: true})
-                                                }}
-                                                style={{
-                                                    borderColor: touched.phone && !validateField('phone', form.phone)
-                                                        ? 'red'
-                                                        : ''
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label className="meta-form-label">
-                                            <span>State</span>
-                                            <select
-                                                className="meta-form-select"
-                                                name="state"
-                                                value={form.state}
-                                                onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, state: true})}
-                                                style={{
-                                                    borderColor: touched.state && !validateField('state', form.state)
-                                                        ? 'red'
-                                                        : ''
-                                                }}
-                                            >
-                                                {states.map((s) => (
-                                                    <option key={s.code} value={s.code}>
-                                                        {s.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div className="meta-form-tc">
-                                        <label>
-                                            <input
-                                                type="checkbox"
-                                                name="tc"
-                                                checked={form.tc}
-                                                onChange={handleChange}
-                                                onBlur={() => setTouched({...touched, tc: true})}
-                                                style={{
-                                                    outline: touched.tc && !validateField('tc', form.tc) ? '1px solid red' : 'none',
-                                                }}
-                                            />
-                                            <span> I agree to the <a href="terms-and-conditions.html" target="_blank">terms &
-                                            conditions</a> provided by the company.
-                                            By providing my phone number, I agree to receive text messages from The
-                                                Healthy Insurance Dude.</span>
-                                        </label>
-                                    </div>
-                                </form>}
-                                {
-                                    submittingContact && <div>
-                                        <i className="fas fa-spinner fa-spin progress-spinning"></i>
-                                    </div>
-                                }
-                                {showPopup && (
-                                    <div className="popup-overlay" onClick={() => setShowPopup(false)}>
-                                        <div className="popup" onClick={e => e.stopPropagation()}>
-                                            <p className="boldBody">Is your phone number correct?</p>
-                                            <p>{formatPhone(form.phone)}</p>
-                                            <div className="meta-button-container">
-                                                <button className="meta-back-button"
-                                                        onClick={() => setShowPopup(false)}>
-                                                    No, edit
-                                                </button>
-                                                <button className="meta-next-button popup-next-button"
-                                                        onClick={() => {
-                                                            setShowPopup(false);
-                                                            setStep(5)
-                                                        }}>Yes, continue
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                                {step === 5 && !submittingContact &&
+                                {step === 4 &&
                                     <iframe
                                         src="https://hello.thehealthyinsurancedude.com/widget/booking/xHdhV9mX82MIRoa7Zxe5"
                                         className="book-appointment"
@@ -6365,19 +6030,14 @@
                                     </iframe>
                                 }
                                 <div className="meta-button-container">
-                                    {step > 1 && step < 5 &&
+                                    {step > 1 && step <= 4 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
                                     {step < 4 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
-                                                onClick={() => setStep(step + 1)}>
+                                                onClick={() => {setStep(step + 1)}}>
                                             Next
-                                        </button>}
-                                    {step === 4 &&
-                                        <button className="meta-next-button" disabled={!isFormValid()}
-                                                onClick={() => formRef.current.requestSubmit()}>
-                                            Get My Free Quote
                                         </button>}
                                 </div>
                             </div>
