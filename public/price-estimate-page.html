@@ -80,6 +80,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Load Babel for JSX parsing in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Healthy Insurance Dude</title>
@@ -5793,12 +5794,134 @@
             const {useState} = React;
             const {useEffect} = React;
             const {createRoot} = ReactDOM;
+            const {useRef} = React;
+
+            const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
+            const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            const DateTime = luxon.DateTime
+            const LOCATIONS = [
+                'Etc/GMT+12',
+                'Pacific/Midway',
+                'Pacific/Honolulu',
+                'America/Juneau',
+                'US/Alaska',
+                'America/Dawson',
+                'America/Los_Angeles',
+                'America/Phoenix',
+                'America/Tijuana',
+                'US/Arizona',
+                'America/Belize',
+                'America/Boise',
+                'America/Chihuahua',
+                'America/Denver',
+                'America/Edmonton',
+                'America/Guatemala',
+                'America/Managua',
+                'America/Regina',
+                'Canada/Saskatchewan',
+                'US/Mountain',
+                'America/Bahia_Banderas',
+                'America/Mexico_City',
+                'America/Bogota',
+                'America/Cancun',
+                'America/Chicago',
+                'US/Central',
+                'America/Caracas',
+                'America/Detroit',
+                'America/Indiana/Indianapolis',
+                'America/Louisville',
+                'America/Manaus',
+                'America/New_York',
+                'America/Santiago',
+                'America/Santo_Domingo',
+                'America/Toronto',
+                'US/East-Indiana',
+                'US/Eastern',
+                'America/Argentina/Buenos_Aires',
+                'America/Glace_Bay',
+                'America/Montevideo',
+                'America/Sao_Paulo',
+                'Canada/Atlantic',
+                'America/St_Johns',
+                'Canada/Newfoundland',
+                'America/Noronha',
+                'Etc/GMT+2',
+                'America/Godthab',
+                'Atlantic/Cape_Verde',
+                'Atlantic/Azores',
+                'UTC',
+                'Africa/Algiers',
+                'Africa/Casablanca',
+                'Africa/Lagos',
+                'Atlantic/Canary',
+                'Europe/London',
+                'Africa/Harare',
+                'Europe/Amsterdam',
+                'Europe/Belgrade',
+                'Europe/Brussels',
+                'Europe/Madrid',
+                'Europe/Oslo',
+                'Europe/Sarajevo',
+                'Africa/Cairo',
+                'Africa/Nairobi',
+                'Asia/Amman',
+                'Asia/Baghdad',
+                'Asia/Jerusalem',
+                'Asia/Kuwait',
+                'Asia/Qatar',
+                'Europe/Athens',
+                'Europe/Bucharest',
+                'Europe/Helsinki',
+                'Europe/Moscow',
+                'Turkey',
+                'Asia/Tehran',
+                'Asia/Baku',
+                'Asia/Dubai',
+                'Asia/Kabul',
+                'Asia/Karachi',
+                'Asia/Yekaterinburg',
+                'Asia/Almaty',
+                'Asia/Colombo',
+                'Asia/Kolkata',
+                'Asia/Calcutta',
+                'Asia/Kathmandu',
+                'Asia/Dhaka',
+                'Asia/Rangoon',
+                'Asia/Bangkok',
+                'Asia/Krasnoyarsk',
+                'Asia/Irkutsk',
+                'Asia/Kuala_Lumpur',
+                'Asia/Shanghai',
+                'Asia/Taipei',
+                'Australia/Perth',
+                'Asia/Seoul',
+                'Asia/Tokyo',
+                'Asia/Yakutsk',
+                'Australia/Adelaide',
+                'Australia/Darwin',
+                'Asia/Vladivostok',
+                'Australia/Brisbane',
+                'Australia/Canberra',
+                'Australia/Hobart',
+                'Australia/Sydney',
+                'Pacific/Guam',
+                'Asia/Magadan',
+                'Pacific/Auckland',
+                'Pacific/Fiji',
+                'Pacific/Tongatapu'
+            ]
 
             function App() {
                 const [step, setStep] = useState(1)
                 const [ageRange, setAgeRange] = useState(null)
                 const [conditions, setConditions] = useState([])
                 const [understandQuote, setUnderstandQuote] = useState(false)
+                const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
+                const [slotDuration, setSlotDuration] = useState(30)
+                const [slotDurationUnit, setSlotDurationUnit] = useState('Mins')
+                const [gettingCalendar, setGettingCalendar] = useState(false)
+                const [showCalendar, setShowCalendar] = useState(false)
+                const [currentTimes, setCurrentTimes] = useState({});
                 const ageGroup1 = '18 - 29'
                 const ageGroup2 = '30 - 44'
                 const ageGroup3 = '45 - 54'
@@ -5809,6 +5932,12 @@
                 const type1Diabetes = 'Type 1 Diabetes'
                 const currentlyPregnant = 'Currently Pregnant'
                 const noPreExistingConditions = 'No Pre-existing Conditions'
+                const now = DateTime.now().setZone(timezone)
+                const [year, setYear] = useState(now.year)
+                const [month, setMonth] = useState(now.month - 1)
+                const [selectedDate, setSelectedDate] = useState(null)
+                const [isStateListOpen, setIsStateListOpen] = useState(false);
+                const statesWrapper = useRef(null);
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -5836,6 +5965,130 @@
                     return !conditions.includes(stroke) && !conditions.includes(cancer)
                         && !conditions.includes(type1Diabetes) && !conditions.includes(currentlyPregnant)
                 }
+
+                const getCalendar = async () => {
+                    setGettingCalendar(true)
+                    const url = APP_BASE_URL + '/getCalendar'
+                    setShowCalendar(false)
+                    try {
+                        const response = await fetch(url)
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            return
+                        }
+                        const calendar = await response.json()
+                        if (calendar.data?.calendar?.slotDuration) {
+                            setSlotDuration(calendar.data.calendar.slotDuration)
+                        }
+                        if (calendar.data?.calendar?.slotDurationUnit) {
+                            const str = calendar.data.calendar.slotDurationUnit
+                            setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
+                        }
+                        setShowCalendar(true)
+                    } catch (error) {
+                        console.error('Error in get calendar: ', error)
+                    } finally {
+                        setGettingCalendar(false)
+                    }
+                }
+
+                const daysInMonth = DateTime.local(year, month + 1, 1, {zone: timezone}).daysInMonth
+                const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
+
+                const timezonesList = LOCATIONS.map(tz => {
+                    const dt = now.setZone(tz)
+                    return {
+                        name: tz,
+                        offset: dt.toFormat("ZZ"),
+                        short: dt.offsetNameShort
+                    }
+                })
+
+                useEffect(() => {
+                    if (!timezonesList.find(tz => tz.name === timezone)) {
+                        const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
+                        setTimezone(matchTimeZone.name)
+                    }
+                    const updateTimes = () => {
+                        const newTimes = {}
+                        timezonesList.forEach((tz) => {
+                            newTimes[tz.name] = DateTime.now().setZone(tz.name).toFormat('h:mm a')
+                        })
+                        setCurrentTimes(newTimes)
+                    }
+                    updateTimes()
+                    const interval = setInterval(updateTimes, 60000); // refresh every minute
+                    return () => clearInterval(interval)
+                }, [])
+
+                useEffect(() => {
+                    function handleClickOutside(e) {
+                        if (statesWrapper.current && !statesWrapper.current.contains(e.target)) {
+                            setIsStateListOpen(false);
+                        }
+                    }
+                    document.addEventListener("mousedown", handleClickOutside);
+                    return () => document.removeEventListener("mousedown", handleClickOutside);
+                }, []);
+
+                const handleSelectState = (tz) => {
+                    setTimezone(tz.name);
+                    setIsStateListOpen(false);
+                };
+
+                const selectedTz = timezonesList.find(tz => tz.name === timezone);
+                const selectedLabel = `GMT${selectedTz.offset} ${selectedTz.name} (${selectedTz.short})`;
+
+                const calendarDays = [];
+                for (let i = 0; i < startDay; i++) calendarDays.push(null);
+                for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
+
+                const isBeforeToday = (day) => {
+                    if (!day) return true;
+                    const date = DateTime.local(year, month + 1, day, {zone: timezone});
+                    return date.startOf('day') < now.startOf('day');
+                }
+
+                const canGoBack = () => {
+                    const now = DateTime.now().setZone(timezone);
+                    const currentYear = now.year;
+                    const currentMonth = now.month - 1;
+                    return !(year === currentYear && month === currentMonth);
+                }
+
+                const goPrevMonth = () => {
+                    if (!canGoBack()) return;
+                    const newMonth = month - 1;
+                    if (newMonth < 0) {
+                        setMonth(11);
+                        setYear(year - 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const goNextMonth = () => {
+                    const newMonth = month + 1;
+                    if (newMonth > 11) {
+                        setMonth(0);
+                        setYear(year + 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const selectedDateStr = selectedDate ? selectedDate.toFormat('ccc, LLL dd, yyyy') : null
+
+                const onSelectDay = (day) => {
+                    if (isBeforeToday(day)) return;
+                    const selected = DateTime.local(year, month + 1, day, {zone: timezone});
+                    setSelectedDate(selected);
+                }
+
+                const monthYearLabel = DateTime.local(year, month + 1, 1, {zone: timezone}).toLocaleString({
+                    month: 'long',
+                    year: 'numeric'
+                })
 
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -5871,6 +6124,11 @@
                                     continue to
                                     connect with a team member for assistance with your situation.
                                 </div>}
+                                {
+                                    gettingCalendar  && <div>
+                                        <i className="fas fa-spinner fa-spin progress-spinning"></i>
+                                    </div>
+                                }
                                 {step === 4 && <div className="boldBody">
                                     Make an appointment with us.
                                 </div>}
@@ -6008,23 +6266,122 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 4 &&
-                                    <iframe
-                                        src="https://hello.thehealthyinsurancedude.com/widget/booking/KYvcFmduqZScwE5asKlw"
-                                        className="book-appointment"
-                                        style={{width: '100%', border: 'none', height: '1200px'}} scrolling="no"
-                                        id="KYvcFmduqZScwE5asKlw_1750664352047">
-                                    </iframe>
+                                {step === 4 && !gettingCalendar && showCalendar &&
+                                    <div>
+                                        <div className="booking-selection-summary">
+                                            <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                            &ensp;
+                                            <i className="fas fa-calendar"></i> {selectedDateStr}
+                                            <br/>
+                                            <i className="fas fa-globe"></i>
+                                            &ensp;
+                                            <div ref={statesWrapper} style={{ position: 'relative', width: 300 }}>
+                                                <div
+                                                    onClick={() => setIsStateListOpen(!isStateListOpen)}
+                                                    style={{
+                                                        border: '1px solid #ccc',
+                                                        padding: '10px',
+                                                        cursor: 'pointer',
+                                                        background: '#fff'
+                                                    }}
+                                                >
+                                                    {selectedLabel}
+                                                </div>
+
+                                                {isStateListOpen && (
+                                                    <ul
+                                                        style={{
+                                                            listStyle: 'none',
+                                                            margin: 0,
+                                                            padding: 0,
+                                                            border: '1px solid #ccc',
+                                                            borderTop: 'none',
+                                                            maxHeight: 200,
+                                                            overflowY: 'auto',
+                                                            background: '#fff',
+                                                            position: 'absolute',
+                                                            width: '100%',
+                                                            zIndex: 10,
+                                                        }}
+                                                    >
+                                                        {timezonesList.map((tz) => {
+                                                            const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                            const time = currentTimes[tz.name] || '';
+                                                            return (
+                                                                <li
+                                                                    key={tz.name}
+                                                                    onClick={() => handleSelectState(tz)}
+                                                                    style={{
+                                                                        padding: '10px',
+                                                                        background: tz.name === timezone ? '#eee' : '#fff',
+                                                                        cursor: 'pointer',
+                                                                    }}
+                                                                >
+                                                                    {label} {time}
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="booking-header">
+                                            <button className="nav-btn" onClick={goPrevMonth}
+                                                    disabled={!canGoBack()}>&lt;</button>
+                                            <div>{monthYearLabel}</div>
+                                            <button className="nav-btn" onClick={goNextMonth}>&gt;</button>
+                                        </div>
+
+                                        <div className="calendar">
+                                            {WEEKDAYS.map(day => (
+                                                <div key={day} className="weekday-header">{day}</div>
+                                            ))}
+
+                                            {calendarDays.map((day, idx) => {
+                                                const disabled = isBeforeToday(day);
+                                                const selected = selectedDate &&
+                                                    selectedDate.year === year &&
+                                                    selectedDate.month - 1 === month &&
+                                                    selectedDate.day === day;
+                                                const isToday = day &&
+                                                    day === now.day &&
+                                                    month + 1 === now.month &&
+                                                    year === now.year
+                                                return (
+                                                    <div
+                                                        key={idx}
+                                                        className={
+                                                            "day" +
+                                                            (disabled ? " disabled" : "") +
+                                                            (selected ? " selected" : "") +
+                                                            (isToday ? " today-dot" : "")
+                                                        }
+                                                        onClick={() => onSelectDay(day)}
+                                                    >
+                                                        {day || ""}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
                                 }
                                 <div className="meta-button-container">
                                     {step > 1 && step <= 4 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
-                                    {step < 4 &&
+                                    {step < 3 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
                                                     setStep(step + 1)
+                                                }}>
+                                            Next
+                                        </button>}
+                                    {step === 3 &&
+                                        <button className="meta-next-button"
+                                                onClick={() => {
+                                                    setStep(step + 1);
+                                                    getCalendar()
                                                 }}>
                                             Next
                                         </button>}
