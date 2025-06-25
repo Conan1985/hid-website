@@ -25627,3 +25627,70 @@ a[href^="tel:"], a[href^="mailto:"] {
     color: #2490e8;
     font-size: 60px;
 }
+
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+.day {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    display: inline-block;
+    margin: auto;
+}
+.day.disabled {
+    color: #aaa;
+    cursor: default;
+    pointer-events: none;
+}
+.day:not(.disabled) {
+    background: #f0f2fd;
+    color: #007bff;
+}
+.day:not(.disabled):hover {
+    color: black;
+}
+.day:not(.disabled).selected:hover {
+    background: #007bff;
+    color: white;
+}
+.day.selected {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+.weekday-header {
+    font-weight: bold;
+    text-align: center;
+}
+.today-dot {
+    position: relative;
+}
+.today-dot::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    width: 6px;
+    height: 6px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+.booking-selection-summary {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 24px;
+    left: 10%;
+    color: gray;
+}
