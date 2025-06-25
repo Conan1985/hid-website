@@ -25627,7 +25627,31 @@ a[href^="tel:"], a[href^="mailto:"] {
     color: #2490e8;
     font-size: 60px;
 }
-
+.booking-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.nav-btn {
+    background: #f0f2fd;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #007bff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-btn:disabled {
+    color: #ccc;
+    cursor: default;
+    background: none;
+}
 
 .calendar {
     display: grid;
