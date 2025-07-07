@@ -6273,55 +6273,57 @@
                                             &ensp;
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
                                             <br/>
-                                            <i className="fas fa-globe"></i>
-                                            &ensp;
-                                            <div ref={statesWrapper} style={{ position: 'relative', width: 300 }}>
-                                                <div
-                                                    onClick={() => setIsStateListOpen(!isStateListOpen)}
-                                                    style={{
-                                                        border: '1px solid #ccc',
-                                                        padding: '10px',
-                                                        cursor: 'pointer',
-                                                        background: '#fff'
-                                                    }}
-                                                >
-                                                    {selectedLabel}
-                                                </div>
-
-                                                {isStateListOpen && (
-                                                    <ul
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                                <i className="fas fa-globe"></i>
+                                                <div ref={statesWrapper} style={{ position: 'relative', width: 300 }}>
+                                                    <div
+                                                        onClick={() => setIsStateListOpen(!isStateListOpen)}
                                                         style={{
-                                                            listStyle: 'none',
-                                                            margin: 0,
-                                                            padding: 0,
-                                                            border: '1px solid #ccc',
-                                                            borderTop: 'none',
-                                                            maxHeight: 200,
-                                                            overflowY: 'auto',
+                                                            border: '1px solid #fff',
+                                                            padding: '10px',
+                                                            cursor: 'pointer',
                                                             background: '#fff',
-                                                            position: 'absolute',
-                                                            width: '100%',
-                                                            zIndex: 10,
                                                         }}
                                                     >
-                                                        {timezonesList.map((tz) => {
-                                                            const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
-                                                            const time = currentTimes[tz.name] || '';
-                                                            return (
-                                                                <li
-                                                                    key={tz.name}
-                                                                    onClick={() => handleSelectState(tz)}
-                                                                    className="timezone-item"
-                                                                    style={{
-                                                                        background: tz.name === timezone ? '#eee' : undefined,
-                                                                    }}
-                                                                >
-                                                                    {label} {time}
-                                                                </li>
-                                                            );
-                                                        })}
-                                                    </ul>
-                                                )}
+                                                        {selectedLabel}
+                                                        <span style={{ marginLeft: 8, color: '#007bff'}}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                    </div>
+
+                                                    {isStateListOpen && (
+                                                        <ul
+                                                            style={{
+                                                                listStyle: 'none',
+                                                                margin: 0,
+                                                                padding: 0,
+                                                                border: '1px solid #ccc',
+                                                                borderTop: '1px solid #ccc',
+                                                                maxHeight: 200,
+                                                                overflowY: 'auto',
+                                                                background: '#fff',
+                                                                position: 'absolute',
+                                                                width: '100%',
+                                                                zIndex: 10,
+                                                            }}
+                                                        >
+                                                            {timezonesList.map((tz) => {
+                                                                const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                                const time = currentTimes[tz.name] || '';
+                                                                return (
+                                                                    <li
+                                                                        key={tz.name}
+                                                                        onClick={() => handleSelectState(tz)}
+                                                                        className="timezone-item"
+                                                                        style={{
+                                                                            background: tz.name === timezone ? '#eee' : undefined,
+                                                                        }}
+                                                                    >
+                                                                        {label} {time}
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="booking-header">
