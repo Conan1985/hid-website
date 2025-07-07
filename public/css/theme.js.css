@@ -25718,3 +25718,14 @@ a[href^="tel:"], a[href^="mailto:"] {
     left: 10%;
     color: gray;
 }
+
+.timezone-item {
+    padding: 10px;
+    cursor: pointer;
+    background: #fff;
+    transition: background-color 0.2s ease;
+}
+
+.timezone-item:hover {
+    background-color: #eee;
+}

@@ -6311,10 +6311,9 @@
                                                                 <li
                                                                     key={tz.name}
                                                                     onClick={() => handleSelectState(tz)}
+                                                                    className="timezone-item"
                                                                     style={{
-                                                                        padding: '10px',
-                                                                        background: tz.name === timezone ? '#eee' : '#fff',
-                                                                        cursor: 'pointer',
+                                                                        background: tz.name === timezone ? '#eee' : undefined,
                                                                     }}
                                                                 >
                                                                     {label} {time}
