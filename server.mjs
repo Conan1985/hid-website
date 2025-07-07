@@ -99,8 +99,6 @@ app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
     try {
         const account = await getAccount()
         const apexCalendar = await getCalendar(account)
-        console.log('HID Developer check account in server: ', account)
-        console.log('HID Developer check apex calendar in server: ', apexCalendar)
         if (apexCalendar.success) {
             console.log('Calendar fetched successfully')
             res.status(200).send({data: apexCalendar.data})
