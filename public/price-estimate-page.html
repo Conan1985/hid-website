@@ -5938,6 +5938,73 @@
                 const [selectedDate, setSelectedDate] = useState(null)
                 const [isStateListOpen, setIsStateListOpen] = useState(false);
                 const statesWrapper = useRef(null);
+                const [openHours, setOpenHours] = useState([
+                    {
+                        "daysOfTheWeek": [
+                            1
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            2
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            3
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            4
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            5
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    }
+                ])
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -5984,6 +6051,9 @@
                         if (calendar.data?.calendar?.slotDurationUnit) {
                             const str = calendar.data.calendar.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
+                        }
+                        if (calendar.data?.calendar?.openHours) {
+                            setOpenHours(calendar.data.calendar.openHours)
                         }
                         setShowCalendar(true)
                     } catch (error) {
@@ -6044,10 +6114,17 @@
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
                 for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
 
-                const isBeforeToday = (day) => {
+                const isDayClosed = (day) => {
                     if (!day) return true;
                     const date = DateTime.local(year, month + 1, day, {zone: timezone});
-                    return date.startOf('day') < now.startOf('day');
+                    const isBefore = date.startOf('day') < now.startOf('day');
+                    if (isBefore)
+                        return true
+                    const dayOfWeek = date.weekday % 7; // Convert 1–7 (Luxon) to 0–6 (Sunday to Saturday)
+                    const isOpenThatDay = openHours.some(entry =>
+                        entry.daysOfTheWeek.includes(dayOfWeek)
+                    );
+                    return !isOpenThatDay;
                 }
 
                 const canGoBack = () => {
@@ -6081,7 +6158,7 @@
                 const selectedDateStr = selectedDate ? selectedDate.toFormat('ccc, LLL dd, yyyy') : null
 
                 const onSelectDay = (day) => {
-                    if (isBeforeToday(day)) return;
+                    if (isDayClosed(day)) return;
                     const selected = DateTime.local(year, month + 1, day, {zone: timezone});
                     setSelectedDate(selected);
                 }
@@ -6340,7 +6417,7 @@
                                             ))}
 
                                             {calendarDays.map((day, idx) => {
-                                                const disabled = isBeforeToday(day);
+                                                const disabled = isDayClosed(day);
                                                 const selected = selectedDate &&
                                                     selectedDate.year === year &&
                                                     selectedDate.month - 1 === month &&
