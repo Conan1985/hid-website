@@ -2,11 +2,19 @@
 <head>
     <meta charset="utf-8">
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5NZGZLKC');</script>
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5NZGZLKC');</script>
     <!-- End Google Tag Manager -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C20DPJ8THM"></script>
@@ -5180,8 +5188,10 @@
 
 <body class="" data-new-gr-c-s-check-loaded="14.1166.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1166.0">
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NZGZLKC"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NZGZLKC"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -5406,7 +5416,8 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="mainLinks" aria-expanded="false" href="price-estimate-page.html">PPO Price Estimate</a>
+                                <a class="mainLinks" aria-expanded="false" href="price-estimate-page.html">PPO Price
+                                    Estimate</a>
                             </li>
                             <li>
                                 <a class="mainLinks" aria-expanded="false" href="faces-behind-brand.html">Faces</a>
@@ -6114,6 +6125,7 @@
                             setIsStateListOpen(false);
                         }
                     }
+
                     document.addEventListener("mousedown", handleClickOutside);
                     return () => document.removeEventListener("mousedown", handleClickOutside);
                 }, []);
@@ -6135,8 +6147,8 @@
                     const date = DateTime.local(year, month + 1, day, {zone: timezone});
                     const startOfDay = date.startOf('day');
                     const endOfDay = date.endOf('day');
-                    const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
-                    const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
+                    const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
+                    const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                     const isBefore = endOfDay < bookingStart;
                     const isAfter = startOfDay > bookingEnd;
                     if (isBefore || isAfter) return true;
@@ -6152,6 +6164,16 @@
                     const currentYear = now.year;
                     const currentMonth = now.month - 1;
                     return !(year === currentYear && month === currentMonth);
+                }
+
+                const canGoNext = () => {
+                    let nextMonth = month + 1
+                    let nextYear = year
+                    if (nextMonth > 11) {
+                        nextMonth = 0
+                        nextYear += 1
+                    }
+                    return !isDayClosed(1, nextMonth, nextYear)
                 }
 
                 const goPrevMonth = () => {
@@ -6223,7 +6245,7 @@
                                     connect with a team member for assistance with your situation.
                                 </div>}
                                 {
-                                    gettingCalendar  && <div>
+                                    gettingCalendar && <div>
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
@@ -6371,9 +6393,14 @@
                                             &ensp;
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
                                             <br/>
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '10px'
+                                            }}>
                                                 <i className="fas fa-globe"></i>
-                                                <div ref={statesWrapper} style={{ position: 'relative', width: 300 }}>
+                                                <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
                                                     <div
                                                         onClick={() => setIsStateListOpen(!isStateListOpen)}
                                                         style={{
@@ -6384,7 +6411,10 @@
                                                         }}
                                                     >
                                                         {selectedLabel}
-                                                        <span style={{ marginLeft: 8, color: '#007bff'}}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                        <span style={{
+                                                            marginLeft: 8,
+                                                            color: '#007bff'
+                                                        }}>{isStateListOpen ? '▲' : '▼'}</span>
                                                     </div>
 
                                                     {isStateListOpen && (
@@ -6428,7 +6458,8 @@
                                             <button className="nav-btn" onClick={goPrevMonth}
                                                     disabled={!canGoBack()}>&lt;</button>
                                             <div>{monthYearLabel}</div>
-                                            <button className="nav-btn" onClick={goNextMonth}>&gt;</button>
+                                            <button disabled={!canGoNext()} className="nav-btn"
+                                                    onClick={goNextMonth}>&gt;</button>
                                         </div>
 
                                         <div className="calendar">
