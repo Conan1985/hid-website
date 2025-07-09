@@ -24,6 +24,8 @@ const allowedOrigins = [
     ALLOWED_ORIGIN
 ];
 
+app.set('trust proxy', true)
+
 const ipLimiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 5,              // max 5 requests per IP per minute
