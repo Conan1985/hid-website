@@ -6093,6 +6093,12 @@
                             return
                         }
                         const calendarEvents = await eventsResponse.json()
+                        // TODO: based on calendar settings and events, make an array to store all available meeting
+                        //  start times, in order, from alloweBookingafter until allowebookingfor. I can save these
+                        //  start times in epoch values, as they are not changed with timezones.
+                        //  Then, when check for isDayClosed, the first one in the start time list is the bookingStart,
+                        //  and the last one in the list the bookingEnd.
+
                         if (calendarEvents.data?.events) {
                             setEvents(calendarEvents.events)
                         }
