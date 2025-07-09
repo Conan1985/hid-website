@@ -6130,7 +6130,7 @@
                 for (let i = 0; i < startDay; i++) calendarDays.push(null);
                 for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
 
-                const isDayClosed = (day) => {
+                const isDayClosed = (day, month, year) => {
                     if (!day) return true;
                     const date = DateTime.local(year, month + 1, day, {zone: timezone});
                     const startOfDay = date.startOf('day');
@@ -6178,7 +6178,7 @@
                 const selectedDateStr = selectedDate ? selectedDate.toFormat('ccc, LLL dd, yyyy') : null
 
                 const onSelectDay = (day) => {
-                    if (isDayClosed(day)) return;
+                    if (isDayClosed(day, month, year)) return;
                     const selected = DateTime.local(year, month + 1, day, {zone: timezone});
                     setSelectedDate(selected);
                 }
@@ -6437,7 +6437,7 @@
                                             ))}
 
                                             {calendarDays.map((day, idx) => {
-                                                const disabled = isDayClosed(day);
+                                                const disabled = isDayClosed(day, month, year);
                                                 const selected = selectedDate &&
                                                     selectedDate.year === year &&
                                                     selectedDate.month - 1 === month &&
