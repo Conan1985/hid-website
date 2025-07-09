@@ -5810,6 +5810,7 @@
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
             const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             const DateTime = luxon.DateTime
+            const apexLocation = 'US/Central'
             const LOCATIONS = [
                 'Etc/GMT+12',
                 'Pacific/Midway',
@@ -6092,10 +6093,9 @@
                             return
                         }
                         const calendarEvents = await eventsResponse.json()
-                        if (calendarEvents.events) {
+                        if (calendarEvents.data?.events) {
                             setEvents(calendarEvents.events)
                         }
-                        console.log('HID Developer check events: ', calendarEvents)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
@@ -6163,8 +6163,9 @@
                     const endOfDay = date.endOf('day');
                     const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
                     const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
-                    const isBefore = endOfDay < bookingStart;
-                    const isAfter = startOfDay > bookingEnd;
+                    const { adjustedBookingStart, adjustedBookingEnd } = adjustBookingWindow(bookingStart, bookingEnd)
+                    const isBefore = endOfDay < adjustedBookingStart;
+                    const isAfter = startOfDay > adjustedBookingEnd;
                     if (isBefore || isAfter) return true;
                     const dayOfWeek = date.weekday % 7; // Convert 1–7 (Luxon) to 0–6 (Sunday to Saturday)
                     const isOpenThatDay = openHours.some(entry =>
@@ -6172,6 +6173,68 @@
                     );
                     return !isOpenThatDay;
                 }
+
+                const adjustBookingWindow = (bookingStart, bookingEnd) => {
+                    const getNextValidOpenTime = (dt) => {
+                        for (let i = 0; i < 7; i++) {
+                            const nextDay = dt.plus({ days: i }).setZone(apexLocation);
+                            const dayOfWeek = nextDay.weekday % 7;
+
+                            const entry = openHours.find(e => e.daysOfTheWeek.includes(dayOfWeek));
+                            if (entry && entry.hours.length > 0) {
+                                const { openHour, openMinute } = entry.hours[0];
+                                return nextDay.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
+                            }
+                        }
+                        return dt;
+                    };
+
+                    const getLastValidCloseTime = (dt) => {
+                        for (let i = 0; i < 7; i++) {
+                            const prevDay = dt.minus({ days: i }).setZone(apexLocation);
+                            const dayOfWeek = prevDay.weekday % 7;
+
+                            const entry = openHours.find(e => e.daysOfTheWeek.includes(dayOfWeek));
+                            if (entry && entry.hours.length > 0) {
+                                const { closeHour, closeMinute } = entry.hours[0];
+                                return prevDay.set({ hour: closeHour, minute: closeMinute, second: 0, millisecond: 0 });
+                            }
+                        }
+                        return dt;
+                    };
+
+                    let bookingStartCentral = bookingStart.setZone(apexLocation);
+                    let bookingEndCentral = bookingEnd.setZone(apexLocation);
+
+                    const dayOfStart = bookingStartCentral.startOf('day');
+                    const startEntry = openHours.find(e => e.daysOfTheWeek.includes(dayOfStart.weekday % 7));
+                    if (startEntry) {
+                        const { closeHour, closeMinute } = startEntry.hours[0];
+                        const closeTime = dayOfStart.set({ hour: closeHour, minute: closeMinute });
+                        if (bookingStartCentral > closeTime) {
+                            bookingStartCentral = getNextValidOpenTime(bookingStartCentral.plus({ days: 1 }));
+                        }
+                    } else {
+                        bookingStartCentral = getNextValidOpenTime(bookingStartCentral.plus({ days: 1 }));
+                    }
+
+                    const dayOfEnd = bookingEndCentral.startOf('day');
+                    const endEntry = openHours.find(e => e.daysOfTheWeek.includes(dayOfEnd.weekday % 7));
+                    if (endEntry) {
+                        const { openHour, openMinute } = endEntry.hours[0];
+                        const openTime = dayOfEnd.set({ hour: openHour, minute: openMinute });
+                        if (bookingEndCentral < openTime) {
+                            bookingEndCentral = getLastValidCloseTime(bookingEndCentral.minus({ days: 1 }));
+                        }
+                    } else {
+                        bookingEndCentral = getLastValidCloseTime(bookingEndCentral.minus({ days: 1 }));
+                    }
+
+                    return {
+                        adjustedBookingStart: bookingStartCentral.setZone(bookingStart.zoneName),
+                        adjustedBookingEnd: bookingEndCentral.setZone(bookingEnd.zoneName)
+                    };
+                };
 
                 const canGoBack = () => {
                     const now = DateTime.now().setZone(timezone);
