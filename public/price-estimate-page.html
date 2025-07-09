@@ -6005,6 +6005,10 @@
                         ]
                     }
                 ])
+                const [allowBookingAfterUnit, setAllowBookingAfterUnit] = useState('hours')
+                const [allowBookingAfter, setAllowBookingAfter] = useState(1)
+                const [allowBookingFor, setAllowBookingFor] = useState(31)
+                const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6054,6 +6058,18 @@
                         }
                         if (calendar.data?.calendar?.openHours) {
                             setOpenHours(calendar.data.calendar.openHours)
+                        }
+                        if (calendar.data?.calendar?.allowBookingAfterUnit) {
+                            setAllowBookingAfterUnit(calendar.data.calendar.allowBookingAfterUnit)
+                        }
+                        if (calendar.data?.calendar?.allowBookingAfter) {
+                            setAllowBookingAfter(calendar.data.calendar.allowBookingAfter)
+                        }
+                        if (calendar.data?.calendar?.allowBookingForUnit) {
+                            setAllowBookingForUnit(calendar.data.calendar.allowBookingForUnit)
+                        }
+                        if (calendar.data?.calendar?.allowBookingFor) {
+                            setAllowBookingFor(calendar.data.calendar.allowBookingFor)
                         }
                         setShowCalendar(true)
                     } catch (error) {
@@ -6116,10 +6132,13 @@
 
                 const isDayClosed = (day) => {
                     if (!day) return true;
-                    const date = DateTime.local(year, month + 1, day, {zone: timezone});
-                    const isBefore = date.startOf('day') < now.startOf('day');
-                    if (isBefore)
-                        return true
+                    const date = DateTime.local(year, month + 1, day, {zone: timezone}).startOf('day');
+                    const nowStart = now.startOf('day')
+                    const bookingStart = nowStart.plus({ [allowBookingAfterUnit]: allowBookingAfter });
+                    const bookingEnd = nowStart.plus({ [allowBookingForUnit]: allowBookingFor });
+                    const isBefore = date < bookingStart;
+                    const isAfter = date > bookingEnd;
+                    if (isBefore || isAfter) return true;
                     const dayOfWeek = date.weekday % 7; // Convert 1–7 (Luxon) to 0–6 (Sunday to Saturday)
                     const isOpenThatDay = openHours.some(entry =>
                         entry.daysOfTheWeek.includes(dayOfWeek)
