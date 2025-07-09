@@ -6050,10 +6050,10 @@
 
                 const getCalendar = async () => {
                     setGettingCalendar(true)
-                    const url = APP_BASE_URL + '/getCalendar'
+                    const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
                     try {
-                        const response = await fetch(url)
+                        const response = await fetch(calendarUrl)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
                             return
@@ -6082,6 +6082,12 @@
                         if (calendar.data?.calendar?.allowBookingFor) {
                             setAllowBookingFor(calendar.data.calendar.allowBookingFor)
                         }
+                        const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
+                            + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
+                            + '&allowBookingForUnit=' + allowBookingForUnit
+
+                        const eventsResponse = await fetch(eventsUrl)
+                        console.log('HID Developer check events response: ', eventsResponse)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)

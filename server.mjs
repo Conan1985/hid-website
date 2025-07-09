@@ -6,6 +6,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import {getAccount} from "./services/Database.js";
 import rateLimit from "express-rate-limit";
+import { DateTime } from 'luxon';
 
 const app = express();
 
@@ -182,6 +183,61 @@ const getCalendar = async (account) => {
         }
     } catch (error) {
         console.error(`Error in get calendar for ${account.business_name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
+    try {
+        console.log('HID Developer check calendar events reqs: ', req)
+        const allowBookingAfter = req.query.allowBookingAfter
+        const allowBookingAfterUnit = req.query.allowBookingAfterUnit
+        const allowBookingFor = req.query.allowBookingFor
+        const allowBookingForUnit = req.query.allowBookingForUnit
+        const now = DateTime.now()
+        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter})
+        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor})
+        const account = await getAccount()
+        const events = await getCalendarEvents(account, bookingStart.valueOf(), bookingEnd.valueOf())
+        if (events.success) {
+            console.log('Calendar events fetched successfully')
+            res.status(200).send({data: events.data})
+        } else {
+            console.log('Error in get calendar events: ', events)
+            res.status(500).send('Error in get calendar events')
+        }
+    } catch (err) {
+        console.error('Unexpected error in get calendar events: ', err)
+        res.status(500).send('Unexpected error in get calendar events: ', err)
+    }
+})
+
+const getCalendarEvents = async (account, startTime, endTime) => {
+    try {
+        console.log('HID Developer check start time: ', startTime)
+        console.log('HID Developer check end time: ', endTime)
+        const url = baseUrl + '/calendars/events?locationId=' + account.location_id + '&startTime=' + startTime
+            +  '&endTime=' + endTime + '&calendarId=' + account.calendar_id
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-04-15'
+            }
+        })
+        const responseData = await response.json()
+        const success = response.status === 200
+        return {
+            success: success,
+            data: responseData
+        }
+    } catch (error) {
+        console.error(`Error in get calendar events for ${account.business_name}: `, error)
         return {
             success: false,
             data: error
