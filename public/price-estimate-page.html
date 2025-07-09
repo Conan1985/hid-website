@@ -6020,6 +6020,7 @@
                 const [allowBookingAfter, setAllowBookingAfter] = useState(1)
                 const [allowBookingFor, setAllowBookingFor] = useState(31)
                 const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
+                const [events, setEvents] = useState([])
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6090,8 +6091,11 @@
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                             return
                         }
-                        const events = await eventsResponse.json()
-                        console.log('HID Developer check events: ', events)
+                        const calendarEvents = await eventsResponse.json()
+                        if (calendarEvents.events) {
+                            setEvents(calendarEvents.events)
+                        }
+                        console.log('HID Developer check events: ', calendarEvents)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
