@@ -6132,12 +6132,13 @@
 
                 const isDayClosed = (day) => {
                     if (!day) return true;
-                    const date = DateTime.local(year, month + 1, day, {zone: timezone}).startOf('day');
-                    const nowStart = now.startOf('day')
-                    const bookingStart = nowStart.plus({ [allowBookingAfterUnit]: allowBookingAfter });
-                    const bookingEnd = nowStart.plus({ [allowBookingForUnit]: allowBookingFor });
-                    const isBefore = date < bookingStart;
-                    const isAfter = date > bookingEnd;
+                    const date = DateTime.local(year, month + 1, day, {zone: timezone});
+                    const startOfDay = date.startOf('day');
+                    const endOfDay = date.endOf('day');
+                    const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
+                    const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
+                    const isBefore = endOfDay < bookingStart;
+                    const isAfter = startOfDay > bookingEnd;
                     if (isBefore || isAfter) return true;
                     const dayOfWeek = date.weekday % 7; // Convert 1–7 (Luxon) to 0–6 (Sunday to Saturday)
                     const isOpenThatDay = openHours.some(entry =>
