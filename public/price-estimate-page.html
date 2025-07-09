@@ -6059,7 +6059,6 @@
                             return
                         }
                         const calendar = await response.json()
-                        console.log('HID Developer check calendar response: ', calendar)
                         if (calendar.data?.calendar?.slotDuration) {
                             setSlotDuration(calendar.data.calendar.slotDuration)
                         }
