@@ -6087,7 +6087,12 @@
                             + '&allowBookingForUnit=' + allowBookingForUnit
 
                         const eventsResponse = await fetch(eventsUrl)
-                        console.log('HID Developer check events response: ', eventsResponse)
+                        if (!eventsResponse.ok) {
+                            console.error(`HTTP error! status: ${eventsResponse.status}`)
+                            return
+                        }
+                        const events = await eventsResponse.json()
+                        console.log('HID Developer check events: ', events)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)

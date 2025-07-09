@@ -192,7 +192,6 @@ const getCalendar = async (account) => {
 
 app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
     try {
-        console.log('HID Developer check calendar events reqs: ', req)
         const allowBookingAfter = req.query.allowBookingAfter
         const allowBookingAfterUnit = req.query.allowBookingAfterUnit
         const allowBookingFor = req.query.allowBookingFor
@@ -217,8 +216,6 @@ app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
 
 const getCalendarEvents = async (account, startTime, endTime) => {
     try {
-        console.log('HID Developer check start time: ', startTime)
-        console.log('HID Developer check end time: ', endTime)
         const url = baseUrl + '/calendars/events?locationId=' + account.location_id + '&startTime=' + startTime
             +  '&endTime=' + endTime + '&calendarId=' + account.calendar_id
         const response = await fetch(url, {
