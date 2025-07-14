@@ -6097,7 +6097,6 @@
                         }
                         let events = []
                         const calendarEvents = await eventsResponse.json()
-                        console.log('HID Developer check calendar events: ', calendarEvents)
                         if (calendarEvents.data?.events) {
                             events = calendarEvents.data.events
                         }
@@ -6140,21 +6139,17 @@
                             });
                         }
                         starts.sort((a, b) => a.toMillis() - b.toMillis());
-                        console.log('HID Developer reach events count')
-                        console.log('HID Developer check events: ', events)
                         const eventCounts = new Map();
                         events.forEach(event => {
                             const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
                             eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
                         });
-                        console.log('HID Developer start assign filtered starts')
                         const filteredStarts = starts.filter(slot => {
                             const slotTime = slot.toUTC().toISO(); // Normalize to UTC
                             const count = eventCounts.get(slotTime) || 0;
                             return count < APPOINTMENTS_CAP;
                         })
                         setSlotStarts(filteredStarts)
-                        console.log('HID Developer reach set slot starts', filteredStarts)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
