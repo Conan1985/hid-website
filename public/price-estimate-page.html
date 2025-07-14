@@ -6140,6 +6140,7 @@
                         }
                         starts.sort((a, b) => a.toMillis() - b.toMillis());
                         console.log('HID Developer reach events count')
+                        console.log('HID Developer check events: ', events)
                         const eventCounts = new Map();
                         events.forEach(event => {
                             const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
