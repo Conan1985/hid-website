@@ -6097,8 +6097,9 @@
                         }
                         let events = []
                         const calendarEvents = await eventsResponse.json()
+                        console.log('HID Developer check calendar events: ', calendarEvents)
                         if (calendarEvents.data?.events) {
-                            events = calendarEvents.events
+                            events = calendarEvents.data.events
                         }
                         const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
                         const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
