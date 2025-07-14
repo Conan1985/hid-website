@@ -6115,8 +6115,7 @@
                             const base = time.set({ second: 0, millisecond: 0 });
                             return base.set({ minute: 0 }).plus({ minutes: roundedMinutes });
                         }
-                        const starts = [];
-                        console.log('HID Developer reach processing starts')
+                        const starts = []
                         for (
                             let date = bookingStart.startOf('day');
                             date <= bookingEnd;
@@ -6141,13 +6140,12 @@
                         }
                         starts.sort((a, b) => a.toMillis() - b.toMillis());
                         console.log('HID Developer reach events count')
-
                         const eventCounts = new Map();
                         events.forEach(event => {
                             const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
                             eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
                         });
-
+                        console.log('HID Developer start assign filtered starts')
                         const filteredStarts = starts.filter(slot => {
                             const slotTime = slot.toUTC().toISO(); // Normalize to UTC
                             const count = eventCounts.get(slotTime) || 0;
