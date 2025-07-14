@@ -6211,6 +6211,7 @@
                 for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
 
                 const isDayClosed = (day, month, year) => {
+                    if (!day) return true
                     const targetStart = DateTime.fromObject(
                         { year, month: month + 1, day, hour: 0, minute: 0, second: 0, millisecond: 0 },
                         { zone: timezone }
