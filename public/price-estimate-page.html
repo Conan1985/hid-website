@@ -6097,6 +6097,8 @@
                         }
                         let events = []
                         const calendarEvents = await eventsResponse.json()
+
+                        console.log('HID Developer reach the events reading: ')
                         if (calendarEvents.data?.events) {
                             events = calendarEvents.events
                         }
@@ -6153,6 +6155,7 @@
                             return count < APPOINTMENTS_CAP;
                         })
                         setSlotStarts(filteredStarts)
+                        console.log('HID Developer reach set slot starts', filteredStarts)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
