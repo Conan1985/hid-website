@@ -6098,7 +6098,7 @@
                         let events = []
                         const calendarEvents = await eventsResponse.json()
 
-                        console.log('HID Developer reach the events reading: ')
+                        console.log('HID Developer reach the events reading. ')
                         if (calendarEvents.data?.events) {
                             events = calendarEvents.events
                         }
@@ -6118,6 +6118,8 @@
                             return base.set({ minute: 0 }).plus({ minutes: roundedMinutes });
                         }
                         const starts = [];
+
+                        console.log('HID Developer reach processing starts')
 
                         for (
                             let date = bookingStart.startOf('day');
