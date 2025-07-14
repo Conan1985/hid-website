@@ -5812,6 +5812,7 @@
             const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             const DateTime = luxon.DateTime
             const Duration = luxon.Duration
+            const APPOINTMENTS_CAP = 20
             const apexLocation = 'US/Central'
             const LOCATIONS = [
                 'Etc/GMT+12',
@@ -6023,7 +6024,7 @@
                 const [allowBookingAfter, setAllowBookingAfter] = useState(1)
                 const [allowBookingFor, setAllowBookingFor] = useState(31)
                 const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
-                const [events, setEvents] = useState([])
+                const [slotStarts, setSlotStarts] = useState([])
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6094,59 +6095,64 @@
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                             return
                         }
+                        let events = []
                         const calendarEvents = await eventsResponse.json()
-                        // TODO: based on calendar settings and events, make an array to store all available meeting
-                        //  start times, in order, from alloweBookingafter until allowebookingfor. I can save these
-                        //  start times in epoch values, as they are not changed with timezones.
-                        //  Then, when check for isDayClosed, the first one in the start time list is the bookingStart,
-                        //  and the last one in the list the bookingEnd.
-
-                        // const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
-                        // const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
-                        //
-                        // const slotDurationObj = Duration.fromObject({ [slotDurationUnit]: slotDuration });
-                        //
-                        // const dayMap = new Map();
-                        // openHours.forEach(entry => {
-                        //     entry.daysOfTheWeek.forEach(day => {
-                        //         dayMap.set(day, entry.hours);
-                        //     });
-                        // });
-                        //
-                        // const result = [];
-                        //
-                        // for (let date = bookingStart.startOf('day'); date <= bookingEnd; date = date.plus({ days: 1 })) {
-                        //     const weekday = date.weekday; // 1 = Monday, 7 = Sunday
-                        //
-                        //     if (!dayMap.has(weekday)) continue;
-                        //
-                        //     const hoursForDay = dayMap.get(weekday);
-                        //
-                        //     hoursForDay.forEach(({ openHour, openMinute, closeHour, closeMinute }) => {
-                        //         let slotStart = date.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
-                        //         const slotEnd = date.set({ hour: closeHour, minute: closeMinute });
-                        //
-                        //         if (slotStart < bookingStart) {
-                        //             slotStart = bookingStart > slotEnd ? slotEnd : bookingStart;
-                        //         }
-                        //
-                        //         while (slotStart.plus(slotDurationObj) <= slotEnd) {
-                        //             if (slotStart >= bookingStart && slotStart <= bookingEnd) {
-                        //                 result.push(slotStart);
-                        //             }
-                        //             slotStart = slotStart.plus(slotDurationObj);
-                        //         }
-                        //     });
-                        // }
-                        //
-                        // result.sort((a, b) => a.toMillis() - b.toMillis());
-                        //
-                        // console.log('HID Developer check result: ', result)
-                        // console.log('HID Developer check result map: ', result.map(dt => dt.toISO()))
-
                         if (calendarEvents.data?.events) {
-                            setEvents(calendarEvents.events)
+                            events = calendarEvents.events
                         }
+                        const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
+                        const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
+                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration });
+                        const dayMap = new Map();
+                        openHours.forEach(entry => {
+                            entry.daysOfTheWeek.forEach(day => {
+                                dayMap.set(day, entry.hours);
+                            });
+                        });
+                        function ceilToNextSlot(time, slotDurationMins) {
+                            const minutes = time.minute;
+                            const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
+                            const base = time.set({ second: 0, millisecond: 0 });
+                            return base.set({ minute: 0 }).plus({ minutes: roundedMinutes });
+                        }
+                        const starts = [];
+
+                        for (
+                            let date = bookingStart.startOf('day');
+                            date <= bookingEnd;
+                            date = date.plus({ days: 1 })
+                        ) {
+                            const weekday = date.weekday; // 1 = Monday, 7 = Sunday
+                            if (!dayMap.has(weekday)) continue;
+                            const hoursForDay = dayMap.get(weekday);
+                            hoursForDay.forEach(({ openHour, openMinute, closeHour, closeMinute }) => {
+                                let slotStart = date.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
+                                const slotEnd = date.set({ hour: closeHour, minute: closeMinute });
+                                if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
+                                    slotStart = ceilToNextSlot(bookingStart, slotDuration);
+                                }
+                                while (slotStart.plus(slotDurationObj) <= slotEnd) {
+                                    if (slotStart >= bookingStart && slotStart <= bookingEnd) {
+                                        starts.push(slotStart);
+                                    }
+                                    slotStart = slotStart.plus(slotDurationObj);
+                                }
+                            });
+                        }
+                        starts.sort((a, b) => a.toMillis() - b.toMillis());
+
+                        const eventCounts = new Map();
+                        events.forEach(event => {
+                            const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
+                            eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
+                        });
+
+                        const filteredStarts = starts.filter(slot => {
+                            const slotTime = slot.toUTC().toISO(); // Normalize to UTC
+                            const count = eventCounts.get(slotTime) || 0;
+                            return count < APPOINTMENTS_CAP;
+                        })
+                        setSlotStarts(filteredStarts)
                         setShowCalendar(true)
                     } catch (error) {
                         console.error('Error in get calendar: ', error)
@@ -6208,84 +6214,17 @@
                 for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
 
                 const isDayClosed = (day, month, year) => {
-                    if (!day) return true;
-                    const date = DateTime.local(year, month + 1, day, {zone: timezone});
-                    const startOfDay = date.startOf('day');
-                    const endOfDay = date.endOf('day');
-                    const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
-                    const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
-                    const { adjustedBookingStart, adjustedBookingEnd } = adjustBookingWindow(bookingStart, bookingEnd)
-                    const isBefore = endOfDay < adjustedBookingStart;
-                    const isAfter = startOfDay > adjustedBookingEnd;
-                    if (isBefore || isAfter) return true;
-                    const dayOfWeek = date.weekday % 7; // Convert 1–7 (Luxon) to 0–6 (Sunday to Saturday)
-                    const isOpenThatDay = openHours.some(entry =>
-                        entry.daysOfTheWeek.includes(dayOfWeek)
+                    const targetStart = DateTime.fromObject(
+                        { year, month, day, hour: 0, minute: 0, second: 0, millisecond: 0 },
+                        { zone: timezone }
                     );
-                    return !isOpenThatDay;
+
+                    const targetEnd = targetStart.endOf('day');
+
+                    return !slotStarts.some(dt =>
+                        dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                    );
                 }
-
-                const adjustBookingWindow = (bookingStart, bookingEnd) => {
-                    const getNextValidOpenTime = (dt) => {
-                        for (let i = 0; i < 7; i++) {
-                            const nextDay = dt.plus({ days: i }).setZone(apexLocation);
-                            const dayOfWeek = nextDay.weekday % 7;
-
-                            const entry = openHours.find(e => e.daysOfTheWeek.includes(dayOfWeek));
-                            if (entry && entry.hours.length > 0) {
-                                const { openHour, openMinute } = entry.hours[0];
-                                return nextDay.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
-                            }
-                        }
-                        return dt;
-                    };
-
-                    const getLastValidCloseTime = (dt) => {
-                        for (let i = 0; i < 7; i++) {
-                            const prevDay = dt.minus({ days: i }).setZone(apexLocation);
-                            const dayOfWeek = prevDay.weekday % 7;
-
-                            const entry = openHours.find(e => e.daysOfTheWeek.includes(dayOfWeek));
-                            if (entry && entry.hours.length > 0) {
-                                const { closeHour, closeMinute } = entry.hours[0];
-                                return prevDay.set({ hour: closeHour, minute: closeMinute, second: 0, millisecond: 0 });
-                            }
-                        }
-                        return dt;
-                    };
-
-                    let bookingStartCentral = bookingStart.setZone(apexLocation);
-                    let bookingEndCentral = bookingEnd.setZone(apexLocation);
-
-                    const dayOfStart = bookingStartCentral.startOf('day');
-                    const startEntry = openHours.find(e => e.daysOfTheWeek.includes(dayOfStart.weekday % 7));
-                    if (startEntry) {
-                        const { closeHour, closeMinute } = startEntry.hours[0];
-                        const closeTime = dayOfStart.set({ hour: closeHour, minute: closeMinute });
-                        if (bookingStartCentral > closeTime) {
-                            bookingStartCentral = getNextValidOpenTime(bookingStartCentral.plus({ days: 1 }));
-                        }
-                    } else {
-                        bookingStartCentral = getNextValidOpenTime(bookingStartCentral.plus({ days: 1 }));
-                    }
-
-                    const dayOfEnd = bookingEndCentral.startOf('day');
-                    const endEntry = openHours.find(e => e.daysOfTheWeek.includes(dayOfEnd.weekday % 7));
-                    if (endEntry) {
-                        const { openHour, openMinute } = endEntry.hours[0];
-                        const openTime = dayOfEnd.set({ hour: openHour, minute: openMinute });
-                        if (bookingEndCentral < openTime) {
-                            bookingEndCentral = getLastValidCloseTime(bookingEndCentral.minus({ days: 1 }));
-                        }
-                    } else {
-                        bookingEndCentral = getLastValidCloseTime(bookingEndCentral.minus({ days: 1 }));
-                    }
-
-                    return {
-                        adjustedBookingStart: bookingStartCentral.setZone(bookingStart.zoneName),
-                        adjustedBookingEnd: bookingEndCentral.setZone(bookingEnd.zoneName)
-                    };
-                };
 
                 const canGoBack = () => {
                     const now = DateTime.now().setZone(timezone);
@@ -6337,6 +6276,20 @@
                     month: 'long',
                     year: 'numeric'
                 })
+
+                const normalizeUnit = (unit) => {
+                    const map = {
+                        mins: 'minutes',
+                        minutes: 'minutes',
+                        min: 'minutes',
+                        hrs: 'hours',
+                        hour: 'hours',
+                        hours: 'hours',
+                        days: 'days',
+                        day: 'days',
+                    };
+                    return map[unit.toLowerCase()];
+                }
 
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
