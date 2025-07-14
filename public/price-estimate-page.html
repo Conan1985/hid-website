@@ -5811,6 +5811,7 @@
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
             const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             const DateTime = luxon.DateTime
+            const Duration = luxon.Duration
             const apexLocation = 'US/Central'
             const LOCATIONS = [
                 'Etc/GMT+12',
@@ -6100,69 +6101,48 @@
                         //  Then, when check for isDayClosed, the first one in the start time list is the bookingStart,
                         //  and the last one in the list the bookingEnd.
 
-//                         import { DateTime, Duration } from 'luxon';
-//
-//                         const openHours = [
-//                             { daysOfTheWeek: [1], hours: [{ openHour: 8, openMinute: 30, closeHour: 17, closeMinute: 30 }] },
-//                             { daysOfTheWeek: [2], hours: [{ openHour: 8, openMinute: 30, closeHour: 17, closeMinute: 30 }] },
-//                             { daysOfTheWeek: [3], hours: [{ openHour: 8, openMinute: 30, closeHour: 17, closeMinute: 30 }] },
-//                             { daysOfTheWeek: [4], hours: [{ openHour: 8, openMinute: 30, closeHour: 17, closeMinute: 30 }] },
-//                             { daysOfTheWeek: [5], hours: [{ openHour: 8, openMinute: 30, closeHour: 17, closeMinute: 30 }] },
-//                         ];
-//
-//                         const allowBookingAfterUnit = 'hours';
-//                         const allowBookingAfter = 1;
-//                         const allowBookingFor = 31;
-//                         const allowBookingForUnit = 'days';
-//                         const slotDuration = 30;
-//                         const slotDurationUnit = 'minutes'; // Luxon accepts 'minutes', not 'Mins'
-//                         const timezone = 'US/Central';
-//
-//                         const now = DateTime.now().setZone(timezone);
-//                         const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
-//                         const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
-//
-//                         const slotDurationObj = Duration.fromObject({ [slotDurationUnit]: slotDuration });
-//
-// // Flatten openHours into map of weekday -> list of hour ranges
-//                         const dayMap = new Map();
-//                         openHours.forEach(entry => {
-//                             entry.daysOfTheWeek.forEach(day => {
-//                                 dayMap.set(day, entry.hours);
-//                             });
-//                         });
-//
-//                         const result = [];
-//
-//                         for (let date = bookingStart.startOf('day'); date <= bookingEnd; date = date.plus({ days: 1 })) {
-//                             const weekday = date.weekday; // 1 = Monday, 7 = Sunday
-//
-//                             if (!dayMap.has(weekday)) continue;
-//
-//                             const hoursForDay = dayMap.get(weekday);
-//
-//                             hoursForDay.forEach(({ openHour, openMinute, closeHour, closeMinute }) => {
-//                                 let slotStart = date.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
-//                                 const slotEnd = date.set({ hour: closeHour, minute: closeMinute });
-//
-//                                 // Skip slots before bookingStart on first day
-//                                 if (slotStart < bookingStart) {
-//                                     slotStart = bookingStart > slotEnd ? slotEnd : bookingStart;
-//                                 }
-//
-//                                 while (slotStart.plus(slotDurationObj) <= slotEnd) {
-//                                     if (slotStart >= bookingStart && slotStart <= bookingEnd) {
-//                                         result.push(slotStart);
-//                                     }
-//                                     slotStart = slotStart.plus(slotDurationObj);
-//                                 }
-//                             });
-//                         }
-//
-// // Sort by time, just in case
-//                         result.sort((a, b) => a.toMillis() - b.toMillis());
-//
-//                         console.log(result.map(dt => dt.toISO()));
+                        // const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
+                        // const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
+                        //
+                        // const slotDurationObj = Duration.fromObject({ [slotDurationUnit]: slotDuration });
+                        //
+                        // const dayMap = new Map();
+                        // openHours.forEach(entry => {
+                        //     entry.daysOfTheWeek.forEach(day => {
+                        //         dayMap.set(day, entry.hours);
+                        //     });
+                        // });
+                        //
+                        // const result = [];
+                        //
+                        // for (let date = bookingStart.startOf('day'); date <= bookingEnd; date = date.plus({ days: 1 })) {
+                        //     const weekday = date.weekday; // 1 = Monday, 7 = Sunday
+                        //
+                        //     if (!dayMap.has(weekday)) continue;
+                        //
+                        //     const hoursForDay = dayMap.get(weekday);
+                        //
+                        //     hoursForDay.forEach(({ openHour, openMinute, closeHour, closeMinute }) => {
+                        //         let slotStart = date.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
+                        //         const slotEnd = date.set({ hour: closeHour, minute: closeMinute });
+                        //
+                        //         if (slotStart < bookingStart) {
+                        //             slotStart = bookingStart > slotEnd ? slotEnd : bookingStart;
+                        //         }
+                        //
+                        //         while (slotStart.plus(slotDurationObj) <= slotEnd) {
+                        //             if (slotStart >= bookingStart && slotStart <= bookingEnd) {
+                        //                 result.push(slotStart);
+                        //             }
+                        //             slotStart = slotStart.plus(slotDurationObj);
+                        //         }
+                        //     });
+                        // }
+                        //
+                        // result.sort((a, b) => a.toMillis() - b.toMillis());
+                        //
+                        // console.log('HID Developer check result: ', result)
+                        // console.log('HID Developer check result map: ', result.map(dt => dt.toISO()))
 
                         if (calendarEvents.data?.events) {
                             setEvents(calendarEvents.events)
@@ -6656,7 +6636,7 @@
                                             Next
                                         </button>}
                                     {step === 3 &&
-                                        <button className="meta-next-button"
+                                        <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
                                                     setStep(step + 1);
                                                     getCalendar()
