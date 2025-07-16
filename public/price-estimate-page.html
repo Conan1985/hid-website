@@ -6027,6 +6027,7 @@
                 const [showSlotsList, setShowSlotsList] = useState(false)
                 const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
                 const [slotsList, setSlotsList] = useState([])
+                const [selectedSlot, setSelectedSlot] = useState(null)
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6321,6 +6322,10 @@
                     return map[unit.toLowerCase()];
                 }
 
+                const onSelectSlot = (slot) => {
+                    console.log('HID Developer check slot selected: ', slot)
+                }
+
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 }, [step])
@@ -6513,9 +6518,9 @@
                                                 <button className="meta-back-button"
                                                         style={{fontSize: 'large'}}
                                                         onClick={() => {
-                                                    setShowCalendar(true);
-                                                    setShowSlotsList(false)
-                                                }}>
+                                                            setShowCalendar(true);
+                                                            setShowSlotsList(false)
+                                                        }}>
                                                     <i className="fa fa-arrow-left" aria-hidden="true"></i> Change date
                                                 </button>
                                             }
@@ -6637,13 +6642,39 @@
                                             showSlotsList &&
                                             <div>
                                                 <div>Choose Time Slot</div>
-                                                <div className="booking-selection-summary">Duration : {slotDuration} {slotDurationUnit}</div>
-                                                <ul>
+                                                <div className="booking-selection-summary">Duration
+                                                    : {slotDuration} {slotDurationUnit}</div>
+                                                <div className="slot-list">
                                                     {slotsList.map((slot, index) => {
-                                                        const localTime = slot.setZone(timezone).toFormat('h:mm a');
-                                                        return <li key={index}>{localTime}</li>;
+                                                        const timeLabel = slot.setZone(timezone).toFormat('h:mm a')
+                                                        const isSelected = selectedSlot === slot
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                className={`slot-item ${isSelected ? 'selected' : ''}`}
+                                                                onClick={() => setSelectedSlot(slot)}
+                                                            >
+                                                                {isSelected ? (
+                                                                    <>
+                                                                        <div className="slot-left">{timeLabel}</div>
+                                                                        <div className="gap" />
+                                                                        <button
+                                                                            className="slot-right"
+                                                                            onClick={(e) => {
+                                                                                e.stopPropagation();
+                                                                                onSelectSlot(slot);
+                                                                            }}
+                                                                        >
+                                                                            Select
+                                                                        </button>
+                                                                    </>
+                                                                ) : (
+                                                                    <div className="slot-full">{timeLabel}</div>
+                                                                )}
+                                                            </div>
+                                                        )
                                                     })}
-                                                </ul>
+                                                </div>
                                             </div>
                                         }
                                     </div>
