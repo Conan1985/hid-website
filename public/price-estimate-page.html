@@ -6292,13 +6292,12 @@
                             second: 0,
                             millisecond: 0
                         },
-                        { zone: timezone }
+                        {zone: timezone}
                     );
                     const targetEnd = targetStart.endOf('day');
-                    const list = slotStarts.filter(dt =>
-                    {
-                        return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
-                    }
+                    const list = slotStarts.filter(dt => {
+                            return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                        }
                     )
                     setSlotsList(list)
                 }
@@ -6518,7 +6517,11 @@
                                                     <i className="fa fa-arrow-left" aria-hidden="true"></i> Change date
                                                 </button>
                                             }
-                                            <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                            {showCalendar &&
+                                                <span>
+                                                    <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                                </span>
+                                            }
                                             &ensp;
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
                                             <br/>
@@ -6631,7 +6634,8 @@
                                         {
                                             showSlotsList &&
                                             <div>
-                                                Choose Time Slot
+                                                <div>Choose Time Slot</div>
+                                                <div>Duration : {slotDuration} {slotDurationUnit}</div>
                                                 <ul>
                                                     {slotsList.map((slot, index) => {
                                                         const localTime = slot.setZone(timezone).toFormat('h:mm a');
