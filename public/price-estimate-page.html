@@ -6657,7 +6657,6 @@
                                                                 {isSelected ? (
                                                                     <>
                                                                         <div className="slot-left">{timeLabel}</div>
-                                                                        <div className="gap" />
                                                                         <button
                                                                             className="slot-right"
                                                                             onClick={(e) => {
@@ -6691,8 +6690,7 @@
                                             setShowSlotsList(false);
                                             setErrorGettingCalendar(false)
                                         }}>
-                                            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to previous
-                                            step
+                                            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to price estimation
                                         </button>}
                                     {step < 3 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
