@@ -5813,7 +5813,6 @@
             const DateTime = luxon.DateTime
             const Duration = luxon.Duration
             const APPOINTMENTS_CAP = 20
-            const apexLocation = 'US/Central'
             const LOCATIONS = [
                 'Etc/GMT+12',
                 'Pacific/Midway',
@@ -6027,6 +6026,7 @@
                 const [slotStarts, setSlotStarts] = useState([])
                 const [showSlotsList, setShowSlotsList] = useState(false)
                 const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
+                const [slotsList, setSlotsList] = useState([])
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6282,6 +6282,24 @@
                     setSelectedDate(selected);
                     setShowSlotsList(true);
                     setShowCalendar(false);
+                    const targetStart = DateTime.fromObject(
+                        {
+                            year,
+                            month,
+                            day,
+                            hour: 0,
+                            minute: 0,
+                            second: 0,
+                            millisecond: 0
+                        },
+                        { zone: timezone }
+                    );
+                    const targetEnd = targetStart.endOf('day');
+                    const list = slotStarts.filter(dt =>
+                        dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                    );
+                    console.log('hid developer check list: ', list)
+                    setSlotsList(list)
                 }
 
                 const monthYearLabel = DateTime.local(year, month + 1, 1, {zone: timezone}).toLocaleString({
