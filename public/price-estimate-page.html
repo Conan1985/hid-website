@@ -6490,6 +6490,15 @@
                                 {step === 4 && !gettingCalendar &&
                                     <div>
                                         <div className="booking-selection-summary">
+                                            {
+                                                showSlotsList &&
+                                                <button className="meta-back-button" onClick={() => {
+                                                    setShowCalendar(true);
+                                                    setShowSlotsList(false)
+                                                }}>
+                                                    <i className="fa fa-arrow-left" aria-hidden="true"></i>Choose date
+                                                </button>
+                                            }
                                             <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
                                             &ensp;
                                             <i className="fas fa-calendar"></i> {selectedDateStr}
@@ -6603,16 +6612,9 @@
                                         {
                                             showSlotsList &&
                                             <div>
-                                                <button className="meta-back-button" onClick={() => {
-                                                    setShowCalendar(true);
-                                                    setShowSlotsList(false)
-                                                }}>
-                                                    <i className="fa fa-arrow-left" aria-hidden="true"></i> Go back to
-                                                    choose date
-                                                </button>
                                                 <div>
-                                                    8:30 - 9:00 <br />
-                                                    9:00 - 9:30 <br />
+                                                    8:30 - 9:00 <br/>
+                                                    9:00 - 9:30 <br/>
                                                 </div>
                                             </div>
                                         }
