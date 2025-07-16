@@ -6060,13 +6060,543 @@
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
                     try {
-                        const response = await fetch(calendarUrl)
-                        if (!response.ok) {
-                            setErrorGettingCalendar(true)
-                            console.error(`HTTP error! status: ${response.status}`)
-                            return
+                        // const response = await fetch(calendarUrl)
+                        // if (!response.ok) {
+                        //     setErrorGettingCalendar(true)
+                        //     console.error(`HTTP error! status: ${response.status}`)
+                        //     return
+                        // }
+                        // const calendar = await response.json()
+
+                        const calendar = {
+                            "data": {
+                                "calendar": {
+                                    "id": "KYvcFmduqZScwE5asKlw",
+                                    "notifications": [],
+                                    "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                    "groupId": "",
+                                    "teamMembers": [
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "MV30eCh3Wa56JA9Dj3ZA",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "isPrimary": true,
+                                            "useMeetingForCollective": true,
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "0K4CgdINHCEaHWo9XSNS",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "ISD03MECrG03YxiZhcfh",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "JEZYTsJMzo4dA8jxgRAk",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "9p6wXGhML9DBuz4629CW",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "OUuVOJmyjFeIshj0Cjjo",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "OwUBPF9B6LbMudh6xN3v",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "WFYcFamDCY13JshTzq30",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "Ypq6rnavGFyvxigNe8Ry",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "YtPN1OWkmrh2z6SctRvE",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "iYnlcyqRumRN6nTLdYbu",
+                                            "isZoomAdded": "phone",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "{{location.phone}}",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "{{location.phone}}",
+                                                    "position": 0,
+                                                    "kind": "zoom_conference",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "zoom_conference_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "kdqIvq6fgXmtPceDyCht",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "ml5LK8W9dTpCrAcexLFB",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "mwaAoJgR3UDrlfPjdwRa",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "p7AqvJ76bwGPCdS5Ef0B",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "p9PbtruBesjOQVCHCUA5",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "qzOckVbt2HRhjiwBa5pP",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        },
+                                        {
+                                            "priority": 0.5,
+                                            "selected": true,
+                                            "userId": "r5DRaSv21cftncNjA7O2",
+                                            "isZoomAdded": "false",
+                                            "zoomOauthId": "",
+                                            "meetingLocation": "",
+                                            "locationConfigurations": [
+                                                {
+                                                    "location": "",
+                                                    "position": 0,
+                                                    "kind": "custom",
+                                                    "zoomOauthId": "",
+                                                    "meetingId": "custom_0"
+                                                }
+                                            ],
+                                            "useMeetingForCollective": false
+                                        }
+                                    ],
+                                    "eventType": "RoundRobin_OptimizeForAvailability",
+                                    "name": "Healthy Insurance Dude Calendar",
+                                    "description": "",
+                                    "widgetSlug": "ld-apex-booking",
+                                    "calendarType": "collective",
+                                    "widgetType": "default",
+                                    "eventTitle": "{{contact.name}}",
+                                    "eventColor": "#039BE5",
+                                    "slotDuration": 30,
+                                    "slotDurationUnit": "mins",
+                                    "slotInterval": 30,
+                                    "slotIntervalUnit": "mins",
+                                    "slotBuffer": 0,
+                                    "slotBufferUnit": "mins",
+                                    "appoinmentPerSlot": 1,
+                                    "appoinmentPerDay": 1000,
+                                    "openHours": [
+                                        {
+                                            "daysOfTheWeek": [
+                                                0
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 11,
+                                                    "openMinute": 0,
+                                                    "closeHour": 13,
+                                                    "closeMinute": 0
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                1
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 30,
+                                                    "closeHour": 17,
+                                                    "closeMinute": 30
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                2
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 30,
+                                                    "closeHour": 17,
+                                                    "closeMinute": 30
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                3
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 30,
+                                                    "closeHour": 17,
+                                                    "closeMinute": 30
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                4
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 30,
+                                                    "closeHour": 17,
+                                                    "closeMinute": 30
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                5
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 30,
+                                                    "closeHour": 17,
+                                                    "closeMinute": 30
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "daysOfTheWeek": [
+                                                6
+                                            ],
+                                            "hours": [
+                                                {
+                                                    "openHour": 9,
+                                                    "openMinute": 0,
+                                                    "closeHour": 12,
+                                                    "closeMinute": 0
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "enableRecurring": false,
+                                    "recurring": {
+                                        "monthDays": [],
+                                        "weekDays": [],
+                                        "count": 1,
+                                        "bookingOption": "skip",
+                                        "bookingOverlapDefaultStatus": "",
+                                        "interval": null,
+                                        "freq": "DAILY"
+                                    },
+                                    "formId": "sMBzmLZl6VvXlghU9jsy",
+                                    "stickyContact": false,
+                                    "isLivePaymentMode": false,
+                                    "autoConfirm": true,
+                                    "googleInvitationEmails": false,
+                                    "allowReschedule": true,
+                                    "allowCancellation": true,
+                                    "shouldAssignContactToTeamMember": false,
+                                    "shouldSkipAssigningContactForExisting": false,
+                                    "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+                                    "pixelId": "",
+                                    "formSubmitType": "ThankYouMessage",
+                                    "formSubmitRedirectUrl": "",
+                                    "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+                                    "availabilities": [
+                                        {
+                                            "_id": "67e6dd80deded45811a28fed",
+                                            "date": "2025-04-04T00:00:00.000Z",
+                                            "hours": [
+                                                {
+                                                    "openHour": 8,
+                                                    "openMinute": 0,
+                                                    "closeHour": 12,
+                                                    "closeMinute": 0
+                                                }
+                                            ],
+                                            "calendarId": "KYvcFmduqZScwE5asKlw",
+                                            "createdAt": "2025-03-28T17:33:52.493Z",
+                                            "updatedAt": "2025-07-07T20:29:29.332Z",
+                                            "__v": 25
+                                        },
+                                        {
+                                            "_id": "67e6d8a1f4fc4565f9e28911",
+                                            "date": "2025-04-05T00:00:00.000Z",
+                                            "hours": [],
+                                            "calendarId": "KYvcFmduqZScwE5asKlw",
+                                            "createdAt": "2025-03-28T17:13:05.092Z",
+                                            "updatedAt": "2025-03-28T17:13:05.092Z",
+                                            "__v": 0
+                                        },
+                                        {
+                                            "_id": "6835f32b6710ed2ecb54c686",
+                                            "date": "2025-05-31T00:00:00.000Z",
+                                            "hours": [],
+                                            "calendarId": "KYvcFmduqZScwE5asKlw",
+                                            "createdAt": "2025-05-27T17:15:23.462Z",
+                                            "updatedAt": "2025-05-27T17:15:23.462Z",
+                                            "__v": 0
+                                        },
+                                        {
+                                            "_id": "6862a42de38d8c4e8ce06b31",
+                                            "date": "2025-07-04T00:00:00.000Z",
+                                            "hours": [],
+                                            "calendarId": "KYvcFmduqZScwE5asKlw",
+                                            "createdAt": "2025-06-30T14:50:21.074Z",
+                                            "updatedAt": "2025-06-30T14:50:21.074Z",
+                                            "__v": 0
+                                        }
+                                    ],
+                                    "guestType": "collect_detail",
+                                    "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+                                    "calendarCoverImage": "",
+                                    "lookBusyConfig": {
+                                        "enabled": false,
+                                        "lookBusyPercentage": 0
+                                    },
+                                    "allowBookingAfterUnit": "hours",
+                                    "allowBookingAfter": 1,
+                                    "allowBookingFor": 31,
+                                    "allowBookingForUnit": "days",
+                                    "preBuffer": 0,
+                                    "preBufferUnit": "mins",
+                                    "isActive": true
+                                },
+                                "traceId": "733990af-88ec-4118-89f7-5dce7896d0cc"
+                            }
                         }
-                        const calendar = await response.json()
                         if (calendar.data?.calendar?.slotDuration) {
                             setSlotDuration(calendar.data.calendar.slotDuration)
                         }
@@ -6089,21 +6619,1373 @@
                         if (calendar.data?.calendar?.allowBookingFor) {
                             setAllowBookingFor(calendar.data.calendar.allowBookingFor)
                         }
-                        const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
-                            + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
-                            + '&allowBookingForUnit=' + allowBookingForUnit
+                        // const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
+                        //     + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
+                        //     + '&allowBookingForUnit=' + allowBookingForUnit
+                        //
+                        // const eventsResponse = await fetch(eventsUrl)
+                        // if (!eventsResponse.ok) {
+                        //     setErrorGettingCalendar(true)
+                        //     console.error(`HTTP error! status: ${eventsResponse.status}`)
+                        //     return
+                        // }
+                        // let events = []
+                        // const calendarEvents = await eventsResponse.json()
+                        // if (calendarEvents.data?.events) {
+                        //     events = calendarEvents.data.events
+                        // }
 
-                        const eventsResponse = await fetch(eventsUrl)
-                        if (!eventsResponse.ok) {
-                            setErrorGettingCalendar(true)
-                            console.error(`HTTP error! status: ${eventsResponse.status}`)
-                            return
-                        }
-                        let events = []
-                        const calendarEvents = await eventsResponse.json()
-                        if (calendarEvents.data?.events) {
-                            events = calendarEvents.data.events
-                        }
+                        const events = [
+                            {
+                                "appointmentStatus": "showed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "WyUHoRjfLwwvqU9JOTXw",
+                                "dateAdded": "2025-07-05T11:25:37.810Z",
+                                "dateUpdated": "2025-07-09T17:57:17.583Z",
+                                "endTime": "2025-07-09T09:00:00-05:00",
+                                "id": "BaINW5Xm0RPe6tvm6A6P",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T08:30:00-05:00",
+                                "title": "Nicole Penney",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "0K4CgdINHCEaHWo9XSNS",
+                                    "ISD03MECrG03YxiZhcfh",
+                                    "JEZYTsJMzo4dA8jxgRAk",
+                                    "9p6wXGhML9DBuz4629CW",
+                                    "OUuVOJmyjFeIshj0Cjjo",
+                                    "OwUBPF9B6LbMudh6xN3v",
+                                    "WFYcFamDCY13JshTzq30",
+                                    "Ypq6rnavGFyvxigNe8Ry",
+                                    "YtPN1OWkmrh2z6SctRvE",
+                                    "iYnlcyqRumRN6nTLdYbu",
+                                    "kdqIvq6fgXmtPceDyCht",
+                                    "ml5LK8W9dTpCrAcexLFB",
+                                    "mwaAoJgR3UDrlfPjdwRa",
+                                    "p7AqvJ76bwGPCdS5Ef0B",
+                                    "p9PbtruBesjOQVCHCUA5",
+                                    "qzOckVbt2HRhjiwBa5pP",
+                                    "r5DRaSv21cftncNjA7O2"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "GITEZfI1m7NWjZUGQioE",
+                                "dateAdded": "2025-07-09T13:30:12.120Z",
+                                "dateUpdated": "2025-07-09T13:30:12.120Z",
+                                "endTime": "2025-07-09T09:30:00-05:00",
+                                "id": "NCWGwZfuGQJ8goqn5MIC",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T09:00:00-05:00",
+                                "title": "Tatiana El-Khouri",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "exAA5oXwLJFjl91SGfe0",
+                                "dateAdded": "2025-07-04T14:06:15.757Z",
+                                "dateUpdated": "2025-07-04T14:06:15.757Z",
+                                "endTime": "2025-07-09T10:00:00-05:00",
+                                "id": "5TaJDmemhJ7TA1hjcCki",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T09:30:00-05:00",
+                                "title": "Michele Greene",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "5d92yzDruPmZGklBaF3z",
+                                "dateAdded": "2025-07-09T01:17:25.814Z",
+                                "dateUpdated": "2025-07-09T01:17:25.814Z",
+                                "endTime": "2025-07-09T10:00:00-05:00",
+                                "id": "7UBwgzQzpQmD70YZmwCh",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T09:30:00-05:00",
+                                "title": "David Wexler",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OwUBPF9B6LbMudh6xN3v"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "vHwiYXlwd6fq7MlNXwfZ",
+                                "dateAdded": "2025-07-08T23:48:48.938Z",
+                                "dateUpdated": "2025-07-08T23:48:48.938Z",
+                                "endTime": "2025-07-09T10:00:00-05:00",
+                                "id": "VIXcYkAVtq1tWv6qgIFM",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T09:30:00-05:00",
+                                "title": "Jordan Braunstein",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "FQyWRwZliRVLtt4PyW36",
+                                "dateAdded": "2025-07-08T22:20:44.442Z",
+                                "dateUpdated": "2025-07-08T22:20:44.442Z",
+                                "endTime": "2025-07-09T11:30:00-05:00",
+                                "id": "cY1t5xxI05svZNbRzn29",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T11:00:00-05:00",
+                                "title": "Colleen Santos",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "kdqIvq6fgXmtPceDyCht"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "1EVaHaTCof98nOVEfchY",
+                                "dateAdded": "2025-07-07T22:29:52.540Z",
+                                "dateUpdated": "2025-07-07T22:29:52.540Z",
+                                "endTime": "2025-07-09T11:30:00-05:00",
+                                "id": "qlSToED0j8dVoVbegYzy",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T11:00:00-05:00",
+                                "title": "Jeff Stokez",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "Ypq6rnavGFyvxigNe8Ry"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "arMYso6Nj7h7spnNIFsC",
+                                "dateAdded": "2025-07-08T17:52:52.617Z",
+                                "dateUpdated": "2025-07-08T17:52:52.617Z",
+                                "endTime": "2025-07-09T11:30:00-05:00",
+                                "id": "qmKwTbiXquo9IwTRHoFK",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T11:00:00-05:00",
+                                "title": "David  Linn",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "0K4CgdINHCEaHWo9XSNS"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "wpkgXwcJw3d1egA0uF5A",
+                                "dateAdded": "2025-07-09T06:52:35.580Z",
+                                "dateUpdated": "2025-07-09T06:52:35.580Z",
+                                "endTime": "2025-07-09T12:00:00-05:00",
+                                "id": "0K4NpqkO45tmFLcKvLnM",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T11:30:00-05:00",
+                                "title": "David Cogburn",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "YtPN1OWkmrh2z6SctRvE"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "hiEEgXHogkKuGLoOGRWN",
+                                "dateAdded": "2025-07-08T15:17:43.925Z",
+                                "dateUpdated": "2025-07-08T15:17:43.925Z",
+                                "endTime": "2025-07-09T12:30:00-05:00",
+                                "id": "yrbd2fZNbEC9QSbHxneH",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T12:00:00-05:00",
+                                "title": "Bryce Justice",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "0K4CgdINHCEaHWo9XSNS"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "hcuJ0yFzEwq0VuJUNiVq",
+                                "dateAdded": "2025-07-09T15:32:45.891Z",
+                                "dateUpdated": "2025-07-09T15:35:50.848Z",
+                                "endTime": "2025-07-09T13:00:00-05:00",
+                                "id": "0EG6jbp8VQ1OHB9QUtVD",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T12:30:00-05:00",
+                                "title": "Jasper Posner",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "lFARrjyaro2Uqjtbjefs",
+                                "dateAdded": "2025-07-09T07:51:45.272Z",
+                                "dateUpdated": "2025-07-09T13:21:53.873Z",
+                                "endTime": "2025-07-09T13:00:00-05:00",
+                                "id": "jmobHZoXeIuUz273LHec",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T12:30:00-05:00",
+                                "title": "Ebenezer Peters",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "p9PbtruBesjOQVCHCUA5"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "MXOsXHS7M2n7mZIBaFMd",
+                                "dateAdded": "2025-07-09T16:50:19.817Z",
+                                "dateUpdated": "2025-07-09T16:50:19.817Z",
+                                "endTime": "2025-07-09T14:00:00-05:00",
+                                "id": "cVM6C1UN4vMN8aXJQ6Zr",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T13:30:00-05:00",
+                                "title": "John Carnemolla",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "YtPN1OWkmrh2z6SctRvE"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "mEEvLwWXVUjEuYNruOSZ",
+                                "dateAdded": "2025-07-08T06:23:45.732Z",
+                                "dateUpdated": "2025-07-08T13:58:36.246Z",
+                                "endTime": "2025-07-09T14:30:00-05:00",
+                                "id": "I1BEBmfEzrBzVdJ0FKXc",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T14:00:00-05:00",
+                                "title": "Mathew Yuriditsky",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "p9PbtruBesjOQVCHCUA5"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "kQWifhx370ygAnaFsCeB",
+                                "dateAdded": "2025-07-09T14:00:03.757Z",
+                                "dateUpdated": "2025-07-09T14:00:03.757Z",
+                                "endTime": "2025-07-09T14:30:00-05:00",
+                                "id": "gfJPFRcKmXp84GvqsNEM",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T14:00:00-05:00",
+                                "title": "Lindsey Kayne",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "25PupAmeSZl9dxJNEjY8",
+                                "dateAdded": "2025-07-08T02:54:59.254Z",
+                                "dateUpdated": "2025-07-08T02:54:59.254Z",
+                                "endTime": "2025-07-09T16:30:00-05:00",
+                                "id": "TgKh6qj5cdFF0JHAlRfx",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T16:00:00-05:00",
+                                "title": "Sithara Das",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "YtPN1OWkmrh2z6SctRvE"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "9Ro8Jj7OKJvwRpSk2vQG",
+                                "dateAdded": "2025-07-03T02:53:22.465Z",
+                                "dateUpdated": "2025-07-03T02:53:22.465Z",
+                                "endTime": "2025-07-09T17:30:00-05:00",
+                                "id": "0pPDKeCE4KpYbucirK1q",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-09T17:00:00-05:00",
+                                "title": "S Wong",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OwUBPF9B6LbMudh6xN3v"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "vOmLalAFzh4zIfxoxK0T",
+                                "dateAdded": "2025-07-09T16:02:37.055Z",
+                                "dateUpdated": "2025-07-09T16:02:37.055Z",
+                                "endTime": "2025-07-10T09:00:00-05:00",
+                                "id": "F45Iwv3rvLzcfpBi0vhI",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T08:30:00-05:00",
+                                "title": "Joseph Johnson",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OwUBPF9B6LbMudh6xN3v"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "JHu5I3VevLfq8O0hF2Qt",
+                                "dateAdded": "2025-07-09T16:03:01.787Z",
+                                "dateUpdated": "2025-07-09T16:03:01.787Z",
+                                "endTime": "2025-07-10T10:30:00-05:00",
+                                "id": "0PyoPCwqXDah2KY2NQKI",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T10:00:00-05:00",
+                                "title": "Gail Nolan",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "Ypq6rnavGFyvxigNe8Ry"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "uro5a5c3rOhVdbyE4cJs",
+                                "dateAdded": "2025-06-16T15:45:45.061Z",
+                                "dateUpdated": "2025-06-16T15:45:45.061Z",
+                                "endTime": "2025-07-10T11:00:00-05:00",
+                                "id": "ycSLQj8wwN1vhDaVqjuH",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-10T10:30:00-05:00",
+                                "title": "Scott Harmon",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "wHIYlElbiaiAoeysmWyX",
+                                "dateAdded": "2025-07-06T11:21:32.005Z",
+                                "dateUpdated": "2025-07-06T11:21:32.005Z",
+                                "endTime": "2025-07-10T12:00:00-05:00",
+                                "id": "TqeNkKZDf4SJgC0681vG",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T11:30:00-05:00",
+                                "title": "Ralph Marroquin",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "j0cpGJvuyYTG5VfpU4Oo",
+                                "dateAdded": "2025-07-09T01:17:20.529Z",
+                                "dateUpdated": "2025-07-09T01:17:20.529Z",
+                                "endTime": "2025-07-10T12:30:00-05:00",
+                                "id": "6mQgOTKl0LcH9WSzQJdD",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T12:00:00-05:00",
+                                "title": "Gail Rivas",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "xrYTVhnMiG9WwsDc1H8w",
+                                "dateAdded": "2025-07-09T09:11:09.317Z",
+                                "dateUpdated": "2025-07-09T09:11:09.317Z",
+                                "endTime": "2025-07-10T12:30:00-05:00",
+                                "id": "XNS7l7vsqUE2xZTaosmr",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T12:00:00-05:00",
+                                "title": "Mike Vila",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "Ypq6rnavGFyvxigNe8Ry"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "zGX3yv7HKI0H6uJIXIgJ",
+                                "dateAdded": "2025-07-04T14:35:27.884Z",
+                                "dateUpdated": "2025-07-04T14:35:27.884Z",
+                                "endTime": "2025-07-10T13:30:00-05:00",
+                                "id": "5CltoqSK16OpPrDPUw8G",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T13:00:00-05:00",
+                                "title": "Andy Steuer",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "ISD03MECrG03YxiZhcfh"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "dPOd5WeJWnBT42INjgtc",
+                                "dateAdded": "2025-07-09T01:32:57.775Z",
+                                "dateUpdated": "2025-07-09T13:56:37.213Z",
+                                "endTime": "2025-07-10T14:00:00-05:00",
+                                "id": "PO0HIbbVx9DY6as7yNl6",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T13:30:00-05:00",
+                                "title": "Jacqueline  Ojeda ",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "p9PbtruBesjOQVCHCUA5"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "booking_widget",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "EVcPCNAa72f3r7xxunCH",
+                                "dateAdded": "2025-07-03T03:51:18.247Z",
+                                "dateUpdated": "2025-07-03T03:51:18.247Z",
+                                "endTime": "2025-07-10T14:30:00-05:00",
+                                "id": "GxiQUAFSeaLM5LbVezfp",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T14:00:00-05:00",
+                                "title": "Loreen Gill",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "IhzyFugUkmcfVoDQJ6tQ",
+                                "dateAdded": "2025-07-09T00:18:30.314Z",
+                                "dateUpdated": "2025-07-09T00:18:30.314Z",
+                                "endTime": "2025-07-10T16:00:00-05:00",
+                                "id": "Eu8KAcTQ8ZHHGUoWoUeP",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T15:30:00-05:00",
+                                "title": "Yuliya Rabinovich",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "vjGlG4atZV9s4HDao8UG",
+                                "dateAdded": "2025-06-19T21:59:24.460Z",
+                                "dateUpdated": "2025-06-19T21:59:24.460Z",
+                                "endTime": "2025-07-10T16:30:00-05:00",
+                                "id": "iwTWyVhMxKIYlCrxQKL3",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-10T16:00:00-05:00",
+                                "title": "Wendy Portier",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "puoOfiF23Pb6A6bOiBVZ",
+                                "dateAdded": "2025-05-22T22:29:30.339Z",
+                                "dateUpdated": "2025-06-10T14:29:57.430Z",
+                                "endTime": "2025-07-10T17:30:00-05:00",
+                                "id": "AXEqgi93Dhr8V2Lg9DNn",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T17:00:00-05:00",
+                                "title": "Wendy Sudberry",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OwUBPF9B6LbMudh6xN3v"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "cSPnz8VnQRgZRDAn12NA",
+                                "dateAdded": "2025-07-09T09:40:46.560Z",
+                                "dateUpdated": "2025-07-09T13:16:58.316Z",
+                                "endTime": "2025-07-10T18:00:00-05:00",
+                                "id": "Deqm5UwV7xi84dAMDl7k",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-10T17:30:00-05:00",
+                                "title": "Tim Jones",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OwUBPF9B6LbMudh6xN3v"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "P20bZQWc41YQBNdpMVh4",
+                                "dateAdded": "2025-07-08T03:54:04.681Z",
+                                "dateUpdated": "2025-07-08T13:50:16.416Z",
+                                "endTime": "2025-07-11T09:00:00-05:00",
+                                "id": "2VGW6bvpyoBa91cC55WS",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T08:30:00-05:00",
+                                "title": "Bryan Palmer",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "p9PbtruBesjOQVCHCUA5"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "wAFRwRDEC7YtzPA0LNkG",
+                                "dateAdded": "2025-07-09T14:33:16.898Z",
+                                "dateUpdated": "2025-07-09T14:33:16.898Z",
+                                "endTime": "2025-07-11T10:30:00-05:00",
+                                "id": "unKqECM7uzmAE9UxqjEW",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T10:00:00-05:00",
+                                "title": "Kimberly Thornton",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "ISD03MECrG03YxiZhcfh"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "wtZwOma7OZeSmBHvw6n7",
+                                "dateAdded": "2025-06-26T22:13:43.217Z",
+                                "dateUpdated": "2025-06-26T22:13:43.217Z",
+                                "endTime": "2025-07-11T12:30:00-05:00",
+                                "id": "B9a57xkaIxliC7KVfN5t",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T12:00:00-05:00",
+                                "title": "Malaika Durbin",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "YtPN1OWkmrh2z6SctRvE"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "FKOIbSPAXLRUoVWumdj7",
+                                "dateAdded": "2025-07-08T06:23:44.687Z",
+                                "dateUpdated": "2025-07-08T06:23:44.687Z",
+                                "endTime": "2025-07-11T12:30:00-05:00",
+                                "id": "J1JlV5HvAkK5J8eVjZBZ",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T12:00:00-05:00",
+                                "title": "Chuck Cabell",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "RZcGd3GHR6aWdrtXXDy9",
+                                "dateAdded": "2025-07-08T14:18:14.896Z",
+                                "dateUpdated": "2025-07-08T14:18:14.896Z",
+                                "endTime": "2025-07-11T12:30:00-05:00",
+                                "id": "OjlENKfiVeJPaJeuWq1U",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T12:00:00-05:00",
+                                "title": "David Gonzales",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "kdqIvq6fgXmtPceDyCht"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "EYTOW8UAn2EH3Wjf93al",
+                                "dateAdded": "2025-07-07T22:00:01.168Z",
+                                "dateUpdated": "2025-07-07T22:00:01.168Z",
+                                "endTime": "2025-07-11T12:30:00-05:00",
+                                "id": "VvFGj1VGvgDVHnsXhQnV",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T12:00:00-05:00",
+                                "title": "Marie Belle Vega",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "OUuVOJmyjFeIshj0Cjjo"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "4fkOAhjOw8H5IONO2NfS",
+                                "dateAdded": "2025-07-08T17:16:20.961Z",
+                                "dateUpdated": "2025-07-08T17:16:20.961Z",
+                                "endTime": "2025-07-11T14:00:00-05:00",
+                                "id": "nuZePt4o7ngLgUQhnqKn",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-11T13:30:00-05:00",
+                                "title": "Ariel Cornett",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "Zuo2pqLxSXqOwQS0uPLK",
+                                "dateAdded": "2025-07-06T14:07:01.533Z",
+                                "dateUpdated": "2025-07-06T14:07:01.533Z",
+                                "endTime": "2025-07-14T09:30:00-05:00",
+                                "id": "AyHjJ5ceVJGWDNJrgD7G",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-14T09:00:00-05:00",
+                                "title": "Joe Williams",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "GTotjpj2OTiiqhbDJZWf",
+                                "dateAdded": "2025-07-09T18:39:58.967Z",
+                                "dateUpdated": "2025-07-09T18:39:58.967Z",
+                                "endTime": "2025-07-14T12:30:00-05:00",
+                                "id": "dJga0xGxboaAY6cLfprD",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-14T12:00:00-05:00",
+                                "title": "Peter Richichi",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "0K4CgdINHCEaHWo9XSNS"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "jarRVY45nNfZOYGIUbE2",
+                                "dateAdded": "2025-07-01T16:13:30.823Z",
+                                "dateUpdated": "2025-07-01T16:13:30.823Z",
+                                "endTime": "2025-07-15T11:30:00-05:00",
+                                "id": "C9zeCoCvdaPoQTUb7mlC",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-15T11:00:00-05:00",
+                                "title": "Celina Shelton",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "4S4ri9oSuy3FDGpoKrjH",
+                                "dateAdded": "2025-07-01T20:35:09.001Z",
+                                "dateUpdated": "2025-07-01T20:35:09.001Z",
+                                "endTime": "2025-07-15T16:00:00-05:00",
+                                "id": "m7Wit2pR7A30yOvQWpBT",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-15T15:30:00-05:00",
+                                "title": "Randi Juergens",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "vSUVS3ykJ46q4gnKufKB",
+                                "dateAdded": "2025-06-27T12:03:23.711Z",
+                                "dateUpdated": "2025-06-27T12:03:23.711Z",
+                                "endTime": "2025-07-17T12:30:00-05:00",
+                                "id": "rwvCosFzsYp5cOVUP6pW",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-17T12:00:00-05:00",
+                                "title": "Nelida Reis",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "NiqB8ogaYkH7WmA0N7dI",
+                                "dateAdded": "2025-07-09T18:39:36.641Z",
+                                "dateUpdated": "2025-07-09T18:39:36.641Z",
+                                "endTime": "2025-07-18T15:30:00-05:00",
+                                "id": "ETQV3vyRbtO6ohZma48D",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-18T15:00:00-05:00",
+                                "title": "Michelle Back",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "p9PbtruBesjOQVCHCUA5"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "QsQqO2FrlnDCD2royRFM",
+                                "dateAdded": "2025-07-01T17:55:41.171Z",
+                                "dateUpdated": "2025-07-01T17:55:41.171Z",
+                                "endTime": "2025-07-25T14:30:00-05:00",
+                                "id": "3Hou6BPEDRkds0rGyomp",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-07-25T14:00:00-05:00",
+                                "title": "Guillermo  Gutierrez ",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "mwaAoJgR3UDrlfPjdwRa"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "6M0M27RW9o5uEOVMKoSh",
+                                "dateAdded": "2025-06-27T18:56:33.677Z",
+                                "dateUpdated": "2025-06-27T18:56:33.677Z",
+                                "endTime": "2025-07-25T14:30:00-05:00",
+                                "id": "I9SETlSWlwElFYnl57Eh",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-25T14:00:00-05:00",
+                                "title": "Clyde Mattie",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "Gos9Zr7s1oMKwZ8fLoI5",
+                                "dateAdded": "2025-06-23T18:49:22.134Z",
+                                "dateUpdated": "2025-06-23T18:49:22.134Z",
+                                "endTime": "2025-07-28T14:30:00-05:00",
+                                "id": "deQRpTkMxES9Dykt7KsE",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-07-28T14:00:00-05:00",
+                                "title": "Laura Leinhos",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "XvC1VzazIYsD7znjZ8u8",
+                                "dateAdded": "2025-06-10T15:40:29.637Z",
+                                "dateUpdated": "2025-06-10T15:40:29.637Z",
+                                "endTime": "2025-08-01T11:00:00-05:00",
+                                "id": "goCzeNdiVisxTAv5bU2e",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-01T10:30:00-05:00",
+                                "title": "Jeremiah Fitzjerrells",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "m8iUe0jWEIFDKN2WegW9",
+                                "dateAdded": "2025-05-20T16:25:35.221Z",
+                                "dateUpdated": "2025-05-20T16:25:35.221Z",
+                                "endTime": "2025-08-01T12:00:00-05:00",
+                                "id": "b9s0TApQRFpNax9nHUou",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-01T11:30:00-05:00",
+                                "title": "Michael Columbo",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "EnHRBsdcScVtX1OwMPuQ",
+                                "dateAdded": "2025-05-04T09:37:21.511Z",
+                                "dateUpdated": "2025-05-06T22:11:37.447Z",
+                                "endTime": "2025-08-01T17:30:00-05:00",
+                                "id": "SHAta2U7oxMHM8dq7ng0",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "startTime": "2025-08-01T17:00:00-05:00",
+                                "title": "Chester Hale",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "ml5LK8W9dTpCrAcexLFB"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "third_party",
+                                    "userId": null
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "CaQFJDzhHvMuOFHJFgs1",
+                                "dateAdded": "2025-05-29T14:08:53.422Z",
+                                "dateUpdated": "2025-05-29T14:08:53.422Z",
+                                "endTime": "2025-08-04T10:00:00-05:00",
+                                "id": "4g0NrxmXh2JDg1aUSPW4",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-04T09:30:00-05:00",
+                                "title": "Aniceto Carriedo",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "qzOckVbt2HRhjiwBa5pP",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "CaQFJDzhHvMuOFHJFgs1",
+                                "dateAdded": "2025-05-29T14:08:16.799Z",
+                                "dateUpdated": "2025-05-29T14:08:16.799Z",
+                                "endTime": "2025-08-04T10:00:00-05:00",
+                                "id": "tUvgf8H1NztBUYGUp3V0",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-04T09:30:00-05:00",
+                                "title": "Aniceto Carriedo",
+                                "users": [
+                                    "qzOckVbt2HRhjiwBa5pP",
+                                    "MV30eCh3Wa56JA9Dj3ZA"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "jlrOK8o7lrdJS2jKLOLb",
+                                "dateAdded": "2025-06-18T22:04:13.572Z",
+                                "dateUpdated": "2025-06-18T22:04:13.572Z",
+                                "endTime": "2025-08-04T17:00:00-05:00",
+                                "id": "2yogMD4tn9rvPHSylZ7J",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-04T16:30:00-05:00",
+                                "title": "Michelle Mcclintock",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "oNA7JFXBSKIWkRKC1a7f",
+                                "dateAdded": "2025-06-12T13:45:45.468Z",
+                                "dateUpdated": "2025-06-12T13:45:45.468Z",
+                                "endTime": "2025-08-05T09:30:00-05:00",
+                                "id": "LgGG3NfpDn1FVNi17HwL",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-05T09:00:00-05:00",
+                                "title": "Keith M. Sedor",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "LhEIORVMNyLfjUfblTJS",
+                                "dateAdded": "2025-05-27T22:47:53.626Z",
+                                "dateUpdated": "2025-05-27T22:47:53.626Z",
+                                "endTime": "2025-08-05T18:00:00-05:00",
+                                "id": "M45PdRq2vP0i0BYJHaAS",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-05T17:30:00-05:00",
+                                "title": "Lisa Donnelly",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            },
+                            {
+                                "appointmentStatus": "confirmed",
+                                "assignedUserId": "MV30eCh3Wa56JA9Dj3ZA",
+                                "address": "",
+                                "calendarId": "KYvcFmduqZScwE5asKlw",
+                                "contactId": "kxK1I9wOxoH2YYblYqVx",
+                                "dateAdded": "2025-04-03T18:14:31.001Z",
+                                "dateUpdated": "2025-04-07T15:50:01.611Z",
+                                "endTime": "2025-08-07T13:00:00-05:00",
+                                "id": "7FCZyWxyZGekQQSBHVg2",
+                                "locationId": "J8hiEgSGT3mr6Dl7WX69",
+                                "notes": "",
+                                "startTime": "2025-08-07T12:30:00-05:00",
+                                "title": "Brad Hemphill",
+                                "users": [
+                                    "MV30eCh3Wa56JA9Dj3ZA",
+                                    "qzOckVbt2HRhjiwBa5pP"
+                                ],
+                                "assignedResources": [],
+                                "isRecurring": false,
+                                "createdBy": {
+                                    "source": "contactdetails_page",
+                                    "userId": "qzOckVbt2HRhjiwBa5pP"
+                                }
+                            }
+                        ]
+
                         const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
                         const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                         const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
@@ -6510,7 +8392,9 @@
                                         <div className="booking-selection-summary">
                                             {
                                                 showSlotsList &&
-                                                <button className="meta-back-button" onClick={() => {
+                                                <button className="meta-back-button"
+                                                        style={{fontSize: 'large'}}
+                                                        onClick={() => {
                                                     setShowCalendar(true);
                                                     setShowSlotsList(false)
                                                 }}>
@@ -6635,7 +8519,7 @@
                                             showSlotsList &&
                                             <div>
                                                 <div>Choose Time Slot</div>
-                                                <div>Duration : {slotDuration} {slotDurationUnit}</div>
+                                                <div className="booking-selection-summary">Duration : {slotDuration} {slotDurationUnit}</div>
                                                 <ul>
                                                     {slotsList.map((slot, index) => {
                                                         const localTime = slot.setZone(timezone).toFormat('h:mm a');
