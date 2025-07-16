@@ -6465,6 +6465,14 @@
                                         </label>
                                     </div>
                                 }
+                                {
+                                    step === 4 && !gettingCalendar && !showCalendar &&
+                                    <div>
+                                        <div className="booking-selection-summary">
+                                            Something wrong with the server. Please try again later.
+                                        </div>
+                                    </div>
+                                }
                                 {step === 4 && !gettingCalendar && showCalendar &&
                                     <div>
                                         <div className="booking-selection-summary">
