@@ -6299,8 +6299,7 @@
                     {
                         return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
                     }
-                    );
-                    console.log('hid developer check list: ', list)
+                    )
                     setSlotsList(list)
                 }
 
@@ -6632,10 +6631,13 @@
                                         {
                                             showSlotsList &&
                                             <div>
-                                                <div>
-                                                    8:30 - 9:00 <br/>
-                                                    9:00 - 9:30 <br/>
-                                                </div>
+                                                Choose Time Slot
+                                                <ul>
+                                                    {slotsList.map((slot, index) => {
+                                                        const localTime = slot.setZone(timezone).toFormat('h:mm a');
+                                                        return <li key={index}>{localTime}</li>;
+                                                    })}
+                                                </ul>
                                             </div>
                                         }
                                     </div>
