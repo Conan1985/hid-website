@@ -6285,7 +6285,7 @@
                     const targetStart = DateTime.fromObject(
                         {
                             year,
-                            month,
+                            month: month + 1,
                             day,
                             hour: 0,
                             minute: 0,
@@ -6295,15 +6295,8 @@
                         { zone: timezone }
                     );
                     const targetEnd = targetStart.endOf('day');
-                    console.log('hid developer check slot starts: ', slotStarts)
-                    console.log('hid developer check target start: ', targetStart)
-                    console.log('hid developer check target end: ', targetEnd)
                     const list = slotStarts.filter(dt =>
                     {
-                        console.log('hid developer check dt: ', dt)
-                        console.log('hid developer check dt set zone: ', dt.setZone(timezone))
-                        console.log('hid developer check bigger: ', dt.setZone(timezone) >= targetStart)
-                        console.log('hid developer check smaller: ', dt.setZone(timezone) <= targetEnd)
                         return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
                     }
                     );
