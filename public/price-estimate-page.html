@@ -6507,8 +6507,9 @@
                                                         style={{
                                                             border: '1px solid #fff',
                                                             padding: '10px',
-                                                            cursor: 'pointer',
+                                                            cursor: showSlotsList ? 'default' : 'pointer',
                                                             background: '#fff',
+                                                            pointerEvents: showSlotsList ? 'none' : 'auto',
                                                         }}
                                                     >
                                                         {selectedLabel}
