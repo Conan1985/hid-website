@@ -6025,6 +6025,8 @@
                 const [allowBookingFor, setAllowBookingFor] = useState(31)
                 const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
                 const [slotStarts, setSlotStarts] = useState([])
+                const [showSlotsList, setShowSlotsList] = useState(false)
+                const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6060,6 +6062,7 @@
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
+                            setErrorGettingCalendar(true)
                             console.error(`HTTP error! status: ${response.status}`)
                             return
                         }
@@ -6092,6 +6095,7 @@
 
                         const eventsResponse = await fetch(eventsUrl)
                         if (!eventsResponse.ok) {
+                            setErrorGettingCalendar(true)
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                             return
                         }
@@ -6100,33 +6104,40 @@
                         if (calendarEvents.data?.events) {
                             events = calendarEvents.data.events
                         }
-                        const bookingStart = now.plus({ [allowBookingAfterUnit]: allowBookingAfter });
-                        const bookingEnd = now.plus({ [allowBookingForUnit]: allowBookingFor });
-                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration });
+                        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
+                        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
+                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
                         const dayMap = new Map();
                         openHours.forEach(entry => {
                             entry.daysOfTheWeek.forEach(day => {
                                 dayMap.set(day, entry.hours);
                             });
                         });
+
                         function ceilToNextSlot(time, slotDurationMins) {
                             const minutes = time.minute;
                             const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
-                            const base = time.set({ second: 0, millisecond: 0 });
-                            return base.set({ minute: 0 }).plus({ minutes: roundedMinutes });
+                            const base = time.set({second: 0, millisecond: 0});
+                            return base.set({minute: 0}).plus({minutes: roundedMinutes});
                         }
+
                         const starts = []
                         for (
                             let date = bookingStart.startOf('day');
                             date <= bookingEnd;
-                            date = date.plus({ days: 1 })
+                            date = date.plus({days: 1})
                         ) {
                             const weekday = date.weekday; // 1 = Monday, 7 = Sunday
                             if (!dayMap.has(weekday)) continue;
                             const hoursForDay = dayMap.get(weekday);
-                            hoursForDay.forEach(({ openHour, openMinute, closeHour, closeMinute }) => {
-                                let slotStart = date.set({ hour: openHour, minute: openMinute, second: 0, millisecond: 0 });
-                                const slotEnd = date.set({ hour: closeHour, minute: closeMinute });
+                            hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
+                                let slotStart = date.set({
+                                    hour: openHour,
+                                    minute: openMinute,
+                                    second: 0,
+                                    millisecond: 0
+                                });
+                                const slotEnd = date.set({hour: closeHour, minute: closeMinute});
                                 if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
                                     slotStart = ceilToNextSlot(bookingStart, slotDuration);
                                 }
@@ -6152,6 +6163,7 @@
                         setSlotStarts(filteredStarts)
                         setShowCalendar(true)
                     } catch (error) {
+                        setErrorGettingCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
@@ -6213,8 +6225,8 @@
                 const isDayClosed = (day, month, year) => {
                     if (!day) return true
                     const targetStart = DateTime.fromObject(
-                        { year, month: month + 1, day, hour: 0, minute: 0, second: 0, millisecond: 0 },
-                        { zone: timezone }
+                        {year, month: month + 1, day, hour: 0, minute: 0, second: 0, millisecond: 0},
+                        {zone: timezone}
                     );
 
                     const targetEnd = targetStart.endOf('day');
@@ -6268,6 +6280,8 @@
                     if (isDayClosed(day, month, year)) return;
                     const selected = DateTime.local(year, month + 1, day, {zone: timezone});
                     setSelectedDate(selected);
+                    setShowSlotsList(true);
+                    setShowCalendar(false);
                 }
 
                 const monthYearLabel = DateTime.local(year, month + 1, 1, {zone: timezone}).toLocaleString({
@@ -6466,14 +6480,14 @@
                                     </div>
                                 }
                                 {
-                                    step === 4 && !gettingCalendar && !showCalendar &&
+                                    step === 4 && !gettingCalendar && errorGettingCalendar &&
                                     <div>
                                         <div className="booking-selection-summary">
-                                            Something wrong with the server. Please try again later.
+                                            Something was wrong with the server. Please try again later.
                                         </div>
                                     </div>
                                 }
-                                {step === 4 && !gettingCalendar && showCalendar &&
+                                {step === 4 && !gettingCalendar &&
                                     <div>
                                         <div className="booking-selection-summary">
                                             <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
@@ -6489,7 +6503,7 @@
                                                 <i className="fas fa-globe"></i>
                                                 <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
                                                     <div
-                                                        onClick={() => setIsStateListOpen(!isStateListOpen)}
+                                                        onClick={!showSlotsList ? () => setIsStateListOpen(!isStateListOpen) : undefined}
                                                         style={{
                                                             border: '1px solid #fff',
                                                             padding: '10px',
@@ -6498,10 +6512,12 @@
                                                         }}
                                                     >
                                                         {selectedLabel}
-                                                        <span style={{
-                                                            marginLeft: 8,
-                                                            color: '#007bff'
-                                                        }}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                        {!showSlotsList &&
+                                                            <span style={{
+                                                                marginLeft: 8,
+                                                                color: '#007bff'
+                                                            }}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                        }
                                                     </div>
 
                                                     {isStateListOpen && (
@@ -6541,51 +6557,77 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="booking-header">
-                                            <button className="nav-btn" onClick={goPrevMonth}
-                                                    disabled={!canGoBack()}>&lt;</button>
-                                            <div>{monthYearLabel}</div>
-                                            <button disabled={!canGoNext()} className="nav-btn"
-                                                    onClick={goNextMonth}>&gt;</button>
-                                        </div>
+                                        {showCalendar &&
+                                            <div className="booking-header">
+                                                <button className="nav-btn" onClick={goPrevMonth}
+                                                        disabled={!canGoBack()}>&lt;</button>
+                                                <div>{monthYearLabel}</div>
+                                                <button disabled={!canGoNext()} className="nav-btn"
+                                                        onClick={goNextMonth}>&gt;</button>
+                                            </div>
+                                        }
+                                        {showCalendar &&
+                                            <div className="calendar">
+                                                {WEEKDAYS.map(day => (
+                                                    <div key={day} className="weekday-header">{day}</div>
+                                                ))}
 
-                                        <div className="calendar">
-                                            {WEEKDAYS.map(day => (
-                                                <div key={day} className="weekday-header">{day}</div>
-                                            ))}
-
-                                            {calendarDays.map((day, idx) => {
-                                                const disabled = isDayClosed(day, month, year);
-                                                const selected = selectedDate &&
-                                                    selectedDate.year === year &&
-                                                    selectedDate.month - 1 === month &&
-                                                    selectedDate.day === day;
-                                                const isToday = day &&
-                                                    day === now.day &&
-                                                    month + 1 === now.month &&
-                                                    year === now.year
-                                                return (
-                                                    <div
-                                                        key={idx}
-                                                        className={
-                                                            "day" +
-                                                            (disabled ? " disabled" : "") +
-                                                            (selected ? " selected" : "") +
-                                                            (isToday ? " today-dot" : "")
-                                                        }
-                                                        onClick={() => onSelectDay(day)}
-                                                    >
-                                                        {day || ""}
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
+                                                {calendarDays.map((day, idx) => {
+                                                    const disabled = isDayClosed(day, month, year);
+                                                    const selected = selectedDate &&
+                                                        selectedDate.year === year &&
+                                                        selectedDate.month - 1 === month &&
+                                                        selectedDate.day === day;
+                                                    const isToday = day &&
+                                                        day === now.day &&
+                                                        month + 1 === now.month &&
+                                                        year === now.year
+                                                    return (
+                                                        <div
+                                                            key={idx}
+                                                            className={
+                                                                "day" +
+                                                                (disabled ? " disabled" : "") +
+                                                                (selected ? " selected" : "") +
+                                                                (isToday ? " today-dot" : "")
+                                                            }
+                                                            onClick={() => onSelectDay(day)}
+                                                        >
+                                                            {day || ""}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        }
+                                        {
+                                            showSlotsList &&
+                                            <div>
+                                                <button className="meta-back-button" onClick={() => {
+                                                    setShowCalendar(true);
+                                                    setShowSlotsList(false)
+                                                }}>
+                                                    <i className="fa fa-arrow-left" aria-hidden="true"></i> Go back to
+                                                    choose date
+                                                </button>
+                                                Show slots list of today
+                                            </div>
+                                        }
                                     </div>
                                 }
                                 <div className="meta-button-container">
-                                    {step > 1 && step <= 4 &&
+                                    {step > 1 && step < 4 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                                        </button>}
+                                    {step > 1 && step === 4 &&
+                                        <button className="meta-back-button" onClick={() => {
+                                            setStep(step - 1);
+                                            setShowCalendar(false);
+                                            setShowSlotsList(false);
+                                            setErrorGettingCalendar(false)
+                                        }}>
+                                            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to previous
+                                            step
                                         </button>}
                                     {step < 3 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
