@@ -6295,12 +6295,17 @@
                         { zone: timezone }
                     );
                     const targetEnd = targetStart.endOf('day');
-                    const list = slotStarts.filter(dt =>
-                        dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
-                    );
                     console.log('hid developer check slot starts: ', slotStarts)
                     console.log('hid developer check target start: ', targetStart)
                     console.log('hid developer check target end: ', targetEnd)
+                    const list = slotStarts.filter(dt =>
+                    {
+                        console.log('hid developer check dt: ', dt)
+                        console.log('hid developer check dt set zone: ', dt.setZone(timezone))
+                        console.log('hid developer check bigger: ', dt.setZone(timezone) >= targetStart)
+                        return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                    }
+                    );
                     console.log('hid developer check list: ', list)
                     setSlotsList(list)
                 }
