@@ -7016,10 +7016,13 @@
                                         }
                                         {
                                             !errorSubmitting &&
-                                            <div>
+                                            <div style={{fontSize: 'large'}}>
+                                                <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+                                                <div>
                                                 Thank you for your appointment request. We will contact you shortly to
                                                 confirm your request. Please call our office at {CONTACT_METHOD} if you
                                                 have any questions.
+                                            </div>
                                             </div>
                                         }
                                     </div>
@@ -7042,7 +7045,7 @@
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to price
                                             estimation
                                         </button>}
-                                    {step === 5 &&
+                                    {step === 5 && !submitting &&
                                         <button className="meta-back-button" onClick={() => {
                                             setStep(1);
                                             setShowCalendar(false)
@@ -7054,7 +7057,7 @@
                                             setErrorSubmitting(false)
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i>
-                                            Get another Price estimation
+                                            Make another Price estimation
                                         </button>}
                                     {step < 3 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
