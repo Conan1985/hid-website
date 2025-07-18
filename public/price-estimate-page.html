@@ -7017,13 +7017,23 @@
                                         {
                                             !errorSubmitting &&
                                             <div style={{fontSize: 'large'}}>
-                                                <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
-                                                   aria-hidden="true"></i>
+                                                <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
+                                                     className="confirmation-image" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M35.6322 16.5787H5.92383M35.6322 20.7049V14.5981C35.6322 11.8251 35.6322 10.4386 35.0925 9.37943C34.6178 8.44777 33.8603 7.6903 32.9287 7.21559C31.8695 6.67593 30.483 6.67593 27.7099 6.67593H13.8461C11.073 6.67593 9.68649 6.67593 8.62733 7.21559C7.69567 7.6903 6.9382 8.44777 6.4635 9.37943C5.92383 10.4386 5.92383 11.8251 5.92383 14.5981V28.462C5.92383 31.2351 5.92383 32.6216 6.4635 33.6808C6.9382 34.6124 7.69567 35.3699 8.62733 35.8446C9.68649 36.3843 11.073 36.3843 13.8461 36.3843H20.778M27.3798 3.375V9.97685M14.1761 3.375V9.97685M24.9042 31.4329L28.2051 34.7338L35.6322 27.3067"
+                                                        stroke="var(--appointment_widgets-primary-color)"
+                                                        strokeWidth="2" strokeLinecap="round"
+                                                        strokeLinejoin="round"></path>
+                                                </svg>
+                                                <div
+                                                    style={{fontSize: '18px', fontWeight: 500, lineHeight: '28px'}}>Your
+                                                    Meeting has been Scheduled
+                                                </div>
                                                 <div>
                                                     Thank you for your appointment request. We will contact you shortly
                                                     to
-                                                    confirm your request. <br/>
-                                                    Please call our office at {CONTACT_METHOD} if you
+                                                    confirm your request. Please call our office at {CONTACT_METHOD} if
+                                                    you
                                                     have any questions.
                                                 </div>
                                             </div>
