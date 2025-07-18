@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 8964;
 
 const baseUrl = process.env.BASE_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
-const FIELD_ID_AGE_GROUP_HID = process.env.FIELD_ID_AGE_GROUP_HID
-const FIELD_ID_PRE_CONDITIONS_HID = process.env.FIELD_ID_PRE_CONDITIONS_HID
+const FIELD_ID_AGE_GROUP_APEX = process.env.FIELD_ID_AGE_GROUP_APEX
+const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
@@ -126,11 +126,11 @@ const upsertContact = async (contact, account) => {
             locationId: account.location_id,
             customFields: [
                 {
-                    id: FIELD_ID_AGE_GROUP_HID,
+                    id: FIELD_ID_AGE_GROUP_APEX,
                     value: contact.ageRange
                 },
                 {
-                    id: FIELD_ID_PRE_CONDITIONS_HID,
+                    id: FIELD_ID_PRE_CONDITIONS_APEX,
                     value: contact.conditions
                 }
             ],
