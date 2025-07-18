@@ -5924,6 +5924,7 @@
                 'Pacific/Fiji',
                 'Pacific/Tongatapu'
             ]
+            const CONTACT_METHOD = '(817) 205-6257'
 
             function App() {
                 const [step, setStep] = useState(1)
@@ -6103,8 +6104,7 @@
                     {code: "DC", name: "District of Columbia"}
                 ]
                 const [submitting, setSubmitting] = useState(false)
-                const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
-                const [submitAppointmentSuccess, setSubmitAppointmentSuccess] = useState(false)
+                const [errorSubmitting, setErrorSubmitting] = useState(false)
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6474,43 +6474,41 @@
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
-                    console.log('HID Developer clicking submit')
                     setStep(step + 1)
-
                     setSubmitting(true)
-                    // await new Promise(resolve => setTimeout(resolve, 500));
-                    // const url = APP_BASE_URL + '/upsertContact'
-                    // try {
-                    //     const contact = {
-                    //         firstName: form.firstName,
-                    //         lastName: form.lastName,
-                    //         email: form.email,
-                    //         phone: form.phone,
-                    //         state: form.state,
-                    //         ageRange: ageRange,
-                    //         conditions: conditions
-                    //     }
-                    //     const response = await fetch(url, {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             'Content-Type': 'application/json'
-                    //         },
-                    //         body: JSON.stringify(contact)
-                    //     })
-                    //     if (!response.ok) {
-                    //         console.error(`HTTP error! status: ${response.status}`)
-                    //         return
-                    //     }
-                    //     setSubmitContactSuccess(true)
-                    // } catch (error) {
-                    //     console.error('Error in upsert contact: ', error)
-                    // } finally {
-                    //     await submitAppointment()
-                    // }
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const url = APP_BASE_URL + '/upsertContacttest'
+                    try {
+                        const contact = {
+                            firstName: form.firstName,
+                            lastName: form.lastName,
+                            email: form.email,
+                            phone: form.phone,
+                            state: form.state,
+                            ageRange: ageRange,
+                            conditions: conditions
+                        }
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(contact)
+                        })
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            setErrorSubmitting(true)
+                        }
+                    } catch (error) {
+                        console.error('Error in upsert contact: ', error)
+                        setErrorSubmitting(true)
+                    } finally {
+                        await submitAppointment()
+                    }
                 }
 
                 const submitAppointment = async () => {
-
+                    setSubmitting(false)
                 }
 
                 useEffect(() => {
@@ -6553,7 +6551,7 @@
                                     connect with a team member for assistance with your situation.
                                 </div>}
                                 {
-                                    gettingCalendar && <div>
+                                    gettingCalendar || submitting && <div>
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
@@ -6698,7 +6696,8 @@
                                     step === 4 && !gettingCalendar && errorGettingCalendar &&
                                     <div>
                                         <div className="booking-selection-summary">
-                                            Something was wrong with the server. Please try again later.
+                                            Something was wrong with the server. Please try again, or call our
+                                            office at {CONTACT_METHOD}.
                                         </div>
                                     </div>
                                 }
@@ -7005,7 +7004,25 @@
                                         }
                                     </div>
                                 }
-                                {step === 5 && <div>Submission page</div>}
+                                {
+                                    step === 5 && !submitting &&
+                                    <div className="booking-selection-summary">
+                                        {errorSubmitting &&
+                                            <div>
+                                                Something was wrong with the server. Please try again, or call our
+                                                office at {CONTACT_METHOD}.
+                                            </div>
+                                        }
+                                        {
+                                            !errorSubmitting &&
+                                            <div>
+                                                Thank you for your appointment request. We will contact you shortly to
+                                                confirm your request. Please call our office at {CONTACT_METHOD} if you
+                                                have any questions.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                                 <div className="meta-button-container">
                                     {step > 1 && step < 4 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
@@ -7033,8 +7050,7 @@
                                             setSelectedSlot(null)
                                             setSlotString('')
                                             setErrorGettingCalendar(false)
-                                            setSubmitAppointmentSuccess(false)
-                                            setSubmitContactSuccess(false)
+                                            setErrorSubmitting(false)
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i>
                                             Get another Price estimation
