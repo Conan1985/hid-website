@@ -6028,6 +6028,8 @@
                 const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
                 const [slotsList, setSlotsList] = useState([])
                 const [selectedSlot, setSelectedSlot] = useState(null)
+                const [showPersonalInfo, setShowPersonalInfo] = useState(false)
+                const [slotString, setSlotString] = useState('')
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6322,8 +6324,16 @@
                     return map[unit.toLowerCase()];
                 }
 
-                const onSelectSlot = (slot) => {
-                    console.log('HID Developer check slot selected: ', slot)
+                const onClickSlot = (slot) => {
+                    setSelectedSlot(slot)
+                    const selectedEndSlot = slot.plus({[normalizeUnit(slotDurationUnit)]: slotDuration})
+                    setSlotString (slot.setZone(timezone).toFormat('h:mm a') + ' - '
+                        + selectedEndSlot.setZone(timezone).toFormat('h:mm a'))
+                }
+
+                const onSelectSlot = () => {
+                    setShowSlotsList(false)
+                    setShowPersonalInfo(true)
                 }
 
                 useEffect(() => {
@@ -6512,25 +6522,28 @@
                                 }
                                 {step === 4 && !gettingCalendar &&
                                     <div>
+                                        {
+                                            (showSlotsList || showPersonalInfo) &&
+                                            <button className="meta-back-button"
+                                                    style={{fontSize: 'large'}}
+                                                    onClick={() => {
+                                                        setShowCalendar(true);
+                                                        setShowSlotsList(false);
+                                                        setShowPersonalInfo(false);
+                                                        setSelectedSlot(null);
+                                                        setSlotString('')
+                                                    }}>
+                                                <i className="fa fa-arrow-left" aria-hidden="true"></i> Change date
+                                            </button>
+                                        }
                                         <div className="booking-selection-summary">
-                                            {
-                                                showSlotsList &&
-                                                <button className="meta-back-button"
-                                                        style={{fontSize: 'large'}}
-                                                        onClick={() => {
-                                                            setShowCalendar(true);
-                                                            setShowSlotsList(false)
-                                                        }}>
-                                                    <i className="fa fa-arrow-left" aria-hidden="true"></i> Change date
-                                                </button>
-                                            }
                                             {showCalendar &&
                                                 <span>
                                                     <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
                                                 </span>
                                             }
                                             &ensp;
-                                            <i className="fas fa-calendar"></i> {selectedDateStr}
+                                            {selectedDate && <i className="fas fa-calendar"></i>} {slotString} {selectedDateStr}
                                             <br/>
                                             <div style={{
                                                 display: 'flex',
@@ -6652,7 +6665,7 @@
                                                             <div
                                                                 key={index}
                                                                 className={`slot-item ${isSelected ? 'selected' : ''}`}
-                                                                onClick={() => setSelectedSlot(slot)}
+                                                                onClick={() => onClickSlot(slot)}
                                                             >
                                                                 {isSelected ? (
                                                                     <>
@@ -6661,7 +6674,7 @@
                                                                             className="slot-right"
                                                                             onClick={(e) => {
                                                                                 e.stopPropagation();
-                                                                                onSelectSlot(slot);
+                                                                                onSelectSlot();
                                                                             }}
                                                                         >
                                                                             Select
@@ -6676,6 +6689,12 @@
                                                 </div>
                                             </div>
                                         }
+                                        {
+                                            showPersonalInfo &&
+                                            <div>
+                                                Here is the personal info
+                                            </div>
+                                        }
                                     </div>
                                 }
                                 <div className="meta-button-container">
@@ -6688,7 +6707,10 @@
                                             setStep(step - 1);
                                             setShowCalendar(false);
                                             setShowSlotsList(false);
-                                            setErrorGettingCalendar(false)
+                                            setShowPersonalInfo(false);
+                                            setSelectedSlot(null);
+                                            setSlotString('');
+                                            setErrorGettingCalendar(false);
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to price estimation
                                         </button>}
