@@ -6400,7 +6400,7 @@
                     setSelectedSlot(slot)
                     const selectedEndSlot = slot.plus({[normalizeUnit(slotDurationUnit)]: slotDuration})
                     setSlotString(slot.setZone(timezone).toFormat('h:mm a') + ' - '
-                        + selectedEndSlot.setZone(timezone).toFormat('h:mm a'))
+                        + selectedEndSlot.setZone(timezone).toFormat('h:mm a') + '|')
                 }
 
                 const onSelectSlot = () => {
@@ -6460,13 +6460,55 @@
                     return `(${part1})${part2}-${part3}`;
                 };
 
-                const handleSubmitContact = () => {
+                const isFormValid = () => {
+                    return validateField('firstName', form.firstName)
+                        && validateField('lastName', form.lastName)
+                        && validateField('email', form.email)
+                        && validateField('phone', form.phone)
+                        && validateField('state', form.state)
+                        && validateField('tc', form.tc)
+                };
+
+                const handleSubmit = async (e) => {
+                    e.preventDefault()
                     console.log('HID Developer clicking submit')
+
+                    // setSubmittingContact(true)
+                    // No need to wait in creating contact
+                    // await new Promise(resolve => setTimeout(resolve, 500));
+                    // const url = APP_BASE_URL + '/upsertContact'
+                    // try {
+                    //     const contact = {
+                    //         firstName: form.firstName,
+                    //         lastName: form.lastName,
+                    //         email: form.email,
+                    //         phone: form.phone,
+                    //         state: form.state,
+                    //         ageRange: ageRange,
+                    //         conditions: conditions
+                    //     }
+                    //     const response = await fetch(url, {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         body: JSON.stringify(contact)
+                    //     })
+                    //     if (!response.ok) {
+                    //         console.error(`HTTP error! status: ${response.status}`)
+                    //         return
+                    //     }
+                    //     setSubmitSuccess(true)
+                    // } catch (error) {
+                    //     console.error('Error in upsert contact: ', error)
+                    // } finally {
+                    //     await getCalendar()
+                    // }
                 }
 
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
-                }, [step])
+                }, [step, showCalendar, showSlotsList, showPersonalInfo])
 
                 return (
                     <div className="cms-block cms-block-element">
@@ -6684,7 +6726,7 @@
                                                 <i className="fas fa-globe"></i>
                                                 <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
                                                     <div
-                                                        onClick={!showSlotsList ? () => setIsStateListOpen(!isStateListOpen) : undefined}
+                                                        onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
                                                         style={{
                                                             border: '1px solid #fff',
                                                             padding: '10px',
@@ -6694,7 +6736,7 @@
                                                         }}
                                                     >
                                                         {selectedLabel}
-                                                        {!showSlotsList &&
+                                                        {showCalendar &&
                                                             <span style={{
                                                                 marginLeft: 8,
                                                                 color: '#007bff'
@@ -6821,7 +6863,7 @@
                                         }
                                         {
                                             showPersonalInfo &&
-                                            <form ref={formRef} onSubmit={handleSubmitContact}>
+                                            <form ref={formRef} onSubmit={handleSubmit}>
                                                 <input
                                                     type="text"
                                                     name="website"
@@ -6983,6 +7025,11 @@
                                                     getCalendar()
                                                 }}>
                                             Next
+                                        </button>}
+                                    {step === 4 && showPersonalInfo &&
+                                        <button className="meta-next-button" disabled={!isFormValid()}
+                                                onClick={() => formRef.current.requestSubmit()}>
+                                            Submit
                                         </button>}
                                 </div>
                             </div>
