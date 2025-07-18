@@ -6101,7 +6101,10 @@
                     {code: "WI", name: "Wisconsin"},
                     {code: "WY", name: "Wyoming"},
                     {code: "DC", name: "District of Columbia"}
-                ];
+                ]
+                const [submitting, setSubmitting] = useState(false)
+                const [submitContactSuccess, setSubmitContactSuccess] = useState(false)
+                const [submitAppointmentSuccess, setSubmitAppointmentSuccess] = useState(false)
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6472,9 +6475,9 @@
                 const handleSubmit = async (e) => {
                     e.preventDefault()
                     console.log('HID Developer clicking submit')
+                    setStep(step + 1)
 
-                    // setSubmittingContact(true)
-                    // No need to wait in creating contact
+                    setSubmitting(true)
                     // await new Promise(resolve => setTimeout(resolve, 500));
                     // const url = APP_BASE_URL + '/upsertContact'
                     // try {
@@ -6498,12 +6501,16 @@
                     //         console.error(`HTTP error! status: ${response.status}`)
                     //         return
                     //     }
-                    //     setSubmitSuccess(true)
+                    //     setSubmitContactSuccess(true)
                     // } catch (error) {
                     //     console.error('Error in upsert contact: ', error)
                     // } finally {
-                    //     await getCalendar()
+                    //     await submitAppointment()
                     // }
+                }
+
+                const submitAppointment = async () => {
+
                 }
 
                 useEffect(() => {
@@ -6519,12 +6526,17 @@
                             </div>}
                             {step > 1 && <div style={{height: '30px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
-                                <h1 className="mediumHeading-1 colorGold meta-title" style={{fontSize: '2em'}}>Get your
-                                    Price Estimate
-                                    with 3 Simple Steps</h1>
-                                <div className="meta-progress-container">
-                                    <progress value={step / 4} className="meta-progress"></progress>
-                                </div>
+                                {step <= 4 &&
+                                    <h1 className="mediumHeading-1 colorGold meta-title" style={{fontSize: '2em'}}>Get
+                                        your
+                                        Price Estimate
+                                        with 3 Simple Steps</h1>
+                                }
+                                {step <= 4 &&
+                                    <div className="meta-progress-container">
+                                        <progress value={step / 4} className="meta-progress"></progress>
+                                    </div>
+                                }
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     What is your age?
                                 </div>}
@@ -6717,69 +6729,69 @@
                                                 <i className="fas fa-calendar"></i>} {slotString} {selectedDateStr}
                                             <br/>
                                             {!errorGettingCalendar &&
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                gap: '10px'
-                                            }}>
-                                                <i className="fas fa-globe"></i>
-                                                <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
-                                                    <div
-                                                        onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
-                                                        style={{
-                                                            border: '1px solid #fff',
-                                                            padding: '10px',
-                                                            cursor: showSlotsList ? 'default' : 'pointer',
-                                                            background: '#fff',
-                                                            pointerEvents: showSlotsList ? 'none' : 'auto',
-                                                        }}
-                                                    >
-                                                        {selectedLabel}
-                                                        {showCalendar &&
-                                                            <span style={{
-                                                                marginLeft: 8,
-                                                                color: '#007bff'
-                                                            }}>{isStateListOpen ? '▲' : '▼'}</span>
-                                                        }
-                                                    </div>
-
-                                                    {isStateListOpen && (
-                                                        <ul
+                                                <div style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    gap: '10px'
+                                                }}>
+                                                    <i className="fas fa-globe"></i>
+                                                    <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
+                                                        <div
+                                                            onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
                                                             style={{
-                                                                listStyle: 'none',
-                                                                margin: 0,
-                                                                padding: 0,
-                                                                border: '1px solid #ccc',
-                                                                borderTop: '1px solid #ccc',
-                                                                maxHeight: 200,
-                                                                overflowY: 'auto',
+                                                                border: '1px solid #fff',
+                                                                padding: '10px',
+                                                                cursor: showSlotsList ? 'default' : 'pointer',
                                                                 background: '#fff',
-                                                                position: 'absolute',
-                                                                width: '100%',
-                                                                zIndex: 10,
+                                                                pointerEvents: showSlotsList ? 'none' : 'auto',
                                                             }}
                                                         >
-                                                            {timezonesList.map((tz) => {
-                                                                const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
-                                                                const time = currentTimes[tz.name] || '';
-                                                                return (
-                                                                    <li
-                                                                        key={tz.name}
-                                                                        onClick={() => handleSelectState(tz)}
-                                                                        className="timezone-item"
-                                                                        style={{
-                                                                            background: tz.name === timezone ? '#eee' : undefined,
-                                                                        }}
-                                                                    >
-                                                                        {label} {time}
-                                                                    </li>
-                                                                );
-                                                            })}
-                                                        </ul>
-                                                    )}
-                                                </div>
-                                            </div>}
+                                                            {selectedLabel}
+                                                            {showCalendar &&
+                                                                <span style={{
+                                                                    marginLeft: 8,
+                                                                    color: '#007bff'
+                                                                }}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                            }
+                                                        </div>
+
+                                                        {isStateListOpen && (
+                                                            <ul
+                                                                style={{
+                                                                    listStyle: 'none',
+                                                                    margin: 0,
+                                                                    padding: 0,
+                                                                    border: '1px solid #ccc',
+                                                                    borderTop: '1px solid #ccc',
+                                                                    maxHeight: 200,
+                                                                    overflowY: 'auto',
+                                                                    background: '#fff',
+                                                                    position: 'absolute',
+                                                                    width: '100%',
+                                                                    zIndex: 10,
+                                                                }}
+                                                            >
+                                                                {timezonesList.map((tz) => {
+                                                                    const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                                    const time = currentTimes[tz.name] || '';
+                                                                    return (
+                                                                        <li
+                                                                            key={tz.name}
+                                                                            onClick={() => handleSelectState(tz)}
+                                                                            className="timezone-item"
+                                                                            style={{
+                                                                                background: tz.name === timezone ? '#eee' : undefined,
+                                                                            }}
+                                                                        >
+                                                                            {label} {time}
+                                                                        </li>
+                                                                    );
+                                                                })}
+                                                            </ul>
+                                                        )}
+                                                    </div>
+                                                </div>}
                                         </div>
                                         {showCalendar &&
                                             <div className="booking-header">
@@ -6993,12 +7005,13 @@
                                         }
                                     </div>
                                 }
+                                {step === 5 && <div>Submission page</div>}
                                 <div className="meta-button-container">
                                     {step > 1 && step < 4 &&
                                         <button className="meta-back-button" onClick={() => setStep(step - 1)}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
-                                    {step > 1 && step === 4 &&
+                                    {step === 4 &&
                                         <button className="meta-back-button" onClick={() => {
                                             setStep(step - 1);
                                             setShowCalendar(false);
@@ -7010,6 +7023,21 @@
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to price
                                             estimation
+                                        </button>}
+                                    {step === 5 &&
+                                        <button className="meta-back-button" onClick={() => {
+                                            setStep(1);
+                                            setShowCalendar(false)
+                                            setShowSlotsList(false)
+                                            setShowPersonalInfo(false)
+                                            setSelectedSlot(null)
+                                            setSlotString('')
+                                            setErrorGettingCalendar(false)
+                                            setSubmitAppointmentSuccess(false)
+                                            setSubmitContactSuccess(false)
+                                        }}>
+                                            <i className="fa fa-arrow-left" aria-hidden="true"></i>
+                                            Get another Price estimation
                                         </button>}
                                     {step < 3 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
