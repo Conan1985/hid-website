@@ -213,6 +213,7 @@ const upsertContact = async (contact, account) => {
     }
 }
 
+// TODO: don't send everything back in calendar
 const getCalendar = async (account) => {
     try {
         const url = baseUrl + '/calendars/' + account.calendar_id
@@ -240,6 +241,7 @@ const getCalendar = async (account) => {
     }
 }
 
+// TODO: don't send everything back in get calendar events
 const getCalendarEvents = async (account, startTime, endTime) => {
     try {
         const url = baseUrl + '/calendars/events?locationId=' + account.location_id + '&startTime=' + startTime
