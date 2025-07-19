@@ -93,7 +93,7 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
             res.status(500).send('Error in upsert contact.')
         }
     } catch (err) {
-        console.error('Unexpected error:', err);
+        console.error('Unexpected error: ', err);
         res.status(500).send('Internal server error.');
     }
 })
@@ -136,6 +136,30 @@ app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
     } catch (err) {
         console.error('Unexpected error in get calendar events: ', err)
         res.status(500).send('Unexpected error in get calendar events: ', err)
+    }
+})
+
+app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).send('No data provided')
+    }
+    if (req.body.website) {
+        return res.status(400).send('Bot detected')
+    }
+    try {
+        const data = req.body
+        const account = await getAccount()
+        const apexAppointment = await makeAppointment(data, account)
+        if (apexAppointment.success) {
+            console.log('Appointment created successfully')
+            res.send('Appointment created successfully')
+        } else {
+            console.log('Error in make appointment: ', apexAppointment)
+            res.status(500).send('Error in make appointment.')
+        }
+    } catch (err) {
+        console.error('Unexpected error: ', err)
+        res.status(500).send('Internal server error.')
     }
 })
 
@@ -237,6 +261,46 @@ const getCalendarEvents = async (account, startTime, endTime) => {
         }
     } catch (error) {
         console.error(`Error in get calendar events for ${account.business_name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+const makeAppointment = async (appointment, account) => {
+    try {
+        const url = baseUrl + '/calendars/events/appointments'
+        const data = {
+            calendarId: account.calendar_id,
+            locationId: account.location_id,
+            contactId: appointment.contactId,
+            startTime: appointment.startTime,
+            ignoreDateRange: true,
+            ignoreFreeSlotValidation: true
+        }
+        const response = await fetch (url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-07-28'
+            },
+            body: JSON.stringify(data)
+        })
+        const responseData = await response.json()
+        const success = response.status === 201
+        const returnData = {
+            success: success,
+            data: responseData
+        }
+        console.log(
+            `Made appointment for ${account.name}: `, returnData
+        )
+        return returnData
+    } catch (error) {
+        console.error(`Error in make appointment for ${account.name}: `, error)
         return {
             success: false,
             data: error
