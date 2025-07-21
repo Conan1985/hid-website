@@ -197,16 +197,19 @@ const upsertContact = async (contact, account) => {
         const responseData = await response.json()
         console.log('HID developer check response data: ', responseData)
         const success = response.status === 201
+        const contactData = {
+            contactId: responseData.contact?.id
+        }
         const returnData = {
             success: success,
-            data: responseData
+            data: contactData
         }
         console.log(
-            `Upsert contact for ${account.name}: `, returnData
+            `Upsert contact for ${account.business_name}: `, returnData
         )
         return returnData
     } catch (error) {
-        console.error(`Error in upsert contact for ${account.name}: `, error)
+        console.error(`Error in upsert contact for ${account.business_name}: `, error)
         return {
             success: false,
             data: error
@@ -309,11 +312,11 @@ const makeAppointment = async (appointment, account) => {
             data: responseData
         }
         console.log(
-            `Made appointment for ${account.name}: `, returnData
+            `Made appointment for ${account.business_name}: `, returnData
         )
         return returnData
     } catch (error) {
-        console.error(`Error in make appointment for ${account.name}: `, error)
+        console.error(`Error in make appointment for ${account.business_name}: `, error)
         return {
             success: false,
             data: error
