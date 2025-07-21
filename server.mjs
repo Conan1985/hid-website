@@ -87,7 +87,7 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
         const apexContact = await upsertContact(data, account)
         if (apexContact.success) {
             console.log('Contact upserted successfully')
-            res.send('Contact upserted successfully')
+            res.status(201).send({data: apexContact.data})
         } else {
             console.log('Error in upsert contact: ', apexContact)
             res.status(500).send('Error in upsert contact.')
