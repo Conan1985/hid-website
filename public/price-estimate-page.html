@@ -6764,9 +6764,9 @@
                                                             style={{
                                                                 border: '1px solid #fff',
                                                                 padding: '10px',
-                                                                cursor: showSlotsList ? 'default' : 'pointer',
+                                                                cursor: (showSlotsList || showPersonalInfo) ? 'default' : 'pointer',
                                                                 background: '#fff',
-                                                                pointerEvents: showSlotsList ? 'none' : 'auto',
+                                                                pointerEvents: (showSlotsList || showPersonalInfo) ? 'none' : 'auto',
                                                             }}
                                                         >
                                                             {selectedLabel}
@@ -7052,6 +7052,17 @@
                                                     confirm your request. Please call our office at {CONTACT_METHOD} if
                                                     you
                                                     have any questions.
+                                                </div>
+                                                <div className="booking-selection-summary">
+                                                    <div>
+                                                        <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                                    </div>
+                                                    <div>
+                                                        <i className="fas fa-calendar"></i> {slotString} {selectedDateStr}
+                                                    </div>
+                                                    <div>
+                                                        <i className="fas fa-globe"></i> {selectedLabel}
+                                                    </div>
                                                 </div>
                                             </div>
                                         }
