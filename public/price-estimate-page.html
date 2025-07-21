@@ -6477,7 +6477,7 @@
                     setStep(step + 1)
                     setSubmitting(true)
                     await new Promise(resolve => setTimeout(resolve, 500));
-                    const url = APP_BASE_URL + '/upsertContactTest'
+                    const url = APP_BASE_URL + '/upsertContact'
                     try {
                         const contact = {
                             firstName: form.firstName,
@@ -6495,11 +6495,13 @@
                             },
                             body: JSON.stringify(contact)
                         })
-                        await submitAppointment()
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        const contactResponse = await response.json()
+                        console.log('hid developer check contact id: ', contactResponse)
+                        await submitAppointment()
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
                         setErrorSubmitting(true)
