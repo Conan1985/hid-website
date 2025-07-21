@@ -6145,27 +6145,28 @@
                             return
                         }
                         const calendar = await response.json()
-                        if (calendar.data?.calendar?.slotDuration) {
-                            setSlotDuration(calendar.data.calendar.slotDuration)
+                        console.log('HID Developer check calendar: ', calendar)
+                        if (calendar.data?.slotDuration) {
+                            setSlotDuration(calendar.data.slotDuration)
                         }
-                        if (calendar.data?.calendar?.slotDurationUnit) {
-                            const str = calendar.data.calendar.slotDurationUnit
+                        if (calendar.data?.slotDurationUnit) {
+                            const str = calendar.data.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
                         }
-                        if (calendar.data?.calendar?.openHours) {
-                            setOpenHours(calendar.data.calendar.openHours)
+                        if (calendar.data?.openHours) {
+                            setOpenHours(calendar.data.openHours)
                         }
-                        if (calendar.data?.calendar?.allowBookingAfterUnit) {
-                            setAllowBookingAfterUnit(calendar.data.calendar.allowBookingAfterUnit)
+                        if (calendar.data?.allowBookingAfterUnit) {
+                            setAllowBookingAfterUnit(calendar.data.allowBookingAfterUnit)
                         }
-                        if (calendar.data?.calendar?.allowBookingAfter) {
-                            setAllowBookingAfter(calendar.data.calendar.allowBookingAfter)
+                        if (calendar.data?.allowBookingAfter) {
+                            setAllowBookingAfter(calendar.data.allowBookingAfter)
                         }
-                        if (calendar.data?.calendar?.allowBookingForUnit) {
-                            setAllowBookingForUnit(calendar.data.calendar.allowBookingForUnit)
+                        if (calendar.data?.allowBookingForUnit) {
+                            setAllowBookingForUnit(calendar.data.allowBookingForUnit)
                         }
-                        if (calendar.data?.calendar?.allowBookingFor) {
-                            setAllowBookingFor(calendar.data.calendar.allowBookingFor)
+                        if (calendar.data?.allowBookingFor) {
+                            setAllowBookingFor(calendar.data.allowBookingFor)
                         }
                         const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
                             + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor

@@ -213,7 +213,6 @@ const upsertContact = async (contact, account) => {
     }
 }
 
-// TODO: don't send everything back in calendar
 const getCalendar = async (account) => {
     try {
         const url = baseUrl + '/calendars/' + account.calendar_id
@@ -227,6 +226,15 @@ const getCalendar = async (account) => {
             }
         })
         const responseData = await response.json()
+        const data = {
+            slotDuration: responseData.calendar?.slotDuration,
+            slotDurationUnit: responseData.calendar?.slotDurationUnit,
+            openHours: responseData.calendar?.openHours,
+            allowBookingAfterUnit: responseData.calendar?.allowBookingAfterUnit,
+            allowBookingAfter: responseData.calendar?.allowBookingAfter,
+            allowBookingForUnit: responseData.calendar?.allowBookingForUnit,
+            allowBookingFor: responseData.calendar?.allowBookingFor
+        }
         const success = response.status === 200
         return {
             success: success,
