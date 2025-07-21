@@ -249,7 +249,6 @@ const getCalendar = async (account) => {
     }
 }
 
-// TODO: don't send everything back in get calendar events
 const getCalendarEvents = async (account, startTime, endTime) => {
     try {
         const url = baseUrl + '/calendars/events?locationId=' + account.location_id + '&startTime=' + startTime
@@ -265,9 +264,12 @@ const getCalendarEvents = async (account, startTime, endTime) => {
         })
         const responseData = await response.json()
         const success = response.status === 200
+        const data = responseData.events?.map(event => ({
+            startTime: event.startTime
+        }))
         return {
             success: success,
-            data: responseData
+            data: data
         }
     } catch (error) {
         console.error(`Error in get calendar events for ${account.business_name}: `, error)

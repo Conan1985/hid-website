@@ -6179,9 +6179,11 @@
                         }
                         let events = []
                         const calendarEvents = await eventsResponse.json()
-                        if (calendarEvents.data?.events) {
-                            events = calendarEvents.data.events
+                        if (calendarEvents.data) {
+                            events = calendarEvents.data
                         }
+                        console.log('HID Developer check calendar: ', calendar.data)
+                        console.log('HID Developer check calenar events: ', calendarEvents.data)
                         const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
                         const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                         const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
