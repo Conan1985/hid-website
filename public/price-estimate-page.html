@@ -6525,6 +6525,7 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        setErrorSubmitting(false)
                     } catch (error) {
                         console.error('Error in make appointment: ', error)
                         setErrorSubmitting(true)
