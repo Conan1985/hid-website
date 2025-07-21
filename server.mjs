@@ -238,7 +238,7 @@ const getCalendar = async (account) => {
         const success = response.status === 200
         return {
             success: success,
-            data: responseData
+            data: data
         }
     } catch (error) {
         console.error(`Error in get calendar for ${account.business_name}: `, error)
