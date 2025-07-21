@@ -195,6 +195,7 @@ const upsertContact = async (contact, account) => {
             body: JSON.stringify(data)
         })
         const responseData = await response.json()
+        console.log('HID developer check response data: ', responseData)
         const success = response.status === 201
         const returnData = {
             success: success,
