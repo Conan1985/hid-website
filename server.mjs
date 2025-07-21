@@ -289,6 +289,7 @@ const makeAppointment = async (appointment, account) => {
         const data = {
             calendarId: account.calendar_id,
             locationId: account.location_id,
+            assignedUserId: account.user_id,
             contactId: appointment.contactId,
             startTime: appointment.startTime,
             ignoreDateRange: true,
