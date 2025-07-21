@@ -6510,8 +6510,6 @@
                 const submitAppointment = async (contactId) => {
                     const url = APP_BASE_URL + '/makeAppointment'
                     try {
-                        console.log('hid developer check start time: ',
-                            selectedSlot.toISO())
                         const appointment = {
                             contactId: contactId,
                             startTime: selectedSlot.toISO()
@@ -6523,8 +6521,6 @@
                             },
                             body: JSON.stringify(appointment)
                         })
-                        const appointmentResponse = await response.json()
-                        console.log('hid developer check contact response: ', appointmentResponse)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)

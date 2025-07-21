@@ -152,7 +152,7 @@ app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
         const apexAppointment = await makeAppointment(data, account)
         if (apexAppointment.success) {
             console.log('Appointment created successfully')
-            res.status(201).send({data: apexAppointment.data})
+            res.status(201).send('Appointment created successfully')
         } else {
             console.log('Error in make appointment: ', apexAppointment)
             res.status(500).send('Error in make appointment.')
@@ -296,7 +296,6 @@ const makeAppointment = async (appointment, account) => {
             ignoreDateRange: true,
             ignoreFreeSlotValidation: true
         }
-        console.log('hid developer check data: ', data)
         const response = await fetch (url, {
             method: 'POST',
             headers: {
@@ -307,14 +306,12 @@ const makeAppointment = async (appointment, account) => {
             },
             body: JSON.stringify(data)
         })
-        console.log('hid developer check response in server: ', response)
         const responseData = await response.json()
         const success = response.status === 201
         const returnData = {
             success: success,
             data: responseData
         }
-        console.log('hid developer check return data: ', returnData)
         console.log(
             `Made appointment for ${account.business_name}: `, returnData
         )
