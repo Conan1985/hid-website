@@ -6495,22 +6495,46 @@
                             },
                             body: JSON.stringify(contact)
                         })
-                        if (!response.ok) {
+                        const contactResponse = await response.json()
+                        if (!response.ok || !contactResponse.data?.contactId) {
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
-                        console.log('hid developer check contact id: ', response)
-                        const contactResponse = await response.json()
-                        console.log('hid developer check contact response: ', contactResponse)
-                        await submitAppointment()
+                        await submitAppointment(contactResponse.data?.contactId)
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
                         setErrorSubmitting(true)
                     }
                 }
 
-                const submitAppointment = async () => {
-                    setSubmitting(false)
+                const submitAppointment = async (contactId) => {
+                    const url = APP_BASE_URL + '/makeAppointment'
+                    try {
+                        console.log('hid developer check start time: ',
+                            selectedSlot.toISO())
+                        const appointment = {
+                            contactId: contactId,
+                            startTime: selectedSlot.toISO()
+                        }
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(appointment)
+                        })
+                        const appointmentResponse = await response.json()
+                        console.log('hid developer check contact response: ', appointmentResponse)
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            setErrorSubmitting(true)
+                        }
+                    } catch (error) {
+                        console.error('Error in make appointment: ', error)
+                        setErrorSubmitting(true)
+                    } finally {
+                        setSubmitting(false)
+                    }
                 }
 
                 useEffect(() => {
