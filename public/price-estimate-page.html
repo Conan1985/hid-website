@@ -6145,7 +6145,13 @@
                             return
                         }
                         const calendar = await response.json()
-                        console.log('HID Developer check calendar: ', calendar)
+                        console.log('HID Developer check slot duration: ', calendar.data?.slotDuration)
+                        console.log('HID Developer check slot duration unit: ', calendar.data?.slotDurationUnit)
+                        console.log('HID Developer check slot open hours: ', calendar.data?.openHours)
+                        console.log('HID Developer check slot allow booking after unit: ', calendar.data?.allowBookingAfterUnit)
+                        console.log('HID Developer check slot allow booking after: ', calendar.data?.allowBookingAfter)
+                        console.log('HID Developer check slot allow booking for unit: ', calendar.data?.allowBookingForUnit)
+                        console.log('HID Developer check slot allow booking for: ', calendar.data?.allowBookingFor)
                         if (calendar.data?.slotDuration) {
                             setSlotDuration(calendar.data.slotDuration)
                         }
