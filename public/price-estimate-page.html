@@ -6499,8 +6499,7 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
-                        const contactResponse = await response.json()
-                        console.log('hid developer check contact id: ', contactResponse)
+                        console.log('hid developer check contact id: ', response)
                         await submitAppointment()
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
