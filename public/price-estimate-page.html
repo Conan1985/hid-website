@@ -6105,6 +6105,7 @@
                 ]
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
+                const [appointmentId, setAppointmentId] = useState('')
 
                 const handleToggleCondition = (condition) => {
                     setConditions(prev => {
@@ -6525,6 +6526,9 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        const appointmentResponse = await response.json()
+                        console.log('HID Developer check appointment Response: ', appointmentResponse)
+                        setAppointmentId(appointmentResponse.data?.id)
                         setErrorSubmitting(false)
                     } catch (error) {
                         console.error('Error in make appointment: ', error)
@@ -6533,6 +6537,10 @@
                         setSubmitting(false)
                     }
                 }
+
+                const googleCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/add-event/${appointmentId}`
+                const outlookCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
+                const iCloudCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
 
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -7060,7 +7068,11 @@
                                                     have any questions.
                                                 </div>
                                                 <div className="booking-selection-summary"
-                                                     style={{marginTop: '20px', border: '1px solid black'}}>
+                                                     style={{
+                                                         marginTop: '20px',
+                                                         border: '1px solid gray',
+                                                         borderRadius: '12px'
+                                                     }}>
                                                     <div>
                                                         <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
                                                     </div>
@@ -7070,6 +7082,30 @@
                                                     <div>
                                                         <i className="fas fa-globe"></i> {selectedLabel}
                                                     </div>
+                                                </div>
+                                                <div>
+                                                    <a href={googleCalendarLink} target="_blank"
+                                                       className="calendar-button">
+                                                        <img src="/images/Contact/Google_Calendar.webp"
+                                                             alt="Google Calendar" className="calendar-icon"/>
+                                                        <span>Google Calendar</span>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href={outlookCalendarLink} target="_blank"
+                                                       className="calendar-button">
+                                                        <img src="/images/Contact/Outlook_Calendar.webp"
+                                                             alt="Outlook Calendar" className="calendar-icon"/>
+                                                        <span>Outlook Calendar</span>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href={iCloudCalendarLink} target="_blank"
+                                                       className="calendar-button">
+                                                        <img src="/images/Contact/iCloud_Calendar.webp"
+                                                             alt="iCloud Calendar" className="calendar-icon"/>
+                                                        <span>iCloud Calendar</span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         }
@@ -7103,6 +7139,7 @@
                                             setSlotString('')
                                             setErrorGettingCalendar(false)
                                             setErrorSubmitting(false)
+                                            setAppointmentId('')
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i>
                                             Make another Price estimation

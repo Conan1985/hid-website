@@ -310,7 +310,7 @@ const makeAppointment = async (appointment, account) => {
         const success = response.status === 201
         const returnData = {
             success: success,
-            data: responseData
+            data: responseData.event?.id
         }
         console.log(
             `Made appointment for ${account.business_name}: `, returnData

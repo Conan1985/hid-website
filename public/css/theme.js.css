@@ -25822,3 +25822,28 @@ a[href^="tel:"], a[href^="mailto:"] {
 .slot-right:hover {
     background-color: #0056b3;
 }
+
+.calendar-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #000;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: box-shadow 0.2s ease;
+    width: fit-content;
+}
+
+.calendar-button:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.calendar-icon {
+    width: 24px;
+    height: 24px;
+}
