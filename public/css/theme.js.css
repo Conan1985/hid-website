@@ -25846,12 +25846,15 @@ a[href^="tel:"], a[href^="mailto:"] {
     border: 1px solid #ccc;
     border-radius: 12px;
     text-decoration: none;
-    color: #000;
+    color: #eee;
     font-family: system-ui, sans-serif;
     font-size: 16px;
     font-weight: 500;
     transition: box-shadow 0.2s ease;
     width: fit-content;
+    justify-items: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .calendar-button:hover {
@@ -25859,8 +25862,8 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .calendar-icon {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
 }
 
 .calendar-contact-us {
