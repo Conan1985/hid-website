@@ -6527,7 +6527,6 @@
                             setErrorSubmitting(true)
                         }
                         const appointmentResponse = await response.json()
-                        console.log('HID Developer check appointment Response: ', appointmentResponse)
                         setAppointmentId(appointmentResponse.data)
                         setErrorSubmitting(false)
                     } catch (error) {
