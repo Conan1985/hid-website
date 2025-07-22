@@ -152,7 +152,7 @@ app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
         const apexAppointment = await makeAppointment(data, account)
         if (apexAppointment.success) {
             console.log('Appointment created successfully')
-            res.status(201).send('Appointment created successfully')
+            res.status(201).send({data: apexAppointment.data})
         } else {
             console.log('Error in make appointment: ', apexAppointment)
             res.status(500).send('Error in make appointment.')
