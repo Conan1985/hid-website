@@ -6526,8 +6526,8 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        console.log('HID Developer check appointment Response: ', response)
                         const appointmentResponse = await response.json()
-                        console.log('HID Developer check appointment Response: ', appointmentResponse)
                         setAppointmentId(appointmentResponse.data?.id)
                         setErrorSubmitting(false)
                     } catch (error) {
