@@ -25573,8 +25573,10 @@ a[href^="tel:"], a[href^="mailto:"] {
 
 .popup-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
     display: flex;
@@ -25587,7 +25589,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     background: white;
     padding: 20px 30px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
     align-items: center;
 }
@@ -25603,12 +25605,14 @@ a[href^="tel:"], a[href^="mailto:"] {
     margin: 20px auto;
     font-family: Arial, sans-serif;
 }
+
 .meta-quote-table th, td {
     padding: 12px;
     text-align: left;
     font-size: 1.7rem;
     font-weight: 600;
 }
+
 .meta-quote-table td.amount {
     text-align: left;
     white-space: nowrap;
@@ -25627,6 +25631,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     color: #2490e8;
     font-size: 60px;
 }
+
 .booking-header {
     display: flex;
     justify-content: center;
@@ -25634,6 +25639,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     gap: 10px;
     margin-bottom: 10px;
 }
+
 .nav-btn {
     background: #f0f2fd;
     border: none;
@@ -25647,6 +25653,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     align-items: center;
     justify-content: center;
 }
+
 .nav-btn:disabled {
     color: #ccc;
     cursor: default;
@@ -25658,6 +25665,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
 }
+
 .day {
     width: 36px;
     height: 36px;
@@ -25671,34 +25679,42 @@ a[href^="tel:"], a[href^="mailto:"] {
     display: inline-block;
     margin: auto;
 }
+
 .day.disabled {
     color: #aaa;
     cursor: default;
     pointer-events: none;
 }
+
 .day:not(.disabled) {
     background: #f0f2fd;
     color: #007bff;
 }
+
 .day:not(.disabled):hover {
     color: black;
 }
+
 .day:not(.disabled).selected:hover {
     background: #007bff;
     color: white;
 }
+
 .day.selected {
     background: #007bff;
     color: white;
     font-weight: bold;
 }
+
 .weekday-header {
     font-weight: bold;
     text-align: center;
 }
+
 .today-dot {
     position: relative;
 }
+
 .today-dot::after {
     content: "";
     position: absolute;
@@ -25803,10 +25819,9 @@ a[href^="tel:"], a[href^="mailto:"] {
     transform: translateX(100%);
     pointer-events: none;
 
-    transition:
-            width 0.3s ease,
-            opacity 0.3s ease,
-            transform 0.3s ease;
+    transition: width 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
     padding: 12px 16px;
     white-space: nowrap;
     overflow: hidden;
@@ -25840,10 +25855,16 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .calendar-button:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-icon {
     width: 24px;
     height: 24px;
+}
+
+.calendar-contact-us {
+    text-decoration: none;
+    color: black;
+    margin-left: 3ch
 }
