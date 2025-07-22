@@ -25843,16 +25843,16 @@ a[href^="tel:"], a[href^="mailto:"] {
     align-items: center;
     gap: 12px;
     padding: 12px 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     border-radius: 12px;
     text-decoration: none;
-    color: #eee;
+    color: black;
     font-family: system-ui, sans-serif;
     font-size: 16px;
     font-weight: 500;
     transition: box-shadow 0.2s ease;
     width: 100%;
-    justify-items: center;
+    justify-content: center;
     margin-bottom: 5px;
     margin-top: 5px;
 }
