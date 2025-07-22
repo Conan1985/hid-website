@@ -324,17 +324,3 @@ const makeAppointment = async (appointment, account) => {
         }
     }
 }
-
-app.post('/TestEditLeadWebHooks', async (req, res) => {
-    console.log('hid developer edit triggered')
-    if (!req.body || Object.keys(req.body).length === 0) {
-        return res.status(400).send('No data provided')
-    }
-});
-
-app.post('/NewLeadWebHooks', async (req, res) => {
-    console.log('HID Developer test new triggered')
-    if (!req.body || Object.keys(req.body).length === 0) {
-        return res.status(400).send('No data provided')
-    }
-});
