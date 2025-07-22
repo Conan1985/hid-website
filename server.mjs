@@ -308,6 +308,7 @@ const makeAppointment = async (appointment, account) => {
         })
         const responseData = await response.json()
         const success = response.status === 201
+        console.log('HID Developer in server check response data: ', responseData)
         const returnData = {
             success: success,
             data: responseData.event?.id
