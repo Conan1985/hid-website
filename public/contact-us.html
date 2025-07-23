@@ -83,6 +83,13 @@
             "contentUrl": "https://www.thehealthyinsurancedude.com/images/Footer/healthy-insurance-dude-bbb.mp4"
         }
     </script>
+    <!-- Load React and ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Load Babel for JSX parsing in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Healthy Insurance Dude</title>
     <link rel="dns-prefetch" href="//code.jquery.com">
@@ -5816,108 +5823,56 @@
             </div>
         </div>
         <div style="height: 50px"></div>
-        <div id="cms-block-66cbd7373ba453.56160975" class="cms-block cms-block-element">
-            <div class="heroBanner default-animation-nomov heroBanner--C1-D" style="padding-bottom: 0">
-                <div class="contentBottom">
-                    <h2 class="mediumHeading-1 colorGold" style="margin-bottom:20px">Contact Us</h2>
-                    <div id="schedule-chosen">
+        <div id="react-root"></div>
+        <script type="text/babel">
+            const {useState} = React
+            const {useEffect} = React
+            const {createRoot} = ReactDOM
+
+            function App() {
+                return (
+                    <div className="cms-block cms-block-element">
                         <h2>Want to schedule an appointment?
-                            <select style="margin-left:10px" name="appointment" id="select-chosen">
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
                         </h2>
                     </div>
-                    <div id="schedule-initial">
-                        <select name="appointment" id="select-initial"
-                                style="background-color: #6C6C6CFF;
-                             color: #FFFFFFFF;
-                             padding: 10px 20px 10px 0px !important;
-                             font-size: 14px; font-weight: 400;
-                             height: 40px;
-                             width: 99%;
-                             max-width: 506px;
-                             margin-bottom: -15px">
-                            <option disabled selected>&nbsp;&nbsp;&nbsp;Want to schedule an appointment instead?
-                            </option>
-                            <option value="yes">&nbsp;&nbsp;&nbsp;Yes</option>
-                            <option value="no">&nbsp;&nbsp;&nbsp;No</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <iframe
-                src="https://hello.thehealthyinsurancedude.com/widget/form/sMBzmLZl6VvXlghU9jsy"
-                style="width:100%;height:100%;border:none;border-radius:4px"
-                id="inline-sMBzmLZl6VvXlghU9jsy"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="Info Submission Gold"
-                data-height="951"
-                data-layout-iframe-id="inline-sMBzmLZl6VvXlghU9jsy"
-                data-form-id="sMBzmLZl6VvXlghU9jsy"
-                title="Info Submission Gold"
-        >
-        </iframe>
-
-        <iframe src="https://hello.thehealthyinsurancedude.com/widget/booking/KYvcFmduqZScwE5asKlw"
-                class="book-appointment"
-                style="width: 100%; border:none;overflow: hidden;display: none" scrolling="no"
-                id="KYvcFmduqZScwE5asKlw_1750664352047"></iframe>
-        <br>
-        <script src="https://hello.thehealthyinsurancedude.com/js/form_embed.js" type="text/javascript"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const selectChosen = document.getElementById('select-chosen');
-                const selectInitial = document.getElementById('select-initial');
-                const scheduleChosen = document.getElementById('schedule-chosen');
-                const scheduleInitial = document.getElementById('schedule-initial');
-                const contact = document.getElementById('inline-sMBzmLZl6VvXlghU9jsy');
-                const calendar = document.getElementById('KYvcFmduqZScwE5asKlw_1750664352047');
-
-                scheduleChosen.style.display = 'none';
-                scheduleInitial.style.display = 'block';
-
-                selectChosen.addEventListener('change', function () {
-                    if (selectChosen.value === 'yes') {
-                        scheduleChosen.style.display = 'block';
-                        scheduleInitial.style.display = 'none';
-                        contact.style.display = 'none';
-                        calendar.style.display = 'block';
-                        selectInitial.value = 'yes'
-                    } else if (selectChosen.value === 'no') {
-                        scheduleChosen.style.display = 'block';
-                        scheduleInitial.style.display = 'none';
-                        contact.style.display = 'block';
-                        calendar.style.display = 'none';
-                        selectInitial.value = 'no'
-                    }
-                });
-
-                selectInitial.addEventListener('change', function () {
-                    if (selectInitial.value === 'yes') {
-                        scheduleChosen.style.display = 'block';
-                        scheduleInitial.style.display = 'none';
-                        contact.style.display = 'none';
-                        calendar.style.display = 'block';
-                        selectChosen.value = 'yes'
-                    } else if (selectInitial.value === 'no') {
-                        scheduleChosen.style.display = 'block';
-                        scheduleInitial.style.display = 'none';
-                        contact.style.display = 'block';
-                        calendar.style.display = 'none';
-                        selectChosen.value = 'no'
-                    }
-                });
-            });
+                )
+            }
+            const root = createRoot(document.getElementById('react-root'))
+            root.render(<App />)
         </script>
+
+
+<!--        <div id="cms-block-66cbd7373ba453.56160975" class="cms-block cms-block-element">-->
+<!--            <div class="heroBanner default-animation-nomov heroBanner&#45;&#45;C1-D" style="padding-bottom: 0">-->
+<!--                <div class="contentBottom">-->
+<!--                    <h2 class="mediumHeading-1 colorGold" style="margin-bottom:20px">Contact Us</h2>-->
+<!--                    <div id="schedule-chosen">-->
+<!--                        <h2>Want to schedule an appointment?-->
+<!--                            <select style="margin-left:10px" name="appointment" id="select-chosen">-->
+<!--                                <option value="yes">Yes</option>-->
+<!--                                <option value="no">No</option>-->
+<!--                            </select>-->
+<!--                        </h2>-->
+<!--                    </div>-->
+<!--                    <div id="schedule-initial">-->
+<!--                        <select name="appointment" id="select-initial"-->
+<!--                                style="background-color: #6C6C6CFF;-->
+<!--                             color: #FFFFFFFF;-->
+<!--                             padding: 10px 20px 10px 0px !important;-->
+<!--                             font-size: 14px; font-weight: 400;-->
+<!--                             height: 40px;-->
+<!--                             width: 99%;-->
+<!--                             max-width: 506px;-->
+<!--                             margin-bottom: -15px">-->
+<!--                            <option disabled selected>&nbsp;&nbsp;&nbsp;Want to schedule an appointment instead?-->
+<!--                            </option>-->
+<!--                            <option value="yes">&nbsp;&nbsp;&nbsp;Yes</option>-->
+<!--                            <option value="no">&nbsp;&nbsp;&nbsp;No</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
