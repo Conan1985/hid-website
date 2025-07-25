@@ -5830,51 +5830,34 @@
             const {createRoot} = ReactDOM
 
             function App() {
+                const [showCalendar, setShowCalendar] = useState(false);
+
                 return (
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
-                            <h2>Want to schedule an appointment?
-                            </h2>
+                            <div className="contact-us-switch-row">
+                                <h2>Want to schedule an appointment?
+                                </h2>
+                                <div
+                                    className={`switch ${showCalendar ? "on" : "off"}`}
+                                    onClick={() => setShowCalendar(!showCalendar)}
+                                >
+                                    <div className="thumb"/> <h2 className={`switch-label ${showCalendar ? "on" : "off"}`}>
+                                    {showCalendar ? "Yes" : "No"}
+                                </h2>
+                                </div>
+                            </div>
+
+                            {
+                                showCalendar && <div>Here is the calendar</div>
+                            }
                         </div>
                     </div>
                 )
             }
             const root = createRoot(document.getElementById('react-root'))
-            root.render(<App />)
+            root.render(<App/>)
         </script>
-
-
-<!--        <div id="cms-block-66cbd7373ba453.56160975" class="cms-block cms-block-element">-->
-<!--            <div class="heroBanner default-animation-nomov heroBanner&#45;&#45;C1-D" style="padding-bottom: 0">-->
-<!--                <div class="contentBottom">-->
-<!--                    <h2 class="mediumHeading-1 colorGold" style="margin-bottom:20px">Contact Us</h2>-->
-<!--                    <div id="schedule-chosen">-->
-<!--                        <h2>Want to schedule an appointment?-->
-<!--                            <select style="margin-left:10px" name="appointment" id="select-chosen">-->
-<!--                                <option value="yes">Yes</option>-->
-<!--                                <option value="no">No</option>-->
-<!--                            </select>-->
-<!--                        </h2>-->
-<!--                    </div>-->
-<!--                    <div id="schedule-initial">-->
-<!--                        <select name="appointment" id="select-initial"-->
-<!--                                style="background-color: #6C6C6CFF;-->
-<!--                             color: #FFFFFFFF;-->
-<!--                             padding: 10px 20px 10px 0px !important;-->
-<!--                             font-size: 14px; font-weight: 400;-->
-<!--                             height: 40px;-->
-<!--                             width: 99%;-->
-<!--                             max-width: 506px;-->
-<!--                             margin-bottom: -15px">-->
-<!--                            <option disabled selected>&nbsp;&nbsp;&nbsp;Want to schedule an appointment instead?-->
-<!--                            </option>-->
-<!--                            <option value="yes">&nbsp;&nbsp;&nbsp;Yes</option>-->
-<!--                            <option value="no">&nbsp;&nbsp;&nbsp;No</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
