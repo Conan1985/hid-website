@@ -5901,6 +5901,7 @@
                     email: "",
                     phone: "",
                     state: "",
+                    preferences: [],
                     tc: false
                 })
                 const [touched, setTouched] = useState({
@@ -5978,6 +5979,16 @@
                         && validateField('state', form.state)
                         && validateField('tc', form.tc)
                 }
+
+                const handleCheckboxChange = (e) => {
+                    const { value, checked } = e.target;
+                    setForm((prevForm) => {
+                        const newPreferences = checked
+                            ? [...prevForm.preferences, value]
+                            : prevForm.preferences.filter((item) => item !== value);
+                        return { ...prevForm, preferences: newPreferences };
+                    });
+                };
 
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -6109,6 +6120,29 @@
                                                 ))}
                                             </select>
                                         </label>
+                                    </div>
+                                    <div className="meta-form-group">
+                                        <div className="meta-form-label" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                            <span style={{ marginBottom: '0.5rem' }}>What options would you prefer?*</span>
+                                            <div className="checkbox-grid">
+                                                {['Health', 'Life', 'Age 65+', 'Annuity', 'Other'].map((option, index) => {
+                                                    const id = `pref-${index}`;
+                                                    return (
+                                                        <div key={id} className="checkbox-item-wrapper">
+                                                            <input
+                                                                type="checkbox"
+                                                                id={id}
+                                                                name="preferences"
+                                                                value={option}
+                                                                checked={form.preferences.includes(option)}
+                                                                onChange={handleCheckboxChange}
+                                                            />
+                                                            <label htmlFor={id}>{option}</label>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="meta-form-tc">
                                         <label>

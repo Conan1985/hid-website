@@ -25929,3 +25929,22 @@ a[href^="tel:"], a[href^="mailto:"] {
         align-items: flex-start; /* optional: aligns switch to left */
     }
 }
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem 2rem;
+    width: 100%;
+}
+
+.checkbox-item-wrapper {
+    display: flex;
+    align-items: center;
+    width: fit-content; /* or 100% if you want alignment */
+}
+
+.checkbox-item-wrapper input[type="checkbox"] {
+    margin-right: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+}
