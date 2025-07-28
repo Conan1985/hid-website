@@ -5889,7 +5889,7 @@
                 {code: "WY", name: "Wyoming"},
                 {code: "DC", name: "District of Columbia"}
             ]
-            const preferences = ['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
+            const userPrefers = ['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
 
             function App() {
                 const [showCalendar, setShowCalendar] = useState(false);
@@ -5910,13 +5910,14 @@
                     email: false,
                     phone: false,
                     state: false,
+                    preferences: false,
                     tc: false
                 })
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
-                    console.log('HID Developer handle submit')
+                    console.log('HID Developer handle submit, check form: ', form)
                 }
 
                 const handleChange = (e) => {
@@ -5954,6 +5955,8 @@
                             return /^[2-9]\d{2}$/.test(areaCode) && /^[2-9]\d{2}$/.test(centralOfficeCode);
                         case 'state':
                             return value.trim() !== '';
+                        case 'preferences':
+                            return value.length > 0;
                         case 'tc':
                             return value === true;
                         default:
@@ -5977,6 +5980,7 @@
                         && validateField('email', form.email)
                         && validateField('phone', form.phone)
                         && validateField('state', form.state)
+                        && validateField('preferences', form.preferences)
                         && validateField('tc', form.tc)
                 }
 
@@ -6122,10 +6126,24 @@
                                         </label>
                                     </div>
                                     <div className="meta-form-group">
-                                        <div className="meta-form-label" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                            <span style={{ marginBottom: '0.5rem' }}>What options would you prefer?*</span>
+                                        <div
+                                            className="meta-form-label"
+                                            style={{
+                                                flexDirection: 'column',
+                                                alignItems: 'flex-start',
+                                                outline:
+                                                    touched.preferences && !validateField('preferences', form.preferences)
+                                                        ? '1px solid red'
+                                                        : 'none',
+                                                padding: '10px',
+                                                borderRadius: '0.75rem',
+                                            }}
+                                            onBlur={() => setTouched({ ...touched, preferences: true })}
+                                            tabIndex={-1} // 👈 Make it focusable so blur can fire
+                                        >
+                                            <span style={{ marginBottom: '0.5rem' }}>What options would you prefer?</span>
                                             <div className="checkbox-grid">
-                                                {['Health', 'Life', 'Age 65+', 'Annuity', 'Other'].map((option, index) => {
+                                                {userPrefers.map((option, index) => {
                                                     const id = `pref-${index}`;
                                                     return (
                                                         <div key={id} className="checkbox-item-wrapper">
@@ -6136,6 +6154,7 @@
                                                                 value={option}
                                                                 checked={form.preferences.includes(option)}
                                                                 onChange={handleCheckboxChange}
+                                                                onBlur={() => setTouched({ ...touched, preferences: true })} // 👈 Mark as touched on blur
                                                             />
                                                             <label htmlFor={id}>{option}</label>
                                                         </div>
@@ -6177,13 +6196,17 @@
                                                 info@healthyinsurancedude.com</a>
                                         </label>
                                     </div>
-                                    <div style={{justifySelf: 'center', marginTop: '20px', marginBottom: '20px'}}>
-                                        <button className="meta-next-button" disabled={!isFormValid()}
-                                                onClick={() => formRef.current.requestSubmit()}>
-                                            Submit
-                                        </button>
-                                    </div>
                                 </form>
+                            }
+
+                            {
+                                !showCalendar &&
+                                <div style={{justifySelf: 'center'}}>
+                                    <button className="meta-next-button" disabled={!isFormValid()}
+                                            onClick={() => formRef.current.requestSubmit()}>
+                                        Submit
+                                    </button>
+                                </div>
                             }
 
                             {
