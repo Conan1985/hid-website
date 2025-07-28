@@ -5889,7 +5889,7 @@
                 {code: "WY", name: "Wyoming"},
                 {code: "DC", name: "District of Columbia"}
             ]
-            const preferences =['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
+            const preferences = ['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
 
             function App() {
                 const [showCalendar, setShowCalendar] = useState(false);
@@ -5985,10 +5985,11 @@
 
                 return (
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
-                        <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
+                        <div className="contentBottom"
+                             style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
                             <div className="contact-us-switch-row">
-                                <h2>Want to schedule an appointment?
-                                </h2>
+                                <h3>Want to schedule an appointment?
+                                </h3>
                                 <div
                                     className={`switch ${showCalendar ? "on" : "off"}`}
                                     onClick={() => setShowCalendar(!showCalendar)}
