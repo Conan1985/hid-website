@@ -5889,6 +5889,7 @@
                 {code: "WY", name: "Wyoming"},
                 {code: "DC", name: "District of Columbia"}
             ]
+            const preferences =['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
 
             function App() {
                 const [showCalendar, setShowCalendar] = useState(false);
@@ -5969,6 +5970,19 @@
                     return `(${part1})${part2}-${part3}`;
                 }
 
+                const isFormValid = () => {
+                    return validateField('firstName', form.firstName)
+                        && validateField('lastName', form.lastName)
+                        && validateField('email', form.email)
+                        && validateField('phone', form.phone)
+                        && validateField('state', form.state)
+                        && validateField('tc', form.tc)
+                }
+
+                useEffect(() => {
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }, [step, showCalendar])
+
                 return (
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
@@ -5987,7 +6001,8 @@
                             </div>
 
                             {
-                                (!showCalendar || step === 3) && <form ref={formRef} onSubmit={handleSubmit}>
+                                (!showCalendar || step === 3) &&
+                                <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
                                         name="website"
@@ -6126,6 +6141,12 @@
                                                className="calendar-contact-us">Email:
                                                 info@healthyinsurancedude.com</a>
                                         </label>
+                                    </div>
+                                    <div style={{justifySelf: 'center', marginTop: '20px', marginBottom: '20px'}}>
+                                        <button className="meta-next-button" disabled={!isFormValid()}
+                                                onClick={() => formRef.current.requestSubmit()}>
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             }
