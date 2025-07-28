@@ -25948,3 +25948,15 @@ a[href^="tel:"], a[href^="mailto:"] {
     width: 1.5rem;
     height: 1.5rem;
 }
+
+.meta-form-textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 100px;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    resize: vertical;
+    box-sizing: border-box;
+}

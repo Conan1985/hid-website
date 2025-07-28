@@ -5902,6 +5902,7 @@
                     phone: "",
                     state: "",
                     preferences: [],
+                    notes: "",
                     tc: false
                 })
                 const [touched, setTouched] = useState({
@@ -5911,6 +5912,7 @@
                     phone: false,
                     state: false,
                     preferences: false,
+                    notes: false,
                     tc: false
                 })
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
@@ -5957,6 +5959,8 @@
                             return value.trim() !== '';
                         case 'preferences':
                             return value.length > 0;
+                        case 'notes':
+                            return value.trim() !== '';
                         case 'tc':
                             return value === true;
                         default:
@@ -5981,6 +5985,7 @@
                         && validateField('phone', form.phone)
                         && validateField('state', form.state)
                         && validateField('preferences', form.preferences)
+                        && validateField('notes', form.notes)
                         && validateField('tc', form.tc)
                 }
 
@@ -6163,6 +6168,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="meta-form-group">
+                                        <label className="meta-form-label" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                            <textarea
+                                                className="meta-form-textarea"
+                                                name="notes"
+                                                placeholder="Any Information You Think We Should Know"
+                                                value={form.notes}
+                                                onChange={handleChange}
+                                                maxLength={2000}
+                                                onBlur={() => setTouched({ ...touched, notes: true })}
+                                                style={{
+                                                    borderColor:
+                                                        touched.notes && !validateField('notes', form.notes) ? 'red' : '',
+                                                }}
+                                            />
+                                        </label>
+                                    </div>
                                     <div className="meta-form-tc">
                                         <label>
                                             <input
@@ -6201,7 +6223,7 @@
 
                             {
                                 !showCalendar &&
-                                <div style={{justifySelf: 'center'}}>
+                                <div style={{justifySelf: 'center', marginBottom: '20px'}}>
                                     <button className="meta-next-button" disabled={!isFormValid()}
                                             onClick={() => formRef.current.requestSubmit()}>
                                         Submit
