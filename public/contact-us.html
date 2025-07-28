@@ -5831,6 +5831,7 @@
 
             function App() {
                 const [showCalendar, setShowCalendar] = useState(false);
+                const [step, setStep] = useState(1)
 
                 return (
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
@@ -5847,6 +5848,10 @@
                                 </h2>
                                 </div>
                             </div>
+
+                            {
+                                (!showCalendar || step === 3) && <div>Here is the form</div>
+                            }
 
                             {
                                 showCalendar && <div>Here is the calendar</div>
