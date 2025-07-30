@@ -5997,8 +5997,6 @@
                             return value.trim() !== '';
                         case 'preferences':
                             return value.length > 0;
-                        case 'notes':
-                            return value.trim() !== '';
                         case 'tc':
                             return value === true;
                         default:
@@ -6023,7 +6021,6 @@
                         && validateField('phone', form.phone)
                         && validateField('state', form.state)
                         && validateField('preferences', form.preferences)
-                        && validateField('notes', form.notes)
                         && validateField('tc', form.tc)
                 }
 
@@ -6045,7 +6042,7 @@
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
                              style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
-                            {!submitting && !submittedContact &&
+                            {!submitting &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
                                     </h3>
@@ -6095,7 +6092,7 @@
                                     />
                                     <div>
                                         <label className="meta-form-label">
-                                            <span>First Name</span>
+                                            <span>First Name*</span>
                                             <input
                                                 className="meta-form-input"
                                                 type="text"
@@ -6113,7 +6110,7 @@
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
-                                            <span>Last Name</span>
+                                            <span>Last Name*</span>
                                             <input
                                                 className="meta-form-input"
                                                 type="text"
@@ -6131,7 +6128,7 @@
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
-                                            <span>Email</span>
+                                            <span>Email*</span>
                                             <input
                                                 className="meta-form-input"
                                                 type="email"
@@ -6149,7 +6146,7 @@
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
-                                            <span>Phone</span>
+                                            <span>Phone*</span>
                                             <input
                                                 className="meta-form-input"
                                                 type="tel"
@@ -6171,7 +6168,7 @@
                                     </div>
                                     <div>
                                         <label className="meta-form-label">
-                                            <span>State</span>
+                                            <span>State*</span>
                                             <select
                                                 className="meta-form-select"
                                                 name="state"
@@ -6208,7 +6205,7 @@
                                             onBlur={() => setTouched({...touched, preferences: true})}
                                             tabIndex={-1} // 👈 Make it focusable so blur can fire
                                         >
-                                            <span style={{marginBottom: '0.5rem'}}>What options would you prefer?</span>
+                                            <span style={{marginBottom: '0.5rem'}}>What options would you prefer?*</span>
                                             <div className="checkbox-grid">
                                                 {userPrefers.map((option, index) => {
                                                     const id = `pref-${index}`;
@@ -6244,10 +6241,6 @@
                                                 onChange={handleChange}
                                                 maxLength={2000}
                                                 onBlur={() => setTouched({...touched, notes: true})}
-                                                style={{
-                                                    borderColor:
-                                                        touched.notes && !validateField('notes', form.notes) ? 'red' : '',
-                                                }}
                                             />
                                         </label>
                                     </div>
