@@ -6,7 +6,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import {getAccount} from "./services/Database.js";
 import rateLimit from "express-rate-limit";
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
 
 const app = express();
 
@@ -18,6 +18,8 @@ const baseUrl = process.env.BASE_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 const FIELD_ID_AGE_GROUP_APEX = process.env.FIELD_ID_AGE_GROUP_APEX
 const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
+const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
+const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
 const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
@@ -67,7 +69,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello from backend!' });
+    res.json({message: 'Hello from backend!'});
 })
 
 app.listen(PORT, () => {
@@ -166,25 +168,42 @@ app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
 const upsertContact = async (contact, account) => {
     try {
         const url = baseUrl + '/contacts/upsert'
+        const customFields = []
+        if (contact.ageRange) {
+            customFields.add({
+                id: FIELD_ID_AGE_GROUP_APEX,
+                value: contact.ageRange
+            })
+        }
+        if (contact.conditions && contact.conditions.length > 0) {
+            customFields.add({
+                id: FIELD_ID_PRE_CONDITIONS_APEX,
+                value: contact.conditions
+            })
+        }
+        if (contact.preferences && contact.preferences.length > 0) {
+            customFields.add({
+                id: FIELD_ID_PREFERENCES_APEX,
+                value: contact.preferences
+            })
+        }
+        if (contact.notes) {
+            customFields.add({
+                id: FIELD_ID_NOTES_APEX,
+                value: contact.notes
+            })
+        }
+
         const data = {
             firstName: contact.firstName,
             lastName: contact.lastName,
             email: contact.email,
             phone: contact.phone,
             locationId: account.location_id,
-            customFields: [
-                {
-                    id: FIELD_ID_AGE_GROUP_APEX,
-                    value: contact.ageRange
-                },
-                {
-                    id: FIELD_ID_PRE_CONDITIONS_APEX,
-                    value: contact.conditions
-                }
-            ],
+            customFields: customFields,
             source: WEBSITE_LEAD
         }
-        const response = await fetch (url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -255,7 +274,7 @@ const getCalendar = async (account) => {
 const getCalendarEvents = async (account, startTime, endTime) => {
     try {
         const url = baseUrl + '/calendars/events?locationId=' + account.location_id + '&startTime=' + startTime
-            +  '&endTime=' + endTime + '&calendarId=' + account.calendar_id
+            + '&endTime=' + endTime + '&calendarId=' + account.calendar_id
         const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -296,7 +315,7 @@ const makeAppointment = async (appointment, account) => {
             ignoreDateRange: true,
             ignoreFreeSlotValidation: true
         }
-        const response = await fetch (url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

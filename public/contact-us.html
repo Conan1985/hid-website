@@ -5835,6 +5835,8 @@
             const {createRoot} = ReactDOM
             const {useRef} = React
 
+            const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
+
             const states = [
                 {code: "", name: "Select State"},
                 {code: "AL", name: "Alabama"},
@@ -5890,11 +5892,14 @@
                 {code: "DC", name: "District of Columbia"}
             ]
             const userPrefers = ['Health', 'Life', 'Age 65+', 'Annuity', 'Other']
+            const CONTACT_METHOD = '(817) 205-6257'
 
             function App() {
                 const [showCalendar, setShowCalendar] = useState(false);
                 const [step, setStep] = useState(1)
                 const formRef = useRef()
+                const [submitting, setSubmitting] = useState(false)
+                const [errorSubmitting, setErrorSubmitting] = useState(false)
                 const [form, setForm] = useState({
                     firstName: "",
                     lastName: "",
@@ -5916,10 +5921,44 @@
                     tc: false
                 })
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
+                const[submittedContact, setSubmittedContact] = useState(false)
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
-                    console.log('HID Developer handle submit, check form: ', form)
+                    setSubmitting(true)
+                    setSubmittedContact(false)
+                    await new Promise(resolve => setTimeout(resolve, 500))
+                    const url = APP_BASE_URL + '/upsertContact'
+                    try {
+                        const contact = {
+                            firstName: form.firstName,
+                            lastName: form.lastName,
+                            email: form.email,
+                            phone: form.phone,
+                            state: form.state,
+                            preferences: form.preferences,
+                            notes: form.notes,
+                        }
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(contact)
+                        })
+                        const contactResponse = await response.json()
+                        if (!response.ok || !contactResponse.data?.contactId) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            setErrorSubmitting(true)
+                        }
+                        setSubmittedContact(true)
+                        console.log('hid developer check contact response: ', contactResponse)
+                    } catch (error) {
+                        console.error('Error in upsert contact: ', error)
+                        setErrorSubmitting(true)
+                    } finally {
+                        setSubmitting(false)
+                    }
                 }
 
                 const handleChange = (e) => {
@@ -5990,12 +6029,12 @@
                 }
 
                 const handleCheckboxChange = (e) => {
-                    const { value, checked } = e.target;
+                    const {value, checked} = e.target;
                     setForm((prevForm) => {
                         const newPreferences = checked
                             ? [...prevForm.preferences, value]
                             : prevForm.preferences.filter((item) => item !== value);
-                        return { ...prevForm, preferences: newPreferences };
+                        return {...prevForm, preferences: newPreferences};
                     });
                 };
 
@@ -6007,22 +6046,46 @@
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
                              style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
-                            <div className="contact-us-switch-row">
-                                <h3>Want to schedule an appointment?
-                                </h3>
-                                <div
-                                    className={`switch ${showCalendar ? "on" : "off"}`}
-                                    onClick={() => setShowCalendar(!showCalendar)}
-                                >
-                                    <div className="thumb"/>
-                                    <h2 className={`switch-label ${showCalendar ? "on" : "off"}`}>
-                                        {showCalendar ? "Yes" : "No"}
-                                    </h2>
+                            {!submitting &&
+                                <div className="contact-us-switch-row">
+                                    <h3>Want to schedule an appointment?
+                                    </h3>
+                                    <div
+                                        className={`switch ${showCalendar ? "on" : "off"}`}
+                                        onClick={() => setShowCalendar(!showCalendar)}
+                                    >
+                                        <div className="thumb"/>
+                                        <h2 className={`switch-label ${showCalendar ? "on" : "off"}`}>
+                                            {showCalendar ? "Yes" : "No"}
+                                        </h2>
+                                    </div>
                                 </div>
-                            </div>
+                            }
 
                             {
-                                (!showCalendar || step === 3) &&
+                                submitting &&
+                                <div>
+                                    <i className="fas fa-spinner fa-spin progress-spinning"></i>
+                                </div>
+                            }
+
+                            {errorSubmitting &&
+                                <div>
+                                    Something went wrong with the server. <br/> Please try again, or call
+                                    our
+                                    office at {CONTACT_METHOD}.
+                                </div>
+                            }
+
+                            {submittedContact &&
+                                <div>
+                                    <h3>Thank you</h3>
+                                    A member of our team will contact you soon.
+                                </div>
+                            }
+
+                            {
+                                (!showCalendar || step === 3) && !submitting &&
                                 <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
@@ -6143,10 +6206,10 @@
                                                 padding: '10px',
                                                 borderRadius: '0.75rem',
                                             }}
-                                            onBlur={() => setTouched({ ...touched, preferences: true })}
+                                            onBlur={() => setTouched({...touched, preferences: true})}
                                             tabIndex={-1} // 👈 Make it focusable so blur can fire
                                         >
-                                            <span style={{ marginBottom: '0.5rem' }}>What options would you prefer?</span>
+                                            <span style={{marginBottom: '0.5rem'}}>What options would you prefer?</span>
                                             <div className="checkbox-grid">
                                                 {userPrefers.map((option, index) => {
                                                     const id = `pref-${index}`;
@@ -6159,7 +6222,10 @@
                                                                 value={option}
                                                                 checked={form.preferences.includes(option)}
                                                                 onChange={handleCheckboxChange}
-                                                                onBlur={() => setTouched({ ...touched, preferences: true })} // 👈 Mark as touched on blur
+                                                                onBlur={() => setTouched({
+                                                                    ...touched,
+                                                                    preferences: true
+                                                                })} // 👈 Mark as touched on blur
                                                             />
                                                             <label htmlFor={id}>{option}</label>
                                                         </div>
@@ -6169,7 +6235,8 @@
                                         </div>
                                     </div>
                                     <div className="meta-form-group">
-                                        <label className="meta-form-label" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                        <label className="meta-form-label"
+                                               style={{flexDirection: 'column', alignItems: 'flex-start'}}>
                                             <textarea
                                                 className="meta-form-textarea"
                                                 name="notes"
@@ -6177,7 +6244,7 @@
                                                 value={form.notes}
                                                 onChange={handleChange}
                                                 maxLength={2000}
-                                                onBlur={() => setTouched({ ...touched, notes: true })}
+                                                onBlur={() => setTouched({...touched, notes: true})}
                                                 style={{
                                                     borderColor:
                                                         touched.notes && !validateField('notes', form.notes) ? 'red' : '',
