@@ -6038,6 +6038,11 @@
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 }, [step, showCalendar])
 
+                useEffect(() => {
+                    setSubmittedContact(false)
+                    setErrorSubmitting(false)
+                }, [showCalendar])
+
                 return (
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
