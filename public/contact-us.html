@@ -5952,7 +5952,6 @@
                             setErrorSubmitting(true)
                         }
                         setSubmittedContact(true)
-                        console.log('hid developer check contact response: ', contactResponse)
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
                         setErrorSubmitting(true)
@@ -6046,7 +6045,7 @@
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
                              style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
-                            {!submitting && !errorSubmitting &&
+                            {!submitting && !submittedContact &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
                                     </h3>
@@ -6078,14 +6077,14 @@
                             }
 
                             {submittedContact &&
-                                <div>
+                                <div style={{textAlign: 'center'}}>
                                     <h3>Thank you</h3>
                                     A member of our team will contact you soon.
                                 </div>
                             }
 
                             {
-                                (!showCalendar || step === 3) && !submitting && !errorSubmitting &&
+                                (!showCalendar || step === 3) && !submitting && !submittedContact &&
                                 <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
@@ -6289,7 +6288,7 @@
                             }
 
                             {
-                                !showCalendar && !submitting && !errorSubmitting &&
+                                !showCalendar && !submitting && !submittedContact &&
                                 <div style={{justifySelf: 'center', marginBottom: '20px'}}>
                                     <button className="meta-next-button" disabled={!isFormValid()}
                                             onClick={() => formRef.current.requestSubmit()}>
