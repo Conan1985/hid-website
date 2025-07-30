@@ -170,25 +170,25 @@ const upsertContact = async (contact, account) => {
         const url = baseUrl + '/contacts/upsert'
         const customFields = []
         if (contact.ageRange) {
-            customFields.add({
+            customFields.push({
                 id: FIELD_ID_AGE_GROUP_APEX,
                 value: contact.ageRange
             })
         }
         if (contact.conditions && contact.conditions.length > 0) {
-            customFields.add({
+            customFields.push({
                 id: FIELD_ID_PRE_CONDITIONS_APEX,
                 value: contact.conditions
             })
         }
         if (contact.preferences && contact.preferences.length > 0) {
-            customFields.add({
+            customFields.push({
                 id: FIELD_ID_PREFERENCES_APEX,
                 value: contact.preferences
             })
         }
         if (contact.notes) {
-            customFields.add({
+            customFields.push({
                 id: FIELD_ID_NOTES_APEX,
                 value: contact.notes
             })

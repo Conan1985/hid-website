@@ -6046,7 +6046,7 @@
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
                              style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
-                            {!submitting &&
+                            {!submitting && !errorSubmitting &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
                                     </h3>
@@ -6085,7 +6085,7 @@
                             }
 
                             {
-                                (!showCalendar || step === 3) && !submitting &&
+                                (!showCalendar || step === 3) && !submitting && !errorSubmitting &&
                                 <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
@@ -6289,7 +6289,7 @@
                             }
 
                             {
-                                !showCalendar &&
+                                !showCalendar && !submitting && !errorSubmitting &&
                                 <div style={{justifySelf: 'center', marginBottom: '20px'}}>
                                     <button className="meta-next-button" disabled={!isFormValid()}
                                             onClick={() => formRef.current.requestSubmit()}>
