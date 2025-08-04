@@ -5836,7 +5836,121 @@
             const {useRef} = React
 
             const APP_BASE_URL = 'https://hid-website-stage-ed3af8308db9.herokuapp.com'
-
+            const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            const DateTime = luxon.DateTime
+            const Duration = luxon.Duration
+            const APPOINTMENTS_CAP = 20
+            const LOCATIONS = [
+                'Etc/GMT+12',
+                'Pacific/Midway',
+                'Pacific/Honolulu',
+                'America/Juneau',
+                'US/Alaska',
+                'America/Dawson',
+                'America/Los_Angeles',
+                'America/Phoenix',
+                'America/Tijuana',
+                'US/Arizona',
+                'America/Belize',
+                'America/Boise',
+                'America/Chihuahua',
+                'America/Denver',
+                'America/Edmonton',
+                'America/Guatemala',
+                'America/Managua',
+                'America/Regina',
+                'Canada/Saskatchewan',
+                'US/Mountain',
+                'America/Bahia_Banderas',
+                'America/Mexico_City',
+                'America/Bogota',
+                'America/Cancun',
+                'America/Chicago',
+                'US/Central',
+                'America/Caracas',
+                'America/Detroit',
+                'America/Indiana/Indianapolis',
+                'America/Louisville',
+                'America/Manaus',
+                'America/New_York',
+                'America/Santiago',
+                'America/Santo_Domingo',
+                'America/Toronto',
+                'US/East-Indiana',
+                'US/Eastern',
+                'America/Argentina/Buenos_Aires',
+                'America/Glace_Bay',
+                'America/Montevideo',
+                'America/Sao_Paulo',
+                'Canada/Atlantic',
+                'America/St_Johns',
+                'Canada/Newfoundland',
+                'America/Noronha',
+                'Etc/GMT+2',
+                'America/Godthab',
+                'Atlantic/Cape_Verde',
+                'Atlantic/Azores',
+                'UTC',
+                'Africa/Algiers',
+                'Africa/Casablanca',
+                'Africa/Lagos',
+                'Atlantic/Canary',
+                'Europe/London',
+                'Africa/Harare',
+                'Europe/Amsterdam',
+                'Europe/Belgrade',
+                'Europe/Brussels',
+                'Europe/Madrid',
+                'Europe/Oslo',
+                'Europe/Sarajevo',
+                'Africa/Cairo',
+                'Africa/Nairobi',
+                'Asia/Amman',
+                'Asia/Baghdad',
+                'Asia/Jerusalem',
+                'Asia/Kuwait',
+                'Asia/Qatar',
+                'Europe/Athens',
+                'Europe/Bucharest',
+                'Europe/Helsinki',
+                'Europe/Moscow',
+                'Turkey',
+                'Asia/Tehran',
+                'Asia/Baku',
+                'Asia/Dubai',
+                'Asia/Kabul',
+                'Asia/Karachi',
+                'Asia/Yekaterinburg',
+                'Asia/Almaty',
+                'Asia/Colombo',
+                'Asia/Kolkata',
+                'Asia/Calcutta',
+                'Asia/Kathmandu',
+                'Asia/Dhaka',
+                'Asia/Rangoon',
+                'Asia/Bangkok',
+                'Asia/Krasnoyarsk',
+                'Asia/Irkutsk',
+                'Asia/Kuala_Lumpur',
+                'Asia/Shanghai',
+                'Asia/Taipei',
+                'Australia/Perth',
+                'Asia/Seoul',
+                'Asia/Tokyo',
+                'Asia/Yakutsk',
+                'Australia/Adelaide',
+                'Australia/Darwin',
+                'Asia/Vladivostok',
+                'Australia/Brisbane',
+                'Australia/Canberra',
+                'Australia/Hobart',
+                'Australia/Sydney',
+                'Pacific/Guam',
+                'Asia/Magadan',
+                'Pacific/Auckland',
+                'Pacific/Fiji',
+                'Pacific/Tongatapu'
+            ]
             const states = [
                 {code: "", name: "Select State"},
                 {code: "AL", name: "Alabama"},
@@ -5924,6 +6038,83 @@
                 const[submittedContact, setSubmittedContact] = useState(false)
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
+                const [showCalendar, setShowCalendar] = useState(false)
+                const [slotDuration, setSlotDuration] = useState(30)
+                const [slotDurationUnit, setSlotDurationUnit] = useState('mins')
+                const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
+                const [openHours, setOpenHours] = useState([
+                    {
+                        "daysOfTheWeek": [
+                            1
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            2
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            3
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            4
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    },
+                    {
+                        "daysOfTheWeek": [
+                            5
+                        ],
+                        "hours": [
+                            {
+                                "openHour": 8,
+                                "openMinute": 30,
+                                "closeHour": 17,
+                                "closeMinute": 30
+                            }
+                        ]
+                    }
+                ])
+                const [allowBookingAfterUnit, setAllowBookingAfterUnit] = useState('hours')
+                const [allowBookingAfter, setAllowBookingAfter] = useState(1)
+                const [allowBookingFor, setAllowBookingFor] = useState(31)
+                const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
+                const now = DateTime.now().setZone(timezone)
+                const [slotStarts, setSlotStarts] = useState([])
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
@@ -6036,6 +6227,142 @@
                     });
                 }
 
+                const toggleCalendar = async () => {
+                    if (!chooseCalendar) {
+                        await getCalendar()
+                    }
+                    setChooseCalendar(!chooseCalendar)
+                }
+
+                const getCalendar = async () => {
+                    setGettingCalendar(true)
+                    const calendarUrl = APP_BASE_URL + '/getCalendar'
+                    setShowCalendar(false)
+                    try {
+                        const response = await fetch(calendarUrl)
+                        if (!response.ok) {
+                            setErrorGettingCalendar(true)
+                            console.error(`HTTP error! status: ${response.status}`)
+                            return
+                        }
+                        const calendar = await response.json()
+                        if (calendar.data?.slotDuration) {
+                            setSlotDuration(calendar.data.slotDuration)
+                        }
+                        if (calendar.data?.slotDurationUnit) {
+                            const str = calendar.data.slotDurationUnit
+                            setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
+                        }
+                        if (calendar.data?.openHours) {
+                            setOpenHours(calendar.data.openHours)
+                        }
+                        if (calendar.data?.allowBookingAfterUnit) {
+                            setAllowBookingAfterUnit(calendar.data.allowBookingAfterUnit)
+                        }
+                        if (calendar.data?.allowBookingAfter) {
+                            setAllowBookingAfter(calendar.data.allowBookingAfter)
+                        }
+                        if (calendar.data?.allowBookingForUnit) {
+                            setAllowBookingForUnit(calendar.data.allowBookingForUnit)
+                        }
+                        if (calendar.data?.allowBookingFor) {
+                            setAllowBookingFor(calendar.data.allowBookingFor)
+                        }
+                        const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
+                            + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
+                            + '&allowBookingForUnit=' + allowBookingForUnit
+
+                        const eventsResponse = await fetch(eventsUrl)
+                        if (!eventsResponse.ok) {
+                            setErrorGettingCalendar(true)
+                            console.error(`HTTP error! status: ${eventsResponse.status}`)
+                            return
+                        }
+                        let events = []
+                        const calendarEvents = await eventsResponse.json()
+                        if (calendarEvents.data) {
+                            events = calendarEvents.data
+                        }
+                        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
+                        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
+                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
+                        const dayMap = new Map();
+                        openHours.forEach(entry => {
+                            entry.daysOfTheWeek.forEach(day => {
+                                dayMap.set(day, entry.hours);
+                            });
+                        });
+
+                        function ceilToNextSlot(time, slotDurationMins) {
+                            const minutes = time.minute;
+                            const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
+                            const base = time.set({second: 0, millisecond: 0});
+                            return base.set({minute: 0}).plus({minutes: roundedMinutes});
+                        }
+
+                        const starts = []
+                        for (
+                            let date = bookingStart.startOf('day');
+                            date <= bookingEnd;
+                            date = date.plus({days: 1})
+                        ) {
+                            const weekday = date.weekday; // 1 = Monday, 7 = Sunday
+                            if (!dayMap.has(weekday)) continue;
+                            const hoursForDay = dayMap.get(weekday);
+                            hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
+                                let slotStart = date.set({
+                                    hour: openHour,
+                                    minute: openMinute,
+                                    second: 0,
+                                    millisecond: 0
+                                });
+                                const slotEnd = date.set({hour: closeHour, minute: closeMinute});
+                                if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
+                                    slotStart = ceilToNextSlot(bookingStart, slotDuration);
+                                }
+                                while (slotStart.plus(slotDurationObj) <= slotEnd) {
+                                    if (slotStart >= bookingStart && slotStart <= bookingEnd) {
+                                        starts.push(slotStart);
+                                    }
+                                    slotStart = slotStart.plus(slotDurationObj);
+                                }
+                            });
+                        }
+                        starts.sort((a, b) => a.toMillis() - b.toMillis());
+                        const eventCounts = new Map();
+                        events.forEach(event => {
+                            const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
+                            eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
+                        });
+                        const filteredStarts = starts.filter(slot => {
+                            const slotTime = slot.toUTC().toISO(); // Normalize to UTC
+                            const count = eventCounts.get(slotTime) || 0;
+                            return count < APPOINTMENTS_CAP;
+                        })
+                        setSlotStarts(filteredStarts)
+                        setShowCalendar(true)
+                    } catch (error) {
+                        setErrorGettingCalendar(true)
+                        console.error('Error in get calendar: ', error)
+                    } finally {
+                        setGettingCalendar(false)
+                    }
+                }
+
+                const normalizeUnit = (unit) => {
+                    const map = {
+                        mins: 'minutes',
+                        minutes: 'minutes',
+                        min: 'minutes',
+                        hrs: 'hours',
+                        hour: 'hours',
+                        hours: 'hours',
+                        days: 'days',
+                        day: 'days',
+                    };
+                    return map[unit.toLowerCase()];
+                }
+
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 }, [showPersonalInfo, chooseCalendar])
@@ -6055,7 +6382,7 @@
                                     </h3>
                                     <div
                                         className={`switch ${chooseCalendar ? "on" : "off"}`}
-                                        onClick={() => setChooseCalendar(!chooseCalendar)}
+                                        onClick={() => toggleCalendar}
                                     >
                                         <div className="thumb"/>
                                         <h2 className={`switch-label ${chooseCalendar ? "on" : "off"}`}>
