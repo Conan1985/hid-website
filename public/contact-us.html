@@ -6238,6 +6238,7 @@
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
@@ -6417,7 +6418,7 @@
                             }
 
                             {
-                                (!chooseCalendar || showPersonalInfo) && !submitting && !submittedContact &&
+                                (!chooseCalendar || showPersonalInfo) && !submitting && !submittedContact && !gettingCalendar &&
                                 <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
