@@ -6238,7 +6238,7 @@
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    await new Promise(resolve => setTimeout(resolve, 1500));
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
@@ -6618,7 +6618,7 @@
                             }
 
                             {
-                                !chooseCalendar && !submitting && !submittedContact &&
+                                !chooseCalendar && !submitting && !submittedContact && !gettingCalendar &&
                                 <div style={{justifySelf: 'center', marginBottom: '20px'}}>
                                     <button className="meta-next-button" disabled={!isFormValid()}
                                             onClick={() => formRef.current.requestSubmit()}>
@@ -6628,7 +6628,17 @@
                             }
 
                             {
-                                chooseCalendar && <div>Here is the calendar</div>
+                                chooseCalendar && !errorGettingCalendar && <div>Here is the calendar</div>
+                            }
+
+                            {
+                                chooseCalendar && errorGettingCalendar &&
+                                <div>
+                                    <div className="booking-selection-summary">
+                                        Something went wrong with the server. <br/> Please try again, or call our
+                                        office at {CONTACT_METHOD}.
+                                    </div>
+                                </div>
                             }
                         </div>
                     </div>
