@@ -6238,7 +6238,7 @@
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
-                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
