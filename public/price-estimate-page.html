@@ -6105,7 +6105,6 @@
                 const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
                 const [slotStarts, setSlotStarts] = useState([])
                 const [showSlotsList, setShowSlotsList] = useState(false)
-                const [errorGettingCalendar, setErrorGettingCalendar] = useState(false)
                 const [slotsList, setSlotsList] = useState([])
                 const [selectedSlot, setSelectedSlot] = useState(null)
                 const [showPersonalInfo, setShowPersonalInfo] = useState(false)
@@ -6163,10 +6162,54 @@
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
                     setShowCalendar(false)
+                    const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
+                    const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
+                    const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
+                    const dayMap = new Map();
+                    openHours.forEach(entry => {
+                        entry.daysOfTheWeek.forEach(day => {
+                            dayMap.set(day, entry.hours);
+                        });
+                    });
+                    function ceilToNextSlot(time, slotDurationMins) {
+                        const minutes = time.minute;
+                        const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
+                        const base = time.set({second: 0, millisecond: 0});
+                        return base.set({minute: 0}).plus({minutes: roundedMinutes});
+                    }
+                    const starts = []
+                    for (
+                        let date = bookingStart.startOf('day');
+                        date <= bookingEnd;
+                        date = date.plus({days: 1})
+                    ) {
+                        const weekday = date.weekday; // 1 = Monday, 7 = Sunday
+                        if (!dayMap.has(weekday)) continue;
+                        const hoursForDay = dayMap.get(weekday);
+                        hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
+                            let slotStart = date.set({
+                                hour: openHour,
+                                minute: openMinute,
+                                second: 0,
+                                millisecond: 0
+                            });
+                            const slotEnd = date.set({hour: closeHour, minute: closeMinute});
+                            if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
+                                slotStart = ceilToNextSlot(bookingStart, slotDuration);
+                            }
+                            while (slotStart.plus(slotDurationObj) <= slotEnd) {
+                                if (slotStart >= bookingStart && slotStart <= bookingEnd) {
+                                    starts.push(slotStart);
+                                }
+                                slotStart = slotStart.plus(slotDurationObj);
+                            }
+                        });
+                    }
+                    starts.sort((a, b) => a.toMillis() - b.toMillis());
+                    setSlotStarts(starts)
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
-                            setErrorGettingCalendar(true)
                             console.error(`HTTP error! status: ${response.status}`)
                             return
                         }
@@ -6199,7 +6242,6 @@
 
                         const eventsResponse = await fetch(eventsUrl)
                         if (!eventsResponse.ok) {
-                            setErrorGettingCalendar(true)
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                             return
                         }
@@ -6208,52 +6250,6 @@
                         if (calendarEvents.data) {
                             events = calendarEvents.data
                         }
-                        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
-                        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
-                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
-                        const dayMap = new Map();
-                        openHours.forEach(entry => {
-                            entry.daysOfTheWeek.forEach(day => {
-                                dayMap.set(day, entry.hours);
-                            });
-                        });
-
-                        function ceilToNextSlot(time, slotDurationMins) {
-                            const minutes = time.minute;
-                            const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
-                            const base = time.set({second: 0, millisecond: 0});
-                            return base.set({minute: 0}).plus({minutes: roundedMinutes});
-                        }
-
-                        const starts = []
-                        for (
-                            let date = bookingStart.startOf('day');
-                            date <= bookingEnd;
-                            date = date.plus({days: 1})
-                        ) {
-                            const weekday = date.weekday; // 1 = Monday, 7 = Sunday
-                            if (!dayMap.has(weekday)) continue;
-                            const hoursForDay = dayMap.get(weekday);
-                            hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
-                                let slotStart = date.set({
-                                    hour: openHour,
-                                    minute: openMinute,
-                                    second: 0,
-                                    millisecond: 0
-                                });
-                                const slotEnd = date.set({hour: closeHour, minute: closeMinute});
-                                if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
-                                    slotStart = ceilToNextSlot(bookingStart, slotDuration);
-                                }
-                                while (slotStart.plus(slotDurationObj) <= slotEnd) {
-                                    if (slotStart >= bookingStart && slotStart <= bookingEnd) {
-                                        starts.push(slotStart);
-                                    }
-                                    slotStart = slotStart.plus(slotDurationObj);
-                                }
-                            });
-                        }
-                        starts.sort((a, b) => a.toMillis() - b.toMillis());
                         const eventCounts = new Map();
                         events.forEach(event => {
                             const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
@@ -6265,12 +6261,11 @@
                             return count < APPOINTMENTS_CAP;
                         })
                         setSlotStarts(filteredStarts)
-                        setShowCalendar(true)
                     } catch (error) {
-                        setErrorGettingCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
+                        setShowCalendar(true)
                     }
                 }
 
@@ -6746,15 +6741,6 @@
                                         </label>
                                     </div>
                                 }
-                                {
-                                    step === 4 && !gettingCalendar && errorGettingCalendar &&
-                                    <div>
-                                        <div className="booking-selection-summary">
-                                            Something went wrong with the server. <br/> Please try again, or call our
-                                            office at {CONTACT_METHOD}.
-                                        </div>
-                                    </div>
-                                }
                                 {step === 4 && !gettingCalendar &&
                                     <div>
                                         {
@@ -6781,70 +6767,69 @@
                                             {selectedDate &&
                                                 <i className="fas fa-calendar"></i>} {slotString} {selectedDateStr}
                                             <br/>
-                                            {!errorGettingCalendar &&
-                                                <div style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    gap: '10px'
-                                                }}>
-                                                    <i className="fas fa-globe"></i>
-                                                    <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
-                                                        <div
-                                                            onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '10px'
+                                            }}>
+                                                <i className="fas fa-globe"></i>
+                                                <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
+                                                    <div
+                                                        onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
+                                                        style={{
+                                                            border: '1px solid #fff',
+                                                            padding: '10px',
+                                                            cursor: (showSlotsList || showPersonalInfo) ? 'default' : 'pointer',
+                                                            background: '#fff',
+                                                            pointerEvents: (showSlotsList || showPersonalInfo) ? 'none' : 'auto',
+                                                        }}
+                                                    >
+                                                        {selectedLabel}
+                                                        {showCalendar &&
+                                                            <span style={{
+                                                                marginLeft: 8,
+                                                                color: '#007bff'
+                                                            }}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                        }
+                                                    </div>
+
+                                                    {isStateListOpen && (
+                                                        <ul
                                                             style={{
-                                                                border: '1px solid #fff',
-                                                                padding: '10px',
-                                                                cursor: (showSlotsList || showPersonalInfo) ? 'default' : 'pointer',
+                                                                listStyle: 'none',
+                                                                margin: 0,
+                                                                padding: 0,
+                                                                border: '1px solid #ccc',
+                                                                borderTop: '1px solid #ccc',
+                                                                maxHeight: 200,
+                                                                overflowY: 'auto',
                                                                 background: '#fff',
-                                                                pointerEvents: (showSlotsList || showPersonalInfo) ? 'none' : 'auto',
+                                                                position: 'absolute',
+                                                                width: '100%',
+                                                                zIndex: 10,
                                                             }}
                                                         >
-                                                            {selectedLabel}
-                                                            {showCalendar &&
-                                                                <span style={{
-                                                                    marginLeft: 8,
-                                                                    color: '#007bff'
-                                                                }}>{isStateListOpen ? '▲' : '▼'}</span>
-                                                            }
-                                                        </div>
-
-                                                        {isStateListOpen && (
-                                                            <ul
-                                                                style={{
-                                                                    listStyle: 'none',
-                                                                    margin: 0,
-                                                                    padding: 0,
-                                                                    border: '1px solid #ccc',
-                                                                    borderTop: '1px solid #ccc',
-                                                                    maxHeight: 200,
-                                                                    overflowY: 'auto',
-                                                                    background: '#fff',
-                                                                    position: 'absolute',
-                                                                    width: '100%',
-                                                                    zIndex: 10,
-                                                                }}
-                                                            >
-                                                                {timezonesList.map((tz) => {
-                                                                    const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
-                                                                    const time = currentTimes[tz.name] || '';
-                                                                    return (
-                                                                        <li
-                                                                            key={tz.name}
-                                                                            onClick={() => handleSelectState(tz)}
-                                                                            className="timezone-item"
-                                                                            style={{
-                                                                                background: tz.name === timezone ? '#eee' : undefined,
-                                                                            }}
-                                                                        >
-                                                                            {label} {time}
-                                                                        </li>
-                                                                    );
-                                                                })}
-                                                            </ul>
-                                                        )}
-                                                    </div>
-                                                </div>}
+                                                            {timezonesList.map((tz) => {
+                                                                const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                                const time = currentTimes[tz.name] || '';
+                                                                return (
+                                                                    <li
+                                                                        key={tz.name}
+                                                                        onClick={() => handleSelectState(tz)}
+                                                                        className="timezone-item"
+                                                                        style={{
+                                                                            background: tz.name === timezone ? '#eee' : undefined,
+                                                                        }}
+                                                                    >
+                                                                        {label} {time}
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
                                         {showCalendar &&
                                             <div className="booking-header">
@@ -7161,7 +7146,6 @@
                                             setShowPersonalInfo(false);
                                             setSelectedSlot(null);
                                             setSlotString('');
-                                            setErrorGettingCalendar(false);
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to price
                                             estimation
@@ -7174,7 +7158,6 @@
                                             setShowPersonalInfo(false)
                                             setSelectedSlot(null)
                                             setSlotString('')
-                                            setErrorGettingCalendar(false)
                                             setErrorSubmitting(false)
                                             setAppointmentId('')
                                         }}>
