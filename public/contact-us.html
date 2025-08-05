@@ -6376,13 +6376,13 @@
                     <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
                         <div className="contentBottom"
                              style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
-                            {!submitting &&
+                            {!submitting && !gettingCalendar &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
                                     </h3>
                                     <div
                                         className={`switch ${chooseCalendar ? "on" : "off"}`}
-                                        onClick={() => toggleCalendar}
+                                        onClick={toggleCalendar}
                                     >
                                         <div className="thumb"/>
                                         <h2 className={`switch-label ${chooseCalendar ? "on" : "off"}`}>
