@@ -5797,9 +5797,9 @@
     </div>
 </header>
 <div>
-    <main id="content">
-        <div id="cms-block-66cc99d6987318.31510275" class="cms-block cms-block-element">
-            <div class="breadcrumbBig">
+    <main id="content" >
+        <div id="cms-block-66cc99d6987318.31510275" class="cms-block cms-block-element" >
+            <div class="breadcrumbBig" >
                 <div class="breadcrumb-container forDesktop blackFont ">
                     <nav class="breadcrumb breadcrumbBlock gtmBreadcrumb" aria-label="breadcrumb.label">
                                 <span>
@@ -5823,12 +5823,12 @@
             </div>
         </div>
         <div style="height: 50px"></div>
-        <div class="cms-block cms-block-element" style="justify-items:center">
+        <div class="cms-block cms-block-element" style="display: grid; justify-content: center;">
             <div class="contentBottom">
                 <h2 class="mediumHeading-1 colorGold">Contact Us</h2>
             </div>
         </div>
-        <div id="react-root"></div>
+        <div id="react-root" style="display: grid; justify-content: center;"></div>
         <script type="text/babel">
             const {useState} = React
             const {useEffect} = React
@@ -6370,9 +6370,9 @@
                 }, [chooseCalendar])
 
                 return (
-                    <div className="cms-block cms-block-element" style={{justifyItems: "center"}}>
+                    <div className="cms-block cms-block-element">
                         <div className="contentBottom"
-                             style={{maxWidth: '600px', margin: '0 auto', marginLeft: '20px', marginRight: '20px'}}>
+                             style={{maxWidth: '600px',  marginLeft: '20px', marginRight: '20px'}}>
                             {!submitting && !gettingCalendar &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
