@@ -6035,7 +6035,7 @@
                     tc: false
                 })
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
-                const[submittedContact, setSubmittedContact] = useState(false)
+                const [submittedContact, setSubmittedContact] = useState(false)
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [showCalendar, setShowCalendar] = useState(false)
                 const [slotDuration, setSlotDuration] = useState(30)
@@ -6113,7 +6113,18 @@
                 const [allowBookingFor, setAllowBookingFor] = useState(31)
                 const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
                 const now = DateTime.now().setZone(timezone)
+                const [year, setYear] = useState(now.year)
+                const [month, setMonth] = useState(now.month - 1)
+                const [selectedDate, setSelectedDate] = useState(null)
+                const [isStateListOpen, setIsStateListOpen] = useState(false)
                 const [slotStarts, setSlotStarts] = useState([])
+                const [showSlotsList, setShowSlotsList] = useState(false)
+                const [slotsList, setSlotsList] = useState([])
+                const [selectedSlot, setSelectedSlot] = useState(null)
+                const [slotString, setSlotString] = useState('')
+                const statesWrapper = useRef(null);
+                const [currentTimes, setCurrentTimes] = useState({})
+                const [loadCalendarBefore, setLoadCalendarBefore] = useState(false)
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
@@ -6236,7 +6247,6 @@
                 const getCalendar = async () => {
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
-                    setShowCalendar(false)
                     const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
                     const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                     const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
@@ -6342,7 +6352,10 @@
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
-                        setShowCalendar(true)
+                        setLoadCalendarBefore(true)
+                        if (!loadCalendarBefore) {
+                            setShowCalendar(true)
+                        }
                     }
                 }
 
@@ -6360,9 +6373,148 @@
                     return map[unit.toLowerCase()];
                 }
 
+                const monthYearLabel = DateTime.local(year, month + 1, 1, {zone: timezone}).toLocaleString({
+                    month: 'long',
+                    year: 'numeric'
+                })
+
+                const onSelectDay = (day) => {
+                    if (isDayClosed(day, month, year)) return;
+                    const selected = DateTime.local(year, month + 1, day, {zone: timezone});
+                    setSelectedDate(selected);
+                    setShowSlotsList(true);
+                    setShowCalendar(false);
+                    const targetStart = DateTime.fromObject(
+                        {
+                            year,
+                            month: month + 1,
+                            day,
+                            hour: 0,
+                            minute: 0,
+                            second: 0,
+                            millisecond: 0
+                        },
+                        {zone: timezone}
+                    );
+                    const targetEnd = targetStart.endOf('day');
+                    const list = slotStarts.filter(dt => {
+                            return dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                        }
+                    )
+                    setSlotsList(list)
+                }
+
+                const onClickSlot = (slot) => {
+                    setSelectedSlot(slot)
+                    const selectedEndSlot = slot.plus({[normalizeUnit(slotDurationUnit)]: slotDuration})
+                    setSlotString(slot.setZone(timezone).toFormat('h:mm a') + ' - '
+                        + selectedEndSlot.setZone(timezone).toFormat('h:mm a') + '|')
+                }
+
+                const onSelectSlot = () => {
+                    setShowSlotsList(false)
+                    setShowPersonalInfo(true)
+                }
+
+                const daysInMonth = DateTime.local(year, month + 1, 1, {zone: timezone}).daysInMonth
+                const startDay = DateTime.local(year, month + 1, 1, {zone: timezone}).weekday % 7
+
+                const calendarDays = [];
+                for (let i = 0; i < startDay; i++) calendarDays.push(null);
+                for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
+
+                const isDayClosed = (day, month, year) => {
+                    if (!day) return true
+                    const targetStart = DateTime.fromObject(
+                        {year, month: month + 1, day, hour: 0, minute: 0, second: 0, millisecond: 0},
+                        {zone: timezone}
+                    );
+
+                    const targetEnd = targetStart.endOf('day');
+
+                    return !slotStarts.some(dt =>
+                        dt.setZone(timezone) >= targetStart && dt.setZone(timezone) <= targetEnd
+                    );
+                }
+
+                const canGoBack = () => {
+                    const now = DateTime.now().setZone(timezone);
+                    const currentYear = now.year;
+                    const currentMonth = now.month - 1;
+                    return !(year === currentYear && month === currentMonth);
+                }
+
+                const canGoNext = () => {
+                    let nextMonth = month + 1
+                    let nextYear = year
+                    if (nextMonth > 11) {
+                        nextMonth = 0
+                        nextYear += 1
+                    }
+                    return !isDayClosed(1, nextMonth, nextYear)
+                }
+
+                const goPrevMonth = () => {
+                    if (!canGoBack()) return;
+                    const newMonth = month - 1;
+                    if (newMonth < 0) {
+                        setMonth(11);
+                        setYear(year - 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const goNextMonth = () => {
+                    const newMonth = month + 1;
+                    if (newMonth > 11) {
+                        setMonth(0);
+                        setYear(year + 1);
+                    } else {
+                        setMonth(newMonth);
+                    }
+                };
+
+                const timezonesList = LOCATIONS.map(tz => {
+                    const dt = now.setZone(tz)
+                    return {
+                        name: tz,
+                        offset: dt.toFormat("ZZ"),
+                        short: dt.offsetNameShort
+                    }
+                })
+
+                const handleSelectState = (tz) => {
+                    setTimezone(tz.name);
+                    setIsStateListOpen(false);
+                };
+
+                const selectedDateStr = selectedDate ? selectedDate.toFormat('ccc, LLL dd, yyyy') : null
+
+                const selectedTz = timezonesList.find(tz => tz.name === timezone);
+
+                const selectedLabel = `GMT${selectedTz.offset} ${selectedTz.name} (${selectedTz.short})`
+
+                useEffect(() => {
+                    if (!timezonesList.find(tz => tz.name === timezone)) {
+                        const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
+                        setTimezone(matchTimeZone.name)
+                    }
+                    const updateTimes = () => {
+                        const newTimes = {}
+                        timezonesList.forEach((tz) => {
+                            newTimes[tz.name] = DateTime.now().setZone(tz.name).toFormat('h:mm a')
+                        })
+                        setCurrentTimes(newTimes)
+                    }
+                    updateTimes()
+                    const interval = setInterval(updateTimes, 60000); // refresh every minute
+                    return () => clearInterval(interval)
+                }, [])
+
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
-                }, [showPersonalInfo, chooseCalendar])
+                }, [showPersonalInfo, chooseCalendar, showSlotsList, showPersonalInfo])
 
                 useEffect(() => {
                     setSubmittedContact(false)
@@ -6410,6 +6562,179 @@
                                        aria-hidden="true"></i>
                                     <h3>Thank you</h3>
                                     A member of our team will contact you soon.
+                                </div>
+                            }
+
+                            {chooseCalendar && !gettingCalendar &&
+                                <div>
+                                    {
+                                        (showSlotsList || showPersonalInfo) &&
+                                        <button className="meta-back-button"
+                                                style={{fontSize: 'large'}}
+                                                onClick={() => {
+                                                    setShowCalendar(true);
+                                                    setShowSlotsList(false);
+                                                    setShowPersonalInfo(false);
+                                                    setSelectedSlot(null);
+                                                    setSlotString('')
+                                                }}>
+                                            <i className="fa fa-arrow-left" aria-hidden="true"></i> Change date
+                                        </button>
+                                    }
+                                    <div className="booking-selection-summary">
+                                        {showCalendar &&
+                                            <span>
+                                                    <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                                </span>
+                                        }
+                                        &ensp;
+                                        {selectedDate &&
+                                            <i className="fas fa-calendar"></i>} {slotString} {selectedDateStr}
+                                        <br/>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '10px'
+                                        }}>
+                                            <i className="fas fa-globe"></i>
+                                            <div ref={statesWrapper} style={{position: 'relative', width: 300}}>
+                                                <div
+                                                    onClick={showCalendar ? () => setIsStateListOpen(!isStateListOpen) : undefined}
+                                                    style={{
+                                                        border: '1px solid #fff',
+                                                        padding: '10px',
+                                                        cursor: (showSlotsList || showPersonalInfo) ? 'default' : 'pointer',
+                                                        background: '#fff',
+                                                        pointerEvents: (showSlotsList || showPersonalInfo) ? 'none' : 'auto',
+                                                    }}
+                                                >
+                                                    {selectedLabel}
+                                                    {showCalendar &&
+                                                        <span style={{
+                                                            marginLeft: 8,
+                                                            color: '#007bff'
+                                                        }}>{isStateListOpen ? '▲' : '▼'}</span>
+                                                    }
+                                                </div>
+
+                                                {isStateListOpen && (
+                                                    <ul
+                                                        style={{
+                                                            listStyle: 'none',
+                                                            margin: 0,
+                                                            padding: 0,
+                                                            border: '1px solid #ccc',
+                                                            borderTop: '1px solid #ccc',
+                                                            maxHeight: 200,
+                                                            overflowY: 'auto',
+                                                            background: '#fff',
+                                                            position: 'absolute',
+                                                            width: '100%',
+                                                            zIndex: 10,
+                                                        }}
+                                                    >
+                                                        {timezonesList.map((tz) => {
+                                                            const label = `GMT${tz.offset} ${tz.name} (${tz.short})`;
+                                                            const time = currentTimes[tz.name] || '';
+                                                            return (
+                                                                <li
+                                                                    key={tz.name}
+                                                                    onClick={() => handleSelectState(tz)}
+                                                                    className="timezone-item"
+                                                                    style={{
+                                                                        background: tz.name === timezone ? '#eee' : undefined,
+                                                                    }}
+                                                                >
+                                                                    {label} {time}
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {showCalendar &&
+                                        <div className="booking-header">
+                                            <button className="nav-btn" onClick={goPrevMonth}
+                                                    disabled={!canGoBack()}>&lt;</button>
+                                            <div>{monthYearLabel}</div>
+                                            <button disabled={!canGoNext()} className="nav-btn"
+                                                    onClick={goNextMonth}>&gt;</button>
+                                        </div>
+                                    }
+                                    {showCalendar &&
+                                        <div className="calendar">
+                                            {WEEKDAYS.map(day => (
+                                                <div key={day} className="weekday-header">{day}</div>
+                                            ))}
+
+                                            {calendarDays.map((day, idx) => {
+                                                const disabled = isDayClosed(day, month, year);
+                                                const selected = selectedDate &&
+                                                    selectedDate.year === year &&
+                                                    selectedDate.month - 1 === month &&
+                                                    selectedDate.day === day;
+                                                const isToday = day &&
+                                                    day === now.day &&
+                                                    month + 1 === now.month &&
+                                                    year === now.year
+                                                return (
+                                                    <div
+                                                        key={idx}
+                                                        className={
+                                                            "day" +
+                                                            (disabled ? " disabled" : "") +
+                                                            (selected ? " selected" : "") +
+                                                            (isToday ? " today-dot" : "")
+                                                        }
+                                                        onClick={() => onSelectDay(day)}
+                                                    >
+                                                        {day || ""}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    }
+                                    {
+                                        showSlotsList &&
+                                        <div>
+                                            <div>Choose Time Slot</div>
+                                            <div className="booking-selection-summary">Duration
+                                                : {slotDuration} {slotDurationUnit}</div>
+                                            <div className="slot-list">
+                                                {slotsList.map((slot, index) => {
+                                                    const timeLabel = slot.setZone(timezone).toFormat('h:mm a')
+                                                    const isSelected = selectedSlot === slot
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className={`slot-item ${isSelected ? 'selected' : ''}`}
+                                                            onClick={() => onClickSlot(slot)}
+                                                        >
+                                                            {isSelected ? (
+                                                                <>
+                                                                    <div className="slot-left">{timeLabel}</div>
+                                                                    <button
+                                                                        className="slot-right"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            onSelectSlot();
+                                                                        }}
+                                                                    >
+                                                                        Select
+                                                                    </button>
+                                                                </>
+                                                            ) : (
+                                                                <div className="slot-full">{timeLabel}</div>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             }
 
@@ -6614,17 +6939,13 @@
                             }
 
                             {
-                                !chooseCalendar && !submitting && !submittedContact && !gettingCalendar &&
+                                (!chooseCalendar || showPersonalInfo) && !submitting && !submittedContact && !gettingCalendar &&
                                 <div style={{justifySelf: 'center', marginBottom: '20px'}}>
                                     <button className="meta-next-button" disabled={!isFormValid()}
                                             onClick={() => formRef.current.requestSubmit()}>
                                         Submit
                                     </button>
                                 </div>
-                            }
-
-                            {
-                                chooseCalendar && <div>Here is the calendar</div>
                             }
 
                         </div>
