@@ -6036,6 +6036,7 @@
                 })
                 const [isPhoneFocused, setIsPhoneFocused] = useState(false)
                 const [submittedContact, setSubmittedContact] = useState(false)
+                const [submittedAppointment, setSubmittedAppointment] = useState(false)
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [showCalendar, setShowCalendar] = useState(false)
                 const [slotDuration, setSlotDuration] = useState(30)
@@ -6154,6 +6155,7 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        setSubmittedContact(true)
                         if (chooseCalendar) {
                             await submitAppointment(contactResponse.data?.contactId)
                         }
@@ -6165,6 +6167,7 @@
 
                 const submitAppointment = async (contactId) => {
                     console.log('HID Developer I am submit appointment: ', contactId)
+                    setSubmitting(false)
                 }
 
                 const handleChange = (e) => {
@@ -6522,6 +6525,7 @@
 
                 useEffect(() => {
                     setSubmittedContact(false)
+                    setSubmittedAppointment(false)
                     setErrorSubmitting(false)
                 }, [chooseCalendar])
 
@@ -6547,7 +6551,7 @@
 
                             {
                                 (gettingCalendar || submitting) &&
-                                <div>
+                                <div style={{textAlign: 'center'}}>
                                     <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                 </div>
                             }
