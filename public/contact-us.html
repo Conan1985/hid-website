@@ -6597,7 +6597,7 @@
                                 </div>
                             }
 
-                            {submittedContact && !chooseCalendar && !submitting && !gettingCalendar &&
+                            {submittedContact && !chooseCalendar && !submitting && !gettingCalendar && !errorSubmitting &&
                                 <div style={{textAlign: 'center'}}>
                                     <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
                                        aria-hidden="true"></i>
@@ -6606,7 +6606,7 @@
                                 </div>
                             }
 
-                            {chooseCalendar && !gettingCalendar && !submitting && !submittedAppointment &&
+                            {chooseCalendar && !gettingCalendar && !submitting && !submittedAppointment && !errorSubmitting &&
                                 <div style={{textAlign: 'center'}}>
                                     {
                                         (showSlotsList || showPersonalInfo) &&
