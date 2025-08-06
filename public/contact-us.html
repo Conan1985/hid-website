@@ -6155,19 +6155,22 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
-                        setSubmittedContact(true)
+                        setSubmitting(false)
                         if (chooseCalendar) {
                             await submitAppointment(contactResponse.data?.contactId)
                         }
                     } catch (error) {
                         console.error('Error in upsert contact: ', error)
                         setErrorSubmitting(true)
+                    } finally {
+                        setSubmittedContact(true)
                     }
                 }
 
                 const submitAppointment = async (contactId) => {
                     console.log('HID Developer I am submit appointment: ', contactId)
                     setSubmitting(false)
+                    setSubmittedAppointment(true)
                 }
 
                 const handleChange = (e) => {
@@ -6573,7 +6576,7 @@
                                 </div>
                             }
 
-                            {chooseCalendar && !gettingCalendar &&
+                            {chooseCalendar && !gettingCalendar && !submitting && !submittedAppointment &&
                                 <div style={{textAlign: 'center'}}>
                                     {
                                         (showSlotsList || showPersonalInfo) &&
