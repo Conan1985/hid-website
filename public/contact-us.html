@@ -5797,9 +5797,9 @@
     </div>
 </header>
 <div>
-    <main id="content" >
-        <div id="cms-block-66cc99d6987318.31510275" class="cms-block cms-block-element" >
-            <div class="breadcrumbBig" >
+    <main id="content">
+        <div id="cms-block-66cc99d6987318.31510275" class="cms-block cms-block-element">
+            <div class="breadcrumbBig">
                 <div class="breadcrumb-container forDesktop blackFont ">
                     <nav class="breadcrumb breadcrumbBlock gtmBreadcrumb" aria-label="breadcrumb.label">
                                 <span>
@@ -6565,7 +6565,7 @@
                 return (
                     <div className="cms-block cms-block-element">
                         <div className="contentBottom"
-                             style={{maxWidth: '600px',  marginLeft: '20px', marginRight: '20px'}}>
+                             style={{maxWidth: '600px', marginLeft: '20px', marginRight: '20px'}}>
                             {!submitting && !gettingCalendar &&
                                 <div className="contact-us-switch-row">
                                     <h3>Want to schedule an appointment?
@@ -6597,7 +6597,7 @@
                                 </div>
                             }
 
-                            {submittedContact && !chooseCalendar && !submitting &&
+                            {submittedContact && !chooseCalendar && !submitting && !gettingCalendar &&
                                 <div style={{textAlign: 'center'}}>
                                     <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
                                        aria-hidden="true"></i>
@@ -6904,7 +6904,8 @@
                                             onBlur={() => setTouched({...touched, preferences: true})}
                                             tabIndex={-1} // 👈 Make it focusable so blur can fire
                                         >
-                                            <span style={{marginBottom: '0.5rem'}}>What options would you prefer?*</span>
+                                            <span
+                                                style={{marginBottom: '0.5rem'}}>What options would you prefer?*</span>
                                             <div className="checkbox-grid">
                                                 {userPrefers.map((option, index) => {
                                                     const id = `pref-${index}`;
@@ -6990,8 +6991,8 @@
                             }
 
                             {
-                                !errorSubmitting && chooseCalendar && submittedAppointment &&
-                                <div style={{fontSize: 'large'}}>
+                                !errorSubmitting && chooseCalendar && submittedAppointment && !submitting && !gettingCalendar &&
+                                <div style={{fontSize: 'large', textAlign: 'center'}}>
                                     <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
                                        aria-hidden="true"></i>
                                     <div
