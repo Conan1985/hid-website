@@ -6126,6 +6126,7 @@
                 const statesWrapper = useRef(null);
                 const [currentTimes, setCurrentTimes] = useState({})
                 const [loadCalendarBefore, setLoadCalendarBefore] = useState(false)
+                const [appointmentId, setAppointmentId] = useState('')
 
                 const handleSubmit = async (e) => {
                     e.preventDefault()
@@ -6163,14 +6164,39 @@
                         console.error('Error in upsert contact: ', error)
                         setErrorSubmitting(true)
                     } finally {
+                        setSubmitting(false)
                         setSubmittedContact(true)
                     }
                 }
 
                 const submitAppointment = async (contactId) => {
-                    console.log('HID Developer I am submit appointment: ', contactId)
-                    setSubmitting(false)
-                    setSubmittedAppointment(true)
+                    const url = APP_BASE_URL + '/makeAppointment'
+                    try {
+                        const appointment = {
+                            contactId: contactId,
+                            startTime: selectedSlot.toISO()
+                        }
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(appointment)
+                        })
+                        if (!response.ok) {
+                            console.error(`HTTP error! status: ${response.status}`)
+                            setErrorSubmitting(true)
+                        }
+                        const appointmentResponse = await response.json()
+                        setAppointmentId(appointmentResponse.data)
+                        setErrorSubmitting(false)
+                    } catch (error) {
+                        console.error('Error in make appointment: ', error)
+                        setErrorSubmitting(true)
+                    } finally {
+                        setSubmitting(false)
+                        setSubmittedAppointment(true)
+                    }
                 }
 
                 const handleChange = (e) => {
@@ -6505,6 +6531,10 @@
 
                 const selectedLabel = `GMT${selectedTz.offset} ${selectedTz.name} (${selectedTz.short})`
 
+                const googleCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/add-event/${appointmentId}`
+                const outlookCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
+                const iCloudCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
+
                 useEffect(() => {
                     if (!timezonesList.find(tz => tz.name === timezone)) {
                         const matchTimeZone = timezonesList.find(tz => tz.offset === now.toFormat("ZZ"))
@@ -6567,7 +6597,7 @@
                                 </div>
                             }
 
-                            {submittedContact && !chooseCalendar &&
+                            {submittedContact && !chooseCalendar && !submitting &&
                                 <div style={{textAlign: 'center'}}>
                                     <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
                                        aria-hidden="true"></i>
@@ -6956,6 +6986,71 @@
                                             onClick={() => formRef.current.requestSubmit()}>
                                         Submit
                                     </button>
+                                </div>
+                            }
+
+                            {
+                                !errorSubmitting && chooseCalendar && submittedAppointment &&
+                                <div style={{fontSize: 'large'}}>
+                                    <i style={{fontSize: 80, color: '#2490e8'}} className="fa fa-thumbs-up"
+                                       aria-hidden="true"></i>
+                                    <div
+                                        style={{
+                                            fontSize: '20px',
+                                            fontWeight: 900,
+                                            color: 'black',
+                                            marginBottom: '10px',
+                                            marginTop: '10px'
+                                        }}>Your
+                                        Meeting has been Scheduled
+                                    </div>
+                                    <div>
+                                        Thank you for your appointment request. We will contact you shortly
+                                        to
+                                        confirm your request. Please call our office at {CONTACT_METHOD} if
+                                        you
+                                        have any questions.
+                                    </div>
+                                    <div className="booking-selection-summary"
+                                         style={{
+                                             marginTop: '20px',
+                                             border: '1px solid gray',
+                                             borderRadius: '12px'
+                                         }}>
+                                        <div>
+                                            <i className="fas fa-clock"></i> {slotDuration} {slotDurationUnit}
+                                        </div>
+                                        <div>
+                                            <i className="fas fa-calendar"></i> {slotString} {selectedDateStr}
+                                        </div>
+                                        <div>
+                                            <i className="fas fa-globe"></i> {selectedLabel}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href={googleCalendarLink} target="_blank"
+                                           className="calendar-button">
+                                            <img src="/images/Contact/Google_Calendar.webp"
+                                                 alt="Google Calendar" className="calendar-icon"/>
+                                            <span>Google Calendar</span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href={outlookCalendarLink} target="_blank"
+                                           className="calendar-button">
+                                            <img src="/images/Contact/Outlook_Calendar.webp"
+                                                 alt="Outlook Calendar" className="calendar-icon"/>
+                                            <span>Outlook Calendar</span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href={iCloudCalendarLink} target="_blank"
+                                           className="calendar-button">
+                                            <img src="/images/Contact/iCloud_Calendar.webp"
+                                                 alt="iCloud Calendar" className="calendar-icon"/>
+                                            <span>iCloud Calendar</span>
+                                        </a>
+                                    </div>
                                 </div>
                             }
 
