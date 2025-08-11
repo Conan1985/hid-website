@@ -199,6 +199,7 @@ const upsertContact = async (contact, account) => {
             lastName: contact.lastName,
             email: contact.email,
             phone: contact.phone,
+            state: contact.state,
             locationId: account.location_id,
             customFields: customFields,
             source: WEBSITE_LEAD
