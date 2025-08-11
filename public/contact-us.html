@@ -6132,6 +6132,7 @@
                     e.preventDefault()
                     setSubmitting(true)
                     setSubmittedContact(false)
+                    setErrorSubmitting(false)
                     await new Promise(resolve => setTimeout(resolve, 500))
                     const url = APP_BASE_URL + '/upsertContact'
                     try {
@@ -6156,7 +6157,6 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
-                        setSubmitting(false)
                         if (chooseCalendar) {
                             await submitAppointment(contactResponse.data?.contactId)
                         }
@@ -6188,10 +6188,8 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
-                        setSubmitting(false)
                         const appointmentResponse = await response.json()
                         setAppointmentId(appointmentResponse.data)
-                        setErrorSubmitting(false)
                     } catch (error) {
                         console.error('Error in make appointment: ', error)
                         setErrorSubmitting(true)
