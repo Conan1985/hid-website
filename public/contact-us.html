@@ -6132,6 +6132,7 @@
                     e.preventDefault()
                     setSubmitting(true)
                     setSubmittedContact(false)
+                    setSubmittedAppointment(false)
                     await new Promise(resolve => setTimeout(resolve, 500))
                     const url = APP_BASE_URL + '/upsertContact'
                     try {
@@ -6171,7 +6172,6 @@
 
                 const submitAppointment = async (contactId) => {
                     const url = APP_BASE_URL + '/makeAppointment'
-                    setSubmittedAppointment(false)
                     try {
                         const appointment = {
                             contactId: contactId,
