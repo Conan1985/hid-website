@@ -6781,7 +6781,8 @@
                             }
 
                             {
-                                (!chooseCalendar || showPersonalInfo) && !submitting && !submittedContact && !submittedAppointment && !gettingCalendar &&
+                                (!chooseCalendar || showPersonalInfo) && !submitting && !submittedContact
+                                && !submittedAppointment && !gettingCalendar && !errorSubmitting &&
                                 <form ref={formRef} onSubmit={handleSubmit}>
                                     <input
                                         type="text"
