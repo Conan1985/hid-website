@@ -6171,6 +6171,7 @@
 
                 const submitAppointment = async (contactId) => {
                     const url = APP_BASE_URL + '/makeAppointment'
+                    setSubmittedAppointment(false)
                     try {
                         const appointment = {
                             contactId: contactId,
