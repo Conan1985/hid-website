@@ -6188,11 +6188,10 @@
                             console.error(`HTTP error! status: ${response.status}`)
                             setErrorSubmitting(true)
                         }
+                        setSubmitting(false)
                         const appointmentResponse = await response.json()
                         setAppointmentId(appointmentResponse.data)
                         setErrorSubmitting(false)
-                        setSubmitting(false)
-                        setSubmittedAppointment(true)
                     } catch (error) {
                         console.error('Error in make appointment: ', error)
                         setErrorSubmitting(true)
