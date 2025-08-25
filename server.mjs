@@ -128,6 +128,9 @@ app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
         const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor})
         const account = await getAccount()
         const events = await getCalendarEvents(account, bookingStart.valueOf(), bookingEnd.valueOf())
+        const blockedEvents = await getBlockedSlotsFromUserId(account, bookingStart.valueOf(), bookingEnd.valueOf())
+        console.log('HID Developer check events: ', events)
+        console.log('HID Developer check blocked events: ', blockedEvents)
         if (events.success) {
             console.log('Calendar events fetched successfully')
             res.status(200).send({data: events.data})
@@ -296,6 +299,38 @@ const getCalendarEvents = async (account, startTime, endTime) => {
         }
     } catch (error) {
         console.error(`Error in get calendar events for ${account.business_name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+const getBlockedSlotsFromUserId = async (account, startTime, endTime) => {
+    try {
+        const url = baseUrl + '/calendars/blocked-slots?locationId=' + account.location_id + '&startTime=' + startTime
+            + '&endTime=' + endTime + '&userId=' + account.user_id
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-04-15'
+            }
+        })
+        const responseData = await response.json()
+        const success = response.status === 200
+        const data = responseData.events?.map(event => ({
+            startTime: event.startTime,
+            endTime: event.endTime
+        }))
+        return {
+            success: success,
+            data: data
+        }
+    } catch (error) {
+        console.error(`Error in get blocked slots for ${account.business_name} `, error)
         return {
             success: false,
             data: error
