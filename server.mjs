@@ -141,6 +141,30 @@ app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
     }
 })
 
+app.get('/getBlockedSlotsFromUserId', globalLimiter, ipLimiter, async (req, res) => {
+    try {
+        const allowBookingAfter = req.query.allowBookingAfter
+        const allowBookingAfterUnit = req.query.allowBookingAfterUnit
+        const allowBookingFor = req.query.allowBookingFor
+        const allowBookingForUnit = req.query.allowBookingForUnit
+        const now = DateTime.now()
+        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter})
+        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor})
+        const account = await getAccount()
+        const events = await getBlockedSlotsFromUserId(account, bookingStart.valueOf(), bookingEnd.valueOf())
+        if (events.success) {
+            console.log('Blocked events fetched successfully')
+            res.status(200).send({data: events.data})
+        } else {
+            console.log('Error in get blocked events: ', events)
+            res.status(500).send('Error in get blocked events')
+        }
+    } catch (err) {
+        console.error('Unexpected error in get blocked events: ', err)
+        res.status(500).send('Unexpected error in get blocked events: ', err)
+    }
+})
+
 app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
         return res.status(400).send('No data provided')
