@@ -128,13 +128,7 @@ app.get('/getCalendarEvents', globalLimiter, ipLimiter, async (req, res) => {
         const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor})
         const account = await getAccount()
         const events = await getCalendarEvents(account, bookingStart.valueOf(), bookingEnd.valueOf())
-        const blockedEvents = await getBlockedSlotsFromUserId(account, bookingStart.valueOf(), bookingEnd.valueOf())
-        console.log('HID Developer check events: ', events)
-        console.log('HID Developer check blocked events: ', blockedEvents)
         if (events.success && blockedEvents.success) {
-            const result = filterEvents(events, blockedEvents)
-            console.log('HID Developer result: ', result)
-            console.log('Calendar events fetched successfully')
             res.status(200).send({data: events.data})
         } else {
             console.log('Error in get calendar events: ', events)
@@ -380,15 +374,4 @@ const makeAppointment = async (appointment, account) => {
             data: error
         }
     }
-}
-
-const filterEvents = (events, blockedEvents) => {
-    return events.data.filter(event => {
-        const eventTime = new Date(event.startTime).getTime();
-        return !blockedEvents.data.some(blocked => {
-            const blockStart = new Date(blocked.startTime).getTime();
-            const blockEnd = new Date(blocked.endTime).getTime();
-            return eventTime >= blockStart && eventTime <= blockEnd;
-        });
-    });
 }
