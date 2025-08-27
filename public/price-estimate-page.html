@@ -6212,7 +6212,6 @@
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
-                            return
                         }
                         const calendar = await response.json()
                         if (calendar.data?.slotDuration) {
