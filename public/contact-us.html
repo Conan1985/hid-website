@@ -6014,6 +6014,7 @@
                 const formRef = useRef()
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
+                const [errorGetCalendar, setErrorGetCalendar] = useState(false)
                 const [form, setForm] = useState({
                     firstName: "",
                     lastName: "",
@@ -6300,7 +6301,7 @@
                         return base.set({minute: 0}).plus({minutes: roundedMinutes});
                     }
 
-                    const starts = []
+                    let starts = []
                     for (
                         let date = bookingStart.startOf('day');
                         date <= bookingEnd;
@@ -6334,7 +6335,6 @@
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
-                            return
                         }
                         const calendar = await response.json()
                         if (calendar.data?.slotDuration) {
@@ -6359,39 +6359,64 @@
                         if (calendar.data?.allowBookingFor) {
                             setAllowBookingFor(calendar.data.allowBookingFor)
                         }
+                        const blockedSlotsUrl = APP_BASE_URL + '/getBlockedSlotsFromUserId?allowBookingAfter=' + allowBookingAfter
+                            + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
+                            + '&allowBookingForUnit=' + allowBookingForUnit
+                        const blockedSlotsResponse = await fetch(blockedSlotsUrl)
+                        if (!blockedSlotsResponse.ok) {
+                            console.error(`HTTP error! status: ${blockedSlotsResponse.status}`)
+                            setShowCalendar(false)
+                            setErrorGetCalendar(true)
+                            return
+                        }
+                        let blockedSlots = []
+                        const blockedStarts = await blockedSlotsResponse.json()
+                        if (blockedStarts.data) {
+                            blockedSlots = blockedStarts.data
+                        }
+
                         const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
                             + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
                             + '&allowBookingForUnit=' + allowBookingForUnit
 
                         const eventsResponse = await fetch(eventsUrl)
+                        let events = []
                         if (!eventsResponse.ok) {
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
-                            return
+                        } else {
+                            const calendarEvents = await eventsResponse.json()
+                            if (calendarEvents.data) {
+                                events = calendarEvents.data
+                            }
+                            const eventCounts = new Map();
+                            events.forEach(event => {
+                                const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
+                                eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
+                            });
+                            starts = starts.filter(slot => {
+                                const slotTime = slot.toUTC().toISO(); // Normalize to UTC
+                                const count = eventCounts.get(slotTime) || 0;
+                                return count < APPOINTMENTS_CAP;
+                            })
                         }
-                        let events = []
-                        const calendarEvents = await eventsResponse.json()
-                        if (calendarEvents.data) {
-                            events = calendarEvents.data
-                        }
-                        const eventCounts = new Map();
-                        events.forEach(event => {
-                            const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
-                            eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
+                        const filteredStarts = starts.filter(startStr => {
+                            const startTime = new Date(startStr).getTime();
+                            return !blockedSlots.some(slot => {
+                                const slotStart = new Date(slot.startTime).getTime();
+                                const slotEnd = new Date(slot.endTime).getTime();
+                                return startTime >= slotStart && startTime < slotEnd;
+                            });
                         });
-                        const filteredStarts = starts.filter(slot => {
-                            const slotTime = slot.toUTC().toISO(); // Normalize to UTC
-                            const count = eventCounts.get(slotTime) || 0;
-                            return count < APPOINTMENTS_CAP;
-                        })
                         setSlotStarts(filteredStarts)
+                        if (!loadCalendarBefore) {
+                            setShowCalendar(true)
+                        }
                     } catch (error) {
+                        setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
                         setLoadCalendarBefore(true)
-                        if (!loadCalendarBefore) {
-                            setShowCalendar(true)
-                        }
                     }
                 }
 
@@ -6473,6 +6498,21 @@
                     );
                 }
 
+                const isMonthClosed = (month, year) => {
+                    if (!month) return true
+                    const startOfMonth = DateTime.fromObject(
+                        { year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 },
+                        { zone: timezone }
+                    );
+                    const daysInMonth = startOfMonth.daysInMonth;
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        if (!isDayClosed(day, month, year)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+
                 const canGoBack = () => {
                     const now = DateTime.now().setZone(timezone);
                     const currentYear = now.year;
@@ -6487,7 +6527,7 @@
                         nextMonth = 0
                         nextYear += 1
                     }
-                    return !isDayClosed(1, nextMonth, nextYear)
+                    return !isMonthClosed(nextMonth, nextYear)
                 }
 
                 const goPrevMonth = () => {
@@ -6560,6 +6600,7 @@
                     setSubmittedContact(false)
                     setSubmittedAppointment(false)
                     setErrorSubmitting(false)
+                    setErrorGetCalendar(false)
                 }, [chooseCalendar])
 
                 return (
@@ -6588,7 +6629,12 @@
                                     <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                 </div>
                             }
-
+                            {errorGetCalendar && chooseCalendar &&
+                                <div>
+                                    Something went wrong with the server to load the calendar.
+                                    <br/> Please try again, or call our office at {CONTACT_METHOD}.
+                                </div>
+                            }
                             {errorSubmitting &&
                                 <div>
                                     Something went wrong with the server. <br/> Please try again, or call
@@ -6605,8 +6651,7 @@
                                     A member of our team will contact you soon.
                                 </div>
                             }
-
-                            {chooseCalendar && !gettingCalendar && !submitting && !submittedAppointment && !errorSubmitting &&
+                            {chooseCalendar && !gettingCalendar && !submitting && !submittedAppointment && !errorSubmitting && !errorGetCalendar &&
                                 <div style={{textAlign: 'center'}}>
                                     {
                                         (showSlotsList || showPersonalInfo) &&
