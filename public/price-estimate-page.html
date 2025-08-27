@@ -6368,6 +6368,21 @@
                     );
                 }
 
+                const isMonthClosed = (month, year) => {
+                    if (!month) return true
+                    const startOfMonth = DateTime.fromObject(
+                        { year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 },
+                        { zone: timezone }
+                    );
+                    const daysInMonth = startOfMonth.daysInMonth;
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        if (!isDayClosed(day, month, year)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+
                 const canGoBack = () => {
                     const now = DateTime.now().setZone(timezone);
                     const currentYear = now.year;
@@ -6382,7 +6397,7 @@
                         nextMonth = 0
                         nextYear += 1
                     }
-                    return !isDayClosed(1, nextMonth, nextYear)
+                    return !isMonthClosed(nextMonth, nextYear)
                 }
 
                 const goPrevMonth = () => {
