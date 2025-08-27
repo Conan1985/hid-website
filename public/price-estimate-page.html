@@ -6277,7 +6277,7 @@
                             const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
                             eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
                         });
-                        const filteredStarts = starts.filter(slot => {
+                        let filteredStarts = starts.filter(slot => {
                             const slotTime = slot.toUTC().toISO(); // Normalize to UTC
                             const count = eventCounts.get(slotTime) || 0;
                             return count < APPOINTMENTS_CAP;
@@ -6285,6 +6285,15 @@
 
                         console.log('HID Developer show filtered starts: ', filteredStarts)
                         console.log('HID Developer show blocked slots: ', blockedSlots)
+
+                        filteredStarts = filteredStarts.filter(startStr => {
+                            const startTime = new Date(startStr).getTime();
+                            return !blockedSlots.some(slot => {
+                                const slotStart = new Date(slot.start).getTime();
+                                const slotEnd = new Date(slot.end).getTime();
+                                return startTime >= slotStart && startTime < slotEnd;
+                            });
+                        });
 
                         setSlotStarts(filteredStarts)
                         setShowCalendar(true)
