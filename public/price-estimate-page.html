@@ -6286,6 +6286,8 @@
                         console.log('HID Developer show filtered starts: ', filteredStarts)
                         console.log('HID Developer show blocked slots: ', blockedSlots)
 
+                        console.log('HID Developer check first start time: ', new Date(filteredStarts[0]).getTime())
+
                         filteredStarts = filteredStarts.filter(startStr => {
                             const startTime = new Date(startStr).getTime();
                             return !blockedSlots.some(slot => {
