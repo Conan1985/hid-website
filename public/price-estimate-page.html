@@ -6130,6 +6130,7 @@
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
                 const [errorGetCalendar, setErrorGetCalendar] = useState(false)
+                const [loadCalendarBefore, setLoadCalendarBefore] = useState(false)
                 const [appointmentId, setAppointmentId] = useState('')
 
                 const handleToggleCondition = (condition) => {
@@ -6288,13 +6289,15 @@
                             });
                         });
                         setSlotStarts(filteredStarts)
-                        setShowCalendar(true)
-
+                        if (!loadCalendarBefore) {
+                            setShowCalendar(true)
+                        }
                     } catch (error) {
                         setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
+                        setLoadCalendarBefore(true)
                     }
                 }
 
@@ -7227,7 +7230,9 @@
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
                                                     setStep(step + 1);
-                                                    getCalendar()
+                                                    if (!loadCalendarBefore) {
+                                                        getCalendar()
+                                                    }
                                                 }}>
                                             Next
                                         </button>}
