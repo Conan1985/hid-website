@@ -6279,8 +6279,6 @@
                                 return count < APPOINTMENTS_CAP;
                             })
                         }
-                        console.log('hid developer check filtered starts before filter: ', starts)
-                        console.log('hid developer check blocked slots: ', blockedSlots)
                         const filteredStarts = starts.filter(startStr => {
                             const startTime = new Date(startStr).getTime();
                             return !blockedSlots.some(slot => {
@@ -6289,7 +6287,6 @@
                                 return startTime >= slotStart && startTime < slotEnd;
                             });
                         });
-                        console.log('hid developer check filtered starts after filter: ', filteredStarts)
                         setSlotStarts(filteredStarts)
                         setShowCalendar(true)
 
