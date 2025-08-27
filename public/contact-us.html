@@ -6275,7 +6275,7 @@
                 }
 
                 const toggleCalendar = async () => {
-                    if (!chooseCalendar) {
+                    if (!chooseCalendar && !loadCalendarBefore) {
                         await getCalendar()
                     }
                     setChooseCalendar(!chooseCalendar)
