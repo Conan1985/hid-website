@@ -6178,7 +6178,7 @@
                         const base = time.set({second: 0, millisecond: 0});
                         return base.set({minute: 0}).plus({minutes: roundedMinutes});
                     }
-                    const starts = []
+                    let starts = []
                     for (
                         let date = bookingStart.startOf('day');
                         date <= bookingEnd;
@@ -6260,29 +6260,28 @@
                             + '&allowBookingForUnit=' + allowBookingForUnit
 
                         const eventsResponse = await fetch(eventsUrl)
+                        let events = []
                         if ( !eventsResponse.ok) {
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
-                            setShowCalendar(true)
-                            return
+                        } else {
+                            const calendarEvents = await eventsResponse.json()
+                            if (calendarEvents.data) {
+                                events = calendarEvents.data
+                            }
+                            const eventCounts = new Map();
+                            events.forEach(event => {
+                                const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
+                                eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
+                            })
+                            starts = starts.filter(slot => {
+                                const slotTime = slot.toUTC().toISO(); // Normalize to UTC
+                                const count = eventCounts.get(slotTime) || 0;
+                                return count < APPOINTMENTS_CAP;
+                            })
                         }
-                        let events = []
-                        const calendarEvents = await eventsResponse.json()
-                        if (calendarEvents.data) {
-                            events = calendarEvents.data
-                        }
-                        const eventCounts = new Map();
-                        events.forEach(event => {
-                            const eventTime = DateTime.fromISO(event.startTime).toUTC().toISO(); // Normalize to UTC
-                            eventCounts.set(eventTime, (eventCounts.get(eventTime) || 0) + 1);
-                        });
-                        let filteredStarts = starts.filter(slot => {
-                            const slotTime = slot.toUTC().toISO(); // Normalize to UTC
-                            const count = eventCounts.get(slotTime) || 0;
-                            return count < APPOINTMENTS_CAP;
-                        })
-                        console.log('hid developer check filtered starts before filter: ', filteredStarts)
+                        console.log('hid developer check filtered starts before filter: ', starts)
                         console.log('hid developer check blocked slots: ', blockedSlots)
-                        filteredStarts = filteredStarts.filter(startStr => {
+                        const filteredStarts = starts.filter(startStr => {
                             const startTime = new Date(startStr).getTime();
                             return !blockedSlots.some(slot => {
                                 const slotStart = new Date(slot.startTime).getTime();
