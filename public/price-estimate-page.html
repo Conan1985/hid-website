@@ -6249,8 +6249,6 @@
                             setErrorGetCalendar(true)
                             return
                         }
-                        console.log('HID Developer am I here?')
-
                         let blockedSlots = []
                         const blockedStarts = await blockedSlotsResponse.json()
                         if (blockedStarts.data) {
@@ -6282,24 +6280,14 @@
                             const count = eventCounts.get(slotTime) || 0;
                             return count < APPOINTMENTS_CAP;
                         })
-
-                        console.log('HID Developer show filtered starts: ', filteredStarts)
-                        console.log('HID Developer show blocked slots: ', blockedSlots)
-
-                        console.log('HID Developer check first start time: ', new Date(filteredStarts[0]).getTime())
-                        console.log('HID Developer check slot start: ', new Date(blockedSlots[0].start).getTime())
-
                         filteredStarts = filteredStarts.filter(startStr => {
                             const startTime = new Date(startStr).getTime();
                             return !blockedSlots.some(slot => {
-                                const slotStart = new Date(slot.start).getTime();
-                                const slotEnd = new Date(slot.end).getTime();
+                                const slotStart = new Date(slot.startTime).getTime();
+                                const slotEnd = new Date(slot.endTime).getTime();
                                 return startTime >= slotStart && startTime < slotEnd;
                             });
                         });
-
-                        console.log('HID developer show final starts: ', filteredStarts)
-
                         setSlotStarts(filteredStarts)
                         setShowCalendar(true)
 
