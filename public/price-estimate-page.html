@@ -6289,9 +6289,7 @@
                             });
                         });
                         setSlotStarts(filteredStarts)
-                        if (!loadCalendarBefore) {
-                            setShowCalendar(true)
-                        }
+                        setShowCalendar(true)
                     } catch (error) {
                         setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
