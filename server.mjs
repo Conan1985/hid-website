@@ -341,7 +341,7 @@ const getBlockedSlotsFromUserId = async (account, startTime, endTime) => {
             }
         })
         const responseData = await response.json()
-        const success = response.status === 304
+        const success = response.status === 200
         const data = responseData.events?.map(event => ({
             startTime: event.startTime,
             endTime: event.endTime
