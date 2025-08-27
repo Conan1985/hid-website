@@ -6280,8 +6280,6 @@
                             const count = eventCounts.get(slotTime) || 0;
                             return count < APPOINTMENTS_CAP;
                         })
-                        console.log('HID Developer check starts: ', filteredStarts)
-                        console.log('HID Developer check blocked slots: ', blockedSlots)
                         filteredStarts = filteredStarts.filter(startStr => {
                             const startTime = new Date(startStr).getTime();
                             return !blockedSlots.some(slot => {
@@ -6290,7 +6288,6 @@
                                 return startTime >= slotStart && startTime < slotEnd;
                             });
                         });
-                        console.log('HID Developer check filtered starts: ', filteredStarts)
                         setSlotStarts(filteredStarts)
                         setShowCalendar(true)
 
