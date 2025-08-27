@@ -6129,6 +6129,7 @@
                 })
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
+                const [errorGetCalendar, setErrorGetCalendar] = useState(false)
                 const [appointmentId, setAppointmentId] = useState('')
 
                 const handleToggleCondition = (condition) => {
@@ -6236,12 +6237,32 @@
                         if (calendar.data?.allowBookingFor) {
                             setAllowBookingFor(calendar.data.allowBookingFor)
                         }
+
+                        const blockedSlotsUrl = APP_BASE_URL + '/getBlockedSlotsFromUserId?allowBookingAfter=' + allowBookingAfter
+                            + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
+                            + '&allowBookingForUnit=' + allowBookingForUnit
+
+                        const blockedSlotsResponse = await fetch(blockedSlotsUrl)
+
+                        if (!blockedSlotsResponse.ok) {
+                            console.error(`HTTP error! status: ${blockedSlotsResponse.status}`)
+                            setShowCalendar(false)
+                            setErrorGetCalendar(true)
+                            return
+                        }
+
+                        let blockedSlots = []
+                        const blockedStarts = await blockedSlotsResponse.json()
+                        if (blockedStarts.data) {
+                            blockedSlots = blockedStarts.data
+                        }
+
                         const eventsUrl = APP_BASE_URL + '/getCalendarEvents?allowBookingAfter=' + allowBookingAfter
                             + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
                             + '&allowBookingForUnit=' + allowBookingForUnit
 
                         const eventsResponse = await fetch(eventsUrl)
-                        if (!eventsResponse.ok) {
+                        if ( !eventsResponse.ok) {
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                             return
                         }
@@ -6260,12 +6281,17 @@
                             const count = eventCounts.get(slotTime) || 0;
                             return count < APPOINTMENTS_CAP;
                         })
+
+                        console.log('HID Developer show filtered starts: ', filteredStarts)
+                        console.log('HID Developer show blocked slots: ', blockedSlots)
+
                         setSlotStarts(filteredStarts)
+
                     } catch (error) {
+                        setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
                         setGettingCalendar(false)
-                        setShowCalendar(true)
                     }
                 }
 
@@ -6605,9 +6631,17 @@
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
-                                {step === 4 && <div className="boldBody">
+                                {step === 4 && !errorGetCalendar && <div className="boldBody">
                                     Make an appointment with us.
                                 </div>}
+                                {
+                                    step === 4 && errorGetCalendar && <div className="boldBody">
+                                        <div>
+                                            Something went wrong with the server to load the calendar.
+                                            <br/> Please try again, or call our office at {CONTACT_METHOD}.
+                                        </div>
+                                    </div>
+                                }
                                 {step === 1 &&
                                     <div>
                                         <div className="options-container">
@@ -6741,7 +6775,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 4 && !gettingCalendar &&
+                                {step === 4 && !gettingCalendar && !errorGetCalendar &&
                                     <div>
                                         {
                                             (showSlotsList || showPersonalInfo) &&
@@ -7060,11 +7094,10 @@
                                 {
                                     step === 5 && !submitting &&
                                     <div className="booking-selection-summary">
-                                        {errorSubmitting &&
+                                        {(errorSubmitting || errorGetCalendar) &&
                                             <div>
-                                                Something went wrong with the server. <br/> Please try again, or call
-                                                our
-                                                office at {CONTACT_METHOD}.
+                                                Something went wrong with the server to process your request.
+                                                <br/> Please try again, or call our office at {CONTACT_METHOD}.
                                             </div>
                                         }
                                         {
@@ -7154,6 +7187,7 @@
                                         <button className="meta-back-button" onClick={() => {
                                             setStep(1);
                                             setShowCalendar(false)
+                                            setErrorGetCalendar(false)
                                             setShowSlotsList(false)
                                             setShowPersonalInfo(false)
                                             setSelectedSlot(null)
