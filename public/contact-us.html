@@ -6043,6 +6043,7 @@
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('mins')
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
+                const deviceTimezone = luxon.DateTime.local().zoneName
                 const [openHours, setOpenHours] = useState([
                     {
                         "daysOfTheWeek": [
@@ -6145,6 +6146,8 @@
                             state: form.state,
                             preferences: form.preferences,
                             notes: form.notes,
+                            deviceTimezone: deviceTimezone,
+                            fromTimezone: timezone
                         }
                         const response = await fetch(url, {
                             method: 'POST',
