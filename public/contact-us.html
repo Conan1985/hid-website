@@ -6012,6 +6012,7 @@
                 const [chooseCalendar, setChooseCalendar] = useState(false);
                 const [showPersonalInfo, setShowPersonalInfo] = useState(false)
                 const formRef = useRef()
+                const businessZone = "America/Chicago"
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
                 const [errorGetCalendar, setErrorGetCalendar] = useState(false)
@@ -6291,12 +6292,12 @@
                     const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                     const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
                     const dayMap = new Map();
-                    openHours.forEach(entry => {
+                    const openHoursLocal = convertHoursToLocal(openHours)
+                    openHoursLocal.forEach(entry => {
                         entry.daysOfTheWeek.forEach(day => {
                             dayMap.set(day, entry.hours);
                         });
                     });
-
                     function ceilToNextSlot(time, slotDurationMins) {
                         const minutes = time.minute;
                         const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
@@ -6441,6 +6442,36 @@
                     month: 'long',
                     year: 'numeric'
                 })
+
+                const convertHoursToLocal = (openHours) => {
+                    return openHours.map(dayEntry => {
+                        const newHours = dayEntry.hours.map(h => {
+                            let openTimeHQ = DateTime.fromObject(
+                                { hour: h.openHour, minute: h.openMinute },
+                                { zone: businessZone }
+                            );
+                            let closeTimeHQ = DateTime.fromObject(
+                                { hour: h.closeHour, minute: h.closeMinute },
+                                { zone: businessZone }
+                            );
+
+                            let openLocal = openTimeHQ.setZone(timezone);
+                            let closeLocal = closeTimeHQ.setZone(timezone);
+
+                            return {
+                                openHour: openLocal.hour,
+                                openMinute: openLocal.minute,
+                                closeHour: closeLocal.hour,
+                                closeMinute: closeLocal.minute
+                            };
+                        });
+
+                        return {
+                            ...dayEntry,
+                            hours: newHours
+                        };
+                    });
+                };
 
                 const onSelectDay = (day) => {
                     if (isDayClosed(day, month, year)) return;
