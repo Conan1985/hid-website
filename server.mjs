@@ -21,7 +21,6 @@ const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
 const FIELD_ID_DEVICE_TIMEZONE = process.env.FIELD_ID_DEVICE_TIMEZONE
-const FIELD_ID_FROM_TIMEZONE = process.env.FIELD_ID_FROM_TIMEZONE
 const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
@@ -211,18 +210,6 @@ const upsertContact = async (contact, account) => {
             customFields.push({
                 id: FIELD_ID_PREFERENCES_APEX,
                 value: contact.preferences
-            })
-        }
-        if (contact.deviceTimezone) {
-            customFields.push({
-                id: FIELD_ID_DEVICE_TIMEZONE,
-                value: contact.deviceTimezone
-            })
-        }
-        if (contact.fromTimezone) {
-            customFields.push({
-                id: FIELD_ID_FROM_TIMEZONE,
-                value: contact.fromTimezone
             })
         }
         if (contact.notes) {

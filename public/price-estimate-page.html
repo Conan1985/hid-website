@@ -6011,7 +6011,6 @@
                 const [conditions, setConditions] = useState([])
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
-                const deviceTimezone = luxon.DateTime.local().zoneName
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('mins')
                 const [gettingCalendar, setGettingCalendar] = useState(false)
@@ -6585,9 +6584,7 @@
                             phone: form.phone,
                             state: form.state,
                             ageRange: ageRange,
-                            conditions: conditions,
-                            deviceTimezone: deviceTimezone,
-                            fromTimezone: timezone
+                            conditions: conditions
                         }
                         const response = await fetch(url, {
                             method: 'POST',
