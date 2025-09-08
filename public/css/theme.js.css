@@ -25989,6 +25989,10 @@ a[href^="tel:"], a[href^="mailto:"] {
     text-align: left;
 }
 
+.faq-answer-list {
+    font-weight: 600;
+}
+
 .faq-question.active {
     background: #e9eefc;
 }
