@@ -10905,49 +10905,49 @@ a:hover, a:focus {
 
 @media screen and (min-width: 1312px) {
     .google-reviews {
-        margin-top: -140px;
+        margin-top: -130px;
         margin-left: -260px
     }
 }
 
 @media screen and (min-width: 1276px) and (max-width: 1311px) {
     .google-reviews {
-        margin-top: -155px;
+        margin-top: -125px;
         margin-left: calc(-250px + ((1311px - 100vw) * 1));
     }
 }
 
 @media screen and (min-width: 1237px) and (max-width: 1275px) {
     .google-reviews {
-        margin-top: -135px;
+        margin-top: -125px;
         margin-left: calc(-214px + ((1275px - 100vw) * 1));
     }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1236px) {
     .google-reviews {
-        margin-top: -115px;
+        margin-top: -85px;
         margin-left: calc(-176px + ((1236px - 100vw) * 1));
     }
 }
 
 @media screen and (min-width: 1176px) and (max-width: 1199px) {
     .google-reviews {
-        margin-top: -155px;
+        margin-top: -125px;
         margin-left: calc(-338px + ((1199px - 100vw) * 1));
     }
 }
 
 @media screen and (min-width: 1137px) and (max-width: 1175px) {
     .google-reviews {
-        margin-top: -135px;
+        margin-top: -115px;
         margin-left: calc(-314px + ((1175px - 100vw) * 1));
     }
 }
 
 @media screen and (min-width: 990px) and (max-width: 1136px) {
     .google-reviews {
-        margin-top: -115px;
+        margin-top: -85px;
         margin-left: calc(-275px + ((1136px - 100vw) * 1));
     }
 }
