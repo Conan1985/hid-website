@@ -25960,3 +25960,35 @@ a[href^="tel:"], a[href^="mailto:"] {
     resize: vertical;
     box-sizing: border-box;
 }
+
+.faq-container {
+    max-width: 700px;
+    margin: 50px auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.faq-question {
+    background: #f3f3f3;
+    color: #0a2a66;
+    cursor: pointer;
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    display: none;
+    padding: 15px;
+    background: #fff;
+    color: #333;
+    text-align: left;
+}
+
+.faq-question.active {
+    background: #e9eefc;
+}

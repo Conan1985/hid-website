@@ -5800,7 +5800,57 @@
             <div class="heroBanner default-animation-nomov heroBanner--C1-D" style="padding-top: 30">
                 <div class="contentBottom">
                     <h2 class="mediumHeading-1 colorGold">Frequently asked questions</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">What is health insurance? <span>+</span></div>
+                            <div class="faq-answer">Health insurance helps cover medical expenses by sharing costs between you and the insurer.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">How does health insurance work? <span>+</span></div>
+                            <div class="faq-answer">You pay monthly premiums, and the insurer helps cover doctor visits, hospital stays, and treatments.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">How do I get health insurance? <span>+</span></div>
+                            <div class="faq-answer">You can apply through employers, government programs, or private marketplaces.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">What are the different types of health insurance? <span>+</span></div>
+                            <div class="faq-answer">Examples include HMO, PPO, EPO, and POS plans.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">How much does health insurance cost? <span>+</span></div>
+                            <div class="faq-answer">Costs vary based on plan type, coverage level, and location.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">What does health insurance cover? <span>+</span></div>
+                            <div class="faq-answer">It often covers doctor visits, hospital stays, preventive care, and prescriptions.</div>
+                        </div>
+                    </div>
 
+                    <script>
+                        const questions = document.querySelectorAll('.faq-question');
+
+                        questions.forEach(q => {
+                            q.addEventListener('click', () => {
+                                const answer = q.nextElementSibling;
+                                const isOpen = q.classList.contains('active');
+
+                                // Close all others
+                                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                                document.querySelectorAll('.faq-question').forEach(q => {
+                                    q.classList.remove('active');
+                                    q.querySelector('span').textContent = '+';
+                                });
+
+                                // Toggle current one
+                                if (!isOpen) {
+                                    answer.style.display = 'block';
+                                    q.classList.add('active');
+                                    q.querySelector('span').textContent = '−';
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>
