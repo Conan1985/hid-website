@@ -1,0 +1,3 @@
+<FilesMatch "\.html$">
+  Header set X-Robots-Tag "index, follow, max-video-preview:-1"
+</FilesMatch>
