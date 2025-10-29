@@ -30,12 +30,12 @@ app.set('trust proxy', 1)
 
 const ipLimiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
-    max: 60,              // max 5 requests per IP per minute
+    max: 60,              // max 60 requests per IP per minute
     message: 'Too many requests from this IP, please try again later.',
 })
 
 let globalRequestCount = 0;
-const GLOBAL_LIMIT = 10; // max 100 requests per minute globally
+const GLOBAL_LIMIT = 100; // max 100 requests per minute globally
 const WINDOW_MS = 10 * 1000; // 10 seconds
 
 setInterval(() => {
