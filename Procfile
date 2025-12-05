@@ -1,1 +1,1 @@
-worker: node refresh.js
+refresh: node refresh.js
