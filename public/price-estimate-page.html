@@ -6375,6 +6375,10 @@
                 for (let day = 1; day <= daysInMonth; day++) calendarDays.push(day);
 
                 const isDayClosed = (day, month, year) => {
+                    if (day === 2 && month === 0 && year === 2026) {
+                        console.log('Hid developer check the day of Jan 2, 2026')
+                    }
+
                     if (!day) return true
                     const targetStart = DateTime.fromObject(
                         {year, month: month + 1, day, hour: 0, minute: 0, second: 0, millisecond: 0},
