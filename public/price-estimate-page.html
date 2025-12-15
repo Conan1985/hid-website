@@ -6389,6 +6389,9 @@
                 }
 
                 const isMonthClosed = (month, year) => {
+                    if (month === 0 && year === 2026) {
+                        console.log('hid developer I can check Jan 2026')
+                    }
                     if (!month) return true
                     const startOfMonth = DateTime.fromObject(
                         { year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 },
