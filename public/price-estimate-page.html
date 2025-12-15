@@ -6389,7 +6389,7 @@
                 }
 
                 const isMonthClosed = (month, year) => {
-                    if (!month) return true
+                    if (!Number.isInteger(month)) return true
                     const startOfMonth = DateTime.fromObject(
                         { year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 },
                         { zone: timezone }
