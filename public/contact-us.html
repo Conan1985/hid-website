@@ -6160,7 +6160,8 @@
                             phone: form.phone,
                             state: form.state,
                             preferences: form.preferences,
-                            notes: form.notes
+                            notes: form.notes,
+                            source: chooseCalendar ? 'appointment' : ''
                         }
                         const response = await fetch(url, {
                             method: 'POST',
