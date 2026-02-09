@@ -70,7 +70,10 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    let reqPath = req.path;
+    if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico)$/)) {
+        return next();
+    }
+   let reqPath = req.path;
     if (reqPath.endsWith('/')) {
         reqPath = reqPath.slice(0, -1);
     }
