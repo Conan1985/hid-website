@@ -70,7 +70,11 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    const file = path.join(__dirname, 'public', req.path + '.html');
+    let reqPath = req.path;
+    if (reqPath.endsWith('/')) {
+        reqPath = reqPath.slice(0, -1);
+    }
+    const file = path.join(__dirname, 'public', reqPath + '.html');
     res.sendFile(file, err => {
         if (err) next();
     });
