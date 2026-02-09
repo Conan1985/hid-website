@@ -69,6 +69,13 @@ app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    const file = path.join(__dirname, 'public', req.path + '.html');
+    res.sendFile(file, err => {
+        if (err) next();
+    });
+});
+
 app.get('/api/hello', (req, res) => {
     res.json({message: 'Hello from backend!'});
 })
