@@ -20,7 +20,8 @@ const FIELD_ID_AGE_GROUP_APEX = process.env.FIELD_ID_AGE_GROUP_APEX
 const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
-const WEBSITE_LEAD = process.env.WEBSITE_LEAD
+const WEBSITE_LEAD_CONTACT = process.env.WEBSITE_LEAD_CONTACT
+const WEBSITE_LEAD_APPOINTMENT = process.env.WEBSITE_LEAD_APPOINTMENT
 
 const allowedOrigins = [
     ALLOWED_ORIGIN
@@ -67,6 +68,20 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+    if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico)$/)) {
+        return next();
+    }
+   let reqPath = req.path;
+    if (reqPath.endsWith('/')) {
+        reqPath = reqPath.slice(0, -1);
+    }
+    const file = path.join(__dirname, 'public', reqPath + '.html');
+    res.sendFile(file, err => {
+        if (err) next();
+    });
+});
 
 app.get('/api/hello', (req, res) => {
     res.json({message: 'Hello from backend!'});
@@ -226,7 +241,7 @@ const upsertContact = async (contact, account) => {
             state: contact.state,
             locationId: account.location_id,
             customFields: customFields,
-            source: WEBSITE_LEAD
+            source: contact.source === 'appointment' ? WEBSITE_LEAD_APPOINTMENT : WEBSITE_LEAD_CONTACT
         }
         const response = await fetch(url, {
             method: 'POST',
