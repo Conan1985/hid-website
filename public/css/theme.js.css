@@ -25872,7 +25872,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .switch {
-    align-self:center;
+    align-self: center;
     width: 42px;
     height: 24px;
     background-color: #ccc;
@@ -25919,7 +25919,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .switch-label.off {
-    color: #ccc;     /* Gray when OFF */
+    color: #ccc; /* Gray when OFF */
 }
 
 @media (max-width: 517px) {
@@ -26041,12 +26041,14 @@ a[href^="tel:"], a[href^="mailto:"] {
     margin-top: 40px;
     text-align: left;
 }
+
 .who-card {
     background: #fff;
     border: 1px solid #e0ddd8;
     border-top: 2px solid #786c45;
     padding: 22px 20px;
 }
+
 .who-card h3 {
     font-size: 1.5rem;
     font-style: normal;
@@ -26054,9 +26056,39 @@ a[href^="tel:"], a[href^="mailto:"] {
     color: #1a1a1a;
     margin-bottom: 6px;
 }
+
 .who-card p {
     font-size: 1.4rem;
     margin: 0;
     max-width: none;
     text-align: left;
+}
+
+.plan-list {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.plan-card {
+    border-bottom: 1px solid #e0ddd8;
+    padding: 36px 0;
+    text-align: left;
+}
+
+.plan-card:first-child {
+    border-top: 1px solid #e0ddd8;
+}
+
+.plan-card h3 {
+    font-style: italic;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.plan-card p {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
 }
