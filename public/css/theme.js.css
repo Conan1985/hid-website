@@ -26001,8 +26001,11 @@ a[href^="tel:"], a[href^="mailto:"] {
     margin-bottom: 15px;
 }
 
-.overline {
+.overline-top {
     margin-top: 25px;
+}
+
+.overline {
     display: block;
     font-size: 1.3rem;
     font-weight: 700;
