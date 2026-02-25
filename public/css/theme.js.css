@@ -2503,9 +2503,8 @@ button.applyBtn[disabled] {
 }
 
 .mediumHeading-1 {
-    font-size: 80px;
-    font-size: 8rem;
-    line-height: 8rem;
+    font-size: 6rem;
+    line-height: 6rem;
     letter-spacing: -1.6px;
     font-family: "BauerBodoniStd", Times, serif;
     font-weight: 700;
@@ -25995,4 +25994,38 @@ a[href^="tel:"], a[href^="mailto:"] {
 
 .faq-question.active {
     background: #e9eefc;
+}
+
+.customized-block {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.overline {
+    margin-top: 25px;
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.gold-divider {
+    width: 15%;
+    height: 2px;
+    margin: 0 auto 28px;
+    background-color: #786c45;
+}
+
+.h1-before-content {
+    margin-bottom: 16px;
+}
+
+.customized-botton-space {
+    margin: 16px auto;
+}
+
+.trust {
+    color: #aaa;
 }
