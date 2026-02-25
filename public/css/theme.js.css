@@ -26032,3 +26032,31 @@ a[href^="tel:"], a[href^="mailto:"] {
 .trust {
     color: #aaa;
 }
+
+/* ── Who grid ── */
+.who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    text-align: left;
+}
+.who-card {
+    background: #fff;
+    border: 1px solid #e0ddd8;
+    border-top: 2px solid #786c45;
+    padding: 22px 20px;
+}
+.who-card h3 {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+.who-card p {
+    font-size: 1.4rem;
+    margin: 0;
+    max-width: none;
+    text-align: left;
+}
