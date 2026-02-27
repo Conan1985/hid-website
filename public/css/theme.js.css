@@ -26129,3 +26129,58 @@ a[href^="tel:"], a[href^="mailto:"] {
     line-height: 1;
     margin-bottom: 10px;
 }
+
+.faq {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e0ddd8;
+}
+
+.faq-item:first-child {
+    border-top: 1px solid #e0ddd8;
+}
+
+.faq-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.faq-btn:hover {
+    color: #786c45;
+}
+
+.faq-icon {
+    color: #786c45;
+    transition: transform .25s;
+    flex-shrink: 0;
+}
+
+.faq-answer {
+    display: none;
+    padding-bottom: 18px;
+    color: #444;
+    line-height: 1.8;
+    max-width: 720px;
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+}

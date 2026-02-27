@@ -6038,6 +6038,86 @@
                 </div>
             </div>
         </div>
+        <div class="cms-block cms-block-element">
+            <div class="heroBanner default-animation-nomov heroBanner--C1-D">
+                <div class="contentBottom">
+                    <span class="overline colorGold">Common Questions</span>
+                    <div class="gold-divider"></div>
+                    <h2 class="mediumHeading-1 h1-before-content">Personal Health Insurance Texas —<br>Frequently Asked Questions</h2>
+                    <p>Straight answers to the questions we hear most from Texans shopping for individual coverage.</p>
+                    <div class="faq">
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                What is personal health insurance in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">Personal health insurance is coverage you purchase on your own — not through an employer group plan. In Texas, private options include PPO plans, short-term coverage, and health sharing memberships. The right plan depends on your health, your budget, which doctors you want to keep, and how often you use medical care. A licensed independent agent can compare all of these side by side for your specific situation.</div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                Can I get personal health insurance outside of open enrollment in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">Yes. Private plans are available for enrollment year-round in Texas — there are no enrollment windows or waiting periods. You can apply today and often have coverage start within days. Short-term plans are also available at any time. This is one of the major advantages of private coverage.</div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                How much does personal health insurance cost in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">Private individual plans in Texas typically range from $200 to $600 per month depending on your age, health history, ZIP code, and plan type. The range is wide because the right plan varies significantly from person to person. The only accurate way to find out what you'd pay is a personalized quote — which takes about 10 minutes and costs nothing.</div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                What does personal health insurance cover in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">Coverage varies depending on the type of plan. Private PPO plans typically cover doctor visits, specialist care, emergency services, hospital stays, prescription drugs, and preventive care. Short-term plans cover less. Health sharing plans work differently from insurance entirely. The specifics matter — which is exactly what we walk through with you before recommending anything, so you know precisely what you're buying before you sign anything.</div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                Is private health insurance better than group insurance in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">It depends on your situation. Private plans often offer more flexibility, broader networks, and in many cases lower premiums than group coverage. They also travel with you regardless of your employer and are available year-round. There's no single right answer, which is exactly why talking to an independent agent who can compare all options for your specific circumstances matters.</div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" aria-expanded="false">
+                                Do I need a referral with a private PPO plan in Texas?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">No. With a PPO plan, you can see any in-network doctor or specialist directly without a referral from a primary care physician. This is one of the key advantages of a PPO over an HMO — you have direct access to the care you need, when you need it, without jumping through hoops first.</div>
+                        </div>
+
+                    </div>
+                    <a href="/contact-us.html" class="primary--btn customized-botton-space">Book a Consultation</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.faq-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.closest('.faq-item');
+                    const open = item.classList.contains('open');
+                    document.querySelectorAll('.faq-item').forEach(i => {
+                        i.classList.remove('open');
+                        i.querySelector('.faq-btn').setAttribute('aria-expanded','false');
+                    });
+                    if (!open) {
+                        item.classList.add('open');
+                        btn.setAttribute('aria-expanded','true');
+                    }
+                });
+            });
+        </script>
+
     </main>
 </div>
 <footer class="mainFooter footerBottom" id="footer">
