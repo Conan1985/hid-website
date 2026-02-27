@@ -25983,7 +25983,6 @@ a[href^="tel:"], a[href^="mailto:"] {
 .faq-answer {
     display: none;
     padding: 15px;
-    background: #fff;
     color: #333;
     text-align: left;
 }
