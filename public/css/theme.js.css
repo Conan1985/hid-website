@@ -26098,6 +26098,15 @@ a[href^="tel:"], a[href^="mailto:"] {
     color: #fff;
 }
 
+.pink-section {
+    background-color: #f9f8f6;
+}
+
+.gold-section {
+    background-color: #786c45;
+    color: #fff;
+}
+
 .why-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -26183,4 +26192,8 @@ a[href^="tel:"], a[href^="mailto:"] {
 
 .faq-item.open .faq-icon {
     transform: rotate(45deg);
+}
+
+.button-black {
+    background-color: #1a1a1a;
 }
