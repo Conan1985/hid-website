@@ -26092,3 +26092,40 @@ a[href^="tel:"], a[href^="mailto:"] {
     margin-right: 0;
     max-width: 100%;
 }
+
+.negative-section {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.why-item h3 {
+    font-size: 1.8rem;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.why-item p {
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0;
+    max-width: none;
+}
+
+.why-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-style: italic;
+    color: #786c45;
+    line-height: 1;
+    margin-bottom: 10px;
+}
