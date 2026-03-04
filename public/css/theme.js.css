@@ -25996,3 +25996,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 .faq-question.active {
     background: #e9eefc;
 }
+
+.no-display-place-only {
+    display: none;
+}
