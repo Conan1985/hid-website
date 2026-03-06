@@ -6020,7 +6020,7 @@
                 const businessZone = "America/Chicago"
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
-                const [errorGetCalendar, setErrorGetCalendar] = useState(false)
+                const [errorGetCalendar, setErrorGetCalendar] = useState(true)
                 const [form, setForm] = useState({
                     firstName: "",
                     lastName: "",
@@ -6435,7 +6435,6 @@
                         setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
-                        setErrorGetCalendar(true)
                         setGettingCalendar(false)
                         setLoadCalendarBefore(true)
                     }
