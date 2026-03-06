@@ -2503,9 +2503,8 @@ button.applyBtn[disabled] {
 }
 
 .mediumHeading-1 {
-    font-size: 80px;
-    font-size: 8rem;
-    line-height: 8rem;
+    font-size: 6rem;
+    line-height: 6rem;
     letter-spacing: -1.6px;
     font-family: "BauerBodoniStd", Times, serif;
     font-weight: 700;
@@ -25873,7 +25872,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .switch {
-    align-self:center;
+    align-self: center;
     width: 42px;
     height: 24px;
     background-color: #ccc;
@@ -25920,7 +25919,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .switch-label.off {
-    color: #ccc;     /* Gray when OFF */
+    color: #ccc; /* Gray when OFF */
 }
 
 @media (max-width: 517px) {
@@ -25984,7 +25983,6 @@ a[href^="tel:"], a[href^="mailto:"] {
 .faq-answer {
     display: none;
     padding: 15px;
-    background: #fff;
     color: #333;
     text-align: left;
 }
@@ -25997,6 +25995,209 @@ a[href^="tel:"], a[href^="mailto:"] {
     background: #e9eefc;
 }
 
+<<<<<<< HEAD
 .no-display-place-only {
     display: none;
+=======
+.customized-block {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.overline-top {
+    margin-top: 25px;
+}
+
+.overline {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.gold-divider {
+    width: 15%;
+    height: 2px;
+    margin: 0 auto 28px;
+    background-color: #786c45;
+}
+
+.h1-before-content {
+    margin-bottom: 16px;
+}
+
+.customized-botton-space {
+    margin: 16px auto;
+}
+
+.trust {
+    color: #aaa;
+}
+
+/* ── Who grid ── */
+.who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.who-card {
+    background: #fff;
+    border: 1px solid #e0ddd8;
+    border-top: 2px solid #786c45;
+    padding: 22px 20px;
+}
+
+.who-card h3 {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.who-card p {
+    font-size: 1.4rem;
+    margin: 0;
+    max-width: none;
+    text-align: left;
+}
+
+.plan-list {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.plan-card {
+    border-bottom: 1px solid #e0ddd8;
+    padding: 36px 0;
+    text-align: left;
+}
+
+.plan-card:first-child {
+    border-top: 1px solid #e0ddd8;
+}
+
+.plan-card h3 {
+    font-style: italic;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.plan-card p {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+
+.negative-section {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.pink-section {
+    background-color: #f9f8f6;
+}
+
+.gold-section {
+    background-color: #786c45;
+    color: #fff;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.why-item h3 {
+    font-size: 1.8rem;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.why-item p {
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0;
+    max-width: none;
+}
+
+.why-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-style: italic;
+    color: #786c45;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.faq {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e0ddd8;
+}
+
+.faq-item:first-child {
+    border-top: 1px solid #e0ddd8;
+}
+
+.faq-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.faq-btn:hover {
+    color: #786c45;
+}
+
+.faq-icon {
+    color: #786c45;
+    transition: transform .25s;
+    flex-shrink: 0;
+}
+
+.faq-answer {
+    display: none;
+    padding-bottom: 18px;
+    color: #444;
+    line-height: 1.8;
+    max-width: 720px;
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+}
+
+.button-black {
+    background-color: #1a1a1a;
+>>>>>>> release/staging
 }
