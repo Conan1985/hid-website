@@ -6020,7 +6020,7 @@
                 const businessZone = "America/Chicago"
                 const [submitting, setSubmitting] = useState(false)
                 const [errorSubmitting, setErrorSubmitting] = useState(false)
-                const [errorGetCalendar, setErrorGetCalendar] = useState(true)
+                const [errorGetCalendar, setErrorGetCalendar] = useState(false)
                 const [form, setForm] = useState({
                     firstName: "",
                     lastName: "",
@@ -6353,7 +6353,6 @@
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
-                            setErrorGetCalendar(true)
                             console.error(`HTTP error! status: ${response.status}`)
                         }
                         const calendar = await response.json()
@@ -6650,7 +6649,6 @@
                     setSubmittedContact(false)
                     setSubmittedAppointment(false)
                     setErrorSubmitting(false)
-                    setErrorGetCalendar(false)
                     setGettingCalendar(false)
                     setSubmitting(false)
                 }, [chooseCalendar])
