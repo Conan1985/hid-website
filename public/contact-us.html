@@ -6303,7 +6303,7 @@
 
                 const getCalendar = async () => {
                     setGettingCalendar(true)
-                    const calendarUrl = APP_BASE_URL + '/getCalendar'
+                    const calendarUrl = APP_BASE_URL + '/getCalenda'
                     const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
                     const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
                     const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
