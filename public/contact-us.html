@@ -6679,7 +6679,9 @@
                                     <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                 </div>
                             }
-                            {errorGetCalendar &&
+                            choose calendar: {chooseCalendar}
+                            error get calendar: {errorGetCalendar}
+                            {errorGetCalendar && chooseCalendar &&
                                 <div>
                                     Something went wrong with the server to load the calendar.
                                     <br/> Please try again, or call our office at {CONTACT_METHOD}.
