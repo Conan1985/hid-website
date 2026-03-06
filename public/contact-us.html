@@ -6354,7 +6354,6 @@
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
                             setErrorGetCalendar(true)
-                            console.log('hid developer check the error get calendar')
                             console.error(`HTTP error! status: ${response.status}`)
                         }
                         const calendar = await response.json()
@@ -6436,6 +6435,7 @@
                         setErrorGetCalendar(true)
                         console.error('Error in get calendar: ', error)
                     } finally {
+                        setErrorGetCalendar(true)
                         setGettingCalendar(false)
                         setLoadCalendarBefore(true)
                     }
