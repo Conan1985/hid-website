@@ -6049,90 +6049,6 @@
                 const [slotDuration, setSlotDuration] = useState(30)
                 const [slotDurationUnit, setSlotDurationUnit] = useState('mins')
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
-                const [openHours, setOpenHours] = useState([
-                    {
-                        "daysOfTheWeek": [
-                            1
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 8,
-                                "openMinute": 0,
-                                "closeHour": 20,
-                                "closeMinute": 30
-                            }
-                        ]
-                    },
-                    {
-                        "daysOfTheWeek": [
-                            2
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 8,
-                                "openMinute": 0,
-                                "closeHour": 20,
-                                "closeMinute": 30
-                            }
-                        ]
-                    },
-                    {
-                        "daysOfTheWeek": [
-                            3
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 8,
-                                "openMinute": 0,
-                                "closeHour": 20,
-                                "closeMinute": 30
-                            }
-                        ]
-                    },
-                    {
-                        "daysOfTheWeek": [
-                            4
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 8,
-                                "openMinute": 0,
-                                "closeHour": 20,
-                                "closeMinute": 30
-                            }
-                        ]
-                    },
-                    {
-                        "daysOfTheWeek": [
-                            5
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 8,
-                                "openMinute": 0,
-                                "closeHour": 17,
-                                "closeMinute": 30
-                            }
-                        ]
-                    },
-                    {
-                        "daysOfTheWeek": [
-                            6
-                        ],
-                        "hours": [
-                            {
-                                "openHour": 10,
-                                "openMinute": 0,
-                                "closeHour": 13,
-                                "closeMinute": 30
-                            }
-                        ]
-                    }
-                ])
-                const [allowBookingAfterUnit, setAllowBookingAfterUnit] = useState('hours')
-                const [allowBookingAfter, setAllowBookingAfter] = useState(1)
-                const [allowBookingFor, setAllowBookingFor] = useState(31)
-                const [allowBookingForUnit, setAllowBookingForUnit] = useState('days')
                 const now = DateTime.now().setZone(timezone)
                 const [year, setYear] = useState(now.year)
                 const [month, setMonth] = useState(now.month - 1)
@@ -6304,80 +6220,151 @@
                 const getCalendar = async () => {
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
-                    const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
-                    const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
-                    const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
-                    const dayMap = new Map();
-                    const openHoursLocal = convertHoursToLocal(openHours)
-                    openHoursLocal.forEach(entry => {
-                        entry.daysOfTheWeek.forEach(day => {
-                            dayMap.set(day, entry.hours);
-                        });
-                    });
-                    function ceilToNextSlot(time, slotDurationMins) {
-                        const minutes = time.minute;
-                        const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
-                        const base = time.set({second: 0, millisecond: 0});
-                        return base.set({minute: 0}).plus({minutes: roundedMinutes});
-                    }
-                    let starts = []
-                    for (
-                        let date = bookingStart.startOf('day');
-                        date <= bookingEnd;
-                        date = date.plus({days: 1})
-                    ) {
-                        const weekday = date.weekday; // 1 = Monday, 7 = Sunday
-                        if (!dayMap.has(weekday)) continue;
-                        const hoursForDay = dayMap.get(weekday);
-                        hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
-                            let slotStart = date.set({
-                                hour: openHour,
-                                minute: openMinute,
-                                second: 0,
-                                millisecond: 0
-                            });
-                            const slotEnd = date.set({hour: closeHour, minute: closeMinute});
-                            if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
-                                slotStart = ceilToNextSlot(bookingStart, slotDuration);
-                            }
-                            while (slotStart.plus(slotDurationObj) <= slotEnd) {
-                                if (slotStart >= bookingStart && slotStart <= bookingEnd) {
-                                    starts.push(slotStart);
-                                }
-                                slotStart = slotStart.plus(slotDurationObj);
-                            }
-                        });
-                    }
-                    starts.sort((a, b) => a.toMillis() - b.toMillis());
-                    setSlotStarts(starts)
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
                             console.error(`HTTP error! status: ${response.status}`)
                         }
                         const calendar = await response.json()
+                        const allowBookingAfterUnit = calendar.data?.allowBookingAfterUnit || 'hours';
+                        const slotDuration = 30;
                         if (calendar.data?.slotDuration) {
                             setSlotDuration(calendar.data.slotDuration)
                         }
+                        const slotDurationUnit = 'mins';
                         if (calendar.data?.slotDurationUnit) {
                             const str = calendar.data.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
                         }
-                        if (calendar.data?.openHours) {
-                            setOpenHours(calendar.data.openHours)
+                        const openHours = calendar.data?.openHours || [
+                            {
+                                "daysOfTheWeek": [
+                                    1
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 8,
+                                        "openMinute": 0,
+                                        "closeHour": 20,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            },
+                            {
+                                "daysOfTheWeek": [
+                                    2
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 8,
+                                        "openMinute": 0,
+                                        "closeHour": 20,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            },
+                            {
+                                "daysOfTheWeek": [
+                                    3
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 8,
+                                        "openMinute": 0,
+                                        "closeHour": 20,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            },
+                            {
+                                "daysOfTheWeek": [
+                                    4
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 8,
+                                        "openMinute": 0,
+                                        "closeHour": 20,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            },
+                            {
+                                "daysOfTheWeek": [
+                                    5
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 8,
+                                        "openMinute": 0,
+                                        "closeHour": 17,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            },
+                            {
+                                "daysOfTheWeek": [
+                                    6
+                                ],
+                                "hours": [
+                                    {
+                                        "openHour": 10,
+                                        "openMinute": 0,
+                                        "closeHour": 13,
+                                        "closeMinute": 30
+                                    }
+                                ]
+                            }
+                        ];
+                        const allowBookingAfter = calendar.data?.allowBookingAfter || 1;
+                        const allowBookingForUnit = calendar.data?.allowBookingForUnit || 'days';
+                        const allowBookingFor = calendar.data?.allowBookingFor || 31;
+                        const bookingStart = now.plus({[allowBookingAfterUnit]: allowBookingAfter});
+                        const bookingEnd = now.plus({[allowBookingForUnit]: allowBookingFor});
+                        const slotDurationObj = Duration.fromObject({[normalizeUnit(slotDurationUnit)]: slotDuration});
+                        const dayMap = new Map();
+                        const openHoursLocal = convertHoursToLocal(openHours)
+                        openHoursLocal.forEach(entry => {
+                            entry.daysOfTheWeek.forEach(day => {
+                                dayMap.set(day, entry.hours);
+                            });
+                        });
+                        function ceilToNextSlot(time, slotDurationMins) {
+                            const minutes = time.minute;
+                            const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
+                            const base = time.set({second: 0, millisecond: 0});
+                            return base.set({minute: 0}).plus({minutes: roundedMinutes});
                         }
-                        if (calendar.data?.allowBookingAfterUnit) {
-                            setAllowBookingAfterUnit(calendar.data.allowBookingAfterUnit)
+                        let starts = []
+                        for (
+                            let date = bookingStart.startOf('day');
+                            date <= bookingEnd;
+                            date = date.plus({days: 1})
+                        ) {
+                            const weekday = date.weekday; // 1 = Monday, 7 = Sunday
+                            if (!dayMap.has(weekday)) continue;
+                            const hoursForDay = dayMap.get(weekday);
+                            hoursForDay.forEach(({openHour, openMinute, closeHour, closeMinute}) => {
+                                let slotStart = date.set({
+                                    hour: openHour,
+                                    minute: openMinute,
+                                    second: 0,
+                                    millisecond: 0
+                                });
+                                const slotEnd = date.set({hour: closeHour, minute: closeMinute});
+                                if (date.hasSame(bookingStart, 'day') && slotStart < bookingStart) {
+                                    slotStart = ceilToNextSlot(bookingStart, slotDuration);
+                                }
+                                while (slotStart.plus(slotDurationObj) <= slotEnd) {
+                                    if (slotStart >= bookingStart && slotStart <= bookingEnd) {
+                                        starts.push(slotStart);
+                                    }
+                                    slotStart = slotStart.plus(slotDurationObj);
+                                }
+                            });
                         }
-                        if (calendar.data?.allowBookingAfter) {
-                            setAllowBookingAfter(calendar.data.allowBookingAfter)
-                        }
-                        if (calendar.data?.allowBookingForUnit) {
-                            setAllowBookingForUnit(calendar.data.allowBookingForUnit)
-                        }
-                        if (calendar.data?.allowBookingFor) {
-                            setAllowBookingFor(calendar.data.allowBookingFor)
-                        }
+                        starts.sort((a, b) => a.toMillis() - b.toMillis());
+                        setSlotStarts(starts)
                         const blockedSlotsUrl = APP_BASE_URL + '/getBlockedSlotsFromUserId?allowBookingAfter=' + allowBookingAfter
                             + '&allowBookingAfterUnit=' + allowBookingAfterUnit + '&allowBookingFor=' + allowBookingFor
                             + '&allowBookingForUnit=' + allowBookingForUnit
