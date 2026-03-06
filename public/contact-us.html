@@ -6679,8 +6679,8 @@
                                     <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                 </div>
                             }
-                            choose calendar: {chooseCalendar}
-                            error get calendar: {errorGetCalendar}
+                            {chooseCalendar && <div>Choose calendar</div>}
+                            {errorGetCalendar && <div>Error getting calendar</div>}
                             {errorGetCalendar && chooseCalendar &&
                                 <div>
                                     Something went wrong with the server to load the calendar.
