@@ -6353,6 +6353,7 @@
                     try {
                         const response = await fetch(calendarUrl)
                         if (!response.ok) {
+                            setErrorGetCalendar(true)
                             console.error(`HTTP error! status: ${response.status}`)
                         }
                         const calendar = await response.json()
@@ -6679,8 +6680,6 @@
                                     <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                 </div>
                             }
-                            {chooseCalendar && <div>Choose calendar</div>}
-                            {errorGetCalendar && <div>Error getting calendar</div>}
                             {errorGetCalendar && chooseCalendar &&
                                 <div>
                                     Something went wrong with the server to load the calendar.
