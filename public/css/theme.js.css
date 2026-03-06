@@ -25995,10 +25995,11 @@ a[href^="tel:"], a[href^="mailto:"] {
     background: #e9eefc;
 }
 
-<<<<<<< HEAD
+
 .no-display-place-only {
     display: none;
-=======
+}
+
 .customized-block {
     margin-top: 50px;
     margin-bottom: 15px;
@@ -26199,5 +26200,4 @@ a[href^="tel:"], a[href^="mailto:"] {
 
 .button-black {
     background-color: #1a1a1a;
->>>>>>> release/staging
 }
