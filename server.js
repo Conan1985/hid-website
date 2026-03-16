@@ -20,8 +20,7 @@ const FIELD_ID_AGE_GROUP_APEX = process.env.FIELD_ID_AGE_GROUP_APEX
 const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
-const WEBSITE_LEAD_CONTACT = process.env.WEBSITE_LEAD_CONTACT
-const WEBSITE_LEAD_APPOINTMENT = process.env.WEBSITE_LEAD_APPOINTMENT
+const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
     ALLOWED_ORIGIN
@@ -241,7 +240,7 @@ const upsertContact = async (contact, account) => {
             state: contact.state,
             locationId: account.location_id,
             customFields: customFields,
-            source: contact.source === 'appointment' ? WEBSITE_LEAD_APPOINTMENT : WEBSITE_LEAD_CONTACT
+            source: WEBSITE_LEAD
         }
         const response = await fetch(url, {
             method: 'POST',
