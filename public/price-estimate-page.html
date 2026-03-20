@@ -6065,7 +6065,8 @@
 
             function App() {
                 const [step, setStep] = useState(1)
-                const [age, setAge] = useState(null);
+                const [age, setAge] = useState("");
+                const [state, setState] = useState("");
                 const [conditions, setConditions] = useState([])
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
@@ -6130,9 +6131,10 @@
                     })
                 }
                 const isNextButtonDisabled = () => {
-                    return (step === 1 && age === null) ||
+                    return (step === 1 && age === "") ||
                         (step === 2 && !conditions.length) ||
-                        (step === 3 && showQuote() && !understandQuote)
+                        (step === 3 && state === "") ||
+                        (step === 4 && showQuote() && !understandQuote)
                 }
 
                 const handleQuote = () => {
@@ -6709,15 +6711,15 @@
                             </div>}
                             {step > 1 && <div style={{height: '30px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
-                                {step <= 4 &&
+                                {step <= 5 &&
                                     <h1 className="mediumHeading-1 colorGold meta-title" style={{fontSize: '2em'}}>Get
                                         your
                                         Price Estimate
                                         with 3 Simple Steps</h1>
                                 }
-                                {step <= 4 &&
+                                {step <= 5 &&
                                     <div className="meta-progress-container">
-                                        <progress value={step / 4} className="meta-progress"></progress>
+                                        <progress value={step / 5} className="meta-progress"></progress>
                                     </div>
                                 }
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
@@ -6727,10 +6729,13 @@
                                     Within the last five years
                                     <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
-                                {step === 3 && showQuote() && <div className="boldBody">
+                                {step === 3 && <div className="boldBody meta-do-you-have-insurance">
+                                    What is your state?
+                                </div>}
+                                {step === 4 && showQuote() && <div className="boldBody">
                                     Estimated Cost for Your PPO Health Coverage
                                 </div>}
-                                {step === 3 && !showQuote() && <div className="boldBody">
+                                {step === 4 && !showQuote() && <div className="boldBody">
                                     Unfortunately, <br/> we can’t provide a virtual price estimate right now. Please
                                     continue to
                                     connect with a team member for assistance with your situation.
@@ -6740,11 +6745,11 @@
                                         <i className="fas fa-spinner fa-spin progress-spinning"></i>
                                     </div>
                                 }
-                                {step === 4 && !errorGetCalendar && <div className="boldBody">
+                                {step === 5 && !errorGetCalendar && <div className="boldBody">
                                     Make an appointment with us.
                                 </div>}
                                 {
-                                    step === 4 && errorGetCalendar && <div className="boldBody">
+                                    step === 5 && errorGetCalendar && <div className="boldBody">
                                         <div>
                                             Something went wrong with the server to load the calendar.
                                             <br/> Please try again, or call our office at {CONTACT_METHOD}.
@@ -6757,10 +6762,8 @@
                                             <select
                                                 className="meta-form-select"
                                                 name="age"
-                                                onChange={(e) => {
-                                                    const val = e.target.value;
-                                                    setAge(val === "null" || val === "" ? null : Number(val));
-                                                }}
+                                                value={age}
+                                                onChange={(e) => setAge(e.target.value)}
                                             >
                                                 {ages.map((s) => (
                                                     <option key={s.display} value={s.value}>
@@ -6823,7 +6826,25 @@
                                            style={{fontSize: '16px'}}>{currentlyPregnant}</p>
                                     </div>
                                 </div>}
-                                {step === 3 && showQuote() &&
+                                {step === 3 &&
+                                    <div>
+                                        <label className="meta-form-label price-estimate-center-dropdown">
+                                            <select
+                                                className="meta-form-select"
+                                                name="state"
+                                                value={state}
+                                                onChange={(e) => setState(e.target.value)}
+                                            >
+                                                {states.map((s) => (
+                                                    <option key={s.code} value={s.code}>
+                                                        {s.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
+                                    </div>
+                                }
+                                {step === 4 && showQuote() &&
                                     <div>
                                         <table className='meta-quote-table'>
                                             <tbody>
@@ -6860,7 +6881,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 4 && !gettingCalendar && !errorGetCalendar &&
+                                {step === 5 && !gettingCalendar && !errorGetCalendar &&
                                     <div>
                                         {
                                             (showSlotsList || showPersonalInfo) &&
@@ -7177,7 +7198,7 @@
                                     </div>
                                 }
                                 {
-                                    step === 5 && !submitting &&
+                                    step === 6 && !submitting &&
                                     <div className="booking-selection-summary">
                                         {errorSubmitting &&
                                             <div>
@@ -7252,11 +7273,17 @@
                                     </div>
                                 }
                                 <div className="meta-button-container">
-                                    {step > 1 && step < 4 &&
-                                        <button className="meta-back-button" onClick={() => setStep(step - 1)}>
+                                    {step > 1 && step < 5 &&
+                                        <button className="meta-back-button" onClick={() => {
+                                            if (step === 4 && !showQuote()) {
+                                                setStep(2);
+                                            } else {
+                                                setStep(step - 1);
+                                            }
+                                        }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
-                                    {step === 4 &&
+                                    {step === 5 &&
                                         <button className="meta-back-button" onClick={() => {
                                             setStep(step - 1);
                                             setShowCalendar(false);
@@ -7268,7 +7295,7 @@
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back to Price
                                             Estimation
                                         </button>}
-                                    {step === 5 && !submitting &&
+                                    {step === 6 && !submitting &&
                                         <button className="meta-back-button" onClick={() => {
                                             setStep(1);
                                             setShowCalendar(false)
@@ -7283,14 +7310,18 @@
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i>
                                             Make another Price estimation
                                         </button>}
-                                    {step < 3 &&
+                                    {step < 4 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
-                                                    setStep(step + 1)
+                                                    if (step === 2 && !showQuote()) {
+                                                        setStep(4);
+                                                    } else {
+                                                        setStep(step + 1);
+                                                    }
                                                 }}>
                                             Next
                                         </button>}
-                                    {step === 3 &&
+                                    {step === 4 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
                                                     setStep(step + 1);
@@ -7302,7 +7333,7 @@
                                                 }}>
                                             Next
                                         </button>}
-                                    {step === 4 && showPersonalInfo &&
+                                    {step === 5 && showPersonalInfo &&
                                         <button className="meta-next-button" disabled={!isFormValid()}
                                                 onClick={() => formRef.current.requestSubmit()}>
                                             Submit
