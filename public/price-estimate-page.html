@@ -93,7 +93,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Free PPO Health Insurance Price Estimate | 3 Simple Steps – HID</title>
-    <link rel="canonical" href="https://www.thehealthyinsurancedude.com/price-estimate-page" />
+    <link rel="canonical" href="https://www.thehealthyinsurancedude.com/price-estimate-page"/>
     <meta name="description"
           content="Get your instant PPO health insurance price estimate in just 3 easy steps — no hidden fees, no surprise costs. Find out if you qualify for an affordable underwritten PPO plan with The Healthy Insurance Dude in Texas.">
     <meta name="keywords"
@@ -5615,7 +5615,8 @@
                                                         we accomplished what they
                                                         can't</a></li>
                                                     <li><a class="submenuLinkItem" id="menu-history-healthcare"
-                                                           href="/history-healthcare.html">History of Healthcare</a></li>
+                                                           href="/history-healthcare.html">History of Healthcare</a>
+                                                    </li>
                                                     <li><a class="submenuLinkItem" id="menu-social"
                                                            href="/social.html">Socials</a></li>
                                                     <li><a class="submenuLinkItem" id="personal-health-insurance-texas"
@@ -5727,7 +5728,8 @@
                                 Services</a>
                         </li>
                         <li>
-                            <a class="mainLinks mobile-menu-link" aria-expanded="false" href="/price-estimate-page.html">
+                            <a class="mainLinks mobile-menu-link" aria-expanded="false"
+                               href="/price-estimate-page.html">
                                 PPO Price Estimate</a>
                         </li>
                         <li>
@@ -5845,7 +5847,7 @@
             const {createRoot} = ReactDOM;
             const {useRef} = React;
 
-            const APP_BASE_URL = 'hid-website-stage-ed3af8308db9.herokuapp.com'
+            const APP_BASE_URL = 'localhost://8964'
             const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             const DateTime = luxon.DateTime
             const Duration = luxon.Duration
@@ -5961,6 +5963,56 @@
                 'Pacific/Fiji',
                 'Pacific/Tongatapu'
             ]
+            const ages = [
+                { value: "", display: "Select age" },
+                { value: 18, display: "18" },
+                { value: 19, display: "19" },
+                { value: 20, display: "20" },
+                { value: 21, display: "21" },
+                { value: 22, display: "22" },
+                { value: 23, display: "23" },
+                { value: 24, display: "24" },
+                { value: 25, display: "25" },
+                { value: 26, display: "26" },
+                { value: 27, display: "27" },
+                { value: 28, display: "28" },
+                { value: 29, display: "29" },
+                { value: 30, display: "30" },
+                { value: 31, display: "31" },
+                { value: 32, display: "32" },
+                { value: 33, display: "33" },
+                { value: 34, display: "34" },
+                { value: 35, display: "35" },
+                { value: 36, display: "36" },
+                { value: 37, display: "37" },
+                { value: 38, display: "38" },
+                { value: 39, display: "39" },
+                { value: 40, display: "40" },
+                { value: 41, display: "41" },
+                { value: 42, display: "42" },
+                { value: 43, display: "43" },
+                { value: 44, display: "44" },
+                { value: 45, display: "45" },
+                { value: 46, display: "46" },
+                { value: 47, display: "47" },
+                { value: 48, display: "48" },
+                { value: 49, display: "49" },
+                { value: 50, display: "50" },
+                { value: 51, display: "51" },
+                { value: 52, display: "52" },
+                { value: 53, display: "53" },
+                { value: 54, display: "54" },
+                { value: 55, display: "55" },
+                { value: 56, display: "56" },
+                { value: 57, display: "57" },
+                { value: 58, display: "58" },
+                { value: 59, display: "59" },
+                { value: 60, display: "60" },
+                { value: 61, display: "61" },
+                { value: 62, display: "62" },
+                { value: 63, display: "63" },
+                { value: 64, display: "64" }
+            ];
             const states = [
                 {code: "", name: "Select State"},
                 {code: "AL", name: "Alabama"},
@@ -6013,7 +6065,7 @@
 
             function App() {
                 const [step, setStep] = useState(1)
-                const [ageRange, setAgeRange] = useState(null)
+                const [age, setAge] = useState(null);
                 const [conditions, setConditions] = useState([])
                 const [understandQuote, setUnderstandQuote] = useState(false)
                 const [timezone, setTimezone] = useState(luxon.DateTime.local().zoneName)
@@ -6022,10 +6074,6 @@
                 const [gettingCalendar, setGettingCalendar] = useState(false)
                 const [showCalendar, setShowCalendar] = useState(false)
                 const [currentTimes, setCurrentTimes] = useState({});
-                const ageGroup1 = '18 - 29'
-                const ageGroup2 = '30 - 44'
-                const ageGroup3 = '45 - 54'
-                const ageGroup4 = '55 - 64'
                 const stroke = 'Stroke'
                 const cancer = 'Cancer'
                 const anyMajorSurgery = 'Any Major Surgery'
@@ -6082,7 +6130,7 @@
                     })
                 }
                 const isNextButtonDisabled = () => {
-                    return (step === 1 && ageRange === null) ||
+                    return (step === 1 && age === null) ||
                         (step === 2 && !conditions.length) ||
                         (step === 3 && showQuote() && !understandQuote)
                 }
@@ -6209,12 +6257,14 @@
                                 dayMap.set(day, entry.hours);
                             });
                         });
+
                         function ceilToNextSlot(time, slotDurationMins) {
                             const minutes = time.minute;
                             const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
                             const base = time.set({second: 0, millisecond: 0});
                             return base.set({minute: 0}).plus({minutes: roundedMinutes});
                         }
+
                         let starts = []
                         for (
                             let date = bookingStart.startOf('day');
@@ -6269,7 +6319,7 @@
 
                         const eventsResponse = await fetch(eventsUrl)
                         let events = []
-                        if ( !eventsResponse.ok) {
+                        if (!eventsResponse.ok) {
                             console.error(`HTTP error! status: ${eventsResponse.status}`)
                         } else {
                             const calendarEvents = await eventsResponse.json()
@@ -6375,8 +6425,8 @@
                 const isMonthClosed = (month, year) => {
                     if (!Number.isInteger(month)) return true
                     const startOfMonth = DateTime.fromObject(
-                        { year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 },
-                        { zone: timezone }
+                        {year, month: month + 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0},
+                        {zone: timezone}
                     );
                     const daysInMonth = startOfMonth.daysInMonth;
                     console.log('hid devloper check days in month: ', daysInMonth)
@@ -6489,12 +6539,12 @@
                     return openHours.map(dayEntry => {
                         const newHours = dayEntry.hours.map(h => {
                             let openTimeHQ = DateTime.fromObject(
-                                { hour: h.openHour, minute: h.openMinute },
-                                { zone: businessZone }
+                                {hour: h.openHour, minute: h.openMinute},
+                                {zone: businessZone}
                             );
                             let closeTimeHQ = DateTime.fromObject(
-                                { hour: h.closeHour, minute: h.closeMinute },
-                                { zone: businessZone }
+                                {hour: h.closeHour, minute: h.closeMinute},
+                                {zone: businessZone}
                             );
 
                             let openLocal = openTimeHQ.setZone(timezone);
@@ -6589,7 +6639,7 @@
                             email: form.email,
                             phone: form.phone,
                             state: form.state,
-                            ageRange: ageRange,
+                            age: age,
                             conditions: conditions,
                             source: 'appointment'
                         }
@@ -6703,34 +6753,22 @@
                                 }
                                 {step === 1 &&
                                     <div>
-                                        <div className="options-container">
-                                            <div
-                                                className={`option-box ${ageRange === ageGroup1 ? 'selected' : ''}`}
-                                                onClick={() => setAgeRange(ageGroup1)}>
-                                                <p className="font-semibold text-sm smallBody"
-                                                   style={{fontSize: '16px'}}>{ageGroup1}</p>
-                                            </div>
-                                            <div
-                                                className={`option-box ${ageRange === ageGroup2 ? 'selected' : ''}`}
-                                                onClick={() => setAgeRange(ageGroup2)}>
-                                                <p className="font-semibold text-sm smallBody"
-                                                   style={{fontSize: '16px'}}>{ageGroup2}</p>
-                                            </div>
-                                        </div>
-                                        <div className="options-container">
-                                            <div
-                                                className={`option-box ${ageRange === ageGroup3 ? 'selected' : ''}`}
-                                                onClick={() => setAgeRange(ageGroup3)}>
-                                                <p className="font-semibold text-sm smallBody"
-                                                   style={{fontSize: '16px'}}>{ageGroup3}</p>
-                                            </div>
-                                            <div
-                                                className={`option-box ${ageRange === ageGroup4 ? 'selected' : ''}`}
-                                                onClick={() => setAgeRange(ageGroup4)}>
-                                                <p className="font-semibold text-sm smallBody"
-                                                   style={{fontSize: '16px'}}>{ageGroup4}</p>
-                                            </div>
-                                        </div>
+                                        <label className="meta-form-label" style={{width: "200px", textAlignLast: "center", justifySelf: "center"}}>
+                                            <select
+                                                className="meta-form-select"
+                                                name="age"
+                                                onChange={(e) => {
+                                                    const val = e.target.value;
+                                                    setAge(val === "null" || val === "" ? null : Number(val));
+                                                }}
+                                            >
+                                                {ages.map((s) => (
+                                                    <option key={s.display} value={s.value}>
+                                                        {s.display}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
                                     </div>
                                 }
                                 {step === 2 && <div className="options-container">
@@ -6791,36 +6829,25 @@
                                             <tbody>
                                             <tr className='meta-quote-table-row-odd'>
                                                 <td>Individual</td>
-                                                {ageRange === ageGroup1 && <td className="amount">$95 -> $872</td>}
-                                                {ageRange === ageGroup2 && <td className="amount">$135 -> $898</td>}
-                                                {ageRange === ageGroup3 && <td className="amount">$195 -> $936</td>}
-                                                {ageRange === ageGroup4 && <td className="amount">$399 -> $1030</td>}
+                                                 <td className="amount">$399 -> $1030</td>
                                             </tr>
                                             <tr className='meta-quote-table-row-even'>
                                                 <td>Individual + Spouse</td>
-                                                {ageRange === ageGroup1 && <td className="amount">$579 -> $1518</td>}
-                                                {ageRange === ageGroup2 && <td className="amount">$609 -> $1569</td>}
-                                                {ageRange === ageGroup3 && <td className="amount">$659 -> $1638</td>}
-                                                {ageRange === ageGroup4 && <td className="amount">$689 -> $1825</td>}
+                                                <td className="amount">$689 -> $1825</td>
                                             </tr>
                                             <tr className='meta-quote-table-row-odd'>
                                                 <td>Individual + Children</td>
-                                                {ageRange === ageGroup1 && <td className="amount">$569 -> $1403</td>}
-                                                {ageRange === ageGroup2 && <td className="amount">$593 -> $1450</td>}
-                                                {ageRange === ageGroup3 && <td className="amount">$629 -> $1513</td>}
-                                                {ageRange === ageGroup4 && <td className="amount">$649 -> $1683</td>}
+                                                <td className="amount">$649 -> $1683</td>
                                             </tr>
                                             <tr className='meta-quote-table-row-even'>
                                                 <td>Family</td>
-                                                {ageRange === ageGroup1 && <td className="amount">$569 -> $2171</td>}
-                                                {ageRange === ageGroup2 && <td className="amount">$859 -> $2247</td>}
-                                                {ageRange === ageGroup3 && <td className="amount">$929 -> $2347</td>}
-                                                {ageRange === ageGroup4 && <td className="amount">$949 -> $2628</td>}
+                                                <td className="amount">$949 -> $2628</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                         <label style={{cursor: 'pointer'}}>
-                                            <span style={{fontSize: '10px', lineHeight: '1.1', display: 'block'}}> <input
+                                            <span
+                                                style={{fontSize: '10px', lineHeight: '1.1', display: 'block'}}> <input
                                                 type="checkbox"
                                                 name="quote"
                                                 checked={understandQuote}
