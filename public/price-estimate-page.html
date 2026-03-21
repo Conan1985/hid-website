@@ -11174,6 +11174,77 @@
                         && !conditions.includes(type1Diabetes) && !conditions.includes(currentlyPregnant)
                 }
 
+                const formatPrice = (value) => {
+                    if (typeof value !== 'string') return '$0';
+                    return value;
+                };
+
+                const parsePrice = (value) => {
+                    const numeric = Number(String(value).replace(/[$,]/g, ''));
+                    return Number.isFinite(numeric) ? numeric : Number.MAX_SAFE_INTEGER;
+                };
+
+                const tierLabelMap = {
+                    "Employee": "Individual",
+                    "Employee + Spouse": "Ind + Spouse",
+                    "Employee + Child(ren)": "Ind + Children",
+                    "Family": "Family"
+                };
+
+                const planPriority = (planName) => planName === 'Catastrophic' ? 0 : 1;
+
+                const getCatastrophicAgeBand = () => {
+                    const ageNum = Number(age);
+                    const stateBlock = catastrophic?.States?.find((item) => item.State === state);
+                    const ageBand = stateBlock?.Age_Bands?.find((band) => {
+                        const [min, max] = String(band.Age_Band).split('-').map(Number);
+                        return ageNum >= min && ageNum <= max;
+                    });
+                    return ageBand?.Coverage_Tiers || [];
+                };
+
+                const getMedPerformanceAgeBand = (deductible) => {
+                    const foundPlan = medPerformance?.find(item => item.States.includes(state) && item.Deductible === deductible);
+                    const ageBands = foundPlan?.Networks[0]?.Age_Bands;
+                    const ageNum = Number(age);
+                    const ageBand = ageBands?.find((band) => {
+                        const [min, max] = String(band?.Age_Band).split('-').map(Number);
+                        return ageNum >= min && ageNum <= max;
+                    });
+                    return ageBand?.Coverage_Tiers || [];
+                }
+
+                const quoteRows = [
+                    ...(getCatastrophicAgeBand().map((tier) => ({
+                        planType: 'Catastrophic',
+                        deductible: catastrophic?.Deductible,
+                        tier: tierLabelMap[tier.Coverage_Tier] || tier.Coverage_Tier,
+                        price: tier.Price
+                    }))),
+                    ...(getMedPerformanceAgeBand('3,500').map((tier) => ({
+                        planType: 'Med-performance',
+                        deductible: '3,500',
+                        tier: tierLabelMap[tier.Coverage_Tier] || tier.Coverage_Tier,
+                        price: tier.Price
+                    }))),
+                    ...(getMedPerformanceAgeBand('5,000').map((tier) => ({
+                        planType: 'Med-performance',
+                        deductible: '5,000',
+                        tier: tierLabelMap[tier.Coverage_Tier] || tier.Coverage_Tier,
+                        price: tier.Price
+                    }))),
+                    ...(getMedPerformanceAgeBand('7,350').map((tier) => ({
+                        planType: 'Med-performance',
+                        deductible: '7,350',
+                        tier: tierLabelMap[tier.Coverage_Tier] || tier.Coverage_Tier,
+                        price: tier.Price
+                    })))
+                ].sort((a, b) => {
+                    const diff = parsePrice(a.price) - parsePrice(b.price);
+                    if (diff !== 0) return diff;
+                    return planPriority(a.planType) - planPriority(b.planType);
+                });
+
                 const getCalendar = async () => {
                     setGettingCalendar(true)
                     const calendarUrl = APP_BASE_URL + '/getCalendar'
@@ -11874,24 +11945,24 @@
                                 }
                                 {step === 4 && showQuote() &&
                                     <div>
-                                        <table className='meta-quote-table'>
+                                        <table className="meta-quote-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Plan</th>
+                                                <th>Deductible</th>
+                                                <th>Tier</th>
+                                                <th>Price</th>
+                                            </tr>
+                                            </thead>
                                             <tbody>
-                                            <tr className='meta-quote-table-row-odd'>
-                                                <td>Individual</td>
-                                                 <td className="amount">$399 -> $1030</td>
-                                            </tr>
-                                            <tr className='meta-quote-table-row-even'>
-                                                <td>Individual + Spouse</td>
-                                                <td className="amount">$689 -> $1825</td>
-                                            </tr>
-                                            <tr className='meta-quote-table-row-odd'>
-                                                <td>Individual + Children</td>
-                                                <td className="amount">$649 -> $1683</td>
-                                            </tr>
-                                            <tr className='meta-quote-table-row-even'>
-                                                <td>Family</td>
-                                                <td className="amount">$949 -> $2628</td>
-                                            </tr>
+                                            {quoteRows.map((row, index) => (
+                                                <tr key={`${row.planType}-${row.deductible}-${row.tier}-${index}`}>
+                                                    <td>{row.planType}</td>
+                                                    <td>{row.deductible}</td>
+                                                    <td>{row.tier}</td>
+                                                    <td>{formatPrice(row.price)}</td>
+                                                </tr>
+                                            ))}
                                             </tbody>
                                         </table>
                                         <label style={{cursor: 'pointer'}}>

@@ -25606,7 +25606,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 .meta-quote-table {
     justify-self: center;
     border-collapse: collapse;
-    width: 60%;
+    width: 100%;
     margin: 20px auto;
     font-family: Arial, sans-serif;
 }
