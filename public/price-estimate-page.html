@@ -11956,7 +11956,11 @@
                                             </thead>
                                             <tbody>
                                             {quoteRows.map((row, index) => (
-                                                <tr key={`${row.planType}-${row.deductible}-${row.tier}-${index}`}>
+                                                <tr
+                                                    key={`${row.planType}-${row.deductible}-${row.tier}-${index}`}
+                                                    className={index % 2 === 0 ? 'meta-quote-table-row-even' :
+                                                        'meta-quote-table-row-odd'}
+                                                >
                                                     <td>{row.planType}</td>
                                                     <td>{row.deductible}</td>
                                                     <td>{row.tier}</td>
