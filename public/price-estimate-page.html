@@ -11175,8 +11175,9 @@
                 }
 
                 const formatPrice = (value) => {
-                    if (typeof value !== 'string') return '$0';
-                    return value;
+                    const numericValue = typeof value === 'number' ? value : Number(value);
+                    if (Number.isNaN(numericValue)) return '$0.00';
+                    return `$${numericValue.toFixed(2)}`;
                 };
 
                 const parsePrice = (value) => {
@@ -11186,8 +11187,8 @@
 
                 const tierLabelMap = {
                     "Employee": "Individual",
-                    "Employee + Spouse": "Ind + Spouse",
-                    "Employee + Child(ren)": "Ind + Children",
+                    "Employee + Spouse": "Individual + Spouse",
+                    "Employee + Child(ren)": "Individual + Children",
                     "Family": "Family"
                 };
 
@@ -11797,6 +11798,49 @@
                 const outlookCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
                 const iCloudCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
 
+                const PriceTable = ({ quoteRows }) => {
+                    const tierPriceRanges = Object.values(
+                        quoteRows.reduce((acc, row) => {
+                            const tier = row.tier;
+                            const price =
+                                typeof row.price === 'string'
+                                    ? Number(row.price.replace(/[^0-9.-]+/g, ''))
+                                    : row.price;
+
+                            if (!acc[tier]) {
+                                acc[tier] = {
+                                    tier,
+                                    min: price,
+                                    max: price,
+                                };
+                            } else {
+                                acc[tier].min = Math.min(acc[tier].min, price);
+                                acc[tier].max = Math.max(acc[tier].max, price);
+                            }
+
+                            return acc;
+                        }, {})
+                    );
+
+                    console.log('youwei lu check tierPriceRanges', tierPriceRanges)
+
+                    return (
+                        <table className="meta-quote-table">
+                            <tbody>
+                            {tierPriceRanges.map((row, index) => (
+                                <tr
+                                    key={row.tier}
+                                    className={index % 2 === 0 ? 'meta-quote-table-row-even' : 'meta-quote-table-row-odd'}
+                                >
+                                    <td>{row.tier}</td>
+                                    <td>{formatPrice(row.min)} -> {formatPrice(row.max)}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    );
+                };
+
                 useEffect(() => {
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 }, [step, showCalendar, showSlotsList, showPersonalInfo, submitting])
@@ -11946,30 +11990,7 @@
                                 </div>}
                                 {step === 4 && showQuote() &&
                                     <div>
-                                        <table className="meta-quote-table">
-                                            <thead>
-                                            <tr>
-                                                <th>Plan</th>
-                                                <th>Deductible</th>
-                                                <th>Tier</th>
-                                                <th>Price</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {quoteRows.map((row, index) => (
-                                                <tr
-                                                    key={`${row.planType}-${row.deductible}-${row.tier}-${index}`}
-                                                    className={index % 2 === 0 ? 'meta-quote-table-row-even' :
-                                                        'meta-quote-table-row-odd'}
-                                                >
-                                                    <td>{row.planType}</td>
-                                                    <td>{row.deductible}</td>
-                                                    <td>{row.tier}</td>
-                                                    <td>{formatPrice(row.price)}</td>
-                                                </tr>
-                                            ))}
-                                            </tbody>
-                                        </table>
+                                        <PriceTable quoteRows={quoteRows} />
                                         <label style={{cursor: 'pointer'}}>
                                             <span
                                                 style={{fontSize: '10px', lineHeight: '1.1', display: 'block'}}> <input
