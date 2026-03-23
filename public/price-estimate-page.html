@@ -11160,8 +11160,8 @@
                 }
                 const isNextButtonDisabled = () => {
                     return (step === 1 && age === "") ||
-                        (step === 2 && !conditions.length) ||
-                        (step === 3 && state === "") ||
+                        (step === 2 && state === "") ||
+                        (step === 3 && !conditions.length) ||
                         (step === 4 && showQuote() && !understandQuote)
                 }
 
@@ -11824,13 +11824,14 @@
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
                                     What is your age?
                                 </div>}
-                                {step === 2 && <div className="boldBody">
+                                {step === 2 && <div className="boldBody meta-do-you-have-insurance">
+                                    What is your state?
+                                </div>}
+                                {step === 3 && <div className="boldBody">
                                     Within the last five years
                                     <p style={{fontSize: '12px', color: 'gray'}}>Which of these apply to you?</p>
                                 </div>}
-                                {step === 3 && <div className="boldBody meta-do-you-have-insurance">
-                                    What is your state?
-                                </div>}
+
                                 {step === 4 && showQuote() && <div className="boldBody">
                                     Estimated Cost for Your PPO Health Coverage
                                 </div>}
@@ -11873,59 +11874,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 2 && <div className="options-container">
-                                    <div className={`option-box ${conditions.includes(stroke) ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition(stroke)}
-                                    >
-                                        <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{stroke}</p>
-                                    </div>
-                                    <div className={`option-box ${conditions.includes(cancer) ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition(cancer)}
-                                    >
-                                        <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{cancer}</p>
-                                    </div>
-                                </div>}
-                                {step === 2 && <div className="options-container">
-                                    <div
-                                        className={`option-box ${conditions.includes(anyMajorSurgery) ? 'selected' : ''}`}
-                                        onClick={() => handleToggleCondition(anyMajorSurgery)}
-                                    >
-                                        <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{anyMajorSurgery}</p>
-                                    </div>
-                                    <div
-                                        className={`option-box ${conditions.includes(type1Diabetes) ? 'selected' : ''}`}
-                                        onClick={() => handleToggleCondition(type1Diabetes)}
-                                    >
-                                        <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{type1Diabetes}</p>
-                                    </div>
-                                </div>}
-                                {step === 2 && <div className="options-container">
-                                    <div
-                                        className={`option-box ${conditions.includes(noPreExistingConditions) ? 'selected' : ''}`}
-                                        onClick={() => handleToggleCondition(noPreExistingConditions)}
-                                    >
-                                        <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{noPreExistingConditions}</p>
-                                    </div>
-                                    <div
-                                        className={`option-box ${conditions.includes(currentlyPregnant) ? 'selected' : ''}`}
-                                        onClick={() => handleToggleCondition(currentlyPregnant)}
-                                    >
-                                        <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>
-                                        <p className="font-semibold text-sm smallBody"
-                                           style={{fontSize: '16px'}}>{currentlyPregnant}</p>
-                                    </div>
-                                </div>}
-                                {step === 3 &&
+                                {step === 2 &&
                                     <div>
                                         <label className="meta-form-label price-estimate-center-dropdown">
                                             <select
@@ -11943,6 +11892,58 @@
                                         </label>
                                     </div>
                                 }
+                                {step === 3 && <div className="options-container">
+                                    <div className={`option-box ${conditions.includes(stroke) ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition(stroke)}
+                                    >
+                                        <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{stroke}</p>
+                                    </div>
+                                    <div className={`option-box ${conditions.includes(cancer) ? 'selected' : ''}`}
+                                         onClick={() => handleToggleCondition(cancer)}
+                                    >
+                                        <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{cancer}</p>
+                                    </div>
+                                </div>}
+                                {step === 3 && <div className="options-container">
+                                    <div
+                                        className={`option-box ${conditions.includes(anyMajorSurgery) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(anyMajorSurgery)}
+                                    >
+                                        <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{anyMajorSurgery}</p>
+                                    </div>
+                                    <div
+                                        className={`option-box ${conditions.includes(type1Diabetes) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(type1Diabetes)}
+                                    >
+                                        <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{type1Diabetes}</p>
+                                    </div>
+                                </div>}
+                                {step === 3 && <div className="options-container">
+                                    <div
+                                        className={`option-box ${conditions.includes(noPreExistingConditions) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(noPreExistingConditions)}
+                                    >
+                                        <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{noPreExistingConditions}</p>
+                                    </div>
+                                    <div
+                                        className={`option-box ${conditions.includes(currentlyPregnant) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(currentlyPregnant)}
+                                    >
+                                        <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>
+                                        <p className="font-semibold text-sm smallBody"
+                                           style={{fontSize: '16px'}}>{currentlyPregnant}</p>
+                                    </div>
+                                </div>}
                                 {step === 4 && showQuote() &&
                                     <div>
                                         <table className="meta-quote-table">
@@ -12378,11 +12379,7 @@
                                 <div className="meta-button-container">
                                     {step > 1 && step < 5 &&
                                         <button className="meta-back-button" onClick={() => {
-                                            if (step === 4 && !showQuote()) {
-                                                setStep(2);
-                                            } else {
-                                                setStep(step - 1);
-                                            }
+                                            setStep(step - 1);
                                         }}>
                                             <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                                         </button>}
@@ -12416,11 +12413,7 @@
                                     {step < 4 &&
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
-                                                    if (step === 2 && !showQuote()) {
-                                                        setStep(4);
-                                                    } else {
-                                                        setStep(step + 1);
-                                                    }
+                                                    setStep(step + 1);
                                                 }}>
                                             Next
                                         </button>}
