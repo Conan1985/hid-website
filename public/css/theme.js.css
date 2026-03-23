@@ -25536,6 +25536,11 @@ a[href^="tel:"], a[href^="mailto:"] {
     width: 200px;
     text-align-last: center;
     justify-self: center;
+    .meta-form-select {
+        min-height: 52px;
+        font-size: 18px;
+        font-weight: 700;
+    }
 }
 
 .meta-form-label span {
