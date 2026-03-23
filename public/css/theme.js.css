@@ -25471,7 +25471,7 @@ a[href^="tel:"], a[href^="mailto:"] {
     background-color: #e0e7ff;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     .option-box-1 {
         padding-top: 32px;
         height: 124px;
