@@ -11934,14 +11934,14 @@
                                     </div>
                                 }
                                 {step === 3 && <div className="options-container">
-                                    <div className={`option-box ${conditions.includes(stroke) ? 'selected' : ''}`}
+                                    <div className={`option-box option-box-1 ${conditions.includes(stroke) ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition(stroke)}
                                     >
                                         <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
                                            style={{fontSize: '16px'}}>{stroke}</p>
                                     </div>
-                                    <div className={`option-box ${conditions.includes(cancer) ? 'selected' : ''}`}
+                                    <div className={`option-box option-box-2 ${conditions.includes(cancer) ? 'selected' : ''}`}
                                          onClick={() => handleToggleCondition(cancer)}
                                     >
                                         <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
@@ -11951,7 +11951,7 @@
                                 </div>}
                                 {step === 3 && <div className="options-container">
                                     <div
-                                        className={`option-box ${conditions.includes(anyMajorSurgery) ? 'selected' : ''}`}
+                                        className={`option-box option-box-3 ${conditions.includes(anyMajorSurgery) ? 'selected' : ''}`}
                                         onClick={() => handleToggleCondition(anyMajorSurgery)}
                                     >
                                         <i className="fas fa-syringe" style={{color: '#2490e8'}}></i>
@@ -11959,7 +11959,7 @@
                                            style={{fontSize: '16px'}}>{anyMajorSurgery}</p>
                                     </div>
                                     <div
-                                        className={`option-box ${conditions.includes(type1Diabetes) ? 'selected' : ''}`}
+                                        className={`option-box option-box-4 ${conditions.includes(type1Diabetes) ? 'selected' : ''}`}
                                         onClick={() => handleToggleCondition(type1Diabetes)}
                                     >
                                         <i className="fas fa-droplet" style={{color: '#2490e8'}}></i>
@@ -11969,7 +11969,7 @@
                                 </div>}
                                 {step === 3 && <div className="options-container">
                                     <div
-                                        className={`option-box ${conditions.includes(noPreExistingConditions) ? 'selected' : ''}`}
+                                        className={`option-box option-box-5 ${conditions.includes(noPreExistingConditions) ? 'selected' : ''}`}
                                         onClick={() => handleToggleCondition(noPreExistingConditions)}
                                     >
                                         <i className="fas fa-check-circle" style={{color: '#2490e8'}}></i>
@@ -11977,7 +11977,7 @@
                                            style={{fontSize: '16px'}}>{noPreExistingConditions}</p>
                                     </div>
                                     <div
-                                        className={`option-box ${conditions.includes(currentlyPregnant) ? 'selected' : ''}`}
+                                        className={`option-box option-box-6 ${conditions.includes(currentlyPregnant) ? 'selected' : ''}`}
                                         onClick={() => handleToggleCondition(currentlyPregnant)}
                                     >
                                         <i className="fas fa-person-pregnant" style={{color: '#2490e8'}}></i>

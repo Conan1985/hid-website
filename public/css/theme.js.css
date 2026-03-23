@@ -25471,6 +25471,70 @@ a[href^="tel:"], a[href^="mailto:"] {
     background-color: #e0e7ff;
 }
 
+@media (max-width: 480px) {
+    .option-box-1 {
+        padding-top: 32px;
+        height: 124px;
+    }
+    .option-box-2 {
+        padding-top: 32px;
+        height: 124px;
+    }
+    .option-box-3 {
+        padding-top: 32px;
+        height: 124px;
+    }
+    .option-box-4 {
+        padding-top: 32px;
+        height: 124px;
+    }
+    .option-box-6 {
+        padding-top: 32px;
+        height: 124px;
+    }
+}
+
+@media (max-width: 463px) {
+    .option-box-6 {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 392px) {
+    .option-box-4 {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 333px) {
+    .option-box-3 {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 292px) {
+    .option-box-1 {
+        padding-top: 42px;
+        height: 148px;
+    }
+    .option-box-2 {
+        padding-top: 42px;
+        height: 148px;
+    }
+    .option-box-3 {
+        padding-top: 32px;
+        height: 148px;
+    }
+    .option-box-4 {
+        padding-top: 32px;
+        height: 148px;
+    }
+    .option-box-6 {
+        padding-top: 32px;
+        height: 148px;
+    }
+}
+
 .meta-form-logo-container {
     align-self: center;
 }
