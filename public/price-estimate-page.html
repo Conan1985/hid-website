@@ -11108,7 +11108,7 @@
                 const anyMajorSurgery = 'Any Major Surgery'
                 const type1Diabetes = 'Type 1 Diabetes'
                 const currentlyPregnant = 'Currently Pregnant'
-                const noPreExistingConditions = 'No Pre-existing Conditions'
+                const noPreExistingConditions = 'Not currently under treatment'
                 const now = DateTime.now().setZone(timezone)
                 const [year, setYear] = useState(now.year)
                 const [month, setMonth] = useState(now.month - 1)
@@ -11864,13 +11864,13 @@
                                     </div>
                                 }
                                 {step === 1 && <div className="boldBody meta-do-you-have-insurance">
-                                    What is the age of the oldest person who will be covered on this policy?
+                                    Age of the oldest person covered on this policy?
                                 </div>}
                                 {step === 2 && <div className="boldBody meta-do-you-have-insurance">
                                     What is your state?
                                 </div>}
                                 {step === 3 && <div className="boldBody">
-                                    Do any of these apply to you currently?
+                                    Currently seeking treatment for?
                                 </div>}
 
                                 {step === 4 && showQuote() && <div className="boldBody">
