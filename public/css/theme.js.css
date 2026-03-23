@@ -25533,14 +25533,46 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 
 .price-estimate-center-dropdown {
-    width: 200px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 260px;
     text-align-last: center;
     justify-self: center;
-    .meta-form-select {
-        min-height: 52px;
-        font-size: 18px;
-        font-weight: 700;
-    }
+}
+
+.price-estimate-center-dropdown .meta-form-select {
+    width: 100%;
+    min-height: 64px;
+    padding: 0 72px 0 24px;
+    border: 2px solid #d9d9d9;
+    border-radius: 9999px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.price-estimate-center-dropdown::after {
+    content: '⌄';
+    position: absolute;
+    right: 26px;
+    top: 42%;
+    transform: translateY(-58%);
+    pointer-events: none;
+    font-size: 26px;
+    color: #7a7a7a;
+}
+
+.price-estimate-center-dropdown .meta-form-select:focus,
+.price-estimate-center-dropdown .meta-form-select:focus-visible {
+    border-color: #a5b4fc;
+    box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.28);
 }
 
 .meta-form-label span {
