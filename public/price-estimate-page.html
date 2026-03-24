@@ -11925,7 +11925,7 @@
                                             <select
                                                 className="meta-form-select"
                                                 name="state"
-                                                value={states.find(s => s.code === state)?.name}
+                                                value={state}
                                                 onChange={(e) => setState(e.target.value)}
                                             >
                                                 {states.map((s) => (
@@ -12282,7 +12282,7 @@
                                                             className="meta-form-input"
                                                             type="text"
                                                             name="state"
-                                                            value={state}
+                                                            value={states.find(s => s.code === state)?.name}
                                                             disabled
                                                         />
                                                     </label>
