@@ -19,7 +19,7 @@ const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
-const FIELD_ID_AGE = process.env.FIELD_ID_AGE;
+const FIELD_ID_AGE_APEX = process.env.FIELD_ID_AGE_APEX;
 const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
@@ -227,7 +227,7 @@ const upsertContact = async (contact, account) => {
         }
         if (contact.age) {
             customFields.push({
-                id: FIELD_ID_AGE,
+                id: FIELD_ID_AGE_APEX,
                 value: contact.age
             })
         }
