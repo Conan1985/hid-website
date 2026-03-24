@@ -16,10 +16,10 @@ const PORT = process.env.PORT || 8964;
 
 const baseUrl = process.env.BASE_URL
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
-const FIELD_ID_AGE_GROUP_APEX = process.env.FIELD_ID_AGE_GROUP_APEX
 const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
+const FIELD_ID_AGE = process.env.FIELD_ID_AGE;
 const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
@@ -207,12 +207,6 @@ const upsertContact = async (contact, account) => {
     try {
         const url = baseUrl + '/contacts/upsert'
         const customFields = []
-        if (contact.ageRange) {
-            customFields.push({
-                id: FIELD_ID_AGE_GROUP_APEX,
-                value: contact.ageRange
-            })
-        }
         if (contact.conditions && contact.conditions.length > 0) {
             customFields.push({
                 id: FIELD_ID_PRE_CONDITIONS_APEX,
@@ -229,6 +223,12 @@ const upsertContact = async (contact, account) => {
             customFields.push({
                 id: FIELD_ID_NOTES_APEX,
                 value: contact.notes
+            })
+        }
+        if (contact.age) {
+            customFields.push({
+                id: FIELD_ID_AGE,
+                value: contact.age
             })
         }
 

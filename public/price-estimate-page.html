@@ -11744,7 +11744,7 @@
                             lastName: form.lastName,
                             email: form.email,
                             phone: form.phone,
-                            state: form.state,
+                            state: state,
                             age: age,
                             conditions: conditions,
                             source: 'appointment'
@@ -12453,9 +12453,8 @@
                                             Next
                                         </button>}
                                     {step === 5 && showPersonalInfo &&
-                                        // <button className="meta-next-button" disabled={!isFormValid()}
-                                        //         onClick={() => formRef.current.requestSubmit()}>
-                                        <button disabled>
+                                        <button className="meta-next-button" disabled={!isFormValid()}
+                                                onClick={() => formRef.current.requestSubmit()}>
                                             Submit
                                         </button>}
                                 </div>
