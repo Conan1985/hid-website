@@ -24,6 +24,21 @@ export const getAccount = async () => {
     }
 }
 
+export const getStaff = async () => {
+    let client
+    try {
+        client = await pool.connect()
+        const res = await client.query('SELECT * FROM staff')
+        return res.rows[0]
+    } catch (e) {
+        console.error('Error getting account: ', e)
+    } finally {
+        if (client) {
+            client.release()
+        }
+    }
+}
+
 export const updateAccount = async (account) => {
     let client
     try {

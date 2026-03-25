@@ -11252,7 +11252,7 @@
 
                 const getCalendar = async () => {
                     setGettingCalendar(true)
-                    const calendarUrl = APP_BASE_URL + '/getCalendar'
+                    const calendarUrl = APP_BASE_URL + '/getCalendar?showQuote=' + showQuote()
                     setShowCalendar(false)
                     try {
                         const response = await fetch(calendarUrl)

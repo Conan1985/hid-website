@@ -4,7 +4,7 @@ import {fileURLToPath} from 'url';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import {getAccount} from "./services/Database.js";
+import {getAccount, getStaff} from "./services/Database.js";
 import rateLimit from "express-rate-limit";
 import {DateTime} from 'luxon';
 
@@ -116,13 +116,22 @@ app.post('/upsertContact', globalLimiter, ipLimiter, async (req, res) => {
 
 app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
     try {
-        const account = await getAccount()
-        const apexCalendar = await getCalendar(account)
-        if (apexCalendar.success) {
+        const showQuote = req?.query?.showQuote;
+        const account = await getAccount();
+        if (!showQuote) {
+            const staff = await getStaff();
+            account.business_name = staff.business_name;
+            account.calendar_id = staff.calendar_id;
+            account.user_id = staff.user_id;
+        }
+        const calendar = await getCalendar(account)
+        console.log('HID Developer check account: ', account);
+        console.log('HID Developer check calendar: ', calendar);
+        if (calendar.success) {
             console.log('Calendar fetched successfully')
-            res.status(200).send({data: apexCalendar.data})
+            res.status(200).send({data: calendar.data})
         } else {
-            console.log('Error in get calendar: ', apexCalendar)
+            console.log('Error in get calendar: ', calendar)
             res.status(500).send('Error in get calendar')
         }
     } catch (err) {
