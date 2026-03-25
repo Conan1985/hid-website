@@ -5964,54 +5964,54 @@
                 'Pacific/Tongatapu'
             ]
             const ages = [
-                { value: "", display: "Select age" },
-                { value: 18, display: "18" },
-                { value: 19, display: "19" },
-                { value: 20, display: "20" },
-                { value: 21, display: "21" },
-                { value: 22, display: "22" },
-                { value: 23, display: "23" },
-                { value: 24, display: "24" },
-                { value: 25, display: "25" },
-                { value: 26, display: "26" },
-                { value: 27, display: "27" },
-                { value: 28, display: "28" },
-                { value: 29, display: "29" },
-                { value: 30, display: "30" },
-                { value: 31, display: "31" },
-                { value: 32, display: "32" },
-                { value: 33, display: "33" },
-                { value: 34, display: "34" },
-                { value: 35, display: "35" },
-                { value: 36, display: "36" },
-                { value: 37, display: "37" },
-                { value: 38, display: "38" },
-                { value: 39, display: "39" },
-                { value: 40, display: "40" },
-                { value: 41, display: "41" },
-                { value: 42, display: "42" },
-                { value: 43, display: "43" },
-                { value: 44, display: "44" },
-                { value: 45, display: "45" },
-                { value: 46, display: "46" },
-                { value: 47, display: "47" },
-                { value: 48, display: "48" },
-                { value: 49, display: "49" },
-                { value: 50, display: "50" },
-                { value: 51, display: "51" },
-                { value: 52, display: "52" },
-                { value: 53, display: "53" },
-                { value: 54, display: "54" },
-                { value: 55, display: "55" },
-                { value: 56, display: "56" },
-                { value: 57, display: "57" },
-                { value: 58, display: "58" },
-                { value: 59, display: "59" },
-                { value: 60, display: "60" },
-                { value: 61, display: "61" },
-                { value: 62, display: "62" },
-                { value: 63, display: "63" },
-                { value: 64, display: "64" }
+                {value: "", display: "Select age"},
+                {value: 18, display: "18"},
+                {value: 19, display: "19"},
+                {value: 20, display: "20"},
+                {value: 21, display: "21"},
+                {value: 22, display: "22"},
+                {value: 23, display: "23"},
+                {value: 24, display: "24"},
+                {value: 25, display: "25"},
+                {value: 26, display: "26"},
+                {value: 27, display: "27"},
+                {value: 28, display: "28"},
+                {value: 29, display: "29"},
+                {value: 30, display: "30"},
+                {value: 31, display: "31"},
+                {value: 32, display: "32"},
+                {value: 33, display: "33"},
+                {value: 34, display: "34"},
+                {value: 35, display: "35"},
+                {value: 36, display: "36"},
+                {value: 37, display: "37"},
+                {value: 38, display: "38"},
+                {value: 39, display: "39"},
+                {value: 40, display: "40"},
+                {value: 41, display: "41"},
+                {value: 42, display: "42"},
+                {value: 43, display: "43"},
+                {value: 44, display: "44"},
+                {value: 45, display: "45"},
+                {value: 46, display: "46"},
+                {value: 47, display: "47"},
+                {value: 48, display: "48"},
+                {value: 49, display: "49"},
+                {value: 50, display: "50"},
+                {value: 51, display: "51"},
+                {value: 52, display: "52"},
+                {value: 53, display: "53"},
+                {value: 54, display: "54"},
+                {value: 55, display: "55"},
+                {value: 56, display: "56"},
+                {value: 57, display: "57"},
+                {value: 58, display: "58"},
+                {value: 59, display: "59"},
+                {value: 60, display: "60"},
+                {value: 61, display: "61"},
+                {value: 62, display: "62"},
+                {value: 63, display: "63"},
+                {value: 64, display: "64"}
             ];
             const states = [
                 {code: "", name: "Select your state"},
@@ -11801,7 +11801,7 @@
                 const outlookCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
                 const iCloudCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
 
-                const PriceTable = ({ quoteRows }) => {
+                const PriceTable = ({quoteRows}) => {
                     const tierPriceRanges = Object.values(
                         quoteRows.reduce((acc, row) => {
                             const tier = row.tier;
@@ -11880,9 +11880,10 @@
                                     Estimated Cost for Your PPO Health Coverage
                                 </div>}
                                 {step === 4 && !showQuote() && <div className="boldBody">
-                                    Unfortunately, <br/> we can’t provide a virtual price estimate right now. Please
-                                    continue to
-                                    connect with a team member for assistance with your situation.
+                                    We’re unable to provide a virtual price estimate based on the information entered.
+                                    However, you may still qualify for outstanding coverage, and our team would be happy
+                                    to help you review your options. Please schedule a call with one of our licensed
+                                    agents for personalized assistance.
                                 </div>}
                                 {
                                     (gettingCalendar || submitting) && <div>
@@ -11937,15 +11938,17 @@
                                     </div>
                                 }
                                 {step === 3 && <div className="options-container">
-                                    <div className={`option-box option-box-1 ${conditions.includes(stroke) ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition(stroke)}
+                                    <div
+                                        className={`option-box option-box-1 ${conditions.includes(stroke) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(stroke)}
                                     >
                                         <i className="fas fa-heartbeat" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
                                            style={{fontSize: '16px'}}>{stroke}</p>
                                     </div>
-                                    <div className={`option-box option-box-2 ${conditions.includes(cancer) ? 'selected' : ''}`}
-                                         onClick={() => handleToggleCondition(cancer)}
+                                    <div
+                                        className={`option-box option-box-2 ${conditions.includes(cancer) ? 'selected' : ''}`}
+                                        onClick={() => handleToggleCondition(cancer)}
                                     >
                                         <i className="fas fa-ribbon" style={{color: '#2490e8'}}></i>
                                         <p className="font-semibold text-sm smallBody"
@@ -11990,7 +11993,7 @@
                                 </div>}
                                 {step === 4 && showQuote() &&
                                     <div>
-                                        <PriceTable quoteRows={quoteRows} />
+                                        <PriceTable quoteRows={quoteRows}/>
                                         <label style={{cursor: 'pointer'}}>
                                             <span
                                                 style={{fontSize: '10px', lineHeight: '1.1', display: 'block'}}> <input
