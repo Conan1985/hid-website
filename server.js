@@ -118,7 +118,7 @@ app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
     try {
         const showQuote = req?.query?.showQuote;
         const account = await getAccount();
-        if (!showQuote) {
+        if (showQuote === 'false') {
             const staff = await getStaff();
             account.business_name = staff.business_name;
             account.calendar_id = staff.calendar_id;
