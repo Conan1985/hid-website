@@ -11855,11 +11855,26 @@
                             </div>}
                             {step > 1 && <div style={{height: '30px'}}></div>}
                             <div className="contentBottom" style={{maxWidth: '600px', margin: '0 auto'}}>
+                                {
+                                    step === 1 &&
+                                    <div>
+                                        <h1 className="mediumHeading-1 colorGold meta-title responsive-price-estimation-head">Estimated
+                                            Cost for Your <br/>
+                                            Off Market Health Coverage</h1>
+                                        <p className="boldBody">
+                                            You Deserve Better Options. <br/>
+
+                                            Rising ACA costs and changing plan availability have made finding the right
+                                            coverage more difficult for many individuals and families. Our Off Market
+                                            Plans simplify the process and help you explore options that fit your
+                                            lifestyle
+                                            and budget. <br/><br/>
+                                        </p>
+                                    </div>
+                                }
                                 {step <= 5 &&
-                                    <h1 className="mediumHeading-1 colorGold meta-title" style={{fontSize: '2em'}}>Get
-                                        your
-                                        Price Estimate
-                                        with 3 Simple Steps</h1>
+                                    <h1 className="mediumHeading-1 colorGold meta-title responsive-price-estimation-title">Off-Market
+                                        Price Estimate with 3 Simple Steps</h1>
                                 }
                                 {step <= 5 &&
                                     <div className="meta-progress-container">

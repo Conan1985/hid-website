@@ -25371,6 +25371,98 @@ a[href^="tel:"], a[href^="mailto:"] {
     margin-top: 10px;
 }
 
+.responsive-price-estimation-head {
+    line-height: 1.5em;
+}
+
+.responsive-price-estimation-title {
+    line-height: 1em;
+}
+
+@media (min-width: 287px) {
+    .responsive-price-estimation-title {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 294px) {
+    .responsive-price-estimation-title {
+        font-size: 1.3em;
+    }
+}
+
+@media (min-width: 318px) {
+    .responsive-price-estimation-title {
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width: 341px) {
+    .responsive-price-estimation-title {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 365px) {
+    .responsive-price-estimation-title {
+        font-size: 1.6em;
+    }
+}
+
+@media (min-width: 388px) {
+    .responsive-price-estimation-title {
+        font-size: 1.7em;
+    }
+}
+
+@media (min-width: 412px) {
+    .responsive-price-estimation-title {
+        font-size: 1.8em;
+    }
+}
+
+@media (min-width: 435px) {
+    .responsive-price-estimation-title {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 451px) {
+    .responsive-price-estimation-title {
+        font-size: 1.3em;
+    }
+}
+
+@media (min-width: 485px) {
+    .responsive-price-estimation-title {
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width: 520px) {
+    .responsive-price-estimation-title {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 555px) {
+    .responsive-price-estimation-title {
+        font-size: 1.6em;
+    }
+}
+
+@media (min-width: 589px) {
+    .responsive-price-estimation-title {
+        font-size: 1.7em;
+    }
+}
+
+@media (min-width: 768px) {
+    .responsive-price-estimation-title {
+        font-size: 1.8em;
+    }
+}
+
 .meta-progress {
     width: 100%;
     height: 15px;
