@@ -12470,8 +12470,9 @@
                                             Next
                                         </button>}
                                     {step === 5 && showPersonalInfo &&
-                                        <button className="meta-next-button" disabled={!isFormValid()}
-                                                onClick={() => formRef.current.requestSubmit()}>
+                                        // <button className="meta-next-button" disabled={!isFormValid()}
+                                        //         onClick={() => formRef.current.requestSubmit()}>
+                                        <button disabled>
                                             Submit
                                         </button>}
                                 </div>
