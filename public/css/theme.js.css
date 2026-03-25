@@ -12099,7 +12099,6 @@ a:hover, a:focus {
 
 .mute_button {
     position: absolute;
-    float: right;
     top: 10px;
     right: 10px;
     z-index: 10;
@@ -12107,11 +12106,14 @@ a:hover, a:focus {
     border: none;
     padding: 5px;
     cursor: pointer;
+    transform: scale(0.8);
 }
 
 .mute_image {
     width: 30px;
-    filter: invert(56%) sepia(83%) saturate(746%) hue-rotate(170deg) brightness(92%) contrast(85%);
+    filter: brightness(0) saturate(100%)
+    invert(39%) sepia(18%) saturate(594%)
+    hue-rotate(7deg) brightness(92%) contrast(90%);
 }
 
 @media (min-width: 990px) {
