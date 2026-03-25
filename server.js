@@ -125,8 +125,6 @@ app.get('/getCalendar', globalLimiter, ipLimiter, async (req, res) => {
             account.user_id = staff.user_id;
         }
         const calendar = await getCalendar(account)
-        console.log('HID Developer check account: ', account);
-        console.log('HID Developer check calendar: ', calendar);
         if (calendar.success) {
             console.log('Calendar fetched successfully')
             res.status(200).send({data: calendar.data})
