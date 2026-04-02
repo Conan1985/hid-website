@@ -6228,11 +6228,11 @@
                         }
                         const calendar = await response.json()
                         const allowBookingAfterUnit = calendar.data?.allowBookingAfterUnit || 'hours';
-                        const slotDuration = 30;
+                        const slotDuration = calendar.data?.slotDuration || 30;
                         if (calendar.data?.slotDuration) {
                             setSlotDuration(calendar.data.slotDuration)
                         }
-                        const slotDurationUnit = 'mins';
+                        const slotDurationUnit = calendar.data?.slotDurationUnit || 'mins';
                         if (calendar.data?.slotDurationUnit) {
                             const str = calendar.data.slotDurationUnit
                             setSlotDurationUnit(str.charAt(0).toUpperCase() + str.slice(1))
