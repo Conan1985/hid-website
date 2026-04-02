@@ -240,7 +240,7 @@ const upsertContact = async (contact, account) => {
             state: contact.state,
             locationId: account.location_id,
             customFields: customFields,
-            source: WEBSITE_LEAD
+            source: contact.source
         }
         const response = await fetch(url, {
             method: 'POST',
