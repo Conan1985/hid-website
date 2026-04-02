@@ -24,7 +24,8 @@ const WEBSITE_LEAD = process.env.WEBSITE_LEAD
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
-    'https://hid-landing-frontend.vercel.app'
+    'https://hid-landing-frontend.vercel.app',
+    'http://localhost:5173/'
 ];
 
 app.set('trust proxy', 1)
