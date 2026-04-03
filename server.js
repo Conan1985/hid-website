@@ -23,8 +23,7 @@ const FIELD_ID_AGE_APEX = process.env.FIELD_ID_AGE_APEX;
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
-    'https://hid-landing-frontend.vercel.app',
-    'http://localhost:5173'
+    'https://hid-landing-frontend.vercel.app'
 ];
 
 app.set('trust proxy', 1)
