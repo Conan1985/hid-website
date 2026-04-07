@@ -20,6 +20,10 @@ const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
 const FIELD_ID_AGE_APEX = process.env.FIELD_ID_AGE_APEX;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
@@ -232,7 +236,30 @@ const upsertContact = async (contact, account) => {
                 value: contact.age
             })
         }
-
+        if (contact.estimatedMonthlyCostIndividual) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL,
+                value: contact.age
+            })
+        }
+        if (contact.estimatedMonthlyCostIndividualSpouse) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE,
+                value: contact.age
+            })
+        }
+        if (contact.estimatedMonthlyCostIndividualChildren) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN,
+                value: contact.age
+            })
+        }
+        if (contact.estimatedMonthlyCostFamily) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY,
+                value: contact.age
+            })
+        }
         const data = {
             firstName: contact.firstName,
             lastName: contact.lastName,
