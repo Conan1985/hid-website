@@ -20,11 +20,10 @@ const FIELD_ID_PRE_CONDITIONS_APEX = process.env.FIELD_ID_PRE_CONDITIONS_APEX
 const FIELD_ID_PREFERENCES_APEX = process.env.FIELD_ID_PREFERENCES_APEX
 const FIELD_ID_NOTES_APEX = process.env.FIELD_ID_NOTES_APEX
 const FIELD_ID_AGE_APEX = process.env.FIELD_ID_AGE_APEX;
-const FILED_ID_ESTIMATED_MONTHLY_COST_RANGE = process.env.FILED_ID_ESTIMATED_MONTHLY_COST_RANGE;
-const FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL
-const FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE;
-const FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
-const FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
+const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
@@ -237,15 +236,28 @@ const upsertContact = async (contact, account) => {
                 value: contact.age
             })
         }
-        if (contact.estimatedMonthlyCost) {
+        if (contact.estimatedIndividual) {
             customFields.push({
-                id: FILED_ID_ESTIMATED_MONTHLY_COST_RANGE,
-                value: {
-                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL]: contact.estimatedMonthlyCost.individual,
-                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE]: contact.estimatedMonthlyCost.individualSpouse,
-                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN]: contact.estimatedMonthlyCost.individualChildren,
-                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY]: contact.estimatedMonthlyCost.family
-                }
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL,
+                value: contact.estimatedIndividual
+            })
+        }
+        if (contact.estimatedIndividualSpouse) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE,
+                value: contact.estimatedIndividualSpouse
+            })
+        }
+        if (contact.estimatedIndividualChildren) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN,
+                value: contact.estimatedIndividualChildren
+            })
+        }
+        if (contact.estimatedFamily) {
+            customFields.push({
+                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY,
+                value: contact.estimatedFamily
             })
         }
         const data = {
