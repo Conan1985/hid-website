@@ -248,33 +248,6 @@ const upsertContact = async (contact, account) => {
                 }
             })
         }
-
-
-
-        if (contact.estimatedMonthlyCostIndividual) {
-            customFields.push({
-                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL,
-                value: contact.age
-            })
-        }
-        if (contact.estimatedMonthlyCostIndividualSpouse) {
-            customFields.push({
-                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE,
-                value: contact.age
-            })
-        }
-        if (contact.estimatedMonthlyCostIndividualChildren) {
-            customFields.push({
-                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN,
-                value: contact.age
-            })
-        }
-        if (contact.estimatedMonthlyCostFamily) {
-            customFields.push({
-                id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY,
-                value: contact.age
-            })
-        }
         const data = {
             firstName: contact.firstName,
             lastName: contact.lastName,
@@ -285,6 +258,7 @@ const upsertContact = async (contact, account) => {
             customFields: customFields,
             source: contact.source
         }
+        console.log('hid developer check upserting contact data: ', data)
         const response = await fetch(url, {
             method: 'POST',
             headers: {
