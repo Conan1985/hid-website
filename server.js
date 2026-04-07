@@ -260,6 +260,7 @@ const upsertContact = async (contact, account) => {
                 value: contact.estimatedFamily
             })
         }
+        console.log('hid developer check custom fields: ', customFields)
         const data = {
             firstName: contact.firstName,
             lastName: contact.lastName,
