@@ -258,8 +258,6 @@ const upsertContact = async (contact, account) => {
             customFields: customFields,
             source: contact.source
         }
-        console.log('hid developer check custom fields: ', customFields)
-        console.log('hid developer check upserting contact data: ', data)
         const response = await fetch(url, {
             method: 'POST',
             headers: {
