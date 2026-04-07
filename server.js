@@ -241,10 +241,10 @@ const upsertContact = async (contact, account) => {
             customFields.push({
                 id: FILED_ID_ESTIMATED_MONTHLY_COST_RANGE,
                 value: {
-                    FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL: contact.estimatedMonthlyCost.individual,
-                    FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE: contact.estimatedMonthlyCost.individualSpouse,
-                    FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN: contact.estimatedMonthlyCost.individualChildren,
-                    FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY: contact.estimatedMonthlyCost.family
+                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL]: contact.estimatedMonthlyCost.individual,
+                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE]: contact.estimatedMonthlyCost.individualSpouse,
+                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN]: contact.estimatedMonthlyCost.individualChildren,
+                    [FIELD_VALUE_ESTIMATED_MONTHLY_COST_RANGE_FAMILY]: contact.estimatedMonthlyCost.family
                 }
             })
         }
