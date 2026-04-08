@@ -11095,6 +11095,51 @@
                 }
             ];
 
+            function AlternativeWidget() {
+                const containerRef = useRef(null);
+                const [isLoaded, setIsLoaded] = useState(false);
+
+                useEffect(() => {
+                    const container = containerRef.current;
+                    if (!container) return;
+
+                    const script = document.createElement("script");
+                    script.src = "https://hello.thehealthyinsurancedude.com/js/form_embed.js";
+                    script.type = "text/javascript";
+                    script.async = true;
+
+                    container.appendChild(script);
+
+                    return () => {
+                        if (script.parentNode === container) {
+                            script.parentNode.removeChild(script);
+                        }
+                    };
+                }, []);
+
+                return (
+                    <div className={`alternative-widget-frame ${isLoaded ? "is-loaded" : ""}`}>
+                        {!isLoaded && (
+                            <div className="alternative-widget-loading" aria-live="polite" aria-busy="true">
+                                <div className="alternative-widget-spinner" aria-hidden="true"></div>
+                                <p>Loading scheduler...</p>
+                                <span>This usually takes a few seconds.</span>
+                            </div>
+                        )}
+                        <div ref={containerRef} className="alternative-widget-embed">
+                            <iframe
+                                title="Schedule a call with Healthy Insurance Dude"
+                                className="alternative-widget-iframe"
+                                src="https://hello.thehealthyinsurancedude.com/widget/booking/1ocYHeQK8eYF40JBXJ5O"
+                                scrolling="no"
+                                id="1ocYHeQK8eYF40JBXJ5O_1775498297330"
+                                onLoad={() => setIsLoaded(true)}
+                            />
+                        </div>
+                    </div>
+                );
+            }
+
             function App() {
                 const [step, setStep] = useState(1)
                 const [age, setAge] = useState("");
@@ -11909,7 +11954,12 @@
                                     Make an appointment with us.
                                 </div>}
                                 {
-                                    step === 5 && errorGetCalendar && <div className="boldBody">
+                                    step === 5 && !showQuote() && <div className="boldBody">
+                                        <AlternativeWidget />
+                                    </div>
+                                }
+                                {
+                                    step === 5 && errorGetCalendar && showQuote() && <div className="boldBody">
                                         <div>
                                             Something went wrong with the server to load the calendar.
                                             <br/> Please try again, or call our office at {CONTACT_METHOD}.
@@ -12024,7 +12074,7 @@
                                         </label>
                                     </div>
                                 }
-                                {step === 5 && !gettingCalendar && !errorGetCalendar &&
+                                {step === 5 && !gettingCalendar && !errorGetCalendar && showQuote() &&
                                     <div>
                                         {
                                             (showSlotsList || showPersonalInfo) &&
@@ -12461,7 +12511,7 @@
                                         <button className="meta-next-button" disabled={isNextButtonDisabled()}
                                                 onClick={() => {
                                                     setStep(step + 1);
-                                                    if (!loadCalendarBefore) {
+                                                    if (!loadCalendarBefore && showQuote()) {
                                                         getCalendar()
                                                     } else {
                                                         setShowCalendar(true)
