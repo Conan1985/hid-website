@@ -414,7 +414,6 @@ const makeAppointment = async (appointment, account) => {
             ignoreDateRange: true,
             ignoreFreeSlotValidation: true
         }
-        console.log('HID Developer check make appointment data: ', data);
         const response = await fetch(url, {
             method: 'POST',
             headers: {
