@@ -28,6 +28,7 @@ const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_ID_ESTIMA
 const allowedOrigins = [
     ALLOWED_ORIGIN,
     'https://hid-landing-frontend.vercel.app',
+    'https://thid-landing-frontend.vercel.app',
     'http://localhost:5173'
 ];
 
