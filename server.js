@@ -24,6 +24,7 @@ const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL = process.env.FIELD_ID_ES
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE;
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
+const FIELD_ID_CONTACT_CREATED = process.env.FIELD_ID_CONTACT_CREATED;
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
@@ -260,6 +261,12 @@ const upsertContact = async (contact, account) => {
             customFields.push({
                 id: FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY,
                 value: contact.estimatedFamily
+            })
+        }
+        if (contact.contactCreated) {
+            customFields.push({
+                id: FIELD_ID_CONTACT_CREATED,
+                value: contact.contactCreated
             })
         }
         const data = {
