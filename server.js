@@ -187,6 +187,24 @@ app.get('/getBlockedSlotsFromUserId', globalLimiter, ipLimiter, async (req, res)
     }
 })
 
+app.get('/getContact', globalLimiter, ipLimiter, async (req, res) => {
+    try {
+        const contactId = req.query.contactId;
+        const account = await getAccount();
+        const contact = await getContact(contactId, account);
+        if (contact.success) {
+            console.log('Fetch contact successfully');
+            res.status(200).send({data: contact.data});
+        } else {
+            console.log('Error in get contact: ', contact);
+            res.status(500).send('Error in get contact');
+        }
+    } catch (err) {
+        console.error('Unexpected error in get contact: ', err);
+        res.status(500).send('Unexpected error in get contact: ', err);
+    }
+})
+
 app.post('/makeAppointment', globalLimiter, ipLimiter, async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
         return res.status(400).send('No data provided')
@@ -304,6 +322,33 @@ const upsertContact = async (contact, account) => {
         return returnData
     } catch (error) {
         console.error(`Error in upsert contact for ${account.business_name}: `, error)
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+const getContact = async (contactId, account) => {
+    try {
+        const url = baseUrl + '/contacts/' + contactId
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + account.access_token,
+                'Version': '2021-07-28'
+            }
+        });
+        const responseData = await response.json();
+        const success = response.status === 200;
+        return {
+            success: success,
+            data: responseData
+        }
+    } catch (error) {
+        console.error(`Error in get contact for ${contactId}: `, error);
         return {
             success: false,
             data: error
