@@ -30,8 +30,7 @@ const allowedOrigins = [
     ALLOWED_ORIGIN,
     'https://hid-landing-frontend.vercel.app',
     'https://thid-landing-frontend.vercel.app',
-    'https://getyourhidquote.com',
-    'http://localhost:5173'
+    'https://getyourhidquote.com'
 ];
 
 app.set('trust proxy', 1)
