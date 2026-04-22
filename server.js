@@ -25,12 +25,20 @@ const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIEL
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
 const FIELD_ID_CONTACT_CREATED = process.env.FIELD_ID_CONTACT_CREATED;
+const FIELD_ID_UTM_MEDIUM = process.env.FIELD_ID_UTM_MEDIUM;
+const FIELD_ID_UTM_SOURCE = process.env.FIELD_ID_UTM_SOURCE;
+const FIELD_ID_UTM_ID = process.env.FIELD_ID_UTM_ID;
+const FIELD_ID_UTM_CONTENT = process.env.FIELD_ID_UTM_CONTENT;
+const FIELD_ID_UTM_TERM = process.env.FIELD_ID_UTM_TERM;
+const FIELD_ID_UTM_CAMPAIGN = process.env.FIELD_ID_UTM_CAMPAIGN;
+const FIELD_ID_FBCLID = process.env.FIELD_ID_FBCLID;
 
 const allowedOrigins = [
     ALLOWED_ORIGIN,
     'https://hid-landing-frontend.vercel.app',
     'https://thid-landing-frontend.vercel.app',
-    'https://getyourhidquote.com'
+    'https://getyourhidquote.com',
+    'http://localhost:5173/'
 ];
 
 app.set('trust proxy', 1)
@@ -285,6 +293,48 @@ const upsertContact = async (contact, account) => {
                 id: FIELD_ID_CONTACT_CREATED,
                 value: contact.contactCreated
             })
+        }
+        if (contact.utmMedium) {
+            customFields.push({
+                id: FIELD_ID_UTM_MEDIUM,
+                value: contact.utmMedium
+            });
+        }
+        if (contact.utmSource) {
+            customFields.push({
+                id: FIELD_ID_UTM_SOURCE,
+                value: contact.utmSource
+            });
+        }
+        if (contact.utmId) {
+            customFields.push({
+                id: FIELD_ID_UTM_ID,
+                value: contact.utmId
+            });
+        }
+        if (contact.utmContent) {
+            customFields.push({
+                id: FIELD_ID_UTM_CONTENT,
+                value: contact.utmContent
+            });
+        }
+        if (contact.utmTerm) {
+            customFields.push({
+                id: FIELD_ID_UTM_TERM,
+                value: contact.utmTerm
+            });
+        }
+        if (contact.utmCampaign) {
+            customFields.push({
+                id: FIELD_ID_UTM_CAMPAIGN,
+                value: contact.utmCampaign
+            });
+        }
+        if (contact.fbclid) {
+            customFields.push({
+                id: FIELD_ID_FBCLID,
+                value: contact.fbclid
+            });
         }
         const data = {
             firstName: contact.firstName,
