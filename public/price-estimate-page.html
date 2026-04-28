@@ -26333,7 +26333,7 @@
                     return Number(String(price).replace(/[$,]/g, ""));
                 }
 
-                function getPlanTypeSummary(planType, state, age) {
+                function getPlanTypeSummary(planType) {
                     let matchingItems = quoteRows.filter((item) => item.Plan_Type === planType);
                     matchingItems = matchingItems.filter((item) => item.State === state);
                     matchingItems = matchingItems.filter((item) => ageMatchesBand(age, item.Age_Band));
@@ -26911,40 +26911,17 @@
                 const outlookCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
                 const iCloudCalendarLink = `https://backend.leadconnectorhq.com/appengine/google/calendar/get-ics/${appointmentId}`
 
-                const PriceTable = ({quoteRows}) => {
-                    const tierPriceRanges = Object.values(
-                        quoteRows.reduce((acc, row) => {
-                            const tier = row.tier;
-                            const price =
-                                typeof row.price === 'string'
-                                    ? Number(row.price.replace(/[^0-9.-]+/g, ''))
-                                    : row.price;
-
-                            if (!acc[tier]) {
-                                acc[tier] = {
-                                    tier,
-                                    min: price,
-                                    max: price,
-                                };
-                            } else {
-                                acc[tier].min = Math.min(acc[tier].min, price);
-                                acc[tier].max = Math.max(acc[tier].max, price);
-                            }
-
-                            return acc;
-                        }, {})
-                    );
-
+                const PriceTable = () => {
+                   const tierPriceRanges = getPlanTypeSummary("HEALTH");
                     return (
                         <table className="meta-quote-table">
                             <tbody>
                             {tierPriceRanges.map((row, index) => (
                                 <tr
-                                    key={row.tier}
                                     className={index % 2 === 0 ? 'meta-quote-table-row-even' : 'meta-quote-table-row-odd'}
                                 >
-                                    <td>{row.tier}</td>
-                                    <td>{formatPrice(row.min)} -> {formatPrice(row.max)}</td>
+                                    <td>{row.Coverage_Tier}</td>
+                                    <td>{formatPrice(row.lowest)} -> {formatPrice(row.highest)}</td>
                                 </tr>
                             ))}
                             </tbody>
@@ -27123,7 +27100,7 @@
                                 </div>}
                                 {step === 4 && showQuote() &&
                                     <div>
-                                        <PriceTable quoteRows={quoteRows}/>
+                                        <PriceTable/>
                                         <label style={{cursor: 'pointer'}}>
                                             <span
                                                 style={{fontSize: '10px', lineHeight: '1.1', display: 'block'}}> <input
