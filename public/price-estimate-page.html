@@ -26645,7 +26645,6 @@
                         {zone: timezone}
                     );
                     const daysInMonth = startOfMonth.daysInMonth;
-                    console.log('hid devloper check days in month: ', daysInMonth)
                     for (let day = 1; day <= daysInMonth; day++) {
                         if (!isDayClosed(day, month, year)) {
                             return false;
@@ -26917,7 +26916,7 @@
                         <table className="meta-quote-table">
                             <tbody>
                             {tierPriceRanges.map((row, index) => (
-                                <tr
+                                <tr key={index}
                                     className={index % 2 === 0 ? 'meta-quote-table-row-even' : 'meta-quote-table-row-odd'}
                                 >
                                     <td>{row.Coverage_Tier}</td>
