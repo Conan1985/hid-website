@@ -25,6 +25,7 @@ const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_SPOUSE = process.env.FIEL
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_INDIVIDUAL_CHILDREN;
 const FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY = process.env.FIELD_ID_ESTIMATED_MONTHLY_COST_RANGE_FAMILY;
 const FIELD_ID_CONTACT_CREATED = process.env.FIELD_ID_CONTACT_CREATED;
+const FIELD_ID_CUSTOMIZED_VISIT = process.env.FIELD_ID_CUSTOMIZED_VISIT;
 const FIELD_ID_UTM_MEDIUM = process.env.FIELD_ID_UTM_MEDIUM;
 const FIELD_ID_UTM_SOURCE = process.env.FIELD_ID_UTM_SOURCE;
 const FIELD_ID_UTM_ID = process.env.FIELD_ID_UTM_ID;
@@ -292,6 +293,12 @@ const upsertContact = async (contact, account) => {
             customFields.push({
                 id: FIELD_ID_CONTACT_CREATED,
                 value: contact.contactCreated
+            })
+        }
+        if (contact.customizedVisit) {
+            customFields.push({
+                id: FIELD_ID_CUSTOMIZED_VISIT,
+                value: contact.customizedVisit
             })
         }
         if (contact.utmMedium) {
