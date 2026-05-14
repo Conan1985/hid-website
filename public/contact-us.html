@@ -6333,6 +6333,9 @@
                         const openHoursLocal = convertHoursToLocal(openHours)
                         openHoursLocal.forEach(entry => {
                             entry.daysOfTheWeek.forEach(day => {
+                                if (day === 0) {
+                                    day = 7;
+                                }
                                 dayMap.set(day, entry.hours);
                             });
                         });
