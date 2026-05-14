@@ -6336,7 +6336,6 @@
                                 dayMap.set(day, entry.hours);
                             });
                         });
-                        console.log('hid developer check day map: ', dayMap);
                         function ceilToNextSlot(time, slotDurationMins) {
                             const minutes = time.minute;
                             const roundedMinutes = Math.ceil(minutes / slotDurationMins) * slotDurationMins;
